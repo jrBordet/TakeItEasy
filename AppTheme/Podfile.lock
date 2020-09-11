@@ -1,0 +1,29 @@
+PODS:
+  - Caprice (0.0.1)
+  - SceneBuilder (1.0.0)
+  - SnapshotTesting (1.7.2)
+  - SwiftGen (6.1.0)
+
+DEPENDENCIES:
+  - Caprice (= 0.0.1)
+  - SceneBuilder (= 1.0.0)
+  - SnapshotTesting (~> 1.7.2)
+  - SwiftGen (~> 6.0)
+
+SPEC REPOS:
+  https://github.com/jrBordet/Sources.git:
+    - Caprice
+    - SceneBuilder
+  trunk:
+    - SnapshotTesting
+    - SwiftGen
+
+SPEC CHECKSUMS:
+  Caprice: 14d6b90fb0f22ca074c348fad75a72de1f8966a1
+  SceneBuilder: e8beec60660be16524eb651df022f310e7a200aa
+  SnapshotTesting: 8caa6661fea7c8019d5b46de77c16bab99c36c5c
+  SwiftGen: f872ca75cbd17bf7103c17f13dcfa0d9a15667b0
+
+PODFILE CHECKSUM: 6417e1cbde7dfafdbb654a4194f17efe48e87b96
+
+COCOAPODS: 1.9.1

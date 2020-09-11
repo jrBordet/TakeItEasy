@@ -1,0 +1,17 @@
+strings:
+    inputs: Styling/Resources/en.lproj/Localizable.strings
+    outputs:
+      templateName: structured-swift4
+      output: Styling/Resources/Localizable.swift
+
+colors:
+    inputs: Styling/Resources/Colors.json
+    outputs:
+      templateName: swift4
+      output: Styling/Resources/Colors.swift
+
+fonts:
+    inputs: Styling/Resources/Roboto/
+    outputs:
+      templateName: swift4
+      output: Styling/Resources/Fonts.swift

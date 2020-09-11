@@ -1,0 +1,73 @@
+PODS:
+  - Caprice (0.0.1)
+  - Differentiator (4.0.1)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxComposableArchitecture (1.0.0):
+    - RxCocoa (~> 5)
+    - RxSwift (~> 5)
+    - SwiftSpinner (~> 2.1.0)
+  - RxComposableArchitectureTests (1.0.0):
+    - RxCocoa (~> 5)
+    - RxComposableArchitecture (= 1.0.0)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - SceneBuilder (1.0.0)
+  - SnapshotTesting (1.7.2)
+  - Styling (1.0.0):
+    - Caprice (= 0.0.1)
+  - SwiftSpinner (2.1.0)
+
+DEPENDENCIES:
+  - Caprice (= 0.0.1)
+  - RxComposableArchitecture (= 1.0.0)
+  - RxComposableArchitectureTests (from `../../RxComposableArchitecture`)
+  - RxDataSources (= 4.0.1)
+  - SceneBuilder (= 1.0.0)
+  - SnapshotTesting (~> 1.7.2)
+  - Styling (from `../AppTheme`)
+
+SPEC REPOS:
+  https://github.com/jrBordet/Sources.git:
+    - Caprice
+    - RxComposableArchitecture
+    - SceneBuilder
+  trunk:
+    - Differentiator
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
+    - SnapshotTesting
+    - SwiftSpinner
+
+EXTERNAL SOURCES:
+  RxComposableArchitectureTests:
+    :path: "../../RxComposableArchitecture"
+  Styling:
+    :path: "../AppTheme"
+
+SPEC CHECKSUMS:
+  Caprice: 14d6b90fb0f22ca074c348fad75a72de1f8966a1
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxComposableArchitecture: ebe9ad90bf09130fce3d9b25a4d1c19c869daf29
+  RxComposableArchitectureTests: c157f3bb7883015491025760f4ace5486a908153
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SceneBuilder: e8beec60660be16524eb651df022f310e7a200aa
+  SnapshotTesting: 8caa6661fea7c8019d5b46de77c16bab99c36c5c
+  Styling: e61ca745333ea6e3466df6414f139499c0b4da5e
+  SwiftSpinner: 0f15c006307f8d8bbac075638927ec1361b565d7
+
+PODFILE CHECKSUM: a862fbbc1fbc59ee833b102e01a8ece4eedc7183
+
+COCOAPODS: 1.9.1

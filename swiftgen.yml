@@ -1,0 +1,5 @@
+strings:
+    inputs: Alarms/Resources/en.lproj/Localizable.strings
+    outputs:
+      templateName: structured-swift4
+      output: Alarms/Resources/Localizable.swift

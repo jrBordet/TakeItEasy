@@ -1,0 +1,90 @@
+PODS:
+  - Caprice (0.0.5)
+  - Difference (0.4)
+  - Differentiator (4.0.1)
+  - FileClient (0.0.1)
+  - Nuke (8.4.1)
+  - RxBlocking (5.1.1):
+    - RxSwift (~> 5)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxComposableArchitecture (2.0.0):
+    - RxCocoa (~> 5)
+    - RxSwift (~> 5)
+    - SwiftSpinner (~> 2.1.0)
+  - RxComposableArchitectureTests (2.0.0):
+    - Difference (= 0.4)
+    - RxCocoa (~> 5)
+    - RxComposableArchitecture (= 2.0.0)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - RxTest (5.1.1):
+    - RxSwift (~> 5)
+  - SceneBuilder (1.0.0)
+  - SnapshotTesting (1.7.2)
+  - SwiftSpinner (2.1.0)
+
+DEPENDENCIES:
+  - Caprice (= 0.0.5)
+  - Difference
+  - FileClient (from `FileClient`)
+  - Nuke (= 8.4.1)
+  - RxBlocking (= 5.1.1)
+  - RxComposableArchitecture (= 2.0.0)
+  - RxComposableArchitectureTests (= 2.0.0)
+  - RxDataSources (= 4.0.1)
+  - RxTest (= 5.1.1)
+  - SceneBuilder (= 1.0.0)
+  - SnapshotTesting (~> 1.7.2)
+
+SPEC REPOS:
+  https://github.com/jrBordet/Sources.git:
+    - Caprice
+    - RxComposableArchitecture
+    - RxComposableArchitectureTests
+    - SceneBuilder
+  trunk:
+    - Difference
+    - Differentiator
+    - Nuke
+    - RxBlocking
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
+    - RxTest
+    - SnapshotTesting
+    - SwiftSpinner
+
+EXTERNAL SOURCES:
+  FileClient:
+    :path: FileClient
+
+SPEC CHECKSUMS:
+  Caprice: 6fc9fc49fcd8a510497a86b005a5aac9415f1df0
+  Difference: d647f091010f05267885fdf758b885c6cfbf116e
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  FileClient: e66de40ef63e15a8acff7c162f9e6886fc6c7d87
+  Nuke: d780e3507a86b86c589ab3cc5cd302d5456f06fb
+  RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxComposableArchitecture: e46aefd34199059aa989fea81906d0a79dea0315
+  RxComposableArchitectureTests: 863fcdf2f0b4a265c984743de75631bfdc1e0112
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
+  SceneBuilder: e8beec60660be16524eb651df022f310e7a200aa
+  SnapshotTesting: 8caa6661fea7c8019d5b46de77c16bab99c36c5c
+  SwiftSpinner: 0f15c006307f8d8bbac075638927ec1361b565d7
+
+PODFILE CHECKSUM: f50af866f99923b38c6b86e24160f368ab6bdfd8
+
+COCOAPODS: 1.9.3
