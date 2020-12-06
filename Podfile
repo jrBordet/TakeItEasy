@@ -30,8 +30,6 @@ target 'ViaggioTreno' do
 
     caprice
     
-    pod 'RxTest', '5.1.1'
-    pod 'RxBlocking', '5.1.1'
     pod 'Difference'
   end
 
