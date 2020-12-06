@@ -16,6 +16,7 @@ targets:
     dependencies:
         - target: Features
         - target: Styling
+        - target: Networking
   Features: # Feature
     type: framework
     platform: iOS
@@ -30,6 +31,12 @@ targets:
     deploymentTarget: 10.0
     sources:
         - path: AppTheme/Styling
+  Networking:
+    type: framework
+    platform: iOS
+    deploymentTarget: 10.0
+    sources:
+        - path: Networking
   ViaggioTrenoTests:
     type: bundle.unit-test
     platform: iOS

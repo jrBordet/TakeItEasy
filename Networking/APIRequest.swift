@@ -62,18 +62,18 @@ internal func performAPI<T: APIRequest>(request r: T, retry: Int? = 0, completio
                 return
             }
             
-//            _ = performAPI(request: AccessTokenRequest(), retry: retry + 1) { result in
-//                switch result {
-//                case let .failure(e):
-//                    .failure(APIError.failedAccessToken(e)) |> completion
-//                case let .success(content):
-//                    content.access_token |> saveAccessToken
-//                    // Retry the last request
-//                    _ = performAPI(request: r,
-//                                   retry: retry + 1,
-//                                   completion: completion)
-//                }
-//            }
+            _ = performAPI(request: AccessTokenRequest(), retry: retry + 1) { result in
+                switch result {
+                case let .failure(e):
+                    .failure(APIError.failedAccessToken(e)) |> completion
+                case let .success(content):
+                    content.access_token |> saveAccessToken
+                    // Retry the last request
+                    _ = performAPI(request: r,
+                                   retry: retry + 1,
+                                   completion: completion)
+                }
+            }
             return
         default:
             completion(.failure(APIError.code(statusCode, r.request)))
