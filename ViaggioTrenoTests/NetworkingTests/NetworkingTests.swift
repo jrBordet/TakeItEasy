@@ -18,9 +18,14 @@ class NetworkingTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_travel_request() throws {
+      let result = TravelRequest(station: "mi")
+      
+      XCTAssertEqual(result.endpoint, "/autocompletaStazione")
+      XCTAssertEqual(result.request.httpMethod, "GET")
+      XCTAssertEqual(result.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno//autocompletaStazionemi")
+      
+      //performAPI(request: <#T##APIRequest#>, completion: <#T##(Result<Decodable>) -> Void#>)
     }
 
     func testPerformanceExample() throws {

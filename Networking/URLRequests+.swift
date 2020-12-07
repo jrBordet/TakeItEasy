@@ -10,11 +10,9 @@ import Foundation
 import UIKit
 
 enum HTTPStatusCodes: Int {
-    // 200 Success
-    case Ok = 200
+    case Ok = 200 // 200 Success
     case Created = 201 // incomplete login
     
-    // 300
     case NotModified = 300
     
     // 400 Client Error
@@ -28,10 +26,3 @@ enum HTTPStatusCodes: Int {
     // 500 Server Error
     case InternalServerError = 500
 }
-
-//extension String {
-//    func download(_ closure: @escaping (UIImage) -> ()) -> URLSessionDataTask? {
-//        guard let url = URL(string: self) else { return nil }
-//        return url.download(closure)
-//    }
-//}
