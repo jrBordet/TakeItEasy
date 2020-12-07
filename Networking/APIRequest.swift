@@ -1,5 +1,7 @@
 import Foundation
 
+
+
 public class NetworkingManager {
   internal static var bundle: Bundle { return Bundle(for: NetworkingManager.self) }
   internal static let cache: URLCache = URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: nil)
@@ -12,6 +14,33 @@ public class NetworkingManager {
   internal static var maxRetry = 3
   
   public let baseUrl: String = ""
+}
+
+public struct API {
+  var endpoint: String
+  var request: URLRequest
+  var data: Data?
+  
+  public init(
+    endpoint: String,
+    request: URLRequest,
+    data: Data?
+  ) {
+    self.endpoint = endpoint
+    self.request = request
+    self.data = data
+  }
+  
+  func makeRequest() throws -> URLRequest {
+    let components = URLComponents(string: "")
+    
+    guard let url = components?.url else {
+      throw NSError(domain: "", code: -1, userInfo: nil)
+    }
+    
+    return URLRequest(url: url)
+  }
+  
 }
 
 public protocol APIRequest {
@@ -81,7 +110,6 @@ public func performAPI<T: APIRequest>(
 
 public func performAPI<T: APIRequest>(
   request r: T,
-  retry: Int? = 0,
   completion: @escaping ResultCompletion<Data>
 ) -> URLSessionDataTask {
   let task = NetworkingManager.session.dataTask(with: r.request) { (data: Data?, response: URLResponse?, error: Error?) in
