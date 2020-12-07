@@ -109,10 +109,11 @@ public func performAPI<T: APIRequest>(
 }
 
 public func performAPI<T: APIRequest>(
+  session: URLSession,
   request r: T,
   completion: @escaping ResultCompletion<Data>
 ) -> URLSessionDataTask {
-  let task = NetworkingManager.session.dataTask(with: r.request) { (data: Data?, response: URLResponse?, error: Error?) in
+  let task = session.dataTask(with: r.request) { (data: Data?, response: URLResponse?, error: Error?) in
     guard let data = data else {
       logError(with: NSError(domain: "empty data", code: 0, userInfo: nil))
       
@@ -125,7 +126,7 @@ public func performAPI<T: APIRequest>(
     #endif
     
     guard let statusCode = HTTPStatusCodes.decode(from: response) else {
-      completion(.failure(APIError.undefinedStatusCode))
+     completion(.failure(APIError.undefinedStatusCode))
       return
     }
     
