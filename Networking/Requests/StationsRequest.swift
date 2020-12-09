@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 /// Retrieve stations by the given string
 /// Example: [Url example](http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mil)
@@ -17,31 +18,41 @@ import Foundation
 /// - Returns: a collection of Station
 
 public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
-  public var data: Data?
-  
-  public var debugDescription: String {
-    return request.debugDescription
-  }
-  
-  public typealias Response = [Station]
-  
-  public var endpoint: String = "/autocompletaStazione"
-  
-  private (set) var station: String
-  
-  public var request: URLRequest {
-    guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station)") else {
-      fatalError()
-    }
-    
-    var request = URLRequest(url: url)
-    request.httpMethod = "GET"
-    
-    return request
-  }
-  
-  public init(station: String, data: Data? = nil) {
-    self.station = station
-    self.data = data
-  }
+	public var data: Data?
+	
+	public var debugDescription: String {
+		return request.debugDescription
+	}
+	
+	public typealias Response = [Station]
+	
+	public var endpoint: String = "/autocompletaStazione"
+	
+	private (set) var station: String
+	
+	public var request: URLRequest {
+		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station)") else {
+			fatalError()
+		}
+		
+		var request = URLRequest(url: url)
+		request.httpMethod = "GET"
+		
+		return request
+	}
+	
+	public init(station: String, data: Data? = nil) {
+		self.station = station
+		self.data = data
+	}
 }
+
+extension StationsRequest {
+	public static func autocompleteStation(with v: String, urlSession: URLSession = .shared) -> Observable<Self.Response> {
+		Networking<StationsRequest>
+			.autocompleteStation(with: v)
+			.data(with: urlSession) { $0.parseStations() }
+	}
+}
+
+
