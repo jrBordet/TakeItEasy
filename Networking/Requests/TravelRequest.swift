@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Travel: Decodable {
+public struct Travel: Codable {
   let id: String
 }
 

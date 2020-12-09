@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 public class NetworkingManager {
   internal static var bundle: Bundle { return Bundle(for: NetworkingManager.self) }
   internal static let cache: URLCache = URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: nil)
@@ -68,6 +66,8 @@ public func decode<T: APIRequest>(request r: T, data: Data) -> Result<T.Response
   }
 }
 
+
+
 public func performAPI<T: APIRequest>(
   request r: T,
   retry: Int? = 0,
@@ -126,7 +126,7 @@ public func performAPI<T: APIRequest>(
     #endif
     
     guard let statusCode = HTTPStatusCodes.decode(from: response) else {
-     completion(.failure(APIError.undefinedStatusCode))
+      completion(.failure(APIError.undefinedStatusCode))
       return
     }
     

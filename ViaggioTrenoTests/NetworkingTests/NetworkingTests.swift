@@ -8,149 +8,205 @@
 import XCTest
 import Networking
 
-class MockUrlProtocol: URLProtocol {
-  static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
-    
-  override class func canInit(with request: URLRequest) -> Bool {
-    return true
-  }
-  
-  override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-    return request
-  }
-  
-  override func startLoading() {
-    guard let handler = MockUrlProtocol.requestHandler else {
-      fatalError("no handler set")
-    }
-    
-    do {
-      let (response, data) =  try handler(request)
-      
-      guard let d = data else {
-        fatalError("data is empty")
-      }
-      
-      client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-      client?.urlProtocol(self, didLoad: d)
-      client?.urlProtocolDidFinishLoading(self)
-      
-    } catch let e {
-      client?.urlProtocol(self, didFailWithError: e)
-    }
-    
-  }
-  
-  override func stopLoading() {
-    
-  }
+let mock = """
+{
+  MOCK|S0666
+  MILITELLO|S12276
+  MIMMOLE|S06954
+  MINEO|S12275
+  MINERVINO MURGE|S11403
+  MINTURNO|S09150
+  MINUCCIANO - PIEVE - CASOLA|S06227
+  MIRA MIRANO|S02588
+  MIRADOLO TERME|S01867
+  MIRAMARE|S03311
+  MIRANDOLA|S05311
+  MIRTO CROSIA|S11814
+  MISANO ADRIATICO|S07119
 }
+""".data(using: .utf8)!
 
 class NetworkingTests: XCTestCase {
-    var urlSession: URLSession!
+  var urlSession: URLSession!
   
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+  override func setUpWithError() throws {
+    let configuration = URLSessionConfiguration.ephemeral
+    configuration.protocolClasses = [MockUrlProtocol.self]
+    
+    urlSession = URLSession(configuration: configuration)
+    
+    MockUrlProtocol.requestHandler = { request in
+      let httpResponse = HTTPURLResponse(
+        url: request.url!,
+        statusCode: 200,
+        httpVersion: nil,
+        headerFields: nil
+      )
+      return (httpResponse!, mock)
+    }
+    
+  }
+  
+  override func tearDownWithError() throws {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+  }
+  
+  func test_parallel() {
+    let expectation = XCTestExpectation(description: "Download apple.com home page")
+    //Networking.travel.request
+    
+    Parallel<Result<String>> { [weak self] callback in
+      let url = "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/M"
+
+      let dataTask = self?.urlSession.dataTask(with: URLRequest(url: URL(string: url)!)) { data, response, error in
+        guard
+          let data = data,
+          let result = String(data: data, encoding: .utf8) else {
+          callback(.failure(NSError.init(domain: error?.localizedDescription ?? "", code: 1, userInfo: nil)))
+          return
+        }
+        
+        callback(.success(result))
+      }.resume()
       
-      let configuration = URLSessionConfiguration.ephemeral
-      configuration.protocolClasses = [MockUrlProtocol.self]
-      
-      urlSession = URLSession(configuration: configuration)
-      
-      // aoirequestload(reuqest, session)
+    }.run {
+      switch $0 {
+      case let .success(v):
+        dump(v)
+        break
+      case .failure(_):
+        break
+      }
+      expectation.fulfill()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func test_travel_request() throws {
-      let expectation = XCTestExpectation(description: "Download apple.com home page")
-
-      let result = TravelRequest(station: "mi")
-      
-      XCTAssertEqual(result.endpoint, "/autocompletaStazione")
-      XCTAssertEqual(result.request.httpMethod, "GET")
-      XCTAssertEqual(result.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
-      
-//      let task = performAPI(request: result) { result in
-//        switch result {
-//        case let .success(data):
-//          break
-//        case let .failure(error):
-//          XCTFail(error.localizedDescription)
-//        }
+//    let p = Parallel<String> { [weak self] (callback: @escaping (String) -> Void) in
+//      let url = "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/M"
+//      print("\(url)")
 //
-//        expectation.fulfill()
+//      let dataTask = self?.urlSession.dataTask(with: URLRequest(url: URL(string: url)!)) { data, response, error in
+//        guard
+//          let data = data,
+//          let result = String(data: data, encoding: .utf8) else {
+//          return
+//        }
+//        callback(result)
 //      }
-      
-//      XCTAssertNotNil(task)
-      
-      let mock = """
-      {
-       MOCK|S0666
-       MONTESANTO|S05801
-       MONTESILVANO|S07808
-       MONTEU DA PO|S00422
-       MONTEVARCHI TERRANUOVA|S06910
-       MONTEVERDE|S09624
-       MONTI TELTI|S12857
-       MONTICCHIO|S09622
-       MONTICELLI D`ONGINA|S01971
-       MONTICELLO D`ALBA|S00823
-       MONTIGLIO MURISENGO|S00426
-       MONTIRONE|S01840
-       MONTJOVET|S00144
-       MONTORO FORINO|S09518
-       MONTORO SUPERIORE|S09517
-       MONTORSI|S09528
-       MONTORSOLI|S06601
-       MONTREUX|S01235
-       MONZA|S01322
-       MONZA SOBBORGHI|S01480
-       MONZONE-M.DEI BANCHI-ISOLANO|S06225
-       MONZUNO|S05132
-       MORANO SUL PO|S00177
-       MORBEGNO|S01425
-       MORCONE|S09503
-      }
-      """.data(using: .utf8)!
-      
-      MockUrlProtocol.requestHandler = { request in
-        let httpResponse = HTTPURLResponse(
-          url: result.request.url!,
-          statusCode: 200,
-          httpVersion: nil,
-          headerFields: nil
-        )
-        return (httpResponse!, mock)
-      }
-      
-      performAPI(session: urlSession, request: result) { result in
+//
+//      dataTask?.resume()
+//
+//      return
+//    }
+//
+//    p.run { r in
+//      dump(r)
+//
+////      expectation.fulfill()
+//    }
+    
+//    let pt = Parallel<TravelRequest> { (request: @escaping (TravelRequest) -> Void) in
+//      return
+//    }
+//
+//    pt.run { result in
+//      dump(result)
+//    }
+    
+    wait(for: [expectation], timeout: 30.0)
+  }
+  
+  func test_travel() {
+    let request = Networking<Travel>.autocompleteStation(with: "mi")
+    
+    XCTAssertEqual(request.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
+    XCTAssertEqual(request.request.httpMethod, "GET")
+  }
+  
+  func test_travel_networking() throws {
+    let expectation = XCTestExpectation(description: "Download apple.com home page")
+    
+    MockUrlProtocol.requestHandler = { request in
+      let httpResponse = HTTPURLResponse(
+        url: request.url!,
+        statusCode: 200,
+        httpVersion: nil,
+        headerFields: nil
+      )
+      return (httpResponse!, mock)
+    }
+    
+    let request = Networking<Travel>
+      .autocompleteStation(with: "mi")
+      .performAPI(urlSession: urlSession) { result in
         switch result {
         case let .success(data):
-          print(String(data: data, encoding: .utf8))
+          let s = String(data: data, encoding: .utf8) ?? ""
+          XCTAssertTrue(s.contains("MOCK"))
         case .failure(_):
           XCTFail("")
         }
         
         expectation.fulfill()
       }
-
-      
-      wait(for: [expectation], timeout: 10.0)
-    }
-  
-  func test_request() {
-
     
+    XCTAssertNotNil(request)
+    
+    wait(for: [expectation], timeout: 10.0)
+  }
+  
+  func test_travel_networking_2() throws {
+    let expectation = XCTestExpectation(description: "Download apple.com home page")
+    
+    MockUrlProtocol.requestHandler = { request in
+      let httpResponse = HTTPURLResponse(
+        url: request.url!,
+        statusCode: 200,
+        httpVersion: nil,
+        headerFields: nil
+      )
+      return (httpResponse!, mock)
+    }
+    
+    let request = Networking<Travel>
+      .autocompleteStation(with: "mi")
+      .performAPI(urlSession: urlSession) { result in
+        switch result {
+        case let .success(data):
+          let s = String(data: data, encoding: .utf8) ?? ""
+          XCTAssertTrue(s.contains("MOCK"))
+        case .failure(_):
+          XCTFail("")
+        }
+
+        expectation.fulfill()
+      }
+    
+    XCTAssertNotNil(request)
+    
+    wait(for: [expectation], timeout: 10.0)
+  }
+  
+  func test_travel_networking_3() throws {
+    let expectation = XCTestExpectation(description: "Download apple.com home page")
+
+    let request = Parallel<TravelRequest> { (callback: @escaping (TravelRequest) -> Void) in
+      callback(TravelRequest(station: ""))
+    }
+    
+    request.run { result in
+      dump(result)
+      expectation.fulfill()
+    }
+    
+    wait(for: [expectation], timeout: 10.0)
   }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+  
+  func testPerformanceExample() throws {
+    // This is an example of a performance test case.
+    self.measure {
+      // Put the code you want to measure the time of here.
     }
-
+  }
+  
 }

@@ -63,8 +63,10 @@
 		EE031476B3A91A663855DDB7 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19928D22A78D32EFC4B611A3 /* Roboto-Italic.ttf */; };
 		F2A6207711773AAE4E879994 /* Pods_Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DCBA9A4B7AA013F1D03C58A /* Pods_Features.framework */; };
 		F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */; };
+		F8A6F35F257F9C0500B46EAB /* MockUrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A6F35E257F9C0500B46EAB /* MockUrlProtocol.swift */; };
 		F8E3A168257D210600E07E59 /* NetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3A167257D210600E07E59 /* NetworkingTests.swift */; };
 		F8E3A172257E337F00E07E59 /* TravelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3A171257E337F00E07E59 /* TravelRequest.swift */; };
+		F8E3A193257E762700E07E59 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3A192257E762700E07E59 /* Networking.swift */; };
 		FAE68B41CD056D77DBC41AE2 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF02743C77A6447841A6399 /* Roboto-LightItalic.ttf */; };
 		FBB908780F79513F17B08AA1 /* CaveauxListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D4857AD001A2E62DDDFD58 /* CaveauxListRequest.swift */; };
 		FDD6896D34798BFDEA02E7D9 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B01E786EA0FF0B5145C4A /* Localizable.swift */; };
@@ -195,8 +197,10 @@
 		F1A0F1D61F0C66F6B04337AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F43EAC77C72E5047D489179B /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F86439F3C61B379D392CB409 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		F8A6F35E257F9C0500B46EAB /* MockUrlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUrlProtocol.swift; sourceTree = "<group>"; };
 		F8E3A167257D210600E07E59 /* NetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTests.swift; sourceTree = "<group>"; };
 		F8E3A171257E337F00E07E59 /* TravelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRequest.swift; sourceTree = "<group>"; };
+		F8E3A192257E762700E07E59 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		F8ECD865B0CD3EC91C4D74D2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FCA9EA6614503E208567B732 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FF8CC5C78C58A757FA756519 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -285,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				DA880ADD771B128E05AB9894 /* Info.plist */,
+				F8E3A192257E762700E07E59 /* Networking.swift */,
 				C155B6FBF3341ADE5F25D551 /* AccessToken+.swift */,
 				F86439F3C61B379D392CB409 /* APIRequest.swift */,
 				83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */,
@@ -431,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E3A167257D210600E07E59 /* NetworkingTests.swift */,
+				F8A6F35E257F9C0500B46EAB /* MockUrlProtocol.swift */,
 			);
 			path = NetworkingTests;
 			sourceTree = "<group>";
@@ -760,6 +766,7 @@
 				493CDDC0941B03D708BBB26C /* RxComposableArchitectureDemoTests.swift in Sources */,
 				F8E3A168257D210600E07E59 /* NetworkingTests.swift in Sources */,
 				D576715E34B543C6A65E9024 /* ViaggioTrenoTests.swift in Sources */,
+				F8A6F35F257F9C0500B46EAB /* MockUrlProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,6 +775,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73231880B7986F0E581EE52E /* APIRequest.swift in Sources */,
+				F8E3A193257E762700E07E59 /* Networking.swift in Sources */,
 				2AB5AE845D4738DD55197DAE /* AccessToken+.swift in Sources */,
 				5FEC4E2EAB154B3D84CED457 /* AccessTokenRequest.swift in Sources */,
 				FBB908780F79513F17B08AA1 /* CaveauxListRequest.swift in Sources */,
