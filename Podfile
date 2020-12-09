@@ -27,10 +27,11 @@ target 'ViaggioTreno' do
     # Pods for testing
     pod 'SnapshotTesting', '~> 1.7.2'
     pod 'RxComposableArchitectureTests', '2.0.0'
+		pod 'RxBlocking'
+		pod 'RxTest'
+		pod 'Difference'
 
     caprice
-    
-    pod 'Difference'
   end
 
 end
@@ -45,6 +46,21 @@ target 'Features' do
   pod 'RxDataSources', '4.0.1'
   pod 'FileClient', :path => 'FileClient'
   pod 'Nuke', '8.4.1'
+
+  # Local pods
+  #pod 'Styling', :path => '../AppTheme'
+  caprice
+  
+end
+
+target 'Networking' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Features
+  shared_pods
+  
+  pod 'RxSwift'
 
   # Local pods
   #pod 'Styling', :path => '../AppTheme'
