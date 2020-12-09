@@ -56,7 +56,6 @@
 		C03A0AF529D150935F5C3896 /* Pods_ViaggioTrenoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B8D8D36D2B88E24869604B6 /* Pods_ViaggioTrenoTests.framework */; };
 		C69DEA0108C99A4F8C7C59E1 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57D37FC3BDC6254EBBC24D82 /* Roboto-Regular.ttf */; };
 		C7A02AF73CDF50CAF371B287 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ECD865B0CD3EC91C4D74D2 /* Colors.swift */; };
-		CBCCDE5EDAF2D8014BA828A2 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F34C38266EF2CD9A9776BA9 /* UserRequest.swift */; };
 		CDD2D77EC323FCD849E0CC27 /* mock_stations_broken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69162551783B1D1282CD0435 /* mock_stations_broken.txt */; };
 		D44F33CC7564894694F30CD4 /* Label+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB43F563A0CB529B7EBC2F1 /* Label+Styles.swift */; };
 		D576715E34B543C6A65E9024 /* ViaggioTrenoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D96C29BC90B7DF3DA5AF84 /* ViaggioTrenoTests.swift */; };
@@ -64,12 +63,10 @@
 		E55EE88DF0C9AAF1DF5B23AC /* Colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 92B2A7E6547088F632AD67E6 /* Colors.json */; };
 		E6370FADC3354A035E287163 /* Pods_ViaggioTreno.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 279964715A0B4C177893E6D9 /* Pods_ViaggioTreno.framework */; };
 		EBF66476ED7B180E2CEEE6E0 /* Styling.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83F9E5D5B40E4D2E6CB2DFBA /* Styling.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EC17E055CBB3C0194C2A0A9C /* MissionsListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA0580D7E0D3FDCFEA84030 /* MissionsListRequest.swift */; };
 		EE031476B3A91A663855DDB7 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19928D22A78D32EFC4B611A3 /* Roboto-Italic.ttf */; };
 		F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */; };
-		F836DB0F77288026D55F9D68 /* TravelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060E7AD0085D7E59097495C /* TravelRequest.swift */; };
+		F836DB0F77288026D55F9D68 /* StationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060E7AD0085D7E59097495C /* StationsRequest.swift */; };
 		FAE68B41CD056D77DBC41AE2 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF02743C77A6447841A6399 /* Roboto-LightItalic.ttf */; };
-		FBB908780F79513F17B08AA1 /* CaveauxListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D4857AD001A2E62DDDFD58 /* CaveauxListRequest.swift */; };
 		FDD6896D34798BFDEA02E7D9 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B01E786EA0FF0B5145C4A /* Localizable.swift */; };
 		FF171A4F92788552887E5C5E /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AB5F2A3B76B7E742F055D7F /* Roboto-Thin.ttf */; };
 /* End PBXBuildFile section */
@@ -132,7 +129,6 @@
 		034C4C9E0162E5793211AC82 /* URLRequests+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequests+.swift"; sourceTree = "<group>"; };
 		0ABA60574F6C0B313B45FA3D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		0E48659D4F2221079A6283F3 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
-		16D4857AD001A2E62DDDFD58 /* CaveauxListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaveauxListRequest.swift; sourceTree = "<group>"; };
 		173739E84B3B5BBEB3DE88A4 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		1885A07A2C5C344D38CCD462 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		18D9DFE700A49CA2ED928D1F /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,7 +151,6 @@
 		4BA26A7FABFD394F3786D495 /* AppTheme+Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppTheme+Basic.swift"; sourceTree = "<group>"; };
 		4BD4F926E4F167E5DC35BA38 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		4E92143A7ECE604E1E351EC9 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
-		4F34C38266EF2CD9A9776BA9 /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
 		5135CCD960214E97837E8040 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		559619176D6F4D7508C96613 /* Pods-Features.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Features.release.xcconfig"; path = "Target Support Files/Pods-Features/Pods-Features.release.xcconfig"; sourceTree = "<group>"; };
 		57D37FC3BDC6254EBBC24D82 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
@@ -193,13 +188,12 @@
 		C3806BACB5A9B6D16275B013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8A3125D4B64CA6FD7BB03F9 /* RxComposableArchitectureDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxComposableArchitectureDemoTests.swift; sourceTree = "<group>"; };
 		C8F311B72610533AEA735AD9 /* Pods-Features.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Features.debug.xcconfig"; path = "Target Support Files/Pods-Features/Pods-Features.debug.xcconfig"; sourceTree = "<group>"; };
-		D060E7AD0085D7E59097495C /* TravelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRequest.swift; sourceTree = "<group>"; };
+		D060E7AD0085D7E59097495C /* StationsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsRequest.swift; sourceTree = "<group>"; };
 		D477DF9A4C2721A9EFC5E97D /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		DA880ADD771B128E05AB9894 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DA8991712A33DA4ECB9F9BC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DBDEB0D1896E19D19A03E98D /* MockUrlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUrlProtocol.swift; sourceTree = "<group>"; };
 		EA4B01E786EA0FF0B5145C4A /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
-		EAA0580D7E0D3FDCFEA84030 /* MissionsListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsListRequest.swift; sourceTree = "<group>"; };
 		EBC1FDACDA1F055D0CB40D13 /* Color+Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Styles.swift"; sourceTree = "<group>"; };
 		F1A0F1D61F0C66F6B04337AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F297E0A6DBEB9B39E9D89E61 /* Pods-ViaggioTreno.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaggioTreno.debug.xcconfig"; path = "Target Support Files/Pods-ViaggioTreno/Pods-ViaggioTreno.debug.xcconfig"; sourceTree = "<group>"; };
@@ -409,10 +403,7 @@
 		95F40FD0286129D12DA963FC /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				16D4857AD001A2E62DDDFD58 /* CaveauxListRequest.swift */,
-				EAA0580D7E0D3FDCFEA84030 /* MissionsListRequest.swift */,
-				D060E7AD0085D7E59097495C /* TravelRequest.swift */,
-				4F34C38266EF2CD9A9776BA9 /* UserRequest.swift */,
+				D060E7AD0085D7E59097495C /* StationsRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -825,13 +816,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				73231880B7986F0E581EE52E /* APIRequest.swift in Sources */,
-				FBB908780F79513F17B08AA1 /* CaveauxListRequest.swift in Sources */,
 				F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */,
-				EC17E055CBB3C0194C2A0A9C /* MissionsListRequest.swift in Sources */,
 				BAD5A3C65BC90E8424B7FBF8 /* Networking.swift in Sources */,
-				F836DB0F77288026D55F9D68 /* TravelRequest.swift in Sources */,
+				F836DB0F77288026D55F9D68 /* StationsRequest.swift in Sources */,
 				A9235934E6DEC9C8703E1880 /* URLRequests+.swift in Sources */,
-				CBCCDE5EDAF2D8014BA828A2 /* UserRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

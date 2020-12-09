@@ -40,7 +40,7 @@ class NetworkingTests: XCTestCase {
   }
   
   func test_station_request() {
-    let stationRequest = Networking<Station>.autocompleteStation(with: "mi")
+    let stationRequest = Networking<StationsRequest>.autocompleteStation(with: "mi")
     
     XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
     XCTAssertEqual(stationRequest.request.httpMethod, "GET")
@@ -80,7 +80,7 @@ class NetworkingTests: XCTestCase {
 	
 	func test_rx_stations_autocomplete() throws {
 		let result = try
-			Networking<Station>
+			Networking<StationsRequest>
 			.autocompleteStation(with: "mi")
 			.data(with: urlSession) { $0.parseStations() }
 			.toBlocking(timeout: 10)
@@ -103,7 +103,7 @@ class NetworkingTests: XCTestCase {
 		}
 		
 		let result = try
-			Networking<Station>
+			Networking<StationsRequest>
 			.autocompleteStation(with: "mi")
 			.data(with: urlSession) { $0.parseStations() }
 			.toBlocking(timeout: 10)
@@ -125,7 +125,7 @@ class NetworkingTests: XCTestCase {
 		}
 		
 		let result = try
-			Networking<Station>
+			Networking<StationsRequest>
 			.autocompleteStation(with: "mi")
 			.data(with: urlSession) { $0.parseStations() }
 			.toBlocking(timeout: 10)
@@ -154,7 +154,7 @@ class NetworkingTests: XCTestCase {
 		}
 		
 		let result = try
-			Networking<Station>
+			Networking<StationsRequest>
 			.autocompleteStation(with: "mi")
 			.data(with: urlSession) { $0.parseStations() }
 			.toBlocking(timeout: 10)

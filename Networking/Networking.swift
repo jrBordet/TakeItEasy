@@ -47,7 +47,7 @@ extension String {
 /// - Parameter name: the name of the station
 /// - Returns: a collection of Station
 
-extension Networking where T == Station {
+extension Networking where T == StationsRequest {
 	public static func autocompleteStation(with s: String) -> Self {
 		Self(
 			baseUrl: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno",
@@ -58,7 +58,7 @@ extension Networking where T == Station {
 	}
 }
 
-public struct Networking<T: Codable> {
+public struct Networking<T: APIRequest> {
 	public var request: URLRequest
 	public var response: T?
 	
@@ -88,8 +88,9 @@ public struct Networking<T: Codable> {
 		self.parsing = parsing
 	}
 	
-	public func data<U>(with urlSession: URLSession = .shared, transform: @escaping(String) -> U) -> Observable<U> {
-		urlSession.rx
+	public func data(with urlSession: URLSession = .shared, transform: @escaping(String) -> T.Response) -> Observable<T.Response> {
+		urlSession
+			.rx
 			.data(request: self.request)
 			.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
 			.map {

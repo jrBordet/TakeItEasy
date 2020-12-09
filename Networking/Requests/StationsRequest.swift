@@ -7,10 +7,6 @@
 
 import Foundation
 
-public struct Travel: Codable {
-  let id: String
-}
-
 /// Retrieve stations by the given string
 /// Example: [Url example](http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mil)
 /// Return a list of station as
@@ -20,14 +16,14 @@ public struct Travel: Codable {
 /// - Parameter name: the name of the station
 /// - Returns: a collection of Station
 
-public struct TravelRequest: APIRequest, CustomDebugStringConvertible {
+public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
   public var data: Data?
   
   public var debugDescription: String {
     return request.debugDescription
   }
   
-  public typealias Response = Travel
+  public typealias Response = [Station]
   
   public var endpoint: String = "/autocompletaStazione"
   
