@@ -160,12 +160,32 @@ class NetworkingTests: XCTestCase {
 		XCTAssertEqual(result?.first?.id, "S0666")
 		XCTAssertEqual(result?.first?.name, "MOCK")
 	}
-  
-  func testPerformanceExample() throws {
-    // This is an example of a performance test case.
-    self.measure {
-      // Put the code you want to measure the time of here.
-    }
-  }
-  
+	
+	func test_rx_stations_autocomplete_404() {
+		let data =
+			Bundle
+			.main
+			.path(forResource: "mock_stations_broken", ofType: "txt")
+			.map (URL.init(fileURLWithPath:))
+			.flatMap { try? Data(contentsOf: $0) }
+				
+		MockUrlProtocol.requestHandler = { request in
+			let httpResponse = HTTPURLResponse(
+				url: request.url!,
+				statusCode: 404,
+				httpVersion: nil,
+				headerFields: nil
+			)
+			return (httpResponse!, data)
+		}
+		
+		let result =
+			StationsRequest
+			.autocompleteStation(with: "mi", urlSession: urlSession)
+			.toBlocking(timeout: 10)
+
+		XCTAssertThrowsError(try result.toArray()) { error in
+			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 1, userInfo: nil))
+		}
+	}
 }

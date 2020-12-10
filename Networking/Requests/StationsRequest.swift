@@ -18,10 +18,8 @@ import RxSwift
 /// - Returns: a collection of Station
 
 public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
-	public var data: Data?
-	
 	public var debugDescription: String {
-		return request.debugDescription
+		request.debugDescription
 	}
 	
 	public typealias Response = [Station]
@@ -41,9 +39,8 @@ public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
 		return request
 	}
 	
-	public init(station: String, data: Data? = nil) {
+	public init(station: String) {
 		self.station = station
-		self.data = data
 	}
 }
 

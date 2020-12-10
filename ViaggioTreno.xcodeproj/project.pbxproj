@@ -66,6 +66,7 @@
 		EE031476B3A91A663855DDB7 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19928D22A78D32EFC4B611A3 /* Roboto-Italic.ttf */; };
 		F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */; };
 		F836DB0F77288026D55F9D68 /* StationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060E7AD0085D7E59097495C /* StationsRequest.swift */; };
+		F8D8D69125814F2C0070DFDC /* TravelsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D69025814F2C0070DFDC /* TravelsRequest.swift */; };
 		FAE68B41CD056D77DBC41AE2 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF02743C77A6447841A6399 /* Roboto-LightItalic.ttf */; };
 		FDD6896D34798BFDEA02E7D9 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B01E786EA0FF0B5145C4A /* Localizable.swift */; };
 		FF171A4F92788552887E5C5E /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AB5F2A3B76B7E742F055D7F /* Roboto-Thin.ttf */; };
@@ -199,6 +200,7 @@
 		F297E0A6DBEB9B39E9D89E61 /* Pods-ViaggioTreno.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaggioTreno.debug.xcconfig"; path = "Target Support Files/Pods-ViaggioTreno/Pods-ViaggioTreno.debug.xcconfig"; sourceTree = "<group>"; };
 		F43EAC77C72E5047D489179B /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F86439F3C61B379D392CB409 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		F8D8D69025814F2C0070DFDC /* TravelsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelsRequest.swift; sourceTree = "<group>"; };
 		F8ECD865B0CD3EC91C4D74D2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FCA9EA6614503E208567B732 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FF8CC5C78C58A757FA756519 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				D060E7AD0085D7E59097495C /* StationsRequest.swift */,
+				F8D8D69025814F2C0070DFDC /* TravelsRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				BAD5A3C65BC90E8424B7FBF8 /* Networking.swift in Sources */,
 				F836DB0F77288026D55F9D68 /* StationsRequest.swift in Sources */,
 				A9235934E6DEC9C8703E1880 /* URLRequests+.swift in Sources */,
+				F8D8D69125814F2C0070DFDC /* TravelsRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
