@@ -52,4 +52,38 @@ extension StationsRequest {
 	}
 }
 
+public struct Station: Codable {
+	public let id: String
+	public let name: String
+	
+	public init(_ id: String, name: String) {
+		self.id = id
+		self.name = name
+	}
+}
 
+extension Networking where T == StationsRequest {
+	public static func autocompleteStation(with s: String) -> Self {
+		Self(
+			API: StationsRequest(station: s),
+			httpMethod: "GET"
+		)
+	}
+}
+
+extension String {
+	public func parseStations() -> [Station] {
+		self
+			.trimmingCharacters(in: .whitespacesAndNewlines)
+			.split(separator: "\n")
+			.map { $0.split(separator: "|") }
+			.map { v -> Station? in
+				guard v.count == 2 else {
+					return nil
+				}
+				
+				return Station(String(v[1]), name: String(v[0]))
+			}
+			.compactMap { $0 }
+	}
+}

@@ -11,40 +11,35 @@ import RxBlocking
 import RxTest
 
 class NetworkingTests: XCTestCase {
-  var urlSession: URLSession!
-  
-  override func setUpWithError() throws {
-    let configuration = URLSessionConfiguration.ephemeral
-    configuration.protocolClasses = [MockUrlProtocol.self]
-    
-    urlSession = URLSession(configuration: configuration)
+	var urlSession: URLSession!
+	
+	override func setUpWithError() throws {
+		let configuration = URLSessionConfiguration.ephemeral
+		configuration.protocolClasses = [MockUrlProtocol.self]
 		
-		let data =
-			Bundle.main.path(forResource: "mock_stations", ofType: "txt")
-				.map (URL.init(fileURLWithPath:))
-				.flatMap { try? Data(contentsOf: $0) }
-		    
-    MockUrlProtocol.requestHandler = { request in
-      let httpResponse = HTTPURLResponse(
-        url: request.url!,
-        statusCode: 200,
-        httpVersion: nil,
-        headerFields: nil
-      )
-      return (httpResponse!, data)
-    }
-    
-  }
-  
-  override func tearDownWithError() throws {
-  }
-  
-  func test_station_request() {
-    let stationRequest = Networking<StationsRequest>.autocompleteStation(with: "mi")
-    
-    XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
-    XCTAssertEqual(stationRequest.request.httpMethod, "GET")
-  }
+		urlSession = URLSession(configuration: configuration)
+		
+		MockUrlProtocol.requestHandler = { request in
+			let httpResponse = HTTPURLResponse(
+				url: request.url!,
+				statusCode: 200,
+				httpVersion: nil,
+				headerFields: nil
+			)
+			return (httpResponse!, .stations)
+		}
+		
+	}
+	
+	override func tearDownWithError() throws {
+	}
+	
+	func test_station_request() {
+		let stationRequest = Networking<StationsRequest>.autocompleteStation(with: "mi")
+		
+		XCTAssertEqual(stationRequest.API.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
+		XCTAssertEqual(stationRequest.API.request.httpMethod, "GET")
+	}
 	
 	func test_parse_stations() {
 		let s = """
@@ -78,7 +73,7 @@ class NetworkingTests: XCTestCase {
 		XCTAssertEqual(stations.first?.name, "MISANO ADRIATICO")
 	}
 	
-	func test_rx_stations_autocomplete() throws {
+	func test_stations_autocomplete() throws {
 		let result = try
 			StationsRequest
 			.autocompleteStation(with: "mi", urlSession: urlSession)
@@ -90,7 +85,7 @@ class NetworkingTests: XCTestCase {
 		XCTAssertEqual(result?.first?.name, "MOCK")
 	}
 	
-	func test_rx_stations_autocomplete_empty_response() throws {
+	func test_stations_autocomplete_empty_response() throws {
 		MockUrlProtocol.requestHandler = { request in
 			let httpResponse = HTTPURLResponse(
 				url: request.url!,
@@ -111,7 +106,7 @@ class NetworkingTests: XCTestCase {
 		XCTAssertTrue(result?.isEmpty ?? false)
 	}
 	
-	func test_rx_stations_autocomplete_notFound_response() throws {
+	func test_stations_autocomplete_notFound_response() throws {
 		MockUrlProtocol.requestHandler = { request in
 			let httpResponse = HTTPURLResponse(
 				url: request.url!,
@@ -132,14 +127,7 @@ class NetworkingTests: XCTestCase {
 		XCTAssertTrue(result?.isEmpty ?? false)
 	}
 	
-	func test_rx_stations_autocomplete_broken_response() throws {
-		let data =
-			Bundle
-			.main
-			.path(forResource: "mock_stations_broken", ofType: "txt")
-			.map (URL.init(fileURLWithPath:))
-			.flatMap { try? Data(contentsOf: $0) }
-				
+	func test_stations_autocomplete_broken_response() throws {
 		MockUrlProtocol.requestHandler = { request in
 			let httpResponse = HTTPURLResponse(
 				url: request.url!,
@@ -147,7 +135,7 @@ class NetworkingTests: XCTestCase {
 				httpVersion: nil,
 				headerFields: nil
 			)
-			return (httpResponse!, data)
+			return (httpResponse!, .stations_broken)
 		}
 		
 		let result = try
@@ -161,14 +149,7 @@ class NetworkingTests: XCTestCase {
 		XCTAssertEqual(result?.first?.name, "MOCK")
 	}
 	
-	func test_rx_stations_autocomplete_404() {
-		let data =
-			Bundle
-			.main
-			.path(forResource: "mock_stations_broken", ofType: "txt")
-			.map (URL.init(fileURLWithPath:))
-			.flatMap { try? Data(contentsOf: $0) }
-				
+	func test_stations_autocomplete_404() {
 		MockUrlProtocol.requestHandler = { request in
 			let httpResponse = HTTPURLResponse(
 				url: request.url!,
@@ -176,14 +157,14 @@ class NetworkingTests: XCTestCase {
 				httpVersion: nil,
 				headerFields: nil
 			)
-			return (httpResponse!, data)
+			return (httpResponse!, .stations_broken)
 		}
 		
 		let result =
 			StationsRequest
 			.autocompleteStation(with: "mi", urlSession: urlSession)
 			.toBlocking(timeout: 10)
-
+		
 		XCTAssertThrowsError(try result.toArray()) { error in
 			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 1, userInfo: nil))
 		}

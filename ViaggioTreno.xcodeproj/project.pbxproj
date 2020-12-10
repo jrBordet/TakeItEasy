@@ -20,7 +20,7 @@
 		1FCFE5EE73AC4D98BC6BC8CB /* Color+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC1FDACDA1F055D0CB40D13 /* Color+Styles.swift */; };
 		27C9F45C65304D5455BC2578 /* Styling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F9E5D5B40E4D2E6CB2DFBA /* Styling.framework */; };
 		3116EE094FAE9E3B8B50FF41 /* Styling.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F9E5D5B40E4D2E6CB2DFBA /* Styling.framework */; };
-		38E0CDE29FB7611909D0C3E2 /* mock_stations.txt in Resources */ = {isa = PBXBuildFile; fileRef = A11CEA81F605B1952E6F34BE /* mock_stations.txt */; };
+		38E0CDE29FB7611909D0C3E2 /* stations.txt in Resources */ = {isa = PBXBuildFile; fileRef = A11CEA81F605B1952E6F34BE /* stations.txt */; };
 		41585FB45F8B56B051DD3E92 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21AF2D8D54888A7763914651 /* Roboto-BlackItalic.ttf */; };
 		425C108D91A1EFE5D3CD8BF4 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 73E89DA2A8612DA4C85BCC31 /* LICENSE.txt */; };
 		4470D29D6570126C93756543 /* AppTheme+Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA26A7FABFD394F3786D495 /* AppTheme+Basic.swift */; };
@@ -56,7 +56,7 @@
 		C03A0AF529D150935F5C3896 /* Pods_ViaggioTrenoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B8D8D36D2B88E24869604B6 /* Pods_ViaggioTrenoTests.framework */; };
 		C69DEA0108C99A4F8C7C59E1 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57D37FC3BDC6254EBBC24D82 /* Roboto-Regular.ttf */; };
 		C7A02AF73CDF50CAF371B287 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ECD865B0CD3EC91C4D74D2 /* Colors.swift */; };
-		CDD2D77EC323FCD849E0CC27 /* mock_stations_broken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69162551783B1D1282CD0435 /* mock_stations_broken.txt */; };
+		CDD2D77EC323FCD849E0CC27 /* stations_broken.txt in Resources */ = {isa = PBXBuildFile; fileRef = 69162551783B1D1282CD0435 /* stations_broken.txt */; };
 		D44F33CC7564894694F30CD4 /* Label+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB43F563A0CB529B7EBC2F1 /* Label+Styles.swift */; };
 		D576715E34B543C6A65E9024 /* ViaggioTrenoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D96C29BC90B7DF3DA5AF84 /* ViaggioTrenoTests.swift */; };
 		E1673879194EAFE60C0FC6CA /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCA9EA6614503E208567B732 /* Roboto-Light.ttf */; };
@@ -65,8 +65,20 @@
 		EBF66476ED7B180E2CEEE6E0 /* Styling.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83F9E5D5B40E4D2E6CB2DFBA /* Styling.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE031476B3A91A663855DDB7 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19928D22A78D32EFC4B611A3 /* Roboto-Italic.ttf */; };
 		F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */; };
+		F803AA66258262190030921D /* Mock+resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = F803AA65258262190030921D /* Mock+resources.swift */; };
+		F803AA6C2582682A0030921D /* train_sections_broken.json in Resources */ = {isa = PBXBuildFile; fileRef = F803AA6B2582682A0030921D /* train_sections_broken.json */; };
 		F836DB0F77288026D55F9D68 /* StationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060E7AD0085D7E59097495C /* StationsRequest.swift */; };
-		F8D8D69125814F2C0070DFDC /* TravelsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D69025814F2C0070DFDC /* TravelsRequest.swift */; };
+		F8D8D69125814F2C0070DFDC /* DeparturesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D69025814F2C0070DFDC /* DeparturesRequest.swift */; };
+		F8D8D71A25821AA30070DFDC /* DeparturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D71925821AA30070DFDC /* DeparturesTests.swift */; };
+		F8D8D72025822C7F0070DFDC /* departures.json in Resources */ = {isa = PBXBuildFile; fileRef = F8D8D71F25822C7F0070DFDC /* departures.json */; };
+		F8D8D7302582378B0070DFDC /* departures_broken.json in Resources */ = {isa = PBXBuildFile; fileRef = F8D8D72F2582378B0070DFDC /* departures_broken.json */; };
+		F8D8D73A25824EC60070DFDC /* ArrivalsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D73925824EC60070DFDC /* ArrivalsRequest.swift */; };
+		F8D8D74025824F6E0070DFDC /* arrivals.json in Resources */ = {isa = PBXBuildFile; fileRef = F8D8D73F25824F6E0070DFDC /* arrivals.json */; };
+		F8D8D74625824F960070DFDC /* ArrivalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D74525824F960070DFDC /* ArrivalsTests.swift */; };
+		F8D8D74C2582501F0070DFDC /* arrivals_broken.json in Resources */ = {isa = PBXBuildFile; fileRef = F8D8D74B2582501F0070DFDC /* arrivals_broken.json */; };
+		F8D8D752258251310070DFDC /* TrainSectionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D751258251310070DFDC /* TrainSectionsRequest.swift */; };
+		F8D8D758258252770070DFDC /* TrainSectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D8D757258252770070DFDC /* TrainSectionsTests.swift */; };
+		F8D8D766258253DB0070DFDC /* train_sections.json in Resources */ = {isa = PBXBuildFile; fileRef = F8D8D765258253DB0070DFDC /* train_sections.json */; };
 		FAE68B41CD056D77DBC41AE2 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF02743C77A6447841A6399 /* Roboto-LightItalic.ttf */; };
 		FDD6896D34798BFDEA02E7D9 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B01E786EA0FF0B5145C4A /* Localizable.swift */; };
 		FF171A4F92788552887E5C5E /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5AB5F2A3B76B7E742F055D7F /* Roboto-Thin.ttf */; };
@@ -158,7 +170,7 @@
 		5AB5F2A3B76B7E742F055D7F /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		5B8D8D36D2B88E24869604B6 /* Pods_ViaggioTrenoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViaggioTrenoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		646C526774AEC51D94CE42BE /* Pods-ViaggioTrenoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaggioTrenoTests.release.xcconfig"; path = "Target Support Files/Pods-ViaggioTrenoTests/Pods-ViaggioTrenoTests.release.xcconfig"; sourceTree = "<group>"; };
-		69162551783B1D1282CD0435 /* mock_stations_broken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = mock_stations_broken.txt; sourceTree = "<group>"; };
+		69162551783B1D1282CD0435 /* stations_broken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = stations_broken.txt; sourceTree = "<group>"; };
 		7106436481C2B1CAA9329A21 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		729B8BB8FAA727ECAD1D9492 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		73E89DA2A8612DA4C85BCC31 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -172,7 +184,7 @@
 		92B2A7E6547088F632AD67E6 /* Colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
 		99E9491BA6D8484D3B83ACEC /* Pods-Networking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking.debug.xcconfig"; path = "Target Support Files/Pods-Networking/Pods-Networking.debug.xcconfig"; sourceTree = "<group>"; };
 		9DC3C2D4FDA38F20A5C9A707 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A11CEA81F605B1952E6F34BE /* mock_stations.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = mock_stations.txt; sourceTree = "<group>"; };
+		A11CEA81F605B1952E6F34BE /* stations.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = stations.txt; sourceTree = "<group>"; };
 		A5A3B650FCAAC965D4310938 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
 		A6F45B8F6BE53E18D5EBD817 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		AAB43F563A0CB529B7EBC2F1 /* Label+Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Styles.swift"; sourceTree = "<group>"; };
@@ -199,8 +211,20 @@
 		F1A0F1D61F0C66F6B04337AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F297E0A6DBEB9B39E9D89E61 /* Pods-ViaggioTreno.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaggioTreno.debug.xcconfig"; path = "Target Support Files/Pods-ViaggioTreno/Pods-ViaggioTreno.debug.xcconfig"; sourceTree = "<group>"; };
 		F43EAC77C72E5047D489179B /* Features.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Features.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F803AA65258262190030921D /* Mock+resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mock+resources.swift"; sourceTree = "<group>"; };
+		F803AA6B2582682A0030921D /* train_sections_broken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = train_sections_broken.json; sourceTree = "<group>"; };
 		F86439F3C61B379D392CB409 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
-		F8D8D69025814F2C0070DFDC /* TravelsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelsRequest.swift; sourceTree = "<group>"; };
+		F8D8D69025814F2C0070DFDC /* DeparturesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesRequest.swift; sourceTree = "<group>"; };
+		F8D8D71925821AA30070DFDC /* DeparturesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesTests.swift; sourceTree = "<group>"; };
+		F8D8D71F25822C7F0070DFDC /* departures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departures.json; sourceTree = "<group>"; };
+		F8D8D72F2582378B0070DFDC /* departures_broken.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departures_broken.json; sourceTree = "<group>"; };
+		F8D8D73925824EC60070DFDC /* ArrivalsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsRequest.swift; sourceTree = "<group>"; };
+		F8D8D73F25824F6E0070DFDC /* arrivals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = arrivals.json; sourceTree = "<group>"; };
+		F8D8D74525824F960070DFDC /* ArrivalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsTests.swift; sourceTree = "<group>"; tabWidth = 4; };
+		F8D8D74B2582501F0070DFDC /* arrivals_broken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = arrivals_broken.json; sourceTree = "<group>"; };
+		F8D8D751258251310070DFDC /* TrainSectionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionsRequest.swift; sourceTree = "<group>"; };
+		F8D8D757258252770070DFDC /* TrainSectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionsTests.swift; sourceTree = "<group>"; tabWidth = 4; };
+		F8D8D765258253DB0070DFDC /* train_sections.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = train_sections.json; sourceTree = "<group>"; };
 		F8ECD865B0CD3EC91C4D74D2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FCA9EA6614503E208567B732 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FF8CC5C78C58A757FA756519 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -315,18 +339,18 @@
 		23239C3622C034A87A1B8766 = {
 			isa = PBXGroup;
 			children = (
+				16B9E9B2F7E4997C10B4E285 /* ViaggioTreno */,
+				F328D411822F60ED3BDA5471 /* ViaggioTrenoTests */,
 				16F0531BA9BE9F2E365554E3 /* AppTheme */,
 				EE0DF479F88527BFD708E88C /* Features */,
 				1EF682B83E552010338D5987 /* Networking */,
-				16B9E9B2F7E4997C10B4E285 /* ViaggioTreno */,
-				F328D411822F60ED3BDA5471 /* ViaggioTrenoTests */,
 				9C1CDB66B4F684D2EEA4B0AE /* Products */,
 				41343A9B24BAA74AB2F55AC1 /* Pods */,
 				7F2482587ED2775D7FD0B2A5 /* Frameworks */,
 			);
-			indentWidth = 2;
+			indentWidth = 4;
 			sourceTree = "<group>";
-			tabWidth = 2;
+			tabWidth = 4;
 		};
 		249BB0881EAEC050E8D6DCAB /* Styling */ = {
 			isa = PBXGroup;
@@ -396,8 +420,10 @@
 		8A7E1C93E9AF42B697B359FD /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				69162551783B1D1282CD0435 /* mock_stations_broken.txt */,
-				A11CEA81F605B1952E6F34BE /* mock_stations.txt */,
+				F8D8D764258253BF0070DFDC /* Sections */,
+				F8D8D75D258253A00070DFDC /* Arrivals */,
+				F8D8D762258253AA0070DFDC /* Stations */,
+				F8D8D763258253B30070DFDC /* Departures */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -406,7 +432,9 @@
 			isa = PBXGroup;
 			children = (
 				D060E7AD0085D7E59097495C /* StationsRequest.swift */,
-				F8D8D69025814F2C0070DFDC /* TravelsRequest.swift */,
+				F8D8D69025814F2C0070DFDC /* DeparturesRequest.swift */,
+				F8D8D73925824EC60070DFDC /* ArrivalsRequest.swift */,
+				F8D8D751258251310070DFDC /* TrainSectionsRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -448,6 +476,9 @@
 			children = (
 				DBDEB0D1896E19D19A03E98D /* MockUrlProtocol.swift */,
 				2AFDE7BC669853ED378919B5 /* StationsTests.swift */,
+				F8D8D71925821AA30070DFDC /* DeparturesTests.swift */,
+				F8D8D74525824F960070DFDC /* ArrivalsTests.swift */,
+				F8D8D757258252770070DFDC /* TrainSectionsTests.swift */,
 			);
 			path = NetworkingTests;
 			sourceTree = "<group>";
@@ -470,8 +501,45 @@
 				C8A3125D4B64CA6FD7BB03F9 /* RxComposableArchitectureDemoTests.swift */,
 				80D96C29BC90B7DF3DA5AF84 /* ViaggioTrenoTests.swift */,
 				C5569130BE92EE996575E9CC /* NetworkingTests */,
+				F803AA65258262190030921D /* Mock+resources.swift */,
 			);
 			path = ViaggioTrenoTests;
+			sourceTree = "<group>";
+		};
+		F8D8D75D258253A00070DFDC /* Arrivals */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8D74B2582501F0070DFDC /* arrivals_broken.json */,
+				F8D8D73F25824F6E0070DFDC /* arrivals.json */,
+			);
+			path = Arrivals;
+			sourceTree = "<group>";
+		};
+		F8D8D762258253AA0070DFDC /* Stations */ = {
+			isa = PBXGroup;
+			children = (
+				69162551783B1D1282CD0435 /* stations_broken.txt */,
+				A11CEA81F605B1952E6F34BE /* stations.txt */,
+			);
+			path = Stations;
+			sourceTree = "<group>";
+		};
+		F8D8D763258253B30070DFDC /* Departures */ = {
+			isa = PBXGroup;
+			children = (
+				F8D8D71F25822C7F0070DFDC /* departures.json */,
+				F8D8D72F2582378B0070DFDC /* departures_broken.json */,
+			);
+			path = Departures;
+			sourceTree = "<group>";
+		};
+		F8D8D764258253BF0070DFDC /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				F803AA6B2582682A0030921D /* train_sections_broken.json */,
+				F8D8D765258253DB0070DFDC /* train_sections.json */,
+			);
+			path = Sections;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -624,10 +692,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D8D74C2582501F0070DFDC /* arrivals_broken.json in Resources */,
+				F8D8D72025822C7F0070DFDC /* departures.json in Resources */,
+				F8D8D7302582378B0070DFDC /* departures_broken.json in Resources */,
+				F803AA6C2582682A0030921D /* train_sections_broken.json in Resources */,
+				F8D8D766258253DB0070DFDC /* train_sections.json in Resources */,
 				86AA50A89221A2F80F1417F4 /* Assets.xcassets in Resources */,
 				B36B59E75597C8B1EE4F0F67 /* ViewController.xib in Resources */,
-				38E0CDE29FB7611909D0C3E2 /* mock_stations.txt in Resources */,
-				CDD2D77EC323FCD849E0CC27 /* mock_stations_broken.txt in Resources */,
+				38E0CDE29FB7611909D0C3E2 /* stations.txt in Resources */,
+				CDD2D77EC323FCD849E0CC27 /* stations_broken.txt in Resources */,
+				F8D8D74025824F6E0070DFDC /* arrivals.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,8 +883,12 @@
 			files = (
 				A19DCC75B9FAD544B42A0741 /* MockUrlProtocol.swift in Sources */,
 				9A9A84AB61F1555F4C0BB800 /* StationsTests.swift in Sources */,
+				F8D8D71A25821AA30070DFDC /* DeparturesTests.swift in Sources */,
 				493CDDC0941B03D708BBB26C /* RxComposableArchitectureDemoTests.swift in Sources */,
 				D576715E34B543C6A65E9024 /* ViaggioTrenoTests.swift in Sources */,
+				F8D8D758258252770070DFDC /* TrainSectionsTests.swift in Sources */,
+				F8D8D74625824F960070DFDC /* ArrivalsTests.swift in Sources */,
+				F803AA66258262190030921D /* Mock+resources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,12 +896,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D8D73A25824EC60070DFDC /* ArrivalsRequest.swift in Sources */,
 				73231880B7986F0E581EE52E /* APIRequest.swift in Sources */,
 				F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */,
 				BAD5A3C65BC90E8424B7FBF8 /* Networking.swift in Sources */,
+				F8D8D752258251310070DFDC /* TrainSectionsRequest.swift in Sources */,
 				F836DB0F77288026D55F9D68 /* StationsRequest.swift in Sources */,
 				A9235934E6DEC9C8703E1880 /* URLRequests+.swift in Sources */,
-				F8D8D69125814F2C0070DFDC /* TravelsRequest.swift in Sources */,
+				F8D8D69125814F2C0070DFDC /* DeparturesRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

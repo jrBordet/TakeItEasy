@@ -9,89 +9,21 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-public struct Station: Codable {
-	public let id: String
-	public let name: String
-	
-	public init(_ id: String, name: String) {
-		self.id = id
-		self.name = name
-	}
-	
-}
-
-extension String {
-	public func parseStations() -> [Station] {
-		self
-			.trimmingCharacters(in: .whitespacesAndNewlines)
-			.split(separator: "\n")
-			.map { $0.split(separator: "|") }
-			.map { v -> Station? in
-				guard v.count == 2 else {
-					return nil
-				}
-				
-				return Station(String(v[1]), name: String(v[0]))
-			}
-			.compactMap { $0 }
-	}
-}
-
-
-/// Retrieve stations by the given string
-/// Example: [Url example](http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mil)
-/// Return a list of station as
-//    MILANO CENTRALE|S01700
-//    MILANO AFFORI|S01078
-//    MILANO BOVISA FNM|S01642
-/// - Parameter name: the name of the station
-/// - Returns: a collection of Station
-
-extension Networking where T == StationsRequest {
-	public static func autocompleteStation(with s: String) -> Self {
-		Self(
-			baseUrl: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno",
-			endpoint: "/autocompletaStazione/\(s)",
-			httpMethod: "GET",
-			data: nil
-		)
-	}
-}
-
 public struct Networking<T: APIRequest> {
-	public var request: URLRequest
-	public var response: T?
-	
-	private var data: Data?
-	
-	private var parsing: ((String) -> T?)? = nil
-	
+	public var API: T
+	public var response: T.Response?
+			
 	public init(
-		baseUrl: String,
-		endpoint: String,
-		httpMethod: String? = "GET",
-		data: Data? = nil,
-		parsing: ((String) -> T?)? = nil
+		API: T,
+		httpMethod: String? = "GET"
 	) {
-		guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
-			fatalError("malformed url")
-		}
-		
-		self.request = URLRequest(
-			url: url,
-			cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData,
-			timeoutInterval: 10
-		)
-		
-		self.request.httpMethod = httpMethod
-		self.data = data
-		self.parsing = parsing
+		self.API = API
 	}
 	
 	public func data(with urlSession: URLSession = .shared, transform: @escaping(String) -> T.Response) -> Observable<T.Response> {
 		urlSession
 			.rx
-			.data(request: self.request)
+			.data(request: self.API.request)
 			.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
 			.map {
 				guard let result = String(data: $0, encoding: .utf8) else {
@@ -103,4 +35,17 @@ public struct Networking<T: APIRequest> {
 			.map (transform)
 	}
 	
+	public func json(with urlSession: URLSession = .shared) -> Observable<T.Response> {
+		urlSession
+			.rx
+			.data(request: self.API.request)
+			.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+			.map { data -> T.Response in
+				do {
+					return try JSONDecoder().decode(T.Response.self, from: data)
+				} catch let error {
+						throw RxCocoaURLError.deserializationError(error: error)
+				}
+			}
+	}
 }
