@@ -21,9 +21,9 @@ public let shadowStyle: ViewStyle = { view in
     view.layer.cornerRadius = 5
 }
 
-public func rounded(with radius: CGFloat? = 5) -> ViewStyle {
+public func rounded(with radius: CGFloat = 5) -> ViewStyle {
     return {
-        $0.layer.cornerRadius = radius ?? 0
+        $0.layer.cornerRadius = radius
         $0.clipsToBounds = true
     }
 }
