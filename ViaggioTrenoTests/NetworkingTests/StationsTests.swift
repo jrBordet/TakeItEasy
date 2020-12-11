@@ -19,16 +19,7 @@ class NetworkingTests: XCTestCase {
 		
 		urlSession = URLSession(configuration: configuration)
 		
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .stations)
-		}
-		
+		MockUrlProtocol.requestHandler = requestHandler(with: .stations, statusCode: 200)
 	}
 	
 	override func tearDownWithError() throws {
@@ -86,15 +77,7 @@ class NetworkingTests: XCTestCase {
 	}
 	
 	func test_stations_autocomplete_empty_response() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, "".data(using: .utf8))
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: "".data(using: .utf8), statusCode: 200)
 		
 		let result = try
 			StationsRequest
@@ -107,15 +90,7 @@ class NetworkingTests: XCTestCase {
 	}
 	
 	func test_stations_autocomplete_notFound_response() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, "".data(using: .utf8))
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: "".data(using: .utf8), statusCode: 200)
 		
 		let result = try
 			StationsRequest
@@ -128,15 +103,7 @@ class NetworkingTests: XCTestCase {
 	}
 	
 	func test_stations_autocomplete_broken_response() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .stations_broken)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .stations_broken, statusCode: 200)
 		
 		let result = try
 			StationsRequest
@@ -150,15 +117,7 @@ class NetworkingTests: XCTestCase {
 	}
 	
 	func test_stations_autocomplete_404() {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 404,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .stations_broken)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .stations_broken, statusCode: 404)
 		
 		let result =
 			StationsRequest
@@ -166,7 +125,7 @@ class NetworkingTests: XCTestCase {
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
-			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 1, userInfo: nil))
+			XCTAssertEqual(error as? APIError, APIError.code(HTTPStatusCodes.NotFound))
 		}
 	}
 }

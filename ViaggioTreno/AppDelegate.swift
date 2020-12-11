@@ -16,12 +16,10 @@ import Styling
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
         self.window = UIWindow(frame: UIScreen.main.bounds)
-                
-        let rootScene = Scene<ViewController>().render()
+		                
+		let rootScene = UIViewController.stations
                     
         self.window?.rootViewController = UINavigationController(rootViewController: rootScene)
         
@@ -30,4 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+}
+
+extension UIViewController {
+	static var stations: StationsViewController = Scene<StationsViewController>().render()
+}
+
+struct Factory {
+	static var stations: StationsViewController = Scene<StationsViewController>().render()
 }

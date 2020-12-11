@@ -9,7 +9,6 @@
 import Foundation
 import RxComposableArchitecture
 import os.log
-import Features
 
 public struct AppState {
     var featureCounterState: FeatureCounterState

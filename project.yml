@@ -2,8 +2,8 @@ name: ViaggioTreno
 options: # Some general settings for the project
     bundleIdPrefix: com.viaggiotreno
     createIntermediateGroups: true # If the folders are nested, also nest the groups in Xcode
-    indentWidth: 2 # indent by 2 spaces
-    tabWidth: 2 # a tab is 2 spaces
+    indentWidth: 4 # indent by 2 spaces
+    tabWidth: 4 # a tab is 2 spaces
 settings:
     DEVELOPMENT_TEAM: None
 targets:
@@ -14,17 +14,8 @@ targets:
     sources:
         - path: ViaggioTreno
     dependencies:
-        - target: Features
         - target: Styling
         - target: Networking
-  Features: # Feature
-    type: framework
-    platform: iOS
-    deploymentTarget: 10.0
-    sources:
-        - path: Features
-    dependencies:
-        - target: Styling
   Styling: # Common
     type: framework
     platform: iOS

@@ -18,16 +18,7 @@ class DeparturesTests: XCTestCase {
 		
 		urlSession = URLSession(configuration: configuration)
 		
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .departures)
-		}
-		
+		MockUrlProtocol.requestHandler = requestHandler(with: .departures)
 	}
 	
 	override func tearDownWithError() throws {
@@ -52,15 +43,7 @@ class DeparturesTests: XCTestCase {
 	}
 	
 	func test_departures_decoding_error() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .departures_broken)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .departures_broken)
 		
 		let result =
 			DeparturesRequest
@@ -68,25 +51,12 @@ class DeparturesTests: XCTestCase {
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
-			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 2, userInfo: nil))
+			XCTAssertEqual(error as? APIError, APIError.decoding("Decoding error on key 'numeroTreno': Expected to decode Int but found a string/data instead."))
 		}
 	}
 	
 	func test_departures_500() throws {
-		let data =
-			Bundle.main.path(forResource: "departures_broken", ofType: ".json")
-			.map (URL.init(fileURLWithPath:))
-			.flatMap { try? Data(contentsOf: $0) }
-		
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 500,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, data)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .departures_broken, statusCode: 500)
 		
 		let result =
 			DeparturesRequest
@@ -94,7 +64,7 @@ class DeparturesTests: XCTestCase {
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
-			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 1, userInfo: nil))
+			XCTAssertEqual(error as? APIError, APIError.code(HTTPStatusCodes.InternalServerError))
 		}
 	}
 	

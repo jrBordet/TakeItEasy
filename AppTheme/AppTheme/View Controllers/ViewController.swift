@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var genericButton: UIButton!
     
-    let theme: AppThemeMaterial = .alarmSoundsGood
+    let theme: AppThemeMaterial = .theme
     
     override func viewDidLoad() {
         super.viewDidLoad()

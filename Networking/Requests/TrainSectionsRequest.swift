@@ -13,7 +13,6 @@ public struct TrainSection: Codable {
 		public let stazioneCorrente: Bool
 		public let id: String
 		public let stazione: String
-	
 		public let fermata: TrainStop
 	
 	public struct TrainStop: Codable {

@@ -21,20 +21,6 @@
 //import RxTest
 //import RxBlocking
 //
-////extension Step {
-////  static func send(_ action: Action, update: @escaping (inout Value) -> Void) -> Step {
-////    Step(.send, action, update)
-////  }
-////
-////  static func receive(_ action: Action, update: @escaping (inout Value) -> Void) -> Step {
-////    Step(.receive, action, update)
-////  }
-////
-////  static func sendSync(_ action: Action, update: @escaping (inout Value) -> Void) -> Step {
-////    Step(.sendSync, action, update)
-////  }
-////}
-//
 //// https://en.wikipedia.org/wiki/Behavior-driven_development
 //
 ///**

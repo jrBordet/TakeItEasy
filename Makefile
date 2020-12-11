@@ -1,6 +1,6 @@
 
 setup:
-	#swiftgen
+	swiftgen
 	xcodegen
 	pod install
 
@@ -10,4 +10,8 @@ reset:
 	rm -rf *.xcworkspace
 	rm -rf Pods/
 	rm Podfile.lock
+
+gen:
+	swiftgen
+
 

@@ -18,16 +18,7 @@ class ArrivalsTests: XCTestCase {
 		
 		urlSession = URLSession(configuration: configuration)
 		
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .arrivals)
-		}
-		
+		MockUrlProtocol.requestHandler = requestHandler(with: .arrivals)
 	}
 	
 	override func tearDownWithError() throws {
@@ -52,15 +43,7 @@ class ArrivalsTests: XCTestCase {
 	}
 	
 	func test_arrivals_decoding_error() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .arrivals_broken)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .arrivals_broken)
 		
 		let result =
 			ArrivalsRequest
@@ -68,20 +51,12 @@ class ArrivalsTests: XCTestCase {
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
-			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 2, userInfo: nil))
+			XCTAssertEqual(error as? APIError, APIError.decoding("Decoding error on key 'numeroTreno': Expected to decode Int but found a string/data instead."))
 		}
 	}
 	
 	func test_arrivals_500() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 500,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .departures_broken)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .departures_broken, statusCode: 500)
 		
 		let result =
 			ArrivalsRequest
@@ -89,7 +64,7 @@ class ArrivalsTests: XCTestCase {
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
-			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 1, userInfo: nil))
+			XCTAssertEqual(error as? APIError, APIError.code(HTTPStatusCodes.InternalServerError))
 		}
 	}
 }

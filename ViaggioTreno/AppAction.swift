@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Features
 
 public enum AppAction {
     case counter(CounterViewAction)

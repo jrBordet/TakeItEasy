@@ -44,3 +44,15 @@ class MockUrlProtocol: URLProtocol {
 		
 	}
 }
+
+func requestHandler(with data: Data?, statusCode: Int = 200) -> (URLRequest) -> (HTTPURLResponse, Data?) {
+	return { request in
+		let httpResponse = HTTPURLResponse(
+			url: request.url!,
+			statusCode: statusCode,
+			httpVersion: nil,
+			headerFields: nil
+		)
+		return (httpResponse!, data)
+	}
+}

@@ -52,7 +52,7 @@ extension StationsRequest {
 	}
 }
 
-public struct Station: Codable {
+public struct Station: Codable, Equatable {
 	public let id: String
 	public let name: String
 	

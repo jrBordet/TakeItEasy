@@ -12,40 +12,77 @@ import RxCocoa
 public struct Networking<T: APIRequest> {
 	public var API: T
 	public var response: T.Response?
-			
+	public let httpMethod: String
+	
 	public init(
 		API: T,
-		httpMethod: String? = "GET"
+		httpMethod: String = "GET"
 	) {
 		self.API = API
+		self.httpMethod = httpMethod
 	}
 	
 	public func data(with urlSession: URLSession = .shared, transform: @escaping(String) -> T.Response) -> Observable<T.Response> {
-		urlSession
-			.rx
-			.data(request: self.API.request)
-			.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-			.map {
-				guard let result = String(data: $0, encoding: .utf8) else {
-					throw NSError(domain: "error on data encoding", code: 1, userInfo: nil)
-				}
-				
-				return result
-			}
-			.map (transform)
+		make(with: urlSession, parse: transform)
 	}
 	
 	public func json(with urlSession: URLSession = .shared) -> Observable<T.Response> {
-		urlSession
-			.rx
-			.data(request: self.API.request)
-			.observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-			.map { data -> T.Response in
-				do {
-					return try JSONDecoder().decode(T.Response.self, from: data)
-				} catch let error {
-						throw RxCocoaURLError.deserializationError(error: error)
+		make(with: urlSession)
+	}
+	
+	private func make(with urlSession: URLSession = .shared, parse: ((String) -> T.Response)? = nil) -> Observable<T.Response> {
+		Observable<T.Response>.create { observer -> Disposable in
+			urlSession.dataTask(with: self.API.request) { (data, response, error) in
+				guard let statusCode = HTTPStatusCodes.decode(from: response) else {
+					observer.onError(APIError.undefinedStatusCode)
+					return
 				}
-			}
+				
+				guard 200...299 ~= statusCode.rawValue else {
+					observer.onError(APIError.code(statusCode))
+					return
+				}
+				
+				guard
+					let data = data,
+					let result = String(data: data, encoding: .utf8) else {
+					observer.onError(APIError.dataCorrupted)
+					return
+				}
+				
+				if let parse = parse {
+					observer.onNext(parse(result))
+				} else {
+					do {
+						try observer.onNext(JSONDecoder().decode(T.Response.self, from: data))
+						observer.onCompleted()
+					}  catch let error {
+						guard let e = error as? DecodingError else {
+							observer.onError(APIError.decoding(error.localizedDescription))
+							return
+						}
+						
+						switch e {
+						case let .typeMismatch(_, value), let .valueNotFound(_, value):
+							if let key = value.codingPath.last {
+								observer.onError(APIError.decoding("Decoding error on key '\(key.stringValue)': " + value.debugDescription))
+							}
+							
+							observer.onError(APIError.decoding(value.debugDescription))
+						case let .keyNotFound(_, value):
+							observer.onError(APIError.decoding(value.underlyingError?.localizedDescription ?? ""))
+						case let .dataCorrupted(value):
+							observer.onError(APIError.decoding(value.underlyingError?.localizedDescription ?? ""))
+						@unknown default:
+							observer.onError(APIError.dataCorrupted)
+						}
+					}
+				}
+				
+				observer.onCompleted()
+			}.resume()
+			
+			return Disposables.create()
+		}
 	}
 }

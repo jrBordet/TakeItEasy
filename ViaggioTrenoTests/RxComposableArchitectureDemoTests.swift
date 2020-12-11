@@ -9,7 +9,6 @@
 import XCTest
 @testable import ViaggioTreno
 import RxComposableArchitectureTests
-import Features
 import Difference
 import RxComposableArchitecture
 import RxSwift

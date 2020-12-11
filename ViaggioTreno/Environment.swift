@@ -7,7 +7,6 @@
 
 import Foundation
 import RxComposableArchitecture
-import Features
 
 public typealias AppEnvironment = (
     counter: CounterViewEnvironment,

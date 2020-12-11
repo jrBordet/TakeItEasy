@@ -5,12 +5,12 @@ source 'https://github.com/jrBordet/Sources.git'
 source 'https://cdn.cocoapods.org/'
 
 def shared_pods
-  pod 'SceneBuilder', '1.0.0'
-  pod 'RxComposableArchitecture', '2.0.0' # :path => '../../RxComposableArchitecture'
+		pod 'SceneBuilder', '1.0.0'
+		pod 'RxComposableArchitecture' # :path => '../../RxComposableArchitecture'
 end
 
 def caprice
-  pod 'Caprice', '0.0.5' #:path => '../../Caprice'
+		pod 'Caprice', '0.0.5'
 end
 
 target 'ViaggioTreno' do
@@ -42,15 +42,11 @@ target 'Features' do
 
   # Pods for Features
   shared_pods
-  
+
+	caprice
+
   pod 'RxDataSources', '4.0.1'
   pod 'FileClient', :path => 'FileClient'
-  pod 'Nuke', '8.4.1'
-
-  # Local pods
-  #pod 'Styling', :path => '../AppTheme'
-  caprice
-  
 end
 
 target 'Networking' do
@@ -58,12 +54,9 @@ target 'Networking' do
   use_frameworks!
 
   # Pods for Features
-  shared_pods
-  
   pod 'RxSwift'
+	pod 'RxCocoa'
 
-  # Local pods
-  #pod 'Styling', :path => '../AppTheme'
   caprice
   
 end

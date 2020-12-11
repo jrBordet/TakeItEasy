@@ -7,7 +7,6 @@
 
 import Foundation
 import RxComposableArchitecture
-import Features
 
 let appReducer: Reducer<AppState, AppAction, AppEnvironment> =  combine(
   pullback(

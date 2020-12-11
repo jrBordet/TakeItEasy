@@ -18,15 +18,7 @@ class TrainSectionsTests: XCTestCase {
 		
 		urlSession = URLSession(configuration: configuration)
 		
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .train_sections)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .train_sections)
 	}
 	
 	override func tearDownWithError() throws {
@@ -53,15 +45,7 @@ class TrainSectionsTests: XCTestCase {
 	}
 	
 	func test_sections_decoding_error() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 200,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .train_sections_broken)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .train_sections_broken)
 		
 		let result =
 			TrainSectionsRequest
@@ -69,20 +53,12 @@ class TrainSectionsTests: XCTestCase {
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
-			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 2, userInfo: nil))
+			XCTAssertEqual(APIError.decoding("Decoding error on key 'last': Expected to decode Bool but found a number instead."), error as? APIError)
 		}
 	}
 	
 	func test_train_sections_500() throws {
-		MockUrlProtocol.requestHandler = { request in
-			let httpResponse = HTTPURLResponse(
-				url: request.url!,
-				statusCode: 500,
-				httpVersion: nil,
-				headerFields: nil
-			)
-			return (httpResponse!, .train_sections_broken)
-		}
+		MockUrlProtocol.requestHandler = requestHandler(with: .train_sections_broken, statusCode: 500)
 		
 		let result =
 			TrainSectionsRequest
@@ -90,7 +66,7 @@ class TrainSectionsTests: XCTestCase {
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
-			XCTAssertEqual(error as NSError, NSError(domain: "RxCocoa.RxCocoaURLError", code: 1, userInfo: nil))
+			XCTAssertEqual(APIError.code(HTTPStatusCodes.InternalServerError), error as? APIError)
 		}
 	}
 	

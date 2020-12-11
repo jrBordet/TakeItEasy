@@ -1,0 +1,38 @@
+/* 
+  Localizable.strings
+  AlarmsDemo
+
+  Created by Jean Raphael Bordet on 17/06/2020.
+  
+*/
+
+"app.name" = "";
+
+// MARK: - Common
+
+"app.common.save" = "Save";
+"app.common.dismiss" = "Dismiss";
+
+// MARK: - Form
+
+"form.alarm.title" = "Title";
+"form.alarm.title_placeholder" = "title";
+"form.alarm.date" = "Time";
+"form.alarm.enable" = "Enable";
+"form.alarm.days" = "Days";
+"form.alarm.delete" = "Delete";
+"form.alarm.create" = "Create";
+"form.alarm.media" = "Media";
+
+"form.days.sunday" = "sunday";
+"form.days.monday" = "monday";
+"form.days.tuesday" = "tuesday";
+"form.days.wednesday" = "wednesday";
+"form.days.thursday" = "thursday";
+"form.days.friday" = "friday";
+"form.days.saturday" = "saturday";
+"form.days.weekend" = "weekend";
+"form.days.everyday" = "everyday";
+
+"media.confirm" = "Confirm";
+
