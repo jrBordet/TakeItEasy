@@ -10,7 +10,8 @@ import RxDataSources
 import RxSwift
 import RxCocoa
 import Styling
-
+import RxComposableArchitecture
+import Networking
 
 enum StationSectionModel {
 	case StationSection(title: String, items: [StationSectionItem])
@@ -58,7 +59,7 @@ extension StationsViewController {
 						return UITableViewCell(style: .default, reuseIdentifier: nil)
 					}
 					
-					cell.stationNameLabel.text = value
+					cell.stationNameLabel.text = value.capitalized
 					
 					return cell
 				case let .FavouriteStationSectionItem(value):
@@ -66,7 +67,7 @@ extension StationsViewController {
 						return UITableViewCell(style: .default, reuseIdentifier: nil)
 					}
 					
-					cell.stationNameLabel.text = value
+					cell.stationNameLabel.text = value.capitalized
 					
 					return cell
 				}
@@ -76,25 +77,22 @@ extension StationsViewController {
 	}
 }
 
-extension StationsViewController {
-	static func layoutMock() -> Observable<[StationSectionModel]> {
-		.just([.StationSection(title: "",
-							   items: [
-								.FavouriteStationSectionItem("row 0"),
-								.FavouriteStationSectionItem("row 1"),
-								.FavouriteStationSectionItem("row 2")
-							   ]),
-			   .StationSection(title: "",
-							   items: [
-								.StationSectionItem("row 00"),
-								.StationSectionItem("row 01"),
-								.StationSectionItem("row 02")
-							   ])
-		])
+//https://jakubturek.com/uicollectionview-self-sizing-cells-animation/
+
+extension Store: ReactiveCompatible {}
+
+public extension Reactive where Base: Store<StationsViewState, StationsViewAction> {
+	
+	var autocomplete: Binder<String?> {
+		Binder(self.base) { store, value in
+			guard let value = value else {
+				return
+			}
+
+			store.send(.stations(.autocomplete(value)))
+		}
 	}
 }
-
-//https://jakubturek.com/uicollectionview-self-sizing-cells-animation/
 
 public class StationsViewController: BaseViewController {
 	@IBOutlet var searchBar: UISearchBar!
@@ -104,60 +102,68 @@ public class StationsViewController: BaseViewController {
 	
 	private let disposeBag = DisposeBag()
 	
-	var temp = BehaviorRelay<[StationSectionModel]>(value: [
-		.StationSection(title: "", items: [
-			.FavouriteStationSectionItem("\(L10n.Media.confirm)")
-		]),
-		.StationSection(title: "", items: [
-			.StationSectionItem("stations "),
-		])
-	])
+	public var store: Store<StationsViewState, StationsViewAction>?
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		//RxTableViewSectionedAnimatedDataSource
+				
+		guard let store = self.store else {
+			return
+		}
 		
 		// MARK: - styling
 		title = L10n.Media.confirm
 		
-		self.tableView.rowHeight = 72
-		self.tableView.separatorColor = .white
+		tableView.rowHeight = 72
+		tableView.separatorColor = .white
 		
-		self.registerTableViewCell(with: tableView, cell: StationCell.self, reuseIdentifier: "StationCell")
+		registerTableViewCell(with: tableView, cell: StationCell.self, reuseIdentifier: "StationCell")
 		
-		// MARK: - bind dataSource
-		
-		func mock() -> [StationSectionModel] {
-			[.StationSection(title: "", items: [
-				.FavouriteStationSectionItem("row 0"),
-				.FavouriteStationSectionItem("row 1"),
-				.FavouriteStationSectionItem("row 2")
-			]),
-			.StationSection(title: "", items: [
-				.StationSectionItem("row 00"),
-				.StationSectionItem("row 01"),
-				.StationSectionItem("row 02")
-			])
-			]
-		}
-		
-		Observable<Int>
-			.timer(.seconds(1), period: .seconds(3), scheduler: MainScheduler.instance)
-			.subscribe (onNext: { v in				
-				let value = self.temp.value
-				
-				self.temp.accept(value + [
-					.StationSection(title: "", items: [
-						.StationSectionItem("station 0\(v)"),
-					])
-				])
+		searchBar.rx
+			.searchButtonClicked
+			.subscribe(onNext: { [weak self] in
+				self?.searchBar.resignFirstResponder()
 			}).disposed(by: disposeBag)
 		
+		// MARK: - autocomplete
 		
-		StationsViewController
-			.layoutMock()
-//					temp
+		searchBar
+			.rx
+			.text
+			.bind(to: store.rx.autocomplete)
+			.disposed(by: disposeBag)
+
+		// MARK: - bind dataSource
+		
+		store.send(.stations(.favourites))
+		
+		let favourites =
+			store
+			.value
+			.map { $0.favouritesStations }
+			.map { favourites -> [StationSectionModel] in
+				let items = favourites.map { s -> StationSectionItem in
+					.FavouriteStationSectionItem(s.name)
+				}
+				
+				return [.StationSection(title: "", items: items)]
+			}
+		
+		let stations =
+			store
+			.value
+			.map { $0.stations }
+			.map { stations -> [StationSectionModel] in
+				let items = stations.map { s -> StationSectionItem in
+					.StationSectionItem(s.name)
+				}
+				
+				return [.StationSection(title: "", items: items)]
+			}
+		
+		let sections = Observable<[StationSectionModel]>.combineLatest(favourites, stations) { $0 + $1 }
+			
+		sections
 			.asObservable()
 			.bind(to: tableView.rx.items(dataSource: dataSource))
 			.disposed(by: disposeBag)

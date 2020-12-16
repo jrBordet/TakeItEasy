@@ -13,6 +13,7 @@ import os.log
 public struct AppState {
     var featureCounterState: FeatureCounterState
     var loginState: LoginViewState
+	var stationsState: StationsViewState
 }
 
 public struct FeatureCounterState {
@@ -53,6 +54,16 @@ extension AppState {
             self.loginState = newValue
         }
     }
+	
+	var stations: StationsViewState {
+		get {
+			StationsViewState(stations: self.stationsState.stations, favouritesStations: self.stationsState.favouritesStations)
+		}
+		
+		set {
+			self.stationsState = newValue
+		}
+	}
 }
 
 let initialAppState = AppState(
@@ -67,7 +78,10 @@ let initialAppState = AppState(
         isEnabled: false,
         alert: nil,
         rememberMeStatus: false
-    )
+	), stationsState: StationsViewState(
+		stations: [],
+		favouritesStations: []
+	)
 )
 
 func activityFeed(

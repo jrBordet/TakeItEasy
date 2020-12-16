@@ -20,5 +20,11 @@ let appReducer: Reducer<AppState, AppAction, AppEnvironment> =  combine(
     value: \AppState.login,
     action: /AppAction.login,
     environment: { $0.login }
-    )
+    ),
+	pullback(
+	  stationsViewReducer,
+	  value: \AppState.stations,
+	  action: /AppAction.stations,
+	  environment: { $0.stations }
+	  )
 )

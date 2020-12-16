@@ -10,4 +10,5 @@ import Foundation
 public enum AppAction {
     case counter(CounterViewAction)
     case login(LoginViewAction)
+	case stations(StationsViewAction)
 }

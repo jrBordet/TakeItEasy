@@ -26,7 +26,7 @@ class StationCell: UITableViewCell {
 		stationNameLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 17)
-			<> { [weak self] in $0.textColor = self?.theme.primaryColor }
+			//<> { [weak self] in $0.textColor = self?.theme.primaryColor }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -62,6 +62,14 @@ public struct Station: Codable, Equatable {
 	}
 }
 
+extension Station {
+	public static var milano: [Station] {[
+			Station("S05188", name: "MODENA PIAZZA MANZONI"),
+			Station("S05997", name: "MEZZOLARA")
+		]
+	}
+}
+
 extension Networking where T == StationsRequest {
 	public static func autocompleteStation(with s: String) -> Self {
 		Self(
