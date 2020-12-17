@@ -40,10 +40,72 @@ class StationsTests: XCTestCase {
 			initialValue: initialState,
 			reducer: stationsViewReducer,
 			environment: env,
-			steps:
-				Step(.send, StationsViewAction.stations(StationsAction.autocomplete("mil")), { _ in }),
+			steps: Step(.send, StationsViewAction.stations(StationsAction.autocomplete("mil")), { _ in }),
 			Step(.receive, StationsViewAction.stations(StationsAction.autocompleteResponse(expectedResult)), { state in
 				state.stations = self.expectedResult
+			})
+		)
+	}
+	
+	func test_add_favorite_station() {
+		let station = Station("S01010", name: "TestStation")
+
+		let station_01 = Station("S0001", name: "TestStation 1")
+
+		assert(
+			initialValue: initialState,
+			reducer: stationsViewReducer,
+			environment: env,
+			steps: Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station_01)), { state in
+				state.favouritesStations = [station, station_01]
+				state.stations = []
+			})
+		)
+	}
+	
+	func test_add_favorite_station_from_autocomplete() {
+		let station = Station("S01010", name: "TestStation")
+		let station_01 = Station("S0001", name: "TestStation 1")
+		
+		expectedResult = [station, station_01]
+
+		assert(
+			initialValue: initialState,
+			reducer: stationsViewReducer,
+			environment: env,
+			steps: Step(.send, StationsViewAction.stations(StationsAction.autocomplete("mil")), { _ in }),
+			Step(.receive, StationsViewAction.stations(StationsAction.autocompleteResponse(expectedResult)), { state in
+				state.stations = self.expectedResult
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+				state.stations = [station_01]
+			})
+		)
+	}
+	
+	
+	func test_remove_favorite_station() {
+		let station = Station("S01010", name: "TestStation")
+		
+		assert(
+			initialValue: initialState,
+			reducer: stationsViewReducer,
+			environment: env,
+			steps: Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.removeFavorite(station)), { state in
+				state.favouritesStations = []
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.removeFavorite(station)), { state in
+				state.favouritesStations = []
 			})
 		)
 	}

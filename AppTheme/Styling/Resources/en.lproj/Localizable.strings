@@ -10,3 +10,7 @@
 "tabbar.title.home" = "Home";
 "tabbar.title.some" = "Some label";
 
+"stations.header.favorites" = "My stations";
+"stations.header.results" = "Results";
+
+

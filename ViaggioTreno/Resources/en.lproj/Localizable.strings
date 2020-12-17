@@ -36,3 +36,8 @@
 
 "media.confirm" = "Confirm";
 
+// MARK: - Stations
+
+"stations.searchbar" = "Search...";
+"stations.header.favorites" = "My stations";
+"stations.header.results" = "Results";

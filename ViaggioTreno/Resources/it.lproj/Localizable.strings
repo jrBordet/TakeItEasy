@@ -35,3 +35,9 @@
 "form.days.everyday" = "ogni giorno";
 
 "media.confirm" = "Conferma";
+
+// MARK: - Stations
+
+"stations.searchbar" = "Cerca...";
+"stations.header.favorites" = "Le mie stazioni";
+"stations.header.results" = "Risultati";

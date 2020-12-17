@@ -54,9 +54,9 @@ internal struct ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#b3b3b3"></span>
   /// Alpha: 100% <br/> (0xb3b3b3ff)
   internal static let onSurfaceColorDark = ColorName(rgbaValue: 0xb3b3b3ff)
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#20fc8f"></span>
-  /// Alpha: 100% <br/> (0x20fc8fff)
-  internal static let primaryColor = ColorName(rgbaValue: 0x20fc8fff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#008080"></span>
+  /// Alpha: 100% <br/> (0x008080ff)
+  internal static let primaryColor = ColorName(rgbaValue: 0x008080ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#018286"></span>
   /// Alpha: 100% <br/> (0x018286ff)
   internal static let primaryColorDark = ColorName(rgbaValue: 0x018286ff)

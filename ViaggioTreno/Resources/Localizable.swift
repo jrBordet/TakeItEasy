@@ -67,6 +67,17 @@ internal enum L10n {
     /// Confirm
     internal static let confirm = L10n.tr("Localizable", "media.confirm")
   }
+
+  internal enum Stations {
+    /// Search...
+    internal static let searchbar = L10n.tr("Localizable", "stations.searchbar")
+    internal enum Header {
+      /// My stations
+      internal static let favorites = L10n.tr("Localizable", "stations.header.favorites")
+      /// Results
+      internal static let results = L10n.tr("Localizable", "stations.header.results")
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

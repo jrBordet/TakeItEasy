@@ -16,6 +16,15 @@ internal enum L10n {
     internal static let name = L10n.tr("Localizable", "app.name")
   }
 
+  internal enum Stations {
+    internal enum Header {
+      /// My stations
+      internal static let favorites = L10n.tr("Localizable", "stations.header.favorites")
+      /// Results
+      internal static let results = L10n.tr("Localizable", "stations.header.results")
+    }
+  }
+
   internal enum Tabbar {
     internal enum Title {
       /// Home
