@@ -21,27 +21,39 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEd-2E-dij">
                         <rect key="frame" x="0.0" y="0.0" width="157" height="130"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvo-LZ-P1q">
-                                <rect key="frame" x="0.0" y="39" width="157" height="20.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Jo-a1-DKD">
+                                <rect key="frame" x="46.5" y="17" width="64" height="64"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="AA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvo-LZ-P1q">
+                                <rect key="frame" x="46.5" y="17" width="64" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="8gb-tL-9Tr"/>
+                                    <constraint firstAttribute="width" constant="64" id="hrd-FI-sb2"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teb-Ov-MKr">
-                                <rect key="frame" x="0.0" y="106" width="157" height="16"/>
+                                <rect key="frame" x="16" y="106" width="125" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Teb-Ov-MKr" secondAttribute="trailing" id="CSh-wx-EVP"/>
-                            <constraint firstItem="Teb-Ov-MKr" firstAttribute="leading" secondItem="lEd-2E-dij" secondAttribute="leading" id="H3H-Ix-dyB"/>
+                            <constraint firstItem="8Jo-a1-DKD" firstAttribute="centerY" secondItem="Vvo-LZ-P1q" secondAttribute="centerY" id="0r2-ZX-fdW"/>
+                            <constraint firstItem="8Jo-a1-DKD" firstAttribute="width" secondItem="Vvo-LZ-P1q" secondAttribute="width" id="1s7-00-qMh"/>
+                            <constraint firstAttribute="trailing" secondItem="Teb-Ov-MKr" secondAttribute="trailing" constant="16" id="CSh-wx-EVP"/>
+                            <constraint firstItem="Teb-Ov-MKr" firstAttribute="leading" secondItem="lEd-2E-dij" secondAttribute="leading" constant="16" id="H3H-Ix-dyB"/>
+                            <constraint firstItem="8Jo-a1-DKD" firstAttribute="height" secondItem="Vvo-LZ-P1q" secondAttribute="height" id="Mbk-vo-3rN"/>
+                            <constraint firstItem="8Jo-a1-DKD" firstAttribute="centerX" secondItem="Vvo-LZ-P1q" secondAttribute="centerX" id="Pga-Qq-ZJo"/>
                             <constraint firstAttribute="bottom" secondItem="Teb-Ov-MKr" secondAttribute="bottom" constant="8" id="cqc-d4-oLQ"/>
-                            <constraint firstItem="Vvo-LZ-P1q" firstAttribute="leading" secondItem="lEd-2E-dij" secondAttribute="leading" id="jb9-OC-mAm"/>
-                            <constraint firstAttribute="trailing" secondItem="Vvo-LZ-P1q" secondAttribute="trailing" id="kEW-a8-2Sj"/>
                             <constraint firstItem="Vvo-LZ-P1q" firstAttribute="centerY" secondItem="lEd-2E-dij" secondAttribute="centerY" constant="-16" id="xYv-Jy-1uy"/>
+                            <constraint firstItem="Vvo-LZ-P1q" firstAttribute="centerX" secondItem="lEd-2E-dij" secondAttribute="centerX" id="y1b-7w-HDI"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -56,6 +68,7 @@
             </constraints>
             <size key="customSize" width="157" height="130"/>
             <connections>
+                <outlet property="cardView" destination="8Jo-a1-DKD" id="hZe-XD-ejX"/>
                 <outlet property="completeNameLabel" destination="Teb-Ov-MKr" id="HO4-aI-5Af"/>
                 <outlet property="initialNameLabel" destination="Vvo-LZ-P1q" id="b4c-7k-fdA"/>
             </connections>
@@ -63,8 +76,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

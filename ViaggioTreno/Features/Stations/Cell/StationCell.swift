@@ -14,9 +14,7 @@ class StationCell: UITableViewCell {
 	@IBOutlet var stationNameLabel: UILabel!
 	
 	let theme: AppThemeMaterial = .theme
-	
-	// 20FC8F
-	
+		
     override func awakeFromNib() {
         super.awakeFromNib()
 		

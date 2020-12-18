@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import Styling
+import Caprice
 import Networking
 
 class FavouritesStationsCell: UICollectionViewCell {
-	@IBOutlet private var initialNameLabel: UILabel?
+	@IBOutlet private var initialNameLabel: UILabel!
 	@IBOutlet var completeNameLabel: UILabel!
+	@IBOutlet var cardView: UIView!
+	
+	let theme: AppThemeMaterial = .theme
 	
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +24,22 @@ class FavouritesStationsCell: UICollectionViewCell {
 	
 	func configure(with value: Station) {
 		self.completeNameLabel?.text = value.name.capitalized
+		
+		cardView
+			|> theme.cardView
+			<> { $0.layer.cornerRadius = $0.frame.width / 2 }
+		
+		initialNameLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 21)
+			<> textColor(color: theme.primaryColor)
+//			<> primaryBackgroundColor()
+		
+		theme.primaryColor
+		
+		completeNameLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 11)
 		
 		let s = value.name.split(separator: " ")
 //		s.map { (s: Substring) -> String in
