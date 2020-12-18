@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import SceneBuilder
 import RxDataSources
+import Networking
 
 public class HomeViewController: BaseViewController {
 	@IBOutlet var searchStationsButton: UIButton!
@@ -35,12 +36,11 @@ public class HomeViewController: BaseViewController {
 		let configureViewCell = HomeViewController.favouritesStationCollectionViewDataSource()
 		
 		let dataSource = RxCollectionViewSectionedAnimatedDataSource(configureCell: configureViewCell)
-		let i = IntItem(number: 10, date: Date())
 		
 		register(with: stationsCollectionView, cell: FavouritesStationsCell.self, identifier: "FavouritesStationsCell")
 		
 		Observable<[NumberSection]>
-			.just([NumberSection(header: "", numbers: [i, i, i], updated: Date())])
+			.just([NumberSection(header: "", numbers: Station.milano, updated: Date())])
 			.bind(to: stationsCollectionView.rx.items(dataSource: dataSource))
 			.disposed(by: disposeBag)
 		
@@ -113,7 +113,7 @@ extension HomeViewController {
 struct NumberSection {
 	var header: String
 	
-	var numbers: [IntItem]
+	var numbers: [Station]
 	
 	var updated: Date
 	
@@ -132,14 +132,14 @@ struct IntItem {
 // MARK: Just extensions to say how to determine identity and how to determine is entity updated
 
 extension NumberSection: AnimatableSectionModelType {
-	typealias Item = IntItem
+	typealias Item = Station
 	typealias Identity = String
 	
 	var identity: String {
 		return header
 	}
 	
-	var items: [IntItem] {
+	var items: [Station] {
 		return numbers
 	}
 	
@@ -152,8 +152,16 @@ extension NumberSection: AnimatableSectionModelType {
 extension NumberSection: CustomDebugStringConvertible {
 	var debugDescription: String {
 		let interval = updated.timeIntervalSince1970
-		let numbersDescription = numbers.map { "\n\($0.debugDescription)" }.joined(separator: "")
+		let numbersDescription = numbers.map { "\n\($0.name)" }.joined(separator: "")
 		return "NumberSection(header: \"\(self.header)\", numbers: \(numbersDescription)\n, updated: \(interval))"
+	}
+}
+
+extension Station: IdentifiableType {
+	public typealias Identity = String
+	
+	public var identity: String {
+		return id
 	}
 }
 
