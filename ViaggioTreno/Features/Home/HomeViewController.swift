@@ -9,18 +9,45 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SceneBuilder
+import RxDataSources
 
 public class HomeViewController: BaseViewController {
-	@IBOutlet var open: UIButton!
+	@IBOutlet var searchStationsButton: UIButton!
+	@IBOutlet var stationsCollectionView: UICollectionView!
 	
 	private let disposeBag = DisposeBag()
+	
+	// MARK: - CollectionView layout
+	
+	private let sectionInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 0)
+	
+	private let itemsPerRow: CGFloat = 1
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		
+		// MARK: - Collection view layout
+		
+		stationsCollectionView.delegate = self
+		
 		// Do any additional setup after loading the view.
 		
-		open.rx.tap
+		let configureViewCell = HomeViewController.favouritesStationCollectionViewDataSource()
+		
+		let dataSource = RxCollectionViewSectionedAnimatedDataSource(configureCell: configureViewCell)
+		let i = IntItem(number: 10, date: Date())
+		
+		register(with: stationsCollectionView, cell: FavouritesStationsCell.self, identifier: "FavouritesStationsCell")
+		
+		Observable<[NumberSection]>
+			.just([NumberSection(header: "", numbers: [i, i, i], updated: Date())])
+			.bind(to: stationsCollectionView.rx.items(dataSource: dataSource))
+			.disposed(by: disposeBag)
+		
+		// MARK: Search tap
+		
+		searchStationsButton.rx
+			.tap
 			.bind { [weak self] in
 				guard let self = self else {
 					return
@@ -36,4 +63,130 @@ public class HomeViewController: BaseViewController {
 		
 	}
 	
+}
+
+// MARK: - Collection View Flow Layout Delegate
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+  
+  public func collectionView(_ collectionView: UICollectionView,
+							 layout collectionViewLayout: UICollectionViewLayout,
+							 sizeForItemAt indexPath: IndexPath) -> CGSize {
+	
+	let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+	let availableWidth = view.frame.width - paddingSpace
+	
+	let widthPerItem = 120 + paddingSpace / itemsPerRow
+	
+	return CGSize(width: widthPerItem, height: 120)
+  }
+  
+  
+  public func collectionView(_ collectionView: UICollectionView,
+							 layout collectionViewLayout: UICollectionViewLayout,
+							 insetForSectionAt section: Int) -> UIEdgeInsets {
+	return sectionInsets
+  }
+  
+  
+  public func collectionView(_ collectionView: UICollectionView,
+							 layout collectionViewLayout: UICollectionViewLayout,
+							 minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+	return sectionInsets.left
+  }
+}
+
+extension HomeViewController {
+	static func favouritesStationCollectionViewDataSource() -> CollectionViewSectionedDataSource<NumberSection>.ConfigureCell {
+		return { _, cv, ip, i in
+			let cell = cv.dequeueReusableCell(withReuseIdentifier: "FavouritesStationsCell", for: ip) as! FavouritesStationsCell
+			
+			cell.configure(with: "\(i)")
+			
+			return cell
+		}
+	}
+}
+
+// MARK: Data
+
+struct NumberSection {
+	var header: String
+	
+	var numbers: [IntItem]
+	
+	var updated: Date
+	
+	init(header: String, numbers: [Item], updated: Date) {
+		self.header = header
+		self.numbers = numbers
+		self.updated = updated
+	}
+}
+
+struct IntItem {
+	let number: Int
+	let date: Date
+}
+
+// MARK: Just extensions to say how to determine identity and how to determine is entity updated
+
+extension NumberSection: AnimatableSectionModelType {
+	typealias Item = IntItem
+	typealias Identity = String
+	
+	var identity: String {
+		return header
+	}
+	
+	var items: [IntItem] {
+		return numbers
+	}
+	
+	init(original: NumberSection, items: [Item]) {
+		self = original
+		self.numbers = items
+	}
+}
+
+extension NumberSection: CustomDebugStringConvertible {
+	var debugDescription: String {
+		let interval = updated.timeIntervalSince1970
+		let numbersDescription = numbers.map { "\n\($0.debugDescription)" }.joined(separator: "")
+		return "NumberSection(header: \"\(self.header)\", numbers: \(numbersDescription)\n, updated: \(interval))"
+	}
+}
+
+extension IntItem: IdentifiableType, Equatable {
+	typealias Identity = Int
+	
+	var identity: Int {
+		return number
+	}
+}
+
+// equatable, this is needed to detect changes
+func == (lhs: IntItem, rhs: IntItem) -> Bool {
+	return lhs.number == rhs.number && lhs.date == rhs.date
+}
+
+// MARK: Some nice extensions
+extension IntItem: CustomDebugStringConvertible {
+	var debugDescription: String {
+		return "IntItem(number: \(number), date: \(date.timeIntervalSince1970))"
+	}
+}
+
+extension IntItem: CustomStringConvertible {
+	var description: String {
+		return "\(number)"
+	}
+}
+
+extension NumberSection: Equatable {
+	
+}
+
+func == (lhs: NumberSection, rhs: NumberSection) -> Bool {
+	return lhs.header == rhs.header && lhs.items == rhs.items && lhs.updated == rhs.updated
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="ViaggioTreno" customModuleProvider="target">
             <connections>
-                <outlet property="open" destination="MQo-mC-trg" id="cOw-tS-Dsk"/>
+                <outlet property="searchStationsButton" destination="MQo-mC-trg" id="qvQ-DA-pXf"/>
+                <outlet property="stationsCollectionView" destination="oIG-Zx-35e" id="P7d-62-msH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,16 +20,47 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQo-mC-trg">
-                    <rect key="frame" x="184" y="433" width="46" height="30"/>
-                    <state key="normal" title="Button"/>
-                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="PyR-7H-mpk">
+                    <rect key="frame" x="0.0" y="44" width="414" height="300"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gou-i5-WFg">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQo-mC-trg">
+                                    <rect key="frame" x="0.0" y="8" width="414" height="30"/>
+                                    <state key="normal" title="Button"/>
+                                </button>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oIG-Zx-35e">
+                                    <rect key="frame" x="0.0" y="38" width="414" height="262"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mwx-NG-hhb">
+                                        <size key="itemSize" width="128" height="128"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="oIG-Zx-35e" secondAttribute="trailing" id="3ve-FV-7hI"/>
+                                <constraint firstItem="oIG-Zx-35e" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" id="KmA-Rz-ycu"/>
+                                <constraint firstItem="oIG-Zx-35e" firstAttribute="top" secondItem="MQo-mC-trg" secondAttribute="bottom" id="NjX-Qp-I9n"/>
+                                <constraint firstAttribute="height" constant="300" id="Rqs-yu-C0B"/>
+                                <constraint firstItem="MQo-mC-trg" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" id="X5R-mi-xq4"/>
+                                <constraint firstAttribute="bottom" secondItem="oIG-Zx-35e" secondAttribute="bottom" id="aKg-N3-Uq3"/>
+                                <constraint firstAttribute="trailing" secondItem="MQo-mC-trg" secondAttribute="trailing" id="db5-Id-aSl"/>
+                                <constraint firstItem="MQo-mC-trg" firstAttribute="top" secondItem="gou-i5-WFg" secondAttribute="top" constant="8" id="mdT-Tb-mX4"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="MQo-mC-trg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="lPv-h2-ZM7"/>
-                <constraint firstItem="MQo-mC-trg" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="zVu-m7-0nr"/>
+                <constraint firstItem="PyR-7H-mpk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="18P-It-1n5"/>
+                <constraint firstItem="PyR-7H-mpk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="6xA-RH-Z19"/>
+                <constraint firstAttribute="trailing" secondItem="PyR-7H-mpk" secondAttribute="trailing" id="CIj-EM-SFF"/>
             </constraints>
             <point key="canvasLocation" x="139" y="146"/>
         </view>

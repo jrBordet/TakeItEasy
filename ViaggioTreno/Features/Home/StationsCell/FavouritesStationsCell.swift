@@ -8,10 +8,15 @@
 import UIKit
 
 class FavouritesStationsCell: UICollectionViewCell {
+	@IBOutlet private var value: UILabel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+	
+	func configure(with value: String) {
+		self.value?.text = value
+	}
 
 }
