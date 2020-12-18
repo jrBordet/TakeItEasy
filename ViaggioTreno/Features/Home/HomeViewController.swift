@@ -74,7 +74,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 							 sizeForItemAt indexPath: IndexPath) -> CGSize {
 	
 	let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-	let widthPerItem = 120 + paddingSpace / itemsPerRow
+	let widthPerItem = 85 + paddingSpace / itemsPerRow
 	
 	return CGSize(width: widthPerItem, height: 120)
   }

@@ -33,9 +33,6 @@ class FavouritesStationsCell: UICollectionViewCell {
 			|> theme.primaryLabel
 			<> fontRegular(with: 21)
 			<> textColor(color: theme.primaryColor)
-//			<> primaryBackgroundColor()
-		
-		theme.primaryColor
 		
 		completeNameLabel
 			|> theme.primaryLabel

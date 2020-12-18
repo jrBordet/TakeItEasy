@@ -37,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teb-Ov-MKr">
-                                <rect key="frame" x="16" y="106" width="125" height="16"/>
+                                <rect key="frame" x="8" y="106" width="141" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -47,8 +47,8 @@
                         <constraints>
                             <constraint firstItem="8Jo-a1-DKD" firstAttribute="centerY" secondItem="Vvo-LZ-P1q" secondAttribute="centerY" id="0r2-ZX-fdW"/>
                             <constraint firstItem="8Jo-a1-DKD" firstAttribute="width" secondItem="Vvo-LZ-P1q" secondAttribute="width" id="1s7-00-qMh"/>
-                            <constraint firstAttribute="trailing" secondItem="Teb-Ov-MKr" secondAttribute="trailing" constant="16" id="CSh-wx-EVP"/>
-                            <constraint firstItem="Teb-Ov-MKr" firstAttribute="leading" secondItem="lEd-2E-dij" secondAttribute="leading" constant="16" id="H3H-Ix-dyB"/>
+                            <constraint firstAttribute="trailing" secondItem="Teb-Ov-MKr" secondAttribute="trailing" constant="8" id="CSh-wx-EVP"/>
+                            <constraint firstItem="Teb-Ov-MKr" firstAttribute="leading" secondItem="lEd-2E-dij" secondAttribute="leading" constant="8" id="H3H-Ix-dyB"/>
                             <constraint firstItem="8Jo-a1-DKD" firstAttribute="height" secondItem="Vvo-LZ-P1q" secondAttribute="height" id="Mbk-vo-3rN"/>
                             <constraint firstItem="8Jo-a1-DKD" firstAttribute="centerX" secondItem="Vvo-LZ-P1q" secondAttribute="centerX" id="Pga-Qq-ZJo"/>
                             <constraint firstAttribute="bottom" secondItem="Teb-Ov-MKr" secondAttribute="bottom" constant="8" id="cqc-d4-oLQ"/>
