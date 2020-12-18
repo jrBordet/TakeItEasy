@@ -40,7 +40,7 @@ public class HomeViewController: BaseViewController {
 		register(with: stationsCollectionView, cell: FavouritesStationsCell.self, identifier: "FavouritesStationsCell")
 		
 		Observable<[NumberSection]>
-			.just([NumberSection(header: "", numbers: Station.milano, updated: Date())])
+			.just([NumberSection(header: "", numbers: Station.milano + Station.milano, updated: Date())])
 			.bind(to: stationsCollectionView.rx.items(dataSource: dataSource))
 			.disposed(by: disposeBag)
 		
@@ -74,8 +74,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 							 sizeForItemAt indexPath: IndexPath) -> CGSize {
 	
 	let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-	let availableWidth = view.frame.width - paddingSpace
-	
 	let widthPerItem = 120 + paddingSpace / itemsPerRow
 	
 	return CGSize(width: widthPerItem, height: 120)
@@ -101,7 +99,8 @@ extension HomeViewController {
 		return { _, cv, ip, i in
 			let cell = cv.dequeueReusableCell(withReuseIdentifier: "FavouritesStationsCell", for: ip) as! FavouritesStationsCell
 			
-			cell.configure(with: "\(i)")
+			
+			cell.configure(with: i)
 			
 			return cell
 		}
