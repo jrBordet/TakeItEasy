@@ -56,11 +56,13 @@ public enum StationsAction: Equatable {
 	case autocomplete(String)
 	case autocompleteResponse([Station])
 	
-	case favorites
-	case favoritesResponse([Station])
+	case favourites
+	case favouritesResponse([Station])
 	
 	case addFavorite(Station)
-	case removeFavorite(Station)
+	case updateFavouritesResponse(Bool)
+	
+	case removeFavourite(Station)
 	
 	case none
 }
@@ -90,11 +92,11 @@ func stationsReducer(
 	case let .autocompleteResponse(stations):
 		state.stations = stations
 		return []
-	case .favorites:
+	case .favourites:
 		return [
-			environment.retrieveFavourites().map(StationsAction.favoritesResponse)
+			environment.retrieveFavourites().map(StationsAction.favouritesResponse)
 		]
-	case let .favoritesResponse(result):
+	case let .favouritesResponse(result):
 		state.favouritesStations = result
 		return []
 	case .none:
@@ -109,8 +111,10 @@ func stationsReducer(
 			.compactMap { $0 }
 		
 		state.favouritesStations.append(station)
-		return []
-	case let .removeFavorite(station):
+		return [
+			environment.saveFavourites(state.favouritesStations).map { StationsAction.updateFavouritesResponse($0) }
+		]
+	case let .removeFavourite(station):
 		guard (state.favouritesStations.filter { station ==  $0 }).isEmpty == false else {
 			return []
 		}
@@ -119,6 +123,11 @@ func stationsReducer(
 			.map { $0.id == station.id ? nil : $0 }
 			.compactMap { $0 }
 		
+		return [
+			environment.saveFavourites(state.favouritesStations).map { StationsAction.updateFavouritesResponse($0) }
+		]
+	case let .updateFavouritesResponse(success):
+		dump(success)
 		return []
 	}
 }

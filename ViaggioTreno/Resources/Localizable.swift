@@ -71,9 +71,11 @@ internal enum L10n {
   internal enum Stations {
     /// Search...
     internal static let searchbar = L10n.tr("Localizable", "stations.searchbar")
+    /// Stations
+    internal static let title = L10n.tr("Localizable", "stations.title")
     internal enum Header {
       /// My stations
-      internal static let favorites = L10n.tr("Localizable", "stations.header.favorites")
+      internal static let favourites = L10n.tr("Localizable", "stations.header.favourites")
       /// Results
       internal static let results = L10n.tr("Localizable", "stations.header.results")
     }

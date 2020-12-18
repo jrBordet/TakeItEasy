@@ -16,6 +16,7 @@ targets:
     dependencies:
         - target: Styling
         - target: Networking
+        - target: FileClient
   Styling: # Common
     type: framework
     platform: iOS
@@ -28,6 +29,14 @@ targets:
     deploymentTarget: 10.0
     sources:
         - path: Networking
+  FileClient:
+    type: framework
+    platform: iOS
+    deploymentTarget: 10.0
+    sources:
+        - path: FileClient
+    dependencies:
+        - target: Networking
   ViaggioTrenoTests:
     type: bundle.unit-test
     platform: iOS

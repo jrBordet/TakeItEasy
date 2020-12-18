@@ -49,28 +49,6 @@ class StationsTests: XCTestCase {
 	
 	func test_add_favorite_station() {
 		let station = Station("S01010", name: "TestStation")
-
-		let station_01 = Station("S0001", name: "TestStation 1")
-
-		assert(
-			initialValue: initialState,
-			reducer: stationsViewReducer,
-			environment: env,
-			steps: Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
-				state.favouritesStations = [station]
-			}),
-			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
-				state.favouritesStations = [station]
-			}),
-			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station_01)), { state in
-				state.favouritesStations = [station, station_01]
-				state.stations = []
-			})
-		)
-	}
-	
-	func test_add_favorite_station_from_autocomplete() {
-		let station = Station("S01010", name: "TestStation")
 		let station_01 = Station("S0001", name: "TestStation 1")
 		
 		expectedResult = [station, station_01]
@@ -86,6 +64,9 @@ class StationsTests: XCTestCase {
 			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
 				state.favouritesStations = [station]
 				state.stations = [station_01]
+			}),
+			Step(.receive, StationsViewAction.stations(StationsAction.updateFavouritesResponse(true)), { state in
+				
 			})
 		)
 	}
@@ -101,10 +82,16 @@ class StationsTests: XCTestCase {
 			steps: Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
 				state.favouritesStations = [station]
 			}),
-			Step(.send, StationsViewAction.stations(StationsAction.removeFavorite(station)), { state in
+			Step(.receive, StationsViewAction.stations(StationsAction.updateFavouritesResponse(true)), { state in
+				
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.removeFavourite(station)), { state in
 				state.favouritesStations = []
 			}),
-			Step(.send, StationsViewAction.stations(StationsAction.removeFavorite(station)), { state in
+			Step(.receive, StationsViewAction.stations(StationsAction.updateFavouritesResponse(true)), { state in
+				
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.removeFavourite(station)), { state in
 				state.favouritesStations = []
 			})
 		)

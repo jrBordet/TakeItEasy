@@ -19,13 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		self.window = UIWindow(frame: UIScreen.main.bounds)
 		
-		let s: StationsViewController = UIViewController.stations
 		
-		s.store = applicationStore.view(
-			value: { $0.stations },
-			action: { .stations($0) }
-		)
-		let rootScene = s
+		let rootScene = Scene<HomeViewController>().render()
+			
+//		Factory.stations(with: applicationStore)
 		
 		self.window?.rootViewController = UINavigationController(rootViewController: rootScene)
 		
@@ -36,10 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 }
 
-extension UIViewController {
-	static var stations: StationsViewController = Scene<StationsViewController>().render()
-}
-
 struct Factory {
 	static var stations: StationsViewController = Scene<StationsViewController>().render()
+	
+	static func stations(with store: Store<AppState, AppAction>) -> StationsViewController {
+		let vc = Scene<StationsViewController>().render()
+		
+		vc.store = store.view(
+			value: { $0.stations },
+			action: { .stations($0) }
+		)
+		
+		return vc
+	}
 }

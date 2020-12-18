@@ -8,7 +8,7 @@ import Foundation
 import RxSwift
 
 public struct Arrival: Codable {
-		public let numeroTreno: Int
+	public let numeroTreno: Int
 }
 
 /// Perform an Http request to retrieve all the arrivals from the give station id.

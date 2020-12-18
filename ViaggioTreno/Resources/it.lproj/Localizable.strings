@@ -38,6 +38,7 @@
 
 // MARK: - Stations
 
+"stations.title" = "Stazioni";
 "stations.searchbar" = "Cerca...";
-"stations.header.favorites" = "Le mie stazioni";
+"stations.header.favourites" = "Le mie stazioni";
 "stations.header.results" = "Risultati";

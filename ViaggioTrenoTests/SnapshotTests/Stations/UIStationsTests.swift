@@ -7,22 +7,25 @@
 
 import XCTest
 @testable import ViaggioTreno
+import RxComposableArchitectureTests
 import SnapshotTesting
+import Difference
 import SceneBuilder
 import RxComposableArchitecture
 import Networking
 
 class UIStationsTests: XCTestCase {
-	var stationsEnv: StationsViewEnvironment!
+	var initialState: StationsViewState!
 	
-	override func setUpWithError() throws {
-		// Put setup code here. This method is called before the invocation of each test method in the class.
-		stationsEnv = (
-			autocomplete: { string in
-				.sync {
-					[]
-				}
-			},
+	var expectedResult = Station.milano
+	
+	var env: StationsViewEnvironment!
+	
+	override func setUp() {
+		initialState = StationsViewState(stations: [], favouritesStations: [])
+		
+		env = (
+			autocomplete: { _ in .sync { self.expectedResult } },
 			saveFavourites: { _ in .sync { true } } ,
 			retrieveFavourites: { .sync { Station.milano }}
 		)
@@ -35,14 +38,38 @@ class UIStationsTests: XCTestCase {
 	func test_stations_favourites_and_result() throws {
 		let vc = Factory.stations
 		
+		let station = Station("S01010", name: "TestStation")
+		let station_01 = Station("S0001", name: "TestStation 1")
+		
+		expectedResult = [station, station_01]
+
 		vc.store = Store<StationsViewState, StationsViewAction>(
 			initialValue: StationsViewState(stations:[], favouritesStations: []),
 			reducer: stationsViewReducer,
-			environment: stationsEnv
+			environment: env
 		)
-		
-		assertSnapshot(matching: vc, as: .image(on: .iPhoneSe))
-		assertSnapshot(matching: vc, as: .image(on: .iPhoneX))
+				
+		assert(
+			initialValue: initialState,
+			reducer: stationsViewReducer,
+			environment: env,
+			steps: Step(.send, StationsViewAction.stations(StationsAction.autocomplete("mil")), { state in
+				state.stations = []
+				state.favouritesStations = []
+			}),
+			Step(.receive, StationsViewAction.stations(StationsAction.autocompleteResponse(expectedResult)), { state in
+				state.stations = self.expectedResult
+				
+				assertSnapshot(matching: vc, as: .image(on: .iPhoneSe))
+			}),
+			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+				state.stations = [station_01]
+			}),
+			Step(.receive, StationsViewAction.stations(StationsAction.updateFavouritesResponse(true)), { state in
+				assertSnapshot(matching: vc, as: .image(on: .iPhoneSe))
+			})
+		)
 	}
 	
 }

@@ -2,20 +2,19 @@ PODS:
   - Caprice (0.0.5)
   - Difference (0.4)
   - Differentiator (4.0.1)
-  - FileClient (0.0.1)
   - RxBlocking (5.1.1):
     - RxSwift (~> 5)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxComposableArchitecture (2.1.0):
+  - RxComposableArchitecture (2.1.1):
     - RxCocoa (~> 5)
     - RxSwift (~> 5)
     - SwiftSpinner (~> 2.1.0)
-  - RxComposableArchitectureTests (2.0.0):
+  - RxComposableArchitectureTests (2.1.1):
     - Difference (= 0.4)
     - RxCocoa (~> 5)
-    - RxComposableArchitecture (= 2.1.0)
+    - RxComposableArchitecture (= 2.1.1)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
@@ -33,11 +32,10 @@ PODS:
 DEPENDENCIES:
   - Caprice (= 0.0.5)
   - Difference
-  - FileClient (from `FileClient`)
   - RxBlocking
   - RxCocoa
-  - RxComposableArchitecture (= 2.1.0)
-  - RxComposableArchitectureTests (= 2.1.0)
+  - RxComposableArchitecture (= 2.1.1)
+  - RxComposableArchitectureTests (= 2.1.1)
   - RxDataSources (= 4.0.1)
   - RxSwift
   - RxTest
@@ -62,19 +60,14 @@ SPEC REPOS:
     - SnapshotTesting
     - SwiftSpinner
 
-EXTERNAL SOURCES:
-  FileClient:
-    :path: FileClient
-
 SPEC CHECKSUMS:
   Caprice: 6fc9fc49fcd8a510497a86b005a5aac9415f1df0
   Difference: d647f091010f05267885fdf758b885c6cfbf116e
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  FileClient: e66de40ef63e15a8acff7c162f9e6886fc6c7d87
   RxBlocking: 5f700a78cad61ce253ebd37c9a39b5ccc76477b4
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxComposableArchitecture: 8a6191d87842b6bbc1cd185e82edcf83889814b3
-  RxComposableArchitectureTests: ded847836afec666cb11f03997d19a2b004a6c86
+  RxComposableArchitecture: b00f13f111520ab956adbd2339d2369da165e148
+  RxComposableArchitectureTests: 2161dc1f1e940feafcba2e954058aaaf6e161210
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
@@ -83,6 +76,6 @@ SPEC CHECKSUMS:
   SnapshotTesting: 8caa6661fea7c8019d5b46de77c16bab99c36c5c
   SwiftSpinner: 0f15c006307f8d8bbac075638927ec1361b565d7
 
-PODFILE CHECKSUM: f73551ad7306f841c4c7a56e612705e0d3ff7f4e
+PODFILE CHECKSUM: 6ff7150dd2479860a5dc279828f2ffc7c12cea65
 
 COCOAPODS: 1.9.3

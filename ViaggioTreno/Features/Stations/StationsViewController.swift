@@ -120,7 +120,7 @@ public extension Reactive where Base: Store<StationsViewState, StationsViewActio
 				return
 			}
 			
-			store.send(.stations(.removeFavorite(value)))
+			store.send(.stations(.removeFavourite(value)))
 		}
 	}
 }
@@ -147,7 +147,7 @@ public class StationsViewController: BaseViewController {
 		}
 		
 		// MARK: - styling
-		title = L10n.Media.confirm
+		title = L10n.Stations.title
 		
 		tableView.tableFooterView = UIView()
 		tableView.separatorStyle = .none
@@ -182,6 +182,29 @@ public class StationsViewController: BaseViewController {
 			.modelSelected(StationSectionItem.self)
 			.share()
 		
+		// MARK: - Can edit
+		
+		dataSource.canEditRowAtIndexPath = { dataSource, idxPath  in
+			switch dataSource[idxPath] {
+			case .FavouriteStationSectionItem:
+				return true
+			case .EmptysectionItem, .StationSectionItem:
+				return false
+			}
+		}
+		
+		tableView.rx
+			.modelDeleted(StationSectionItem.self)
+			.map { station -> Station? in
+				guard case let .FavouriteStationSectionItem(value) = station else {
+					return  nil
+				}
+				
+				return value
+			}
+			.bind(to: store.rx.removeFavorite)
+			.disposed(by: disposeBag)
+
 		// MARK: - Select a result
 		
 		modelSelected
@@ -197,16 +220,16 @@ public class StationsViewController: BaseViewController {
 		
 		// MARK: - Select a favorite
 		
-		modelSelected
-			.map { station -> Station? in
-				guard case let .FavouriteStationSectionItem(value) = station else {
-					return  nil
-				}
-				
-				return value
-			}
-			.bind(to: store.rx.removeFavorite)
-			.disposed(by: disposeBag)
+//		modelSelected
+//			.map { station -> Station? in
+//				guard case let .FavouriteStationSectionItem(value) = station else {
+//					return  nil
+//				}
+//
+//				return value
+//			}
+//			.bind(to: store.rx.removeFavorite)
+//			.disposed(by: disposeBag)
 		
 		// MARK: - autocomplete
 		
@@ -217,7 +240,7 @@ public class StationsViewController: BaseViewController {
 		
 		// MARK: - bind dataSource
 		
-		store.send(.stations(.favorites))
+		store.send(.stations(.favourites))
 		
 		let favorites =
 			store
@@ -278,7 +301,7 @@ extension StationsViewController: UITableViewDelegate {
 		case .StationSectionItem:
 			header.sectionLabel.text = L10n.Stations.Header.results
 		case .FavouriteStationSectionItem:
-			header.sectionLabel.text = L10n.Stations.Header.favorites
+			header.sectionLabel.text = L10n.Stations.Header.favourites
 		case .EmptysectionItem:
 			return nil
 		}
