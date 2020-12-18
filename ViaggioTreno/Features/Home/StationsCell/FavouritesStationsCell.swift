@@ -38,18 +38,15 @@ class FavouritesStationsCell: UICollectionViewCell {
 			|> theme.primaryLabel
 			<> fontRegular(with: 11)
 		
-		let s = value.name.split(separator: " ")
-//		s.map { (s: Substring) -> String in
-//			String(s.first ?? Character(""))
-//		}.flatMap { $0 }		
+		let stationNames = value.name.split(separator: " ")
 
-		if let f = s.first {
-			dump("[TEST] \(f.first)")
-			dump("[TEST] \(f)")
-			self.initialNameLabel?.text = String(f.first ?? Character("")).uppercased()
+		if let first = stationNames.first {
+			if let last = stationNames.last, stationNames.count > 1 {
+				self.initialNameLabel?.text = String(first.first ?? Character("")).uppercased() + String(last.first ?? Character("")).uppercased()
+			} else {
+				self.initialNameLabel?.text = String(first.first ?? Character("")).uppercased()
+			}
 		}
-		
-//		print("[TEST] \(s)")
 	}
 
 }
