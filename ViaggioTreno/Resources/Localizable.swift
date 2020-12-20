@@ -20,6 +20,12 @@ internal enum L10n {
       /// Save
       internal static let save = L10n.tr("Localizable", "app.common.save")
     }
+    internal enum Home {
+      /// Add stations
+      internal static let addStations = L10n.tr("Localizable", "app.home.addStations")
+      /// +
+      internal static let plus = L10n.tr("Localizable", "app.home.plus")
+    }
   }
 
   internal enum Form {

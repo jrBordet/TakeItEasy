@@ -18,6 +18,7 @@ public class HomeViewController: BaseViewController {
 	@IBOutlet var searchStationsButton: UIButton!
 	@IBOutlet var stationsCollectionView: UICollectionView!
 	@IBOutlet var addLabel: UILabel!
+	@IBOutlet var plusLabel: UILabel!
 	
 	let theme: AppThemeMaterial = .theme
 	
@@ -34,24 +35,17 @@ public class HomeViewController: BaseViewController {
 		
 		// MARK: - styling
 		
-//		 searchStationsButton
-//			|> { $0.backgroundColor = .white }
-//			<> {
-//				[weak self] in
-//				$0.layer.cornerRadius = $0.frame.width / 2
-//				$0.layer.borderColor = self?.theme.primaryColor.cgColor
-//				$0.layer.borderWidth = 2.0
-//				$0.setTitleColor(self?.theme.primaryColor, for: .normal)
-//				//$0.tintColor.cgColor = self?.theme.primaryColor.cgColor
-//			}
-			//theme.primaryButton
-//			<> { $0.setTitle("+", for: .normal) }
-//			<> { $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 3) }
-//			<> titleFont(size: 16)
-		
 		addLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 13)
+			<> textColor(color: theme.primaryColor)
+			<> textLabel(L10n.App.Home.addStations)
+
+		plusLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 17)
+			<> textColor(color: theme.primaryColor)
+			<> textLabel(L10n.App.Home.plus)
 		
 		// MARK: - Collection view layout
 		

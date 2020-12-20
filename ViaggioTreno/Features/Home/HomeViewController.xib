@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="ViaggioTreno" customModuleProvider="target">
             <connections>
                 <outlet property="addLabel" destination="Mkd-2z-pyX" id="028-Qz-geO"/>
+                <outlet property="plusLabel" destination="Q8Y-M8-iAy" id="faf-Qz-4It"/>
                 <outlet property="searchStationsButton" destination="i4m-KC-qim" id="GYa-wY-Mqp"/>
                 <outlet property="stationsCollectionView" destination="oIG-Zx-35e" id="P7d-62-msH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -44,18 +45,17 @@
                                         <constraint firstAttribute="height" constant="1" id="qSC-O5-zJa"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQo-mC-trg">
-                                    <rect key="frame" x="369" y="135" width="30" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="eql-IH-u6S"/>
-                                    </constraints>
-                                    <state key="normal" title="+"/>
-                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aggiungi stazioni" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkd-2z-pyX">
                                     <rect key="frame" x="15" y="135" width="128.5" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="qUU-W8-vJr"/>
                                     </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Y-M8-iAy">
+                                    <rect key="frame" x="357.5" y="135.5" width="41.5" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -66,19 +66,19 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="MQo-mC-trg" firstAttribute="centerY" secondItem="Mkd-2z-pyX" secondAttribute="centerY" id="0Ol-dN-bNj"/>
                                 <constraint firstAttribute="trailing" secondItem="oIG-Zx-35e" secondAttribute="trailing" id="3ve-FV-7hI"/>
                                 <constraint firstItem="w5F-DQ-9Sf" firstAttribute="top" secondItem="oIG-Zx-35e" secondAttribute="bottom" constant="4" id="4l9-uc-TBg"/>
                                 <constraint firstAttribute="bottom" secondItem="i4m-KC-qim" secondAttribute="bottom" id="7HC-14-vvh"/>
                                 <constraint firstItem="oIG-Zx-35e" firstAttribute="top" secondItem="gou-i5-WFg" secondAttribute="top" id="81D-2F-JPH"/>
+                                <constraint firstAttribute="trailing" secondItem="Q8Y-M8-iAy" secondAttribute="trailing" constant="15" id="9XT-lj-YFx"/>
                                 <constraint firstItem="w5F-DQ-9Sf" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" constant="15" id="Cjf-k9-spY"/>
-                                <constraint firstAttribute="trailing" secondItem="MQo-mC-trg" secondAttribute="trailing" constant="15" id="JiK-IW-RCx"/>
                                 <constraint firstItem="oIG-Zx-35e" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" id="KmA-Rz-ycu"/>
                                 <constraint firstItem="Mkd-2z-pyX" firstAttribute="top" secondItem="oIG-Zx-35e" secondAttribute="bottom" constant="15" id="MIc-rF-Ukq"/>
                                 <constraint firstItem="i4m-KC-qim" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" constant="15" id="Msm-qH-L2Z"/>
                                 <constraint firstAttribute="trailing" secondItem="oIG-Zx-35e" secondAttribute="trailing" id="RUl-yH-MDz"/>
                                 <constraint firstAttribute="height" constant="156" id="Rqs-yu-C0B"/>
                                 <constraint firstAttribute="bottom" secondItem="Mkd-2z-pyX" secondAttribute="bottom" id="XT8-DP-Aqu"/>
+                                <constraint firstItem="Q8Y-M8-iAy" firstAttribute="centerY" secondItem="Mkd-2z-pyX" secondAttribute="centerY" id="bQl-uw-NU2"/>
                                 <constraint firstAttribute="trailing" secondItem="w5F-DQ-9Sf" secondAttribute="trailing" constant="15" id="fGA-Nu-k0W"/>
                                 <constraint firstAttribute="trailing" secondItem="i4m-KC-qim" secondAttribute="trailing" constant="15" id="rZk-Pn-hVj"/>
                                 <constraint firstItem="Mkd-2z-pyX" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" constant="15" id="up3-1X-aBR"/>

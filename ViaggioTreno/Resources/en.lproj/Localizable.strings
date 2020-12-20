@@ -36,6 +36,11 @@
 
 "media.confirm" = "Confirm";
 
+// MARK: - Home
+
+"app.home.plus" = "+";
+"app.home.addStations" = "Add stations";
+
 // MARK: - Stations
 
 "stations.title" = "Stations";
