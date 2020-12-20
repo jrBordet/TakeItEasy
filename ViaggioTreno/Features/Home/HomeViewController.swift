@@ -11,10 +11,15 @@ import RxCocoa
 import SceneBuilder
 import RxDataSources
 import Networking
+import Styling
+import Caprice
 
 public class HomeViewController: BaseViewController {
 	@IBOutlet var searchStationsButton: UIButton!
 	@IBOutlet var stationsCollectionView: UICollectionView!
+	@IBOutlet var addLabel: UILabel!
+	
+	let theme: AppThemeMaterial = .theme
 	
 	private let disposeBag = DisposeBag()
 	
@@ -26,6 +31,27 @@ public class HomeViewController: BaseViewController {
 	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
+		
+		// MARK: - styling
+		
+//		 searchStationsButton
+//			|> { $0.backgroundColor = .white }
+//			<> {
+//				[weak self] in
+//				$0.layer.cornerRadius = $0.frame.width / 2
+//				$0.layer.borderColor = self?.theme.primaryColor.cgColor
+//				$0.layer.borderWidth = 2.0
+//				$0.setTitleColor(self?.theme.primaryColor, for: .normal)
+//				//$0.tintColor.cgColor = self?.theme.primaryColor.cgColor
+//			}
+			//theme.primaryButton
+//			<> { $0.setTitle("+", for: .normal) }
+//			<> { $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 3, bottom: 0, right: 3) }
+//			<> titleFont(size: 16)
+		
+		addLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 13)
 		
 		// MARK: - Collection view layout
 		
