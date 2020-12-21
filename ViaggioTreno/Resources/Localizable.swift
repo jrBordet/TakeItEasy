@@ -23,55 +23,11 @@ internal enum L10n {
     internal enum Home {
       /// Add stations
       internal static let addStations = L10n.tr("Localizable", "app.home.addStations")
+      /// No stations on your favourites...
+      internal static let disclaimer = L10n.tr("Localizable", "app.home.disclaimer")
       /// +
       internal static let plus = L10n.tr("Localizable", "app.home.plus")
     }
-  }
-
-  internal enum Form {
-    internal enum Alarm {
-      /// Create
-      internal static let create = L10n.tr("Localizable", "form.alarm.create")
-      /// Time
-      internal static let date = L10n.tr("Localizable", "form.alarm.date")
-      /// Days
-      internal static let days = L10n.tr("Localizable", "form.alarm.days")
-      /// Delete
-      internal static let delete = L10n.tr("Localizable", "form.alarm.delete")
-      /// Enable
-      internal static let enable = L10n.tr("Localizable", "form.alarm.enable")
-      /// Media
-      internal static let media = L10n.tr("Localizable", "form.alarm.media")
-      /// Title
-      internal static let title = L10n.tr("Localizable", "form.alarm.title")
-      /// title
-      internal static let titlePlaceholder = L10n.tr("Localizable", "form.alarm.title_placeholder")
-    }
-    internal enum Days {
-      /// everyday
-      internal static let everyday = L10n.tr("Localizable", "form.days.everyday")
-      /// friday
-      internal static let friday = L10n.tr("Localizable", "form.days.friday")
-      /// monday
-      internal static let monday = L10n.tr("Localizable", "form.days.monday")
-      /// saturday
-      internal static let saturday = L10n.tr("Localizable", "form.days.saturday")
-      /// sunday
-      internal static let sunday = L10n.tr("Localizable", "form.days.sunday")
-      /// thursday
-      internal static let thursday = L10n.tr("Localizable", "form.days.thursday")
-      /// tuesday
-      internal static let tuesday = L10n.tr("Localizable", "form.days.tuesday")
-      /// wednesday
-      internal static let wednesday = L10n.tr("Localizable", "form.days.wednesday")
-      /// weekend
-      internal static let weekend = L10n.tr("Localizable", "form.days.weekend")
-    }
-  }
-
-  internal enum Media {
-    /// Confirm
-    internal static let confirm = L10n.tr("Localizable", "media.confirm")
   }
 
   internal enum Stations {

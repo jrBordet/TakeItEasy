@@ -8,7 +8,14 @@ import Foundation
 import RxSwift
 
 public struct Arrival: Codable {
-	public let numeroTreno: Int
+	public let numeroTreno: Int?
+	public let origine: String?
+	public let destinazione: String?
+	public let compOrarioArrivo: String?
+	public let compNumeroTreno: String?
+}
+
+extension Arrival: Equatable {
 }
 
 /// Perform an Http request to retrieve all the arrivals from the give station id.
@@ -40,6 +47,8 @@ public struct ArrivalsRequest: APIRequest, CustomDebugStringConvertible {
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
 		
+		print(request)
+		
 		return request
 	}
 	
@@ -51,15 +60,15 @@ public struct ArrivalsRequest: APIRequest, CustomDebugStringConvertible {
 
 extension ArrivalsRequest {
 	public static func fetch(from station: String, date: Date = Date(), urlSession: URLSession = .shared) -> Observable<Self.Response> {
-		Networking<Self>
-			.departure(from: station, date: date)
+		return Networking<Self>
+			.arrivals(from: station, date: date)
 			.json(with: urlSession)
 	}
 }
 
 
 extension Networking where T == ArrivalsRequest {
-	public static func departure(from station: String, date: Date = Date()) -> Self {
+	public static func arrivals(from station: String, date: Date = Date()) -> Self {
 		Self(
 			API: T(code: station, date: date),
 			httpMethod: "GET"

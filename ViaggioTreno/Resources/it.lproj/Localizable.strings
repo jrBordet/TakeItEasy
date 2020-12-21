@@ -13,33 +13,11 @@
 "app.common.save" = "Salva";
 "app.common.dismiss" = "Chiudi";
 
-// MARK: - Form
-
-"form.alarm.title" = "Etichetta";
-"form.alarm.title_placeholder" = "titolo";
-"form.alarm.date" = "Orario";
-"form.alarm.enable" = "Abilita";
-"form.alarm.days" = "Giorni";
-"form.alarm.delete" = "Rimuovi";
-"form.alarm.create" = "Aggiungi";
-"form.alarm.media" = "Musica";
-
-"form.days.sunday" = "domenica";
-"form.days.monday" = "lunedì";
-"form.days.tuesday" = "martedì";
-"form.days.wednesday" = "mercoledì";
-"form.days.thursday" = "giovedì";
-"form.days.friday" = "venerdì";
-"form.days.saturday" = "sabato";
-"form.days.weekend" = "weekend";
-"form.days.everyday" = "ogni giorno";
-
-"media.confirm" = "Conferma";
-
 // MARK: - Home
 
 "app.home.plus" = "+";
 "app.home.addStations" = "Aggiungi stazioni";
+"app.home.disclaimer" = "Sembra che non ci siano stazioni tra i tuoi preferiti...";
 
 // MARK: - Stations
 

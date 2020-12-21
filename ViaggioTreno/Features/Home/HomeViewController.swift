@@ -13,16 +13,20 @@ import RxDataSources
 import Networking
 import Styling
 import Caprice
+import RxComposableArchitecture
 
 public class HomeViewController: BaseViewController {
 	@IBOutlet var searchStationsButton: UIButton!
 	@IBOutlet var stationsCollectionView: UICollectionView!
 	@IBOutlet var addLabel: UILabel!
-	@IBOutlet var plusLabel: UILabel!
+	@IBOutlet var emptyStationsView: UIView!
+	@IBOutlet var emptyStationsLabel: UILabel!
 	
 	let theme: AppThemeMaterial = .theme
 	
 	private let disposeBag = DisposeBag()
+	
+	public var store: Store<HomeViewState, HomeViewAction>?
 	
 	// MARK: - CollectionView layout
 	
@@ -33,19 +37,24 @@ public class HomeViewController: BaseViewController {
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		
+		guard let store = self.store else {
+			return
+		}
+		
+		self.navigationController?.navigationBar.isHidden = true
+		
 		// MARK: - styling
 		
 		addLabel
 			|> theme.primaryLabel
-			<> fontRegular(with: 13)
+			<> fontMedium(with: 17)
 			<> textColor(color: theme.primaryColor)
 			<> textLabel(L10n.App.Home.addStations)
-
-		plusLabel
+		
+		emptyStationsLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 17)
-			<> textColor(color: theme.primaryColor)
-			<> textLabel(L10n.App.Home.plus)
+			<> textLabel(L10n.App.Home.disclaimer)
 		
 		// MARK: - Collection view layout
 		
@@ -59,8 +68,31 @@ public class HomeViewController: BaseViewController {
 		
 		register(with: stationsCollectionView, cell: FavouritesStationsCell.self, identifier: "FavouritesStationsCell")
 		
-		Observable<[NumberSection]>
-			.just([NumberSection(header: "", numbers: Station.milano + Station.milano, updated: Date())])
+		// MARK: - bind dataSource
+		
+		store.send(HomeViewAction.favourites(StationsViewAction.stations(.favourites)))
+	
+		stationsCollectionView.rx
+			.modelSelected(Station.self)
+			.subscribe(onNext: {
+				dump($0)
+			}).disposed(by: disposeBag)
+		
+		store
+			.value
+			.distinctUntilChanged()
+			.map { $0.favouritesStations.favouritesStations.isEmpty == false }
+			.bind(to: self.emptyStationsView.rx.isHidden)
+			.disposed(by: disposeBag)
+		
+		store
+			.value
+			.distinctUntilChanged()
+			.map { $0.favouritesStations }
+			.distinctUntilChanged()
+			.map { stations -> [HomeStationsSection] in
+				[HomeStationsSection(header: "", numbers: stations.favouritesStations, updated: Date())]
+			}
 			.bind(to: stationsCollectionView.rx.items(dataSource: dataSource))
 			.disposed(by: disposeBag)
 		
@@ -74,13 +106,13 @@ public class HomeViewController: BaseViewController {
 				}
 				
 				navigationLink(from: self, destination: Scene<StationsViewController>(), completion: { vc in
-					vc.store = applicationStore.view(
-						value: { $0.stations },
-						action: { .stations($0) }
-					)
+					vc.store =
+						store.view (
+							value: { $0.favouritesStations },
+							action: { .favourites($0) }
+						)
 				}, isModal: true)
 			}.disposed(by: disposeBag)
-		
 	}
 	
 }
@@ -88,40 +120,39 @@ public class HomeViewController: BaseViewController {
 // MARK: - Collection View Flow Layout Delegate
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
-  
-  public func collectionView(_ collectionView: UICollectionView,
-							 layout collectionViewLayout: UICollectionViewLayout,
-							 sizeForItemAt indexPath: IndexPath) -> CGSize {
 	
-	let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-	let widthPerItem = 85 + paddingSpace / itemsPerRow
+	public func collectionView(_ collectionView: UICollectionView,
+							   layout collectionViewLayout: UICollectionViewLayout,
+							   sizeForItemAt indexPath: IndexPath) -> CGSize {
+		
+		let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+		let widthPerItem = 85 + paddingSpace / itemsPerRow
+		
+		return CGSize(width: widthPerItem, height: 120)
+	}
 	
-	return CGSize(width: widthPerItem, height: 120)
-  }
-  
-  
-  public func collectionView(_ collectionView: UICollectionView,
-							 layout collectionViewLayout: UICollectionViewLayout,
-							 insetForSectionAt section: Int) -> UIEdgeInsets {
-	return sectionInsets
-  }
-  
-  
-  public func collectionView(_ collectionView: UICollectionView,
-							 layout collectionViewLayout: UICollectionViewLayout,
-							 minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-	return sectionInsets.left
-  }
+	
+	public func collectionView(_ collectionView: UICollectionView,
+							   layout collectionViewLayout: UICollectionViewLayout,
+							   insetForSectionAt section: Int) -> UIEdgeInsets {
+		return sectionInsets
+	}
+	
+	
+	public func collectionView(_ collectionView: UICollectionView,
+							   layout collectionViewLayout: UICollectionViewLayout,
+							   minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+		return sectionInsets.left
+	}
 }
 
 extension HomeViewController {
-	static func favouritesStationCollectionViewDataSource() -> CollectionViewSectionedDataSource<NumberSection>.ConfigureCell {
-		return { _, cv, ip, i in
-			let cell = cv.dequeueReusableCell(withReuseIdentifier: "FavouritesStationsCell", for: ip) as! FavouritesStationsCell
-			
-			
-			cell.configure(with: i)
-			
+	static func favouritesStationCollectionViewDataSource() -> CollectionViewSectionedDataSource<HomeStationsSection>.ConfigureCell {
+		return { dataSource, cv, idxPath, item in
+			let cell = cv.dequeueReusableCell(withReuseIdentifier: "FavouritesStationsCell", for: idxPath) as! FavouritesStationsCell
+
+			cell.configure(with: item)
+
 			return cell
 		}
 	}
@@ -129,28 +160,23 @@ extension HomeViewController {
 
 // MARK: Data
 
-struct NumberSection {
+struct HomeStationsSection {
 	var header: String
 	
-	var numbers: [Station]
+	var stations: [Station]
 	
 	var updated: Date
 	
 	init(header: String, numbers: [Item], updated: Date) {
 		self.header = header
-		self.numbers = numbers
+		self.stations = numbers
 		self.updated = updated
 	}
 }
 
-struct IntItem {
-	let number: Int
-	let date: Date
-}
-
 // MARK: Just extensions to say how to determine identity and how to determine is entity updated
 
-extension NumberSection: AnimatableSectionModelType {
+extension HomeStationsSection: AnimatableSectionModelType {
 	typealias Item = Station
 	typealias Identity = String
 	
@@ -159,20 +185,20 @@ extension NumberSection: AnimatableSectionModelType {
 	}
 	
 	var items: [Station] {
-		return numbers
+		return stations
 	}
 	
-	init(original: NumberSection, items: [Item]) {
+	init(original: HomeStationsSection, items: [Item]) {
 		self = original
-		self.numbers = items
+		self.stations = items
 	}
 }
 
-extension NumberSection: CustomDebugStringConvertible {
+extension HomeStationsSection: CustomDebugStringConvertible {
 	var debugDescription: String {
 		let interval = updated.timeIntervalSince1970
-		let numbersDescription = numbers.map { "\n\($0.name)" }.joined(separator: "")
-		return "NumberSection(header: \"\(self.header)\", numbers: \(numbersDescription)\n, updated: \(interval))"
+		let numbersDescription = stations.map { "\n\($0.name)" }.joined(separator: "")
+		return "HomeStationsSection(header: \"\(self.header)\", numbers: \(numbersDescription)\n, updated: \(interval))"
 	}
 }
 
@@ -184,36 +210,10 @@ extension Station: IdentifiableType {
 	}
 }
 
-extension IntItem: IdentifiableType, Equatable {
-	typealias Identity = Int
-	
-	var identity: Int {
-		return number
-	}
-}
-
-// equatable, this is needed to detect changes
-func == (lhs: IntItem, rhs: IntItem) -> Bool {
-	return lhs.number == rhs.number && lhs.date == rhs.date
-}
-
-// MARK: Some nice extensions
-extension IntItem: CustomDebugStringConvertible {
-	var debugDescription: String {
-		return "IntItem(number: \(number), date: \(date.timeIntervalSince1970))"
-	}
-}
-
-extension IntItem: CustomStringConvertible {
-	var description: String {
-		return "\(number)"
-	}
-}
-
-extension NumberSection: Equatable {
+extension HomeStationsSection: Equatable {
 	
 }
 
-func == (lhs: NumberSection, rhs: NumberSection) -> Bool {
+func == (lhs: HomeStationsSection, rhs: HomeStationsSection) -> Bool {
 	return lhs.header == rhs.header && lhs.items == rhs.items && lhs.updated == rhs.updated
 }

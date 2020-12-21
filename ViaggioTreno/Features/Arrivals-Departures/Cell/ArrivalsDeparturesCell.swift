@@ -1,30 +1,36 @@
 //
-//  StationCell.swift
+//  ArrivalsDeparturesCell.swift
 //  ViaggioTreno
 //
-//  Created by Jean Raphael Bordet on 11/12/2020.
+//  Created by Jean Raphael Bordet on 21/12/2020.
 //
 
 import UIKit
 import Styling
 import Caprice
 
-class StationCell: UITableViewCell {
+class ArrivalsDeparturesCell: UITableViewCell {
 	@IBOutlet var cardView: UIView!
-	@IBOutlet var stationNameLabel: UILabel!
+	@IBOutlet var timeLabel: UILabel!
+	@IBOutlet var titleLabel: UILabel!
 	
 	let theme: AppThemeMaterial = .theme
-		
-    override func awakeFromNib() {
-        super.awakeFromNib()
+
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
 		
 		cardView
 			|> theme.cardView
 		
-		stationNameLabel
+		timeLabel
+			|> theme.primaryLabel
+			<> fontThin(with: 19)
+		
+		titleLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 17)
-    }
+	}
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

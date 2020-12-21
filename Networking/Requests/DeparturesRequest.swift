@@ -9,7 +9,10 @@ import Foundation
 import RxSwift
 
 public struct Departure: Codable {
-		public let numeroTreno: Int	
+	public let numeroTreno: Int
+}
+
+extension Departure: Equatable {
 }
 
 /// Perform an Http request to retrieve all departures from the give station id.
@@ -72,10 +75,11 @@ extension Networking where T == DeparturesRequest {
 ///
 /// - Returns: a String representing the current date.
 func encoded(_ date: Date) -> String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT")! as TimeZone
-		
-		dateFormatter.dateFormat = "EEE MMM dd yyyy HH:mm:ss"
-		
-		return (dateFormatter.string(from: date) + " GMT+0100").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+	let dateFormatter = DateFormatter()
+	
+	dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT")! as TimeZone
+	dateFormatter.dateFormat = "EEE MMM dd yyyy HH:mm:ss"
+	dateFormatter.locale = Locale(identifier: "en_US")
+	
+	return (dateFormatter.string(from: date) + " GMT+0100").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
 }

@@ -19,12 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		self.window = UIWindow(frame: UIScreen.main.bounds)
 		
+		let a = Scene<ArrivalsDeparturesViewController>().render()
+		
+		a.store = Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction>(
+			initialValue: ArrivalsDeparturesViewState(departures: [], arrivals: []),
+			reducer: arrivalsDeparturesViewReducer,
+			environment: arrivalsDeparturesViewEnvLive
+		)
 		
 		let rootScene = Scene<HomeViewController>().render()
-			
-//		Factory.stations(with: applicationStore)
 		
-		self.window?.rootViewController = UINavigationController(rootViewController: rootScene)
+		rootScene.store =
+			applicationStore.view(
+				value: { $0.stationsState },
+				action: { .home($0) }
+			)
+		
+		self.window?.rootViewController = UINavigationController(rootViewController: a)
 		
 		self.window?.makeKeyAndVisible()
 		self.window?.backgroundColor = .white
@@ -36,14 +47,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 struct Factory {
 	static var stations: StationsViewController = Scene<StationsViewController>().render()
 	
-	static func stations(with store: Store<AppState, AppAction>) -> StationsViewController {
-		let vc = Scene<StationsViewController>().render()
-		
-		vc.store = store.view(
-			value: { $0.stations },
-			action: { .stations($0) }
-		)
-		
-		return vc
-	}
+	//	static func stations(with store: Store<AppState, AppAction>) -> StationsViewController {
+	//		let vc = Scene<StationsViewController>().render()
+	//
+	//		vc.store = store.view(
+	//			value: { $0.stations },
+	//			action: { .stations($0) }
+	//		)
+	//
+	//		return vc
+	//	}
 }

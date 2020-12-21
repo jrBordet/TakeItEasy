@@ -31,7 +31,7 @@ public struct Networking<T: APIRequest> {
 	}
 	
 	private func make(with urlSession: URLSession = .shared, parse: ((String) -> T.Response)? = nil) -> Observable<T.Response> {
-		Observable<T.Response>.create { observer -> Disposable in
+		return Observable<T.Response>.create { observer -> Disposable in
 			urlSession.dataTask(with: self.API.request) { (data, response, error) in
 				guard let statusCode = HTTPStatusCodes.decode(from: response) else {
 					observer.onError(APIError.undefinedStatusCode)

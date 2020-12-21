@@ -22,7 +22,7 @@ extension StationSectionModel {
 	static var empty: [StationSectionModel] = [.StationSection(title: "", items: [StationSectionItem.EmptysectionItem])]
 }
 
-enum StationSectionItem {
+enum StationSectionItem: Equatable {
 	case StationSectionItem(_ value: Station)
 	case FavouriteStationSectionItem(_ value: Station)
 	case EmptysectionItem
@@ -217,19 +217,6 @@ public class StationsViewController: BaseViewController {
 			}
 			.bind(to: store.rx.addFavorite)
 			.disposed(by: disposeBag)
-		
-		// MARK: - Select a favorite
-		
-//		modelSelected
-//			.map { station -> Station? in
-//				guard case let .FavouriteStationSectionItem(value) = station else {
-//					return  nil
-//				}
-//
-//				return value
-//			}
-//			.bind(to: store.rx.removeFavorite)
-//			.disposed(by: disposeBag)
 		
 		// MARK: - autocomplete
 		

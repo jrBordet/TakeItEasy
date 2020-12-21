@@ -9,4 +9,5 @@ import Foundation
 
 public enum AppAction {
 	case stations(StationsViewAction)
+	case home(HomeViewAction)
 }

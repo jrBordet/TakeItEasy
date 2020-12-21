@@ -12,15 +12,21 @@ import FileClient
 
 public typealias AppEnvironment = StationsViewEnvironment
 
-public typealias CounterViewEnvironment = (
-	autocomplete: (String) -> Effect<Bool>,
-	saveFavourites: () -> Effect<Bool>
-)
-
 let stationsEnvLive: StationsViewEnvironment = (
 	autocomplete: { StationsRequest.autocompleteStation(with: $0)},
 	saveFavourites: { saveFavourites(stations: $0) } ,
 	retrieveFavourites: { retrieveFavourites() }
+)
+
+let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
+	departures: { _ in
+		Effect.sync {
+			[]
+		}
+	},
+	arrivals: { id in
+		ArrivalsRequest.fetch(from: id, date: Date()).debug("[TEST]", trimOutput: false)
+	}
 )
 
 let live: AppEnvironment = stationsEnvLive

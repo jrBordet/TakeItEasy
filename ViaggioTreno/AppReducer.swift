@@ -10,9 +10,9 @@ import RxComposableArchitecture
 
 let appReducer: Reducer<AppState, AppAction, AppEnvironment> =  combine(
 	pullback(
-	  stationsViewReducer,
-	  value: \AppState.stations,
-	  action: /AppAction.stations,
-	  environment: { $0 }
-	  )
+		homeViewReducer,
+		value: \AppState.stations,
+		action: /AppAction.home,
+		environment: { $0 }
+	)
 )

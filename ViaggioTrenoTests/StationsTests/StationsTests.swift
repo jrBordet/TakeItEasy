@@ -71,7 +71,6 @@ class StationsTests: XCTestCase {
 		)
 	}
 	
-	
 	func test_remove_favorite_station() {
 		let station = Station("S01010", name: "TestStation")
 		
