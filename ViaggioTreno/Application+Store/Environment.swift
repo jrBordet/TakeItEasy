@@ -10,7 +10,7 @@ import RxComposableArchitecture
 import Networking
 import FileClient
 
-public typealias AppEnvironment = StationsViewEnvironment
+public typealias AppEnvironment = HomeViewEnvironment
 
 let stationsEnvLive: StationsViewEnvironment = (
 	autocomplete: { StationsRequest.autocompleteStation(with: $0)},
@@ -19,17 +19,22 @@ let stationsEnvLive: StationsViewEnvironment = (
 )
 
 let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
-	departures: { _ in
-		Effect.sync {
-			[]
-		}
+	departures: { id in
+		DeparturesRequest
+			.fetch(from: id)
+			.debug("[DeparturesRequest]", trimOutput: false)
 	},
 	arrivals: { id in
-		ArrivalsRequest.fetch(from: id, date: Date()).debug("[TEST]", trimOutput: false)
+		ArrivalsRequest
+			.fetch(from: id)
+			.debug("[ArrivalsRequest]", trimOutput: false)
 	}
 )
 
-let live: AppEnvironment = stationsEnvLive
+let live: AppEnvironment = (
+	stations: stationsEnvLive,
+	arrivalsDepartures: arrivalsDeparturesViewEnvLive
+)
 
 func saveFavourites(stations s: [Station]) -> Effect<Bool> {
 	.sync { () -> Bool in

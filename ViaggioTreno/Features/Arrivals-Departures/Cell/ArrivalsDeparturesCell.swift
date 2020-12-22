@@ -13,6 +13,7 @@ class ArrivalsDeparturesCell: UITableViewCell {
 	@IBOutlet var cardView: UIView!
 	@IBOutlet var timeLabel: UILabel!
 	@IBOutlet var titleLabel: UILabel!
+	@IBOutlet var statusLabel: UILabel!
 	
 	let theme: AppThemeMaterial = .theme
 
@@ -28,6 +29,10 @@ class ArrivalsDeparturesCell: UITableViewCell {
 			<> fontThin(with: 19)
 		
 		titleLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 17)
+		
+		statusLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 17)
 	}

@@ -25,7 +25,7 @@ class ArrivalsTests: XCTestCase {
 	}
 	
 	func test_arrival_request() {
-		let arrivalRequest = Networking<ArrivalsRequest>.departure(from: "S01700", date: Date(timeIntervalSince1970: 315568800))
+		let arrivalRequest = Networking<ArrivalsRequest>.arrivals(from: "S01700", date: Date(timeIntervalSince1970: 315568800))
 		
 		XCTAssertEqual(arrivalRequest.API.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/arrivi/S01700/Tue%20Jan%2001%201980%2010:00:00%20GMT+0100")
 		XCTAssertEqual(arrivalRequest.API.request.httpMethod, "GET")
@@ -39,7 +39,7 @@ class ArrivalsTests: XCTestCase {
 			.toArray()
 			.first
 		
-		XCTAssertEqual(result?.first?.numeroTreno, 2611)
+		XCTAssertEqual(25523, result?.first?.numeroTreno)
 	}
 	
 	func test_arrivals_decoding_error() throws {

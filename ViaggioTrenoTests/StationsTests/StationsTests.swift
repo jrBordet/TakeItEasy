@@ -22,7 +22,7 @@ class StationsTests: XCTestCase {
 	var env: StationsViewEnvironment!
 	
 	override func setUp() {
-		initialState = StationsViewState(stations: [], favouritesStations: [])
+		initialState = StationsViewState(stations: [], favouritesStations: [], selectedStation: nil)
 		
 		env = (
 			autocomplete: { _ in .sync { self.expectedResult } },

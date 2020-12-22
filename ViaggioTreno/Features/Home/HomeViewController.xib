@@ -24,13 +24,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="PyR-7H-mpk">
-                    <rect key="frame" x="0.0" y="44" width="414" height="156"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gou-i5-WFg">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="156"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="248" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="oIG-Zx-35e">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mwx-NG-hhb">
                                         <size key="itemSize" width="128" height="128"/>
@@ -40,29 +40,30 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5F-DQ-9Sf">
-                                    <rect key="frame" x="15" y="124" width="384" height="1"/>
+                                    <rect key="frame" x="15" y="145" width="384" height="1"/>
                                     <color key="backgroundColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="0.30000535102739728" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="qSC-O5-zJa"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="aggiungi stazioni" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mkd-2z-pyX">
-                                    <rect key="frame" x="15" y="135" width="384" height="21"/>
+                                    <rect key="frame" x="15" y="156" width="384" height="44"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="qUU-W8-vJr"/>
+                                        <constraint firstAttribute="height" constant="44" id="qUU-W8-vJr"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4m-KC-qim">
-                                    <rect key="frame" x="15" y="126" width="384" height="30"/>
+                                    <rect key="frame" x="15" y="170" width="384" height="30"/>
+                                    <color key="tintColor" red="0.054901960780000002" green="0.84705882349999995" blue="0.71764705880000002" alpha="0.89771511130000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5l6-t8-SsK">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZm-c0-wtt">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -90,7 +91,7 @@
                                 <constraint firstItem="Mkd-2z-pyX" firstAttribute="top" secondItem="oIG-Zx-35e" secondAttribute="bottom" constant="15" id="MIc-rF-Ukq"/>
                                 <constraint firstItem="i4m-KC-qim" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" constant="15" id="Msm-qH-L2Z"/>
                                 <constraint firstAttribute="trailing" secondItem="oIG-Zx-35e" secondAttribute="trailing" id="RUl-yH-MDz"/>
-                                <constraint firstAttribute="height" constant="156" id="Rqs-yu-C0B"/>
+                                <constraint firstAttribute="height" constant="200" id="Rqs-yu-C0B"/>
                                 <constraint firstAttribute="bottom" secondItem="Mkd-2z-pyX" secondAttribute="bottom" id="XT8-DP-Aqu"/>
                                 <constraint firstItem="5l6-t8-SsK" firstAttribute="bottom" secondItem="oIG-Zx-35e" secondAttribute="bottom" id="ZLR-9j-vM5"/>
                                 <constraint firstAttribute="trailing" secondItem="w5F-DQ-9Sf" secondAttribute="trailing" constant="15" id="fGA-Nu-k0W"/>

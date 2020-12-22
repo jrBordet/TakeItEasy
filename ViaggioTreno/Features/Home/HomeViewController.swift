@@ -15,6 +15,14 @@ import Styling
 import Caprice
 import RxComposableArchitecture
 
+public extension Reactive where Base: Store<HomeViewState, HomeViewAction> {
+	var select: Binder<Station?> {
+		Binder(self.base) { store, value in
+			store.send(.favourites(.stations(.select(value))))
+		}
+	}
+}
+
 public class HomeViewController: BaseViewController {
 	@IBOutlet var searchStationsButton: UIButton!
 	@IBOutlet var stationsCollectionView: UICollectionView!
@@ -37,19 +45,25 @@ public class HomeViewController: BaseViewController {
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.navigationController?.navigationBar.isHidden = false
+		self.navigationController?.navigationBar.tintColor = theme.primaryColor
+		self.title = "Viaggio Treno"
+
+		self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.primaryColor]
+		
 		guard let store = self.store else {
 			return
 		}
-		
-		self.navigationController?.navigationBar.isHidden = true
-		
+				
 		// MARK: - styling
 		
 		addLabel
 			|> theme.primaryLabel
 			<> fontMedium(with: 17)
-			<> textColor(color: theme.primaryColor)
+			<> textColor(color: .white)
 			<> textLabel(L10n.App.Home.addStations)
+			<> backgroundLabel(with: theme.primaryColor)
+			<> rounded(with: 5)
 		
 		emptyStationsLabel
 			|> theme.primaryLabel
@@ -70,18 +84,12 @@ public class HomeViewController: BaseViewController {
 		
 		// MARK: - bind dataSource
 		
-		store.send(HomeViewAction.favourites(StationsViewAction.stations(.favourites)))
-	
-		stationsCollectionView.rx
-			.modelSelected(Station.self)
-			.subscribe(onNext: {
-				dump($0)
-			}).disposed(by: disposeBag)
+		store.send(.favourites(.stations(.favourites)))
 		
 		store
 			.value
 			.distinctUntilChanged()
-			.map { $0.favouritesStations.favouritesStations.isEmpty == false }
+			.map { $0.favouritesStations.isEmpty == false }
 			.bind(to: self.emptyStationsView.rx.isHidden)
 			.disposed(by: disposeBag)
 		
@@ -89,11 +97,32 @@ public class HomeViewController: BaseViewController {
 			.value
 			.distinctUntilChanged()
 			.map { $0.favouritesStations }
-			.distinctUntilChanged()
 			.map { stations -> [HomeStationsSection] in
-				[HomeStationsSection(header: "", numbers: stations.favouritesStations, updated: Date())]
+				[HomeStationsSection(header: "", stations: stations, updated: Date())]
 			}
 			.bind(to: stationsCollectionView.rx.items(dataSource: dataSource))
+			.disposed(by: disposeBag)
+		
+		// MARK: - Select stations
+		
+		stationsCollectionView.rx
+			.modelSelected(Station.self)
+			.bind(to: store.rx.select)
+			.disposed(by: disposeBag)
+				
+		store
+			.value
+			.map { $0.favouritesStationsState.selectedStation }
+			.distinctUntilChanged()
+			.ignoreNil()
+			.subscribe(onNext: { station in
+				navigationLink(from: self, destination: Scene<ArrivalsDeparturesContainerViewController>(), completion: { vc in
+					vc.store = store.view(
+						value: { $0.arrivalsDeparturesState },
+						action: { .arrivalsDepartures($0) }
+					)
+				}, isModal: false)
+			})
 			.disposed(by: disposeBag)
 		
 		// MARK: Search tap
@@ -106,11 +135,10 @@ public class HomeViewController: BaseViewController {
 				}
 				
 				navigationLink(from: self, destination: Scene<StationsViewController>(), completion: { vc in
-					vc.store =
-						store.view (
-							value: { $0.favouritesStations },
-							action: { .favourites($0) }
-						)
+					vc.store = store.view (
+						value: { $0.favouritesStationsState },
+						action: { .favourites($0) }
+					)
 				}, isModal: true)
 			}.disposed(by: disposeBag)
 	}
@@ -126,7 +154,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 							   sizeForItemAt indexPath: IndexPath) -> CGSize {
 		
 		let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-		let widthPerItem = 85 + paddingSpace / itemsPerRow
+		let widthPerItem = 65 + paddingSpace / itemsPerRow
 		
 		return CGSize(width: widthPerItem, height: 120)
 	}
@@ -146,6 +174,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 	}
 }
 
+// MARK: - ConfigureCell
+
 extension HomeViewController {
 	static func favouritesStationCollectionViewDataSource() -> CollectionViewSectionedDataSource<HomeStationsSection>.ConfigureCell {
 		return { dataSource, cv, idxPath, item in
@@ -158,7 +188,7 @@ extension HomeViewController {
 	}
 }
 
-// MARK: Data
+// MARK: - Data
 
 struct HomeStationsSection {
 	var header: String
@@ -167,14 +197,14 @@ struct HomeStationsSection {
 	
 	var updated: Date
 	
-	init(header: String, numbers: [Item], updated: Date) {
+	init(header: String, stations: [Item], updated: Date) {
 		self.header = header
-		self.stations = numbers
+		self.stations = stations
 		self.updated = updated
 	}
 }
 
-// MARK: Just extensions to say how to determine identity and how to determine is entity updated
+// MARK: - Just extensions to say how to determine identity and how to determine is entity updated
 
 extension HomeStationsSection: AnimatableSectionModelType {
 	typealias Item = Station

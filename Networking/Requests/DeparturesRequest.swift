@@ -9,7 +9,12 @@ import Foundation
 import RxSwift
 
 public struct Departure: Codable {
+	public let compNumeroTreno: String
 	public let numeroTreno: Int
+	public let destinazione: String
+	public let compOrarioPartenza: String
+	public let ritardo: Int
+	public let compRitardo: [String]
 }
 
 extension Departure: Equatable {

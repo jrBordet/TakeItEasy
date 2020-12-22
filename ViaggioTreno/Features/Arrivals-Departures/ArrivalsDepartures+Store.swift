@@ -10,20 +10,23 @@ import RxComposableArchitecture
 import Networking
 
 public struct ArrivalsDeparturesViewState: Equatable {
+	public var selectedStation: Station?
 	public var departures: [Departure]
 	public var arrivals: [Arrival]
 	
 	public init(
+		selectedStation: Station?,
 		departures: [Departure],
 		arrivals: [Arrival]
 	) {
+		self.selectedStation = selectedStation
 		self.departures = departures
 		self.arrivals = arrivals
 	}
 	
 	var stationsState: ArrivalsDeparturesState {
-		get { (self.departures, self.arrivals) }
-		set { (self.departures, self.arrivals) = newValue }
+		get { (self.selectedStation, self.departures, self.arrivals) }
+		set { (self.selectedStation, self.departures, self.arrivals) = newValue }
 	}
 }
 
@@ -47,7 +50,7 @@ public let arrivalsDeparturesViewReducer: Reducer<ArrivalsDeparturesViewState, A
 
 // MARk: - State
 
-public typealias ArrivalsDeparturesState = (departures: [Departure], arrivals: [Arrival])
+public typealias ArrivalsDeparturesState = (selectedStation: Station?, departures: [Departure], arrivals: [Arrival])
 
 // MARk: - Action
 
@@ -58,6 +61,8 @@ public enum ArrivalsDeparturesAction: Equatable {
 	case arrivals(String)
 	case arrivalsResponse([Arrival])
 	
+	case select(Station?)
+		
 	case none
 }
 
@@ -90,5 +95,10 @@ func arrivalsDeparturesReducer(
 		return []
 	case .none:
 		return []
+	case let .select(station):
+		state.selectedStation = station
+		return [
+			
+		]
 	}
 }

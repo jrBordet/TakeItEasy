@@ -12,27 +12,40 @@ import os.log
 import Networking
 
 public struct AppState {
-	var stationsState: HomeViewState
+	var selectedStation: Station?
+	var departures: [Departure]
+	var arrivals: [Arrival]
+	var stations: [Station]
+	var favouritesStations: [Station]
 }
 
 extension AppState {
-	var stations: HomeViewState {
+	var homeState: HomeViewState {
 		get {
-			HomeViewState(favouritesStations: self.stationsState.favouritesStations)
+			HomeViewState(
+				selectedStation: self.selectedStation,
+				departures: self.departures,
+				arrivals: self.arrivals,
+				stations: self.stations,
+				favouritesStations: self.favouritesStations
+			)
 		}
 		set {
-			self.stationsState = newValue
+			
+			self.selectedStation = newValue.selectedStation
+			self.departures = newValue.departures
+			self.arrivals = newValue.arrivals
+			self.stations = newValue.stations
+			self.favouritesStations = newValue.favouritesStations
 		}
 	}
 }
 
 let initialAppState = AppState(
-	stationsState: HomeViewState(
-		favouritesStations: StationsViewState(
-			stations: [],
-			favouritesStations: []
-		)
-	)
+	departures: [],
+	arrivals: [],
+	stations: [],
+	favouritesStations: []
 )
 
 func activityFeed(

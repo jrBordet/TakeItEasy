@@ -19,23 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		self.window = UIWindow(frame: UIScreen.main.bounds)
 		
-		let a = Scene<ArrivalsDeparturesViewController>().render()
-		
-		a.store = Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction>(
-			initialValue: ArrivalsDeparturesViewState(departures: [], arrivals: []),
-			reducer: arrivalsDeparturesViewReducer,
-			environment: arrivalsDeparturesViewEnvLive
-		)
+//		let container = Scene<ArrivalsDeparturesContainerViewController>().render()
+//		
+//		container.store = Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction>(
+//			initialValue: ArrivalsDeparturesViewState(selectedStation: nil, departures: [], arrivals: []),
+//			reducer: arrivalsDeparturesViewReducer,
+//			environment: arrivalsDeparturesViewEnvLive
+//		)
 		
 		let rootScene = Scene<HomeViewController>().render()
 		
-		rootScene.store =
-			applicationStore.view(
-				value: { $0.stationsState },
-				action: { .home($0) }
-			)
+		rootScene.store = applicationStore.view(
+			value: { $0.homeState },
+			action: { .home($0) }
+		)
 		
-		self.window?.rootViewController = UINavigationController(rootViewController: a)
+		self.window?.rootViewController = UINavigationController(rootViewController: rootScene)
 		
 		self.window?.makeKeyAndVisible()
 		self.window?.backgroundColor = .white

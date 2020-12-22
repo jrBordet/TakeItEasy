@@ -92,10 +92,15 @@
 		F7EEAA286804B6A9AA95BD86 /* StationsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A172DBCCCFEE0CC9F236D315 /* StationsState.swift */; };
 		F89A10E8258D0DB900363072 /* FavouritesStationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A10E6258D0DB900363072 /* FavouritesStationsCell.swift */; };
 		F89A10E9258D0DB900363072 /* FavouritesStationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F89A10E7258D0DB900363072 /* FavouritesStationsCell.xib */; };
+		F8AD626E2591D791007249F2 /* ArrivalsDeparturesContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD626C2591D791007249F2 /* ArrivalsDeparturesContainerViewController.swift */; };
+		F8AD626F2591D791007249F2 /* ArrivalsDeparturesContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AD626D2591D791007249F2 /* ArrivalsDeparturesContainerViewController.xib */; };
+		F8AD62842591DF35007249F2 /* DeparturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD62822591DF35007249F2 /* DeparturesViewController.swift */; };
+		F8AD62852591DF35007249F2 /* DeparturesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AD62832591DF35007249F2 /* DeparturesViewController.xib */; };
+		F8AD62C32591EDB5007249F2 /* Utils+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD62C22591EDB5007249F2 /* Utils+Rx.swift */; };
 		F8B2C4982590856A002419E8 /* Home+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C4972590856A002419E8 /* Home+Store.swift */; };
 		F8B2C4A325908C18002419E8 /* HomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C4A225908C18002419E8 /* HomeTests.swift */; };
-		F8B2C5722590D9DC002419E8 /* ArrivalsDeparturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5702590D9DC002419E8 /* ArrivalsDeparturesViewController.swift */; };
-		F8B2C5732590D9DC002419E8 /* ArrivalsDeparturesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B2C5712590D9DC002419E8 /* ArrivalsDeparturesViewController.xib */; };
+		F8B2C5722590D9DC002419E8 /* ArrivalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5702590D9DC002419E8 /* ArrivalsViewController.swift */; };
+		F8B2C5732590D9DC002419E8 /* ArrivalsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B2C5712590D9DC002419E8 /* ArrivalsViewController.xib */; };
 		F8B2C57B2590DAF6002419E8 /* ArrivalsDeparturesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5792590DAF6002419E8 /* ArrivalsDeparturesCell.swift */; };
 		F8B2C57C2590DAF6002419E8 /* ArrivalsDeparturesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B2C57A2590DAF6002419E8 /* ArrivalsDeparturesCell.xib */; };
 		F8B2C5862590E9CB002419E8 /* ArrivalsDepartures+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5852590E9CB002419E8 /* ArrivalsDepartures+Store.swift */; };
@@ -185,7 +190,7 @@
 		3AFD940ACEAA1ACF683C2A23 /* UIStationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStationsTests.swift; sourceTree = "<group>"; };
 		3DAB1B414764A989D2A94C13 /* Button+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+Style.swift"; sourceTree = "<group>"; };
 		3EB664A8CE5FAD0E57E59DB7 /* departures_broken.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departures_broken.json; sourceTree = "<group>"; };
-		4028CB338F8EEB0389BDC675 /* ViaggioTreno.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ViaggioTreno.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4028CB338F8EEB0389BDC675 /* ViaggioTreno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaggioTreno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410940849981DCD37885BE43 /* test_stations_favourites_and_result.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_stations_favourites_and_result.2.png; sourceTree = "<group>"; };
 		4817CCCC3016429DEA1850AA /* Favourites+FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favourites+FileClient.swift"; sourceTree = "<group>"; };
 		4B6277006C226E5B28C47994 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
@@ -258,10 +263,15 @@
 		F86439F3C61B379D392CB409 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		F89A10E6258D0DB900363072 /* FavouritesStationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesStationsCell.swift; sourceTree = "<group>"; };
 		F89A10E7258D0DB900363072 /* FavouritesStationsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesStationsCell.xib; sourceTree = "<group>"; };
+		F8AD626C2591D791007249F2 /* ArrivalsDeparturesContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsDeparturesContainerViewController.swift; sourceTree = "<group>"; };
+		F8AD626D2591D791007249F2 /* ArrivalsDeparturesContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArrivalsDeparturesContainerViewController.xib; sourceTree = "<group>"; };
+		F8AD62822591DF35007249F2 /* DeparturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesViewController.swift; sourceTree = "<group>"; };
+		F8AD62832591DF35007249F2 /* DeparturesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeparturesViewController.xib; sourceTree = "<group>"; };
+		F8AD62C22591EDB5007249F2 /* Utils+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utils+Rx.swift"; sourceTree = "<group>"; };
 		F8B2C4972590856A002419E8 /* Home+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Store.swift"; sourceTree = "<group>"; };
 		F8B2C4A225908C18002419E8 /* HomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTests.swift; sourceTree = "<group>"; };
-		F8B2C5702590D9DC002419E8 /* ArrivalsDeparturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsDeparturesViewController.swift; sourceTree = "<group>"; };
-		F8B2C5712590D9DC002419E8 /* ArrivalsDeparturesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArrivalsDeparturesViewController.xib; sourceTree = "<group>"; };
+		F8B2C5702590D9DC002419E8 /* ArrivalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsViewController.swift; sourceTree = "<group>"; };
+		F8B2C5712590D9DC002419E8 /* ArrivalsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArrivalsViewController.xib; sourceTree = "<group>"; };
 		F8B2C5792590DAF6002419E8 /* ArrivalsDeparturesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsDeparturesCell.swift; sourceTree = "<group>"; };
 		F8B2C57A2590DAF6002419E8 /* ArrivalsDeparturesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArrivalsDeparturesCell.xib; sourceTree = "<group>"; };
 		F8B2C5852590E9CB002419E8 /* ArrivalsDepartures+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArrivalsDepartures+Store.swift"; sourceTree = "<group>"; };
@@ -321,16 +331,13 @@
 		16B9E9B2F7E4997C10B4E285 /* ViaggioTreno */ = {
 			isa = PBXGroup;
 			children = (
-				4B6277006C226E5B28C47994 /* AppAction.swift */,
 				9DC3C2D4FDA38F20A5C9A707 /* AppDelegate.swift */,
-				0E48659D4F2221079A6283F3 /* AppReducer.swift */,
-				1885A07A2C5C344D38CCD462 /* AppState.swift */,
-				D477DF9A4C2721A9EFC5E97D /* AppStore.swift */,
-				E3F0638C57C372FF25025688 /* BaseViewController.swift */,
-				173739E84B3B5BBEB3DE88A4 /* Environment.swift */,
+				F8AD63822592483C007249F2 /* Application+Store */,
 				B357E5B710664829144B7C2A /* Features */,
 				B82F09634285886586985BDA /* Resources */,
 				311C76BEFFE9BCB448C60395 /* Supporting Files */,
+				F8AD62C22591EDB5007249F2 /* Utils+Rx.swift */,
+				E3F0638C57C372FF25025688 /* BaseViewController.swift */,
 			);
 			path = ViaggioTreno;
 			sourceTree = "<group>";
@@ -389,10 +396,10 @@
 		23239C3622C034A87A1B8766 = {
 			isa = PBXGroup;
 			children = (
-				16F0531BA9BE9F2E365554E3 /* AppTheme */,
-				932BE5600EC396F97D6541D4 /* FileClient */,
-				1EF682B83E552010338D5987 /* Networking */,
 				16B9E9B2F7E4997C10B4E285 /* ViaggioTreno */,
+				1EF682B83E552010338D5987 /* Networking */,
+				932BE5600EC396F97D6541D4 /* FileClient */,
+				16F0531BA9BE9F2E365554E3 /* AppTheme */,
 				F328D411822F60ED3BDA5471 /* ViaggioTrenoTests */,
 				9C1CDB66B4F684D2EEA4B0AE /* Products */,
 				657433EBD362BC3A35020490 /* Pods */,
@@ -515,6 +522,7 @@
 		74091DA6B0C78045EF627E68 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F8B2C49625908553002419E8 /* Home+Store */,
 				F89A10E5258D0D7F00363072 /* StationsCell */,
 				A767DF0F4804A39EC7DBBA7C /* HomeViewController.swift */,
 				E397BB7C92753348FECA93F8 /* HomeViewController.xib */,
@@ -612,10 +620,9 @@
 		B357E5B710664829144B7C2A /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				F8B2C5512590D966002419E8 /* Arrivals-Departures */,
-				F8B2C49625908553002419E8 /* Home+Store */,
 				74091DA6B0C78045EF627E68 /* Home */,
 				6338D144AEA36724E00882D0 /* Stations */,
+				F8B2C5512590D966002419E8 /* Arrivals-Departures */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -701,6 +708,36 @@
 			path = StationsCell;
 			sourceTree = "<group>";
 		};
+		F8AD627C2591DF0E007249F2 /* Arrivals */ = {
+			isa = PBXGroup;
+			children = (
+				F8B2C5702590D9DC002419E8 /* ArrivalsViewController.swift */,
+				F8B2C5712590D9DC002419E8 /* ArrivalsViewController.xib */,
+			);
+			path = Arrivals;
+			sourceTree = "<group>";
+		};
+		F8AD62812591DF1D007249F2 /* Departures */ = {
+			isa = PBXGroup;
+			children = (
+				F8AD62822591DF35007249F2 /* DeparturesViewController.swift */,
+				F8AD62832591DF35007249F2 /* DeparturesViewController.xib */,
+			);
+			path = Departures;
+			sourceTree = "<group>";
+		};
+		F8AD63822592483C007249F2 /* Application+Store */ = {
+			isa = PBXGroup;
+			children = (
+				4B6277006C226E5B28C47994 /* AppAction.swift */,
+				0E48659D4F2221079A6283F3 /* AppReducer.swift */,
+				1885A07A2C5C344D38CCD462 /* AppState.swift */,
+				D477DF9A4C2721A9EFC5E97D /* AppStore.swift */,
+				173739E84B3B5BBEB3DE88A4 /* Environment.swift */,
+			);
+			path = "Application+Store";
+			sourceTree = "<group>";
+		};
 		F8B2C49625908553002419E8 /* Home+Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -720,10 +757,12 @@
 		F8B2C5512590D966002419E8 /* Arrivals-Departures */ = {
 			isa = PBXGroup;
 			children = (
-				F8B2C5782590DAD1002419E8 /* Cell */,
-				F8B2C5702590D9DC002419E8 /* ArrivalsDeparturesViewController.swift */,
-				F8B2C5712590D9DC002419E8 /* ArrivalsDeparturesViewController.xib */,
 				F8B2C5852590E9CB002419E8 /* ArrivalsDepartures+Store.swift */,
+				F8AD626C2591D791007249F2 /* ArrivalsDeparturesContainerViewController.swift */,
+				F8AD626D2591D791007249F2 /* ArrivalsDeparturesContainerViewController.xib */,
+				F8AD62812591DF1D007249F2 /* Departures */,
+				F8AD627C2591DF0E007249F2 /* Arrivals */,
+				F8B2C5782590DAD1002419E8 /* Cell */,
 			);
 			path = "Arrivals-Departures";
 			sourceTree = "<group>";
@@ -849,9 +888,6 @@
 					4E2573C6EF332B80F017E7EB = {
 						DevelopmentTeam = None;
 					};
-					62E1CB155C6FFB751C7EF184 = {
-						DevelopmentTeam = None;
-					};
 					6B0F06BC7A9BDAB737301463 = {
 						DevelopmentTeam = None;
 					};
@@ -904,15 +940,17 @@
 				60A25BCBF908D3EFA0400631 /* StationsSectionHeader.xib in Resources */,
 				6F0468C416C611A81AA36E43 /* StationsViewController.xib in Resources */,
 				F8B2C57C2590DAF6002419E8 /* ArrivalsDeparturesCell.xib in Resources */,
-				F8B2C5732590D9DC002419E8 /* ArrivalsDeparturesViewController.xib in Resources */,
+				F8B2C5732590D9DC002419E8 /* ArrivalsViewController.xib in Resources */,
 				109D08A9AFFDF5884F04F980 /* arrivals.json in Resources */,
 				0BCDEE7590E48782C0FD8A3B /* arrivals_broken.json in Resources */,
 				F9EEE7A3D6FEF820FDCE0D75 /* departures.json in Resources */,
 				330021AFCBDE1AFE1BCDB3D4 /* departures_broken.json in Resources */,
+				F8AD626F2591D791007249F2 /* ArrivalsDeparturesContainerViewController.xib in Resources */,
 				D887481AB8BCD949970C9B9F /* stations.txt in Resources */,
 				356644C6FAD49B8DC539E1F2 /* stations_broken.txt in Resources */,
 				808A869BC05BA88BA5AA4146 /* train_sections.json in Resources */,
 				29FE307CB16F52DC75566C5F /* train_sections_broken.json in Resources */,
+				F8AD62852591DF35007249F2 /* DeparturesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,11 +1145,13 @@
 				F8B2C57B2590DAF6002419E8 /* ArrivalsDeparturesCell.swift in Sources */,
 				7B1E9FDC5802C7BED7A8FD32 /* AppReducer.swift in Sources */,
 				F8B2C5862590E9CB002419E8 /* ArrivalsDepartures+Store.swift in Sources */,
-				F8B2C5722590D9DC002419E8 /* ArrivalsDeparturesViewController.swift in Sources */,
+				F8B2C5722590D9DC002419E8 /* ArrivalsViewController.swift in Sources */,
+				F8AD626E2591D791007249F2 /* ArrivalsDeparturesContainerViewController.swift in Sources */,
 				9A3408FCD3CC761B5B737E52 /* AppState.swift in Sources */,
 				F89A10E8258D0DB900363072 /* FavouritesStationsCell.swift in Sources */,
 				585238B3639C6F188F8177F8 /* AppStore.swift in Sources */,
 				DB760463E09671AAF325EAB8 /* BaseViewController.swift in Sources */,
+				F8AD62842591DF35007249F2 /* DeparturesViewController.swift in Sources */,
 				649CFB07468CEC4E6316ECA5 /* Environment.swift in Sources */,
 				F8B2C4982590856A002419E8 /* Home+Store.swift in Sources */,
 				5FA7D43FFAC90A97A8DFA812 /* HomeViewController.swift in Sources */,
@@ -1120,6 +1160,7 @@
 				1C8BDA58AD9AB7D0F82B0338 /* StationsSectionHeader.swift in Sources */,
 				F7EEAA286804B6A9AA95BD86 /* StationsState.swift in Sources */,
 				C4747CD146317DBBDC6F07FC /* StationsViewController.swift in Sources */,
+				F8AD62C32591EDB5007249F2 /* Utils+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1464,6 +1505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1482,6 +1524,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

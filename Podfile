@@ -23,6 +23,7 @@ target 'ViaggioTreno' do
   # pod 'FileClient', :path => 'FileClient'
 
   pod 'RxDataSources', '4.0.1'
+	pod 'Tabman', '~> 2.9'
 	
   target 'ViaggioTrenoTests' do
     inherit! :search_paths

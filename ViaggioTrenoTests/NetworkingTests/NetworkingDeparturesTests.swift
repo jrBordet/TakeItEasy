@@ -39,7 +39,7 @@ class DeparturesTests: XCTestCase {
 			.toArray()
 			.first
 		
-		XCTAssertEqual(result?.first?.numeroTreno, 2611)
+		XCTAssertEqual(9523, result?.first?.numeroTreno)
 	}
 	
 	func test_departures_decoding_error() throws {

@@ -15,6 +15,12 @@ internal enum L10n {
     /// 
     internal static let name = L10n.tr("Localizable", "app.name")
     internal enum Common {
+      /// Arrivals
+      internal static let arrivals = L10n.tr("Localizable", "app.common.arrivals")
+      /// Board
+      internal static let board = L10n.tr("Localizable", "app.common.board")
+      /// Departures
+      internal static let departures = L10n.tr("Localizable", "app.common.departures")
       /// Dismiss
       internal static let dismiss = L10n.tr("Localizable", "app.common.dismiss")
       /// Save

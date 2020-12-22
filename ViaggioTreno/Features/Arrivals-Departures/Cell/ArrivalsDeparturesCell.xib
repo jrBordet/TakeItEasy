@@ -33,13 +33,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUb-Oa-HFw">
+                                <rect key="frame" x="295" y="17.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="IT1-G4-BSd" firstAttribute="leading" secondItem="8gs-ua-jkr" secondAttribute="leading" constant="15" id="0aH-Jk-UJ8"/>
                             <constraint firstItem="U41-Ue-TaE" firstAttribute="centerY" secondItem="IT1-G4-BSd" secondAttribute="centerY" id="6E0-QE-k5l"/>
+                            <constraint firstItem="gUb-Oa-HFw" firstAttribute="centerY" secondItem="U41-Ue-TaE" secondAttribute="centerY" id="She-gm-aXd"/>
                             <constraint firstItem="IT1-G4-BSd" firstAttribute="centerY" secondItem="8gs-ua-jkr" secondAttribute="centerY" id="fji-Mq-sC5"/>
                             <constraint firstItem="U41-Ue-TaE" firstAttribute="leading" secondItem="IT1-G4-BSd" secondAttribute="trailing" constant="15" id="pZs-lk-h63"/>
+                            <constraint firstAttribute="trailing" secondItem="gUb-Oa-HFw" secondAttribute="trailing" constant="15" id="w6Y-x5-b7F"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -53,6 +61,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cardView" destination="8gs-ua-jkr" id="4SS-jc-EbL"/>
+                <outlet property="statusLabel" destination="gUb-Oa-HFw" id="2zn-m9-85b"/>
                 <outlet property="timeLabel" destination="IT1-G4-BSd" id="kbC-ju-SQE"/>
                 <outlet property="titleLabel" destination="U41-Ue-TaE" id="SBg-js-91M"/>
             </connections>

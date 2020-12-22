@@ -12,18 +12,21 @@ import Networking
 public struct StationsViewState: Equatable {
 	public var stations: [Station]
 	public var favouritesStations: [Station]
+	public var selectedStation: Station?
 	
 	public init(
 		stations: [Station],
-		favouritesStations: [Station]
+		favouritesStations: [Station],
+		selectedStation: Station?
 	) {
 		self.stations = stations
 		self.favouritesStations = favouritesStations
+		self.selectedStation = selectedStation
 	}
 	
 	var stationsState: StationsState {
-		get { (self.stations, self.favouritesStations) }
-		set { (self.stations, self.favouritesStations) = newValue }
+		get { (self.stations, self.favouritesStations, self.selectedStation) }
+		set { (self.stations, self.favouritesStations, self.selectedStation) = newValue }
 	}
 }
 
@@ -48,7 +51,7 @@ public let stationsViewReducer: Reducer<StationsViewState, StationsViewAction, S
 
 // MARk: - State
 
-public typealias StationsState = (stations: [Station], favouritesStations: [Station])
+public typealias StationsState = (stations: [Station], favouritesStations: [Station], selectedStation: Station?)
 
 // MARk: - Action
 
@@ -63,6 +66,8 @@ public enum StationsAction: Equatable {
 	case updateFavouritesResponse(Bool)
 	
 	case removeFavourite(Station)
+	
+	case select(Station?)
 	
 	case none
 }
@@ -126,8 +131,12 @@ func stationsReducer(
 		return [
 			environment.saveFavourites(state.favouritesStations).map { StationsAction.updateFavouritesResponse($0) }
 		]
-	case let .updateFavouritesResponse(success):
-		dump(success)
+	case .updateFavouritesResponse:
 		return []
+	case let .select(station):
+		
+		state.selectedStation = station
+		
+		return[]
 	}
 }

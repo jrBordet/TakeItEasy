@@ -18,6 +18,7 @@ struct ArrivalDepartureSectionItem {
 	var number: String
 	var name: String
 	var time: String
+	var status: String
 }
 
 extension ArrivalDepartureSectionItem: IdentifiableType {
@@ -30,7 +31,7 @@ extension ArrivalDepartureSectionItem: IdentifiableType {
 
 extension ArrivalDepartureSectionItem: Equatable { }
 
-class ArrivalsDeparturesViewController: UIViewController {
+class ArrivalsViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
 
 	typealias ArrivalsDeparturesListSectionModel = AnimatableSectionModel<String, ArrivalDepartureSectionItem>
@@ -48,26 +49,26 @@ class ArrivalsDeparturesViewController: UIViewController {
 			return
 		}
 		
-		tableView.rowHeight = 72
+		tableView.rowHeight = 85
 		tableView.separatorColor = .white
 		
-		// Do any additional setup after loading the view.
 		registerTableViewCell(with: tableView, cell: ArrivalsDeparturesCell.self, reuseIdentifier: "ArrivalsDeparturesCell")
 		
 		setupDataSource()
 		
-		tableView
-			.rx
-			.setDelegate(self)
+		store
+			.value
+			.map { $0.selectedStation }
+			.distinctUntilChanged()
+			.ignoreNil()
+			.bind(to: store.rx.select)
 			.disposed(by: disposeBag)
-		// S01700
-		store.send(ArrivalsDeparturesViewAction.arrivalDepartures(ArrivalsDeparturesAction.arrivals("S01700")))
 		
 		store
 			.value
 			.distinctUntilChanged()
 			.map { $0.arrivals }
-			.map { $0.map { ArrivalDepartureSectionItem(number: $0.compNumeroTreno ?? "", name: $0.origine ?? "", time: $0.compOrarioArrivo ?? "") } }
+			.map { $0.map { ArrivalDepartureSectionItem(number: $0.compNumeroTreno, name: $0.origine, time: $0.compOrarioArrivo, status: delay(from: $0.compRitardo)) } }
 			.map { (items: [ArrivalDepartureSectionItem]) -> [ArrivalsDeparturesListSectionModel] in
 				[ArrivalsDeparturesListSectionModel(model: "", items: items)]
 			}
@@ -78,20 +79,16 @@ class ArrivalsDeparturesViewController: UIViewController {
 	
 	private func setupDataSource() {
 		dataSource = RxTableViewSectionedAnimatedDataSource<ArrivalsDeparturesListSectionModel>(
-			animationConfiguration: AnimationConfiguration(insertAnimation: .top,
+			animationConfiguration: AnimationConfiguration(insertAnimation: .right,
 														   reloadAnimation: .none),
 			configureCell: configureCell
 		)
 	}
 }
 
-extension ArrivalsDeparturesViewController: UITableViewDelegate {
-	
-}
-
 // MARK: Data Source Configuration
 
-extension ArrivalsDeparturesViewController {
+extension ArrivalsViewController {
 	private var configureCell: RxTableViewSectionedAnimatedDataSource<ArrivalsDeparturesListSectionModel>.ConfigureCell {
 		return { _, table, idxPath, item in
 			guard let cell = table.dequeueReusableCell(withIdentifier: "ArrivalsDeparturesCell", for: idxPath) as? ArrivalsDeparturesCell else {
@@ -100,8 +97,17 @@ extension ArrivalsDeparturesViewController {
 			
 			cell.titleLabel.text = item.name.capitalized
 			cell.timeLabel.text = item.time
+			cell.statusLabel.text = item.status
 			
 			return cell
 		}
+	}
+}
+
+func delay(from compRitardo: [String]) -> String {
+	if Locale.current.identifier == "it_IT" {
+		return compRitardo.first ?? ""
+	} else {
+		return compRitardo[1]
 	}
 }

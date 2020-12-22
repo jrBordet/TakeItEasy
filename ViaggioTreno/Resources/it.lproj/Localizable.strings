@@ -12,6 +12,9 @@
 
 "app.common.save" = "Salva";
 "app.common.dismiss" = "Chiudi";
+"app.common.arrivals" = "Arrivi";
+"app.common.departures" = "Partenze";
+"app.common.board" = "Tabellone";
 
 // MARK: - Home
 

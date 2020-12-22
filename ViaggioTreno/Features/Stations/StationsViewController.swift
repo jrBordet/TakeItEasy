@@ -123,6 +123,12 @@ public extension Reactive where Base: Store<StationsViewState, StationsViewActio
 			store.send(.stations(.removeFavourite(value)))
 		}
 	}
+	
+	var select: Binder<Station?> {
+		Binder(self.base) { store, value in
+			store.send(.stations(.select(value)))
+		}
+	}
 }
 
 public class StationsViewController: BaseViewController {
@@ -303,6 +309,5 @@ extension StationsViewController: UITableViewDelegate {
 		case .EmptysectionItem:
 			return .zero
 		}
-		
 	}
 }

@@ -8,11 +8,11 @@ import Foundation
 import RxSwift
 
 public struct Arrival: Codable {
-	public let numeroTreno: Int?
-	public let origine: String?
-	public let destinazione: String?
-	public let compOrarioArrivo: String?
-	public let compNumeroTreno: String?
+	public let numeroTreno: Int
+	public let origine: String
+	public let compOrarioArrivo: String
+	public let compNumeroTreno: String
+	public let compRitardo: [String]
 }
 
 extension Arrival: Equatable {
