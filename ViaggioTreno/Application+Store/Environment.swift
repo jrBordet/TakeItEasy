@@ -40,7 +40,7 @@ let sections = TrainSectionsRequest.fetch(from: "", train: "")
 
 let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 	arrivalsDepartures: arrivalsDeparturesEnvLive,
-	sections: { train, station in
+	sections: { station, train in
 		TrainSectionsRequest.fetch(from: station, train: train)
 	}
 )
