@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let trainSections = Scene<TrainSectionViewController>().render()
 		
 		trainSections.store = Store<TrainSectionViewState, TrainSectionViewAction>(
-			initialValue: TrainSectionViewState(selectedStation: nil, trainSections: r),
+			initialValue: TrainSectionViewState(selectedStation: nil, trainNumber: nil, trainSections: r),
 			reducer: trainSectionViewReducer,
 			environment: env
 		)
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			action: { .home($0) }
 		)
 		
-		self.window?.rootViewController = UINavigationController(rootViewController: trainSections)
+		self.window?.rootViewController = UINavigationController(rootViewController: rootScene)
 		
 		self.window?.makeKeyAndVisible()
 		self.window?.backgroundColor = .white

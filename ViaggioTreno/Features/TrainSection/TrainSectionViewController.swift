@@ -52,7 +52,6 @@ class TrainSectionViewController: UIViewController {
 	
 	private let disposeBag = DisposeBag()
 	
-
 	
 	// MARK: - Life cycle
 	
@@ -64,35 +63,6 @@ class TrainSectionViewController: UIViewController {
 		guard let store = self.store else {
 			return
 		}
-		
-		tableView.rx
-			.contentOffset
-			.map { $0.y }
-			.distinctUntilChanged()
-			.debug("[\(self.debugDescription)]", trimOutput: false)
-			.subscribe(onNext: { [weak self] scrollY in
-				guard let self = self else {
-					return
-				}
-				
-				let maxHeight: CGFloat = 210.0
-				let minHeight: CGFloat = 64.0
-				
-				let headerViewMinHeight: CGFloat = 44 + UIApplication.shared.statusBarFrame.height
-
-				let newHeaderViewHeight: CGFloat = self.headerHeightConstraint.constant - scrollY
-
-				if newHeaderViewHeight > maxHeight {
-					// Here, Manage Your Score Format View
-					self.headerHeightConstraint.constant = maxHeight
-//					self.headerHeightConstraint.constant = max(maxHeight, newHeaderViewHeight)
-				} else if newHeaderViewHeight < headerViewMinHeight {
-					self.headerHeightConstraint.constant = headerViewMinHeight
-				} else {
-					self.headerHeightConstraint.constant = newHeaderViewHeight
-					//scrollY = 0 // block scroll view
-				}
-			}).disposed(by: disposeBag)
 		
 		self.navigationController?.navigationBar.isHidden = true
 		
@@ -173,3 +143,32 @@ extension TrainSectionViewController {
 		}
 	}
 }
+
+//		tableView.rx
+//			.contentOffset
+//			.map { $0.y }
+//			.distinctUntilChanged()
+//			.debug("[\(self.debugDescription)]", trimOutput: false)
+//			.subscribe(onNext: { [weak self] scrollY in
+//				guard let self = self else {
+//					return
+//				}
+//
+//				let maxHeight: CGFloat = 180.0
+//				let minHeight: CGFloat = 64.0
+//
+//				let headerViewMinHeight: CGFloat = 44 + UIApplication.shared.statusBarFrame.height
+//
+//				let newHeaderViewHeight: CGFloat = self.headerHeightConstraint.constant - scrollY
+//
+//				if newHeaderViewHeight > maxHeight {
+//					// Here, Manage Your Score Format View
+//					self.headerHeightConstraint.constant = maxHeight
+////					self.headerHeightConstraint.constant = max(maxHeight, newHeaderViewHeight)
+//				} else if newHeaderViewHeight < headerViewMinHeight {
+//					self.headerHeightConstraint.constant = headerViewMinHeight
+//				} else {
+//					self.headerHeightConstraint.constant = newHeaderViewHeight
+//					//scrollY = 0 // block scroll view
+//				}
+//			}).disposed(by: disposeBag)

@@ -18,6 +18,7 @@ import Caprice
 
 struct ArrivalDepartureSectionItem {
 	var number: String
+	var trainNumber: Int
 	var name: String
 	var time: String
 	var status: String
@@ -37,7 +38,7 @@ extension ArrivalDepartureSectionItem: Equatable { }
 
 class ArrivalsViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
-
+	
 	typealias ArrivalsDeparturesListSectionModel = AnimatableSectionModel<String, ArrivalDepartureSectionItem>
 	
 	var dataSource: RxTableViewSectionedAnimatedDataSource<ArrivalsDeparturesListSectionModel>!
@@ -45,7 +46,7 @@ class ArrivalsViewController: UIViewController {
 	public var store: Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction>?
 	
 	private let disposeBag = DisposeBag()
-		
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -60,15 +61,33 @@ class ArrivalsViewController: UIViewController {
 		
 		setupDataSource()
 		
-		// MARK: - Select station
+		// MARK: - Selected station
 		
 		store
 			.value
 			.map { $0.selectedStation }
 			.distinctUntilChanged()
 			.ignoreNil()
-			.bind(to: store.rx.select)
+			.bind(to: store.rx.arrivals)
 			.disposed(by: disposeBag)
+		
+		// MARK: - Select section
+
+		tableView.rx
+			.modelSelected(ArrivalDepartureSectionItem.self)
+			.map { $0.trainNumber }
+			.distinctUntilChanged()
+			.bind(to: store.rx.selectTrain)
+			.disposed(by: disposeBag)
+		
+		store
+			.value
+			.map { $0.trainNumber }
+			.distinctUntilChanged()
+			.ignoreNil()
+			.subscribe(onNext: { trainNumber in
+				dump(trainNumber)
+			}).disposed(by: disposeBag)
 		
 		// MARK: - Bind dataSource
 		
@@ -76,7 +95,14 @@ class ArrivalsViewController: UIViewController {
 			.value
 			.distinctUntilChanged()
 			.map { $0.arrivals }
-			.map { $0.map { ArrivalDepartureSectionItem(number: $0.compNumeroTreno, name: $0.origine, time: $0.compOrarioArrivo, status: delay(from: $0.compRitardo)) } }
+			.map { $0.map {
+				ArrivalDepartureSectionItem(
+					number: $0.compNumeroTreno,
+					trainNumber: $0.numeroTreno,
+					name: $0.origine,
+					time: $0.compOrarioArrivo,
+					status: formatDelay(from: $0.compRitardo))}
+			}
 			.map { (items: [ArrivalDepartureSectionItem]) -> [ArrivalsDeparturesListSectionModel] in
 				[ArrivalsDeparturesListSectionModel(model: "", items: items)]
 			}
@@ -112,7 +138,7 @@ extension ArrivalsViewController {
 	}
 }
 
-func delay(from compRitardo: [String]) -> String {
+func formatDelay(from compRitardo: [String]) -> String {
 	if Locale.current.identifier == "it_IT" {
 		return compRitardo.first ?? ""
 	} else {

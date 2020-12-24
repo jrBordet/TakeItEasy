@@ -64,13 +64,17 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		viewControllers.append(arrivals)
 		
+		// MARK: - Train number selected
+		
 		store
 			.value
-			.map { $0.selectedStation }
-			.distinctUntilChanged()
+			.map { $0.trainNumber }
+			.debug("[\(self.debugDescription)]", trimOutput: false)
+			//.distinctUntilChanged()
 			.ignoreNil()
-			.bind(to: store.rx.arrivals)
-			.disposed(by: disposeBag)
+			.subscribe(onNext: { trainNumber in
+				dump(trainNumber)
+			}).disposed(by: disposeBag)
 
 		// MARK: - Create bar
 		
@@ -83,7 +87,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		bar.buttons.customize { [weak self] button in
 			button.tintColor = self?.theme.primaryColor.withAlphaComponent(0.6)
 			button.selectedTintColor = self?.theme.primaryColor
-			button.font = UIFont.boldSystemFont(ofSize: 21)
+			button.font = UIFont.boldSystemFont(ofSize: 19)
 		}
 		
 		reloadData()

@@ -10,24 +10,30 @@ import RxComposableArchitecture
 import Networking
 
 public struct HomeViewState: Equatable {
-	public var selectedStation: Station?
-	public var departures: [Departure]
-	public var arrivals: [Arrival]
-	public var stations: [Station]
-	public var favouritesStations: [Station]
+	var selectedStation: Station?
+	var departures: [Departure]
+	var arrivals: [Arrival]
+	var stations: [Station]
+	var favouritesStations: [Station]
+	var trainNumber: Int?
+	var trainSections: [TrainSection]
 	
-	public init(
+	init(
 		selectedStation: Station?,
 		departures: [Departure],
 		arrivals: [Arrival],
 		stations: [Station],
-		favouritesStations: [Station]
+		favouritesStations: [Station],
+		trainNumber: Int?,
+		trainSections: [TrainSection]
 	) {
 		self.selectedStation = selectedStation
 		self.departures = departures
 		self.arrivals = arrivals
 		self.stations = stations
 		self.favouritesStations = favouritesStations
+		self.trainNumber = trainNumber
+		self.trainSections = trainSections
 	}
 	
 	var favouritesStationsState: StationsViewState {
@@ -51,7 +57,9 @@ public struct HomeViewState: Equatable {
 			ArrivalsDeparturesViewState(
 				selectedStation: self.selectedStation,
 				departures: self.departures,
-				arrivals: self.arrivals
+				arrivals: self.arrivals,
+				trainNumber: self.trainNumber,
+				trainSections: self.trainSections
 			)
 		}
 		
@@ -59,21 +67,23 @@ public struct HomeViewState: Equatable {
 			self.selectedStation = newValue.selectedStation
 			self.departures = newValue.departures
 			self.arrivals = newValue.arrivals
+			self.trainNumber = newValue.trainNumber
+			self.trainSections = newValue.trainSections
 		}
 	}
 }
 
-public enum HomeViewAction: Equatable {
+enum HomeViewAction: Equatable {
 	case favourites(StationsViewAction)
 	case arrivalsDepartures(ArrivalsDeparturesViewAction)
 }
 
-public typealias HomeViewEnvironment = (
+typealias HomeViewEnvironment = (
 	stations: StationsEnvironment,
 	arrivalsDepartures: ArrivalsDeparturesViewEnvironment
 )
 
-public let homeViewReducer: Reducer<HomeViewState, HomeViewAction, HomeViewEnvironment> = combine(
+let homeViewReducer: Reducer<HomeViewState, HomeViewAction, HomeViewEnvironment> = combine(
 	pullback(
 		stationsViewReducer,
 		value: \HomeViewState.favouritesStationsState,

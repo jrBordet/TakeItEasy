@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		01DA6C1C4BE8DA66370C7C35 /* FileClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7A215F6162A07FD4AE56453 /* FileClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03746FEDF402EC0572800DD9 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC8863B05D992ABB5FE47A1B /* Roboto-Bold.ttf */; };
-		0409491B210D5E6464CACC7F /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6277006C226E5B28C47994 /* AppAction.swift */; };
+		0409491B210D5E6464CACC7F /* ApplicationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B6277006C226E5B28C47994 /* ApplicationAction.swift */; };
 		0851710126B482E777FE118A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC3C2D4FDA38F20A5C9A707 /* AppDelegate.swift */; };
 		0989D5A49022952EEE52F99D /* Fileclient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397EAD687DC8D23B46BC7F1C /* Fileclient.swift */; };
 		0BCDEE7590E48782C0FD8A3B /* arrivals_broken.json in Resources */ = {isa = PBXBuildFile; fileRef = 5FC48DCFBF142C777D6299BB /* arrivals_broken.json */; };
@@ -41,7 +41,7 @@
 		564DC8F3F2584EE8BE0F4D94 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BBAF1A6307E144445B3CC4 /* StationCell.swift */; };
 		56512152F48FCA968B2269DB /* StationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B017F938131C1E1BBD09C85C /* StationsRequest.swift */; };
 		57DABBD1DC705E5F36A99267 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E92143A7ECE604E1E351EC9 /* CustomColor.swift */; };
-		585238B3639C6F188F8177F8 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D477DF9A4C2721A9EFC5E97D /* AppStore.swift */; };
+		585238B3639C6F188F8177F8 /* ApplicationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D477DF9A4C2721A9EFC5E97D /* ApplicationStore.swift */; };
 		5D95099B6684F6E88ED2C66D /* Networking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18D9DFE700A49CA2ED928D1F /* Networking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5FA7D43FFAC90A97A8DFA812 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A767DF0F4804A39EC7DBBA7C /* HomeViewController.swift */; };
 		60A25BCBF908D3EFA0400631 /* StationsSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6459ED5BCCE0338E6F6B2B4F /* StationsSectionHeader.xib */; };
@@ -52,16 +52,16 @@
 		6F0468C416C611A81AA36E43 /* StationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CEF1F85B78CDE910A98D88 /* StationsViewController.xib */; };
 		73231880B7986F0E581EE52E /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86439F3C61B379D392CB409 /* APIRequest.swift */; };
 		74C3104C3B5772C682C0C7F8 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD4F926E4F167E5DC35BA38 /* Fonts.swift */; };
-		7B1E9FDC5802C7BED7A8FD32 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48659D4F2221079A6283F3 /* AppReducer.swift */; };
+		7B1E9FDC5802C7BED7A8FD32 /* ApplicationReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E48659D4F2221079A6283F3 /* ApplicationReducer.swift */; };
 		808A869BC05BA88BA5AA4146 /* train_sections.json in Resources */ = {isa = PBXBuildFile; fileRef = FD9A20DFE4DED2C5F1A10229 /* train_sections.json */; };
 		86AA50A89221A2F80F1417F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3806BACB5A9B6D16275B013 /* Assets.xcassets */; };
 		87D3237F0B1092173AE294ED /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5A3B650FCAAC965D4310938 /* Roboto-MediumItalic.ttf */; };
 		8B53C22F4A783404BACF69BC /* NetworkingTrainSectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F64068A9377581783DB72F1 /* NetworkingTrainSectionsTests.swift */; };
 		8D1CE804D37A730F4E04A092 /* UIStationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD940ACEAA1ACF683C2A23 /* UIStationsTests.swift */; };
-		9A3408FCD3CC761B5B737E52 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1885A07A2C5C344D38CCD462 /* AppState.swift */; };
+		9A3408FCD3CC761B5B737E52 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1885A07A2C5C344D38CCD462 /* ApplicationState.swift */; };
 		A19DCC75B9FAD544B42A0741 /* MockUrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDEB0D1896E19D19A03E98D /* MockUrlProtocol.swift */; };
 		A1CFEAD9BE9D9C8EE7D8D0A7 /* ArrivalsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089A3377BB316F8C2F6CD42C /* ArrivalsRequest.swift */; };
-		A9235934E6DEC9C8703E1880 /* URLRequests+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C4C9E0162E5793211AC82 /* URLRequests+.swift */; };
+		A9235934E6DEC9C8703E1880 /* URLRequests+HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034C4C9E0162E5793211AC82 /* URLRequests+HTTPStatusCodes.swift */; };
 		AB44C0487505C20204466B64 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0254D3A7A9C597946AF6CA /* Localizable.swift */; };
 		ADA5DDE072E4090198BC22A7 /* TextField+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0B8BD435C3F0DAB9681C7A /* TextField+Styles.swift */; };
 		AE2C14471D41669C835B91C3 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A1F5D3B9279B1C707C24CDC /* Roboto-BoldItalic.ttf */; };
@@ -88,7 +88,6 @@
 		EE031476B3A91A663855DDB7 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19928D22A78D32EFC4B611A3 /* Roboto-Italic.ttf */; };
 		F43E8096F1E9DDD353B2E2F5 /* Difference+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611F18186D403AE4CC0272F3 /* Difference+.swift */; };
 		F4BB7CF86D4FC81363B08E88 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18D9DFE700A49CA2ED928D1F /* Networking.framework */; };
-		F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */; };
 		F7EEAA286804B6A9AA95BD86 /* StationsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A172DBCCCFEE0CC9F236D315 /* StationsState.swift */; };
 		F89A10E8258D0DB900363072 /* FavouritesStationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A10E6258D0DB900363072 /* FavouritesStationsCell.swift */; };
 		F89A10E9258D0DB900363072 /* FavouritesStationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F89A10E7258D0DB900363072 /* FavouritesStationsCell.xib */; };
@@ -172,15 +171,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		034C4C9E0162E5793211AC82 /* URLRequests+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequests+.swift"; sourceTree = "<group>"; };
+		034C4C9E0162E5793211AC82 /* URLRequests+HTTPStatusCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequests+HTTPStatusCodes.swift"; sourceTree = "<group>"; };
 		03F4C220B473D3390C46155F /* stations_broken.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = stations_broken.txt; sourceTree = "<group>"; };
 		089A3377BB316F8C2F6CD42C /* ArrivalsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsRequest.swift; sourceTree = "<group>"; };
 		0ABA60574F6C0B313B45FA3D /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
-		0E48659D4F2221079A6283F3 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		0E48659D4F2221079A6283F3 /* ApplicationReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationReducer.swift; sourceTree = "<group>"; };
 		0FC04795D09056F5B4F16A17 /* stations.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = stations.txt; sourceTree = "<group>"; };
 		120821F03407363AE4E0B177 /* Mock+resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mock+resources.swift"; sourceTree = "<group>"; };
 		173739E84B3B5BBEB3DE88A4 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		1885A07A2C5C344D38CCD462 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1885A07A2C5C344D38CCD462 /* ApplicationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		18CEF1F85B78CDE910A98D88 /* StationsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationsViewController.xib; sourceTree = "<group>"; };
 		18D9DFE700A49CA2ED928D1F /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19928D22A78D32EFC4B611A3 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
@@ -200,7 +199,7 @@
 		4028CB338F8EEB0389BDC675 /* ViaggioTreno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaggioTreno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410940849981DCD37885BE43 /* test_stations_favourites_and_result.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_stations_favourites_and_result.2.png; sourceTree = "<group>"; };
 		4817CCCC3016429DEA1850AA /* Favourites+FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favourites+FileClient.swift"; sourceTree = "<group>"; };
-		4B6277006C226E5B28C47994 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		4B6277006C226E5B28C47994 /* ApplicationAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAction.swift; sourceTree = "<group>"; };
 		4BA26A7FABFD394F3786D495 /* AppTheme+Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppTheme+Basic.swift"; sourceTree = "<group>"; };
 		4BD4F926E4F167E5DC35BA38 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		4E92143A7ECE604E1E351EC9 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
@@ -222,7 +221,6 @@
 		7BF02743C77A6447841A6399 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		7EB6883DA38A699914BEC852 /* test_stations_favourites_and_result.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_stations_favourites_and_result.1.png; sourceTree = "<group>"; };
 		83F9E5D5B40E4D2E6CB2DFBA /* Styling.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Styling.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCodes.swift; sourceTree = "<group>"; };
 		86569F02F95CE2B6F16D557C /* Pods-Styling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Styling.debug.xcconfig"; path = "Target Support Files/Pods-Styling/Pods-Styling.debug.xcconfig"; sourceTree = "<group>"; };
 		8D0B8BD435C3F0DAB9681C7A /* TextField+Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Styles.swift"; sourceTree = "<group>"; };
 		92B2A7E6547088F632AD67E6 /* Colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Colors.json; sourceTree = "<group>"; };
@@ -252,7 +250,7 @@
 		C618E6451D6B748F0E55A7CC /* arrivals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = arrivals.json; sourceTree = "<group>"; };
 		CF3E32329FA68593BA3C5B61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D0BBAF1A6307E144445B3CC4 /* StationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
-		D477DF9A4C2721A9EFC5E97D /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		D477DF9A4C2721A9EFC5E97D /* ApplicationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStore.swift; sourceTree = "<group>"; };
 		DA880ADD771B128E05AB9894 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DAC4F6331B67B6E2C07D23A7 /* Pods_ViaggioTreno.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViaggioTreno.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBDEB0D1896E19D19A03E98D /* MockUrlProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUrlProtocol.swift; sourceTree = "<group>"; };
@@ -368,11 +366,10 @@
 		1EF682B83E552010338D5987 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				F86439F3C61B379D392CB409 /* APIRequest.swift */,
-				83FD67AD886DC8AB599CDBE9 /* HTTPStatusCodes.swift */,
 				DA880ADD771B128E05AB9894 /* Info.plist */,
+				F86439F3C61B379D392CB409 /* APIRequest.swift */,
 				0ABA60574F6C0B313B45FA3D /* Networking.swift */,
-				034C4C9E0162E5793211AC82 /* URLRequests+.swift */,
+				034C4C9E0162E5793211AC82 /* URLRequests+HTTPStatusCodes.swift */,
 				95F40FD0286129D12DA963FC /* Requests */,
 			);
 			path = Networking;
@@ -746,10 +743,10 @@
 		F8AD63822592483C007249F2 /* Application+Store */ = {
 			isa = PBXGroup;
 			children = (
-				4B6277006C226E5B28C47994 /* AppAction.swift */,
-				0E48659D4F2221079A6283F3 /* AppReducer.swift */,
-				1885A07A2C5C344D38CCD462 /* AppState.swift */,
-				D477DF9A4C2721A9EFC5E97D /* AppStore.swift */,
+				4B6277006C226E5B28C47994 /* ApplicationAction.swift */,
+				0E48659D4F2221079A6283F3 /* ApplicationReducer.swift */,
+				1885A07A2C5C344D38CCD462 /* ApplicationState.swift */,
+				D477DF9A4C2721A9EFC5E97D /* ApplicationStore.swift */,
 				173739E84B3B5BBEB3DE88A4 /* Environment.swift */,
 			);
 			path = "Application+Store";
@@ -1176,11 +1173,10 @@
 				73231880B7986F0E581EE52E /* APIRequest.swift in Sources */,
 				A1CFEAD9BE9D9C8EE7D8D0A7 /* ArrivalsRequest.swift in Sources */,
 				20B671B54F5EBBE95FCF7328 /* DeparturesRequest.swift in Sources */,
-				F78E4174D8ED105A9D6CCD69 /* HTTPStatusCodes.swift in Sources */,
 				BAD5A3C65BC90E8424B7FBF8 /* Networking.swift in Sources */,
 				56512152F48FCA968B2269DB /* StationsRequest.swift in Sources */,
 				CA9146881FBDB796794315AD /* TrainSectionsRequest.swift in Sources */,
-				A9235934E6DEC9C8703E1880 /* URLRequests+.swift in Sources */,
+				A9235934E6DEC9C8703E1880 /* URLRequests+HTTPStatusCodes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1188,18 +1184,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0409491B210D5E6464CACC7F /* AppAction.swift in Sources */,
+				0409491B210D5E6464CACC7F /* ApplicationAction.swift in Sources */,
 				0851710126B482E777FE118A /* AppDelegate.swift in Sources */,
 				F8B2C57B2590DAF6002419E8 /* ArrivalsDeparturesCell.swift in Sources */,
-				7B1E9FDC5802C7BED7A8FD32 /* AppReducer.swift in Sources */,
+				7B1E9FDC5802C7BED7A8FD32 /* ApplicationReducer.swift in Sources */,
 				F8C2AE182593372500CC88FB /* Mock+.swift in Sources */,
 				F8B2C5862590E9CB002419E8 /* ArrivalsDepartures+Store.swift in Sources */,
 				F8B2C5722590D9DC002419E8 /* ArrivalsViewController.swift in Sources */,
 				F8AD626E2591D791007249F2 /* ArrivalsDeparturesContainerViewController.swift in Sources */,
-				9A3408FCD3CC761B5B737E52 /* AppState.swift in Sources */,
+				9A3408FCD3CC761B5B737E52 /* ApplicationState.swift in Sources */,
 				F89A10E8258D0DB900363072 /* FavouritesStationsCell.swift in Sources */,
 				F8AD63A5259269C5007249F2 /* TrainSection+Store.swift in Sources */,
-				585238B3639C6F188F8177F8 /* AppStore.swift in Sources */,
+				585238B3639C6F188F8177F8 /* ApplicationStore.swift in Sources */,
 				DB760463E09671AAF325EAB8 /* BaseViewController.swift in Sources */,
 				F8C2AE042593329A00CC88FB /* TrainSectionCell.swift in Sources */,
 				F8AD62842591DF35007249F2 /* DeparturesViewController.swift in Sources */,

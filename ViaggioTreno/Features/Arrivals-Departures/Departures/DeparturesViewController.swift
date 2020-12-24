@@ -14,10 +14,16 @@ import RxComposableArchitecture
 import Networking
 import Caprice
 
-public extension Reactive where Base: Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction> {
-	var select: Binder<Station?> {
+extension Reactive where Base: Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction> {
+	var selectStation: Binder<Station?> {
 		Binder(self.base) { store, value in
-			store.send(ArrivalsDeparturesViewAction.arrivalDepartures(ArrivalsDeparturesAction.select(value)))
+			store.send(.arrivalDepartures(.select(value)))
+		}
+	}
+	
+	var selectTrain: Binder<Int?> {
+		Binder(self.base) { store, value in
+ 			store.send(.arrivalDepartures(.selectTrain(value)))
 		}
 	}
 	
@@ -36,7 +42,7 @@ public extension Reactive where Base: Store<ArrivalsDeparturesViewState, Arrival
 
 class DeparturesViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
-
+	
 	typealias ArrivalsDeparturesListSectionModel = AnimatableSectionModel<String, ArrivalDepartureSectionItem>
 	
 	var dataSource: RxTableViewSectionedAnimatedDataSource<ArrivalsDeparturesListSectionModel>!
@@ -44,7 +50,7 @@ class DeparturesViewController: UIViewController {
 	public var store: Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction>?
 	
 	private let disposeBag = DisposeBag()
-		
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -60,6 +66,8 @@ class DeparturesViewController: UIViewController {
 		
 		setupDataSource()
 		
+		// MARK: - Selected station
+		
 		store
 			.value
 			.map { $0.selectedStation }
@@ -67,12 +75,56 @@ class DeparturesViewController: UIViewController {
 			.ignoreNil()
 			.bind(to: store.rx.departures)
 			.disposed(by: disposeBag)
-
+		
+//		store
+//			.value
+//			.map { $0.favouritesStationsState.selectedStation }
+//			.distinctUntilChanged()
+//			.ignoreNil()
+//			.subscribe(onNext: { station in
+//				navigationLink(from: self, destination: Scene<ArrivalsDeparturesContainerViewController>(), completion: { vc in
+//					vc.store = store.view(
+//						value: { $0.arrivalsDeparturesState },
+//						action: { .arrivalsDepartures($0) }
+//					)
+//				}, isModal: false)
+//			})
+//			.disposed(by: disposeBag)
+		
+		// MARK: - Select section
+		
+		tableView.rx
+			.modelSelected(ArrivalDepartureSectionItem.self)
+			.map { $0.trainNumber }
+			.distinctUntilChanged()
+			.bind(to: store.rx.selectTrain)
+			.disposed(by: disposeBag)
+		
+		store
+			.value
+			.map { $0.trainNumber }
+			.debug("[\(self.debugDescription)]", trimOutput: false)
+			.distinctUntilChanged()
+			.ignoreNil()
+			.subscribe(onNext: { trainNumber in
+				dump(trainNumber)
+			}).disposed(by: disposeBag)
+		
+		// MARK: - Bind dataSource
+		
 		store
 			.value
 			.distinctUntilChanged()
 			.map { $0.departures }
-			.map { $0.map { ArrivalDepartureSectionItem(number: $0.compNumeroTreno, name: $0.destinazione, time: $0.compOrarioPartenza, status: delay(from: $0.compRitardo)) } }
+			.map { $0.map {
+				ArrivalDepartureSectionItem(
+					number: $0.compNumeroTreno,
+					trainNumber: $0.numeroTreno,
+					name: $0.destinazione,
+					time: $0.compOrarioPartenza,
+					status: formatDelay(from: $0.compRitardo)
+				)}
+			}
 			.map { (items: [ArrivalDepartureSectionItem]) -> [ArrivalsDeparturesListSectionModel] in
 				[ArrivalsDeparturesListSectionModel(model: "", items: items)]
 			}

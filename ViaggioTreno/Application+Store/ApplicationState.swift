@@ -17,6 +17,8 @@ public struct AppState {
 	var arrivals: [Arrival]
 	var stations: [Station]
 	var favouritesStations: [Station]
+	var trainSections: [TrainSection]
+	var trainNumber: Int?
 }
 
 extension AppState {
@@ -27,7 +29,9 @@ extension AppState {
 				departures: self.departures,
 				arrivals: self.arrivals,
 				stations: self.stations,
-				favouritesStations: self.favouritesStations
+				favouritesStations: self.favouritesStations,
+				trainNumber: nil,
+				trainSections: []
 			)
 		}
 		set {
@@ -37,6 +41,8 @@ extension AppState {
 			self.arrivals = newValue.arrivals
 			self.stations = newValue.stations
 			self.favouritesStations = newValue.favouritesStations
+			self.trainSections = newValue.trainSections
+			self.trainNumber = newValue.trainNumber
 		}
 	}
 }
@@ -45,7 +51,8 @@ let initialAppState = AppState(
 	departures: [],
 	arrivals: [],
 	stations: [],
-	favouritesStations: []
+	favouritesStations: [],
+	trainSections: []
 )
 
 func activityFeed(

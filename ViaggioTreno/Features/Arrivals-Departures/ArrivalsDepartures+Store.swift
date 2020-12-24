@@ -9,48 +9,87 @@ import Foundation
 import RxComposableArchitecture
 import Networking
 
-public struct ArrivalsDeparturesViewState: Equatable {
-	public var selectedStation: Station?
-	public var departures: [Departure]
-	public var arrivals: [Arrival]
+struct ArrivalsDeparturesViewState: Equatable {
+	var selectedStation: Station?
+	var departures: [Departure]
+	var arrivals: [Arrival]
+	var trainNumber: Int?
+	var trainSections: [TrainSection]
 	
-	public init(
+	init(
 		selectedStation: Station?,
 		departures: [Departure],
-		arrivals: [Arrival]
+		arrivals: [Arrival],
+		trainNumber: Int?,
+		trainSections: [TrainSection]
 	) {
 		self.selectedStation = selectedStation
 		self.departures = departures
 		self.arrivals = arrivals
+		self.trainNumber = trainNumber
+		self.trainSections = trainSections
 	}
 	
 	var stationsState: ArrivalsDeparturesState {
-		get { (self.selectedStation, self.departures, self.arrivals) }
-		set { (self.selectedStation, self.departures, self.arrivals) = newValue }
+		get { (
+			self.selectedStation,
+			self.departures,
+			self.arrivals,
+			self.trainNumber
+		) }
+		set {
+			self.selectedStation = newValue.selectedStation
+			self.departures = newValue.departures
+			self.arrivals = newValue.arrivals
+			self.trainNumber = newValue.trainNumber
+		 }
+	}
+	
+	var trainSectionsState: TrainSectionViewState {
+		get {
+			TrainSectionViewState(
+				selectedStation: self.selectedStation,
+				trainNumber: self.trainNumber,
+				trainSections: self.trainSections
+			)
+		}
+		
+		set {
+			self.selectedStation = newValue.selectedStation
+			self.trainNumber = newValue.trainNumber
+			self.trainSections = newValue.trainSections
+		}
 	}
 }
 
-public enum ArrivalsDeparturesViewAction: Equatable {
+enum ArrivalsDeparturesViewAction: Equatable {
 	case arrivalDepartures(ArrivalsDeparturesAction)
+	case sections(TrainSectionViewAction)
 }
 
-public typealias ArrivalsDeparturesViewEnvironment = (
-	departures: (String) -> Effect<[Departure]>,
-	arrivals: (String) -> Effect<[Arrival]>
+typealias ArrivalsDeparturesViewEnvironment = (
+	arrivalsDepartures: ArrivalsDeparturesEnvironment,
+	sections: TrainSectionViewEnvironment
 )
 
-public let arrivalsDeparturesViewReducer: Reducer<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction, ArrivalsDeparturesViewEnvironment> = combine(
+let arrivalsDeparturesViewReducer: Reducer<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction, ArrivalsDeparturesViewEnvironment> = combine(
 	pullback(
 		arrivalsDeparturesReducer,
 		value: \ArrivalsDeparturesViewState.stationsState,
 		action: /ArrivalsDeparturesViewAction.arrivalDepartures,
-		environment: { $0 }
+		environment: { $0.arrivalsDepartures }
+	),
+	pullback(
+		trainSectionViewReducer,
+		value: \ArrivalsDeparturesViewState.trainSectionsState,
+		action: /ArrivalsDeparturesViewAction.sections,
+		environment: { $0.sections }
 	)
 )
 
 // MARk: - State
 
-public typealias ArrivalsDeparturesState = (selectedStation: Station?, departures: [Departure], arrivals: [Arrival])
+public typealias ArrivalsDeparturesState = (selectedStation: Station?, departures: [Departure], arrivals: [Arrival], trainNumber: Int?)
 
 // MARk: - Action
 
@@ -62,7 +101,9 @@ public enum ArrivalsDeparturesAction: Equatable {
 	case arrivalsResponse([Arrival])
 	
 	case select(Station?)
-		
+	
+	case selectTrain(Int?)
+	
 	case none
 }
 
@@ -97,8 +138,9 @@ func arrivalsDeparturesReducer(
 		return []
 	case let .select(station):
 		state.selectedStation = station
-		return [
-			
-		]
+		return []
+	case let .selectTrain(value):
+		state.trainNumber = value
+		return []
 	}
 }

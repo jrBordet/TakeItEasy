@@ -15,7 +15,7 @@ import Styling
 import Caprice
 import RxComposableArchitecture
 
-public extension Reactive where Base: Store<HomeViewState, HomeViewAction> {
+extension Reactive where Base: Store<HomeViewState, HomeViewAction> {
 	var select: Binder<Station?> {
 		Binder(self.base) { store, value in
 			store.send(.favourites(.stations(.select(value))))
@@ -34,7 +34,7 @@ public class HomeViewController: BaseViewController {
 	
 	private let disposeBag = DisposeBag()
 	
-	public var store: Store<HomeViewState, HomeViewAction>?
+	var store: Store<HomeViewState, HomeViewAction>?
 	
 	// MARK: - CollectionView layout
 	

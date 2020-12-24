@@ -10,7 +10,7 @@ import RxComposableArchitecture
 import Networking
 import FileClient
 
-public typealias AppEnvironment = HomeViewEnvironment
+typealias AppEnvironment = HomeViewEnvironment
 
 let stationsEnvLive: StationsViewEnvironment = (
 	autocomplete: { StationsRequest.autocompleteStation(with: $0)},
@@ -18,7 +18,12 @@ let stationsEnvLive: StationsViewEnvironment = (
 	retrieveFavourites: { retrieveFavourites() }
 )
 
-let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
+//typealias ArrivalsDeparturesViewEnvironment = (
+//	arrivalsDepartures: ArrivalsDeparturesEnvironment,
+//	sections: TrainSectionViewEnvironment
+//)
+
+let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 	departures: { id in
 		DeparturesRequest
 			.fetch(from: id)
@@ -28,6 +33,15 @@ let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 		ArrivalsRequest
 			.fetch(from: id)
 			.debug("[ArrivalsRequest]", trimOutput: false)
+	}
+)
+
+let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
+	arrivalsDepartures: arrivalsDeparturesEnvLive,
+	sections: { _, _ in
+		.sync { () -> [TrainSection] in
+			[]
+		}
 	}
 )
 

@@ -28,13 +28,13 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REG 2735" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmG-Dd-FKx">
-                            <rect key="frame" x="20" y="21.5" width="76.5" height="21"/>
+                            <rect key="frame" x="20" y="22" width="76.5" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in orario" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHf-dI-0Dm">
-                            <rect key="frame" x="332" y="21.5" width="62" height="21"/>
+                            <rect key="frame" x="332" y="22" width="62" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -42,9 +42,9 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="SmG-Dd-FKx" firstAttribute="centerY" secondItem="XhX-Cx-aef" secondAttribute="centerY" id="2dJ-Gs-HXJ"/>
-                        <constraint firstItem="QHf-dI-0Dm" firstAttribute="centerY" secondItem="XhX-Cx-aef" secondAttribute="centerY" id="RSA-01-a8z"/>
+                        <constraint firstAttribute="bottom" secondItem="SmG-Dd-FKx" secondAttribute="bottom" constant="21" id="O3N-TX-zAS"/>
                         <constraint firstAttribute="height" constant="64" id="Y7C-Y5-eGF"/>
+                        <constraint firstItem="QHf-dI-0Dm" firstAttribute="centerY" secondItem="SmG-Dd-FKx" secondAttribute="centerY" id="hg4-bV-PVJ"/>
                         <constraint firstItem="SmG-Dd-FKx" firstAttribute="leading" secondItem="XhX-Cx-aef" secondAttribute="leading" constant="20" id="icp-ef-DFq"/>
                         <constraint firstAttribute="trailing" secondItem="QHf-dI-0Dm" secondAttribute="trailing" constant="20" id="qyk-qH-reA"/>
                     </constraints>

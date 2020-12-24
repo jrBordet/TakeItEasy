@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum AppAction {
+enum AppAction {
 	case stations(StationsViewAction)
 	case home(HomeViewAction)
 }

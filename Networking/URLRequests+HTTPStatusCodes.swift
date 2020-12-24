@@ -26,3 +26,14 @@ public enum HTTPStatusCodes: Int {
     // 500 Server Error
     case InternalServerError = 500
 }
+
+extension HTTPStatusCodes {
+	public static func decode(from response: URLResponse?) -> HTTPStatusCodes? {
+		guard let HTTPURLResponse = (response as? HTTPURLResponse),
+			let statusCode = HTTPStatusCodes(rawValue: HTTPURLResponse.statusCode) else {
+				return nil
+		}
+		
+		return statusCode
+	}
+}
