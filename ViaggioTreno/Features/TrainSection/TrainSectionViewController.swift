@@ -14,6 +14,38 @@ import RxComposableArchitecture
 import Networking
 import Caprice
 
+extension Reactive where Base: Store<TrainSectionViewState, TrainSectionViewAction> {
+	var sections: Binder<(String, String)> {
+		Binder(self.base) { store, value in
+			store.send(.section(.trainSections(value.1, value.0)))
+		}
+	}
+	
+//	var selectStation: Binder<Station?> {
+//		Binder(self.base) { store, value in
+//			store.send(.arrivalDepartures(.select(value)))
+//		}
+//	}
+//
+//	var selectTrain: Binder<Int?> {
+//		Binder(self.base) { store, value in
+//			store.send(.arrivalDepartures(.selectTrain(value)))
+//		}
+//	}
+//
+//	var departures: Binder<Station> {
+//		Binder(self.base) { store, value in
+//			store.send(.arrivalDepartures(.departures(value.id)))
+//		}
+//	}
+//
+//	var arrivals: Binder<Station> {
+//		Binder(self.base) { store, value in
+//			store.send(.arrivalDepartures(.arrivals(value.id)))
+//		}
+//	}
+}
+
 // MARK: - Data
 
 struct TrainSectionItem {
@@ -52,10 +84,18 @@ class TrainSectionViewController: UIViewController {
 	
 	private let disposeBag = DisposeBag()
 	
-	
 	// MARK: - Life cycle
 	
-	private var lastContentOffset: CGFloat = 0
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		guard let store = self.store else {
+			return
+		}
+		
+		store.send(.section(.select(nil)))
+		store.send(TrainSectionViewAction.section(TrainSectionAction.selectTrain(nil)))
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -87,7 +127,23 @@ class TrainSectionViewController: UIViewController {
 		
 		// MARK: - retrieve data
 		
-		//store.send(TrainSectionViewAction.section(TrainSectionAction.trainSections("", "")))
+		store
+			.value
+			.map { (train: $0.trainNumber, station: $0.selectedStation?.id) }
+			.map { (train: Int?, station: String?) -> (Int, String)? in
+				guard
+					let train = train,
+					let station = station else {
+					return nil
+				}
+				
+				return (train, station)
+			}
+			.ignoreNil()
+			.distinctUntilChanged { $0 == $1 }
+			.map { (train: String($0), station: $1) }
+			.bind(to: store.rx.sections)
+			.disposed(by: disposeBag)
 		
 		// MARK: - Bind dataSource
 		
@@ -102,15 +158,45 @@ class TrainSectionViewController: UIViewController {
 			return dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time / 1000)))
 		}
 		
+		// MARK: - Errors
+		
+		store
+			.error
+			.subscribe(onNext: { error in
+				if let error = error as? APIError {
+					switch error {
+					case .code(_):
+						break
+					case .undefinedStatusCode:
+						break
+					case .empty:
+						break
+					case let .decoding(value):
+						print(value)
+						break
+					case .dataCorrupted:
+						break
+					}
+				}
+			})
+			.disposed(by: disposeBag)
+
+		// MARK: - Sections
+		
 		store
 			.value
 			.distinctUntilChanged()
 			.map { $0.trainSections }
 			.map {
 				$0.map {
-					TrainSectionItem(number: $0.stazione, name: $0.stazione, time: formattedDate(with: $0.fermata.partenzaReale ?? 1000), status: "status")
+					TrainSectionItem(
+						number: $0.stazione,
+						name: $0.stazione, time:
+							formattedDate(with: $0.fermata.partenzaReale ?? 1000),
+						status: "status"
+					)
 				}
-			}.map { (items: [TrainSectionItem]) -> [TrainSectionItemModel] in
+			}.map { items -> [TrainSectionItemModel] in
 				[TrainSectionItemModel(model: "", items: items)]
 			}
 			.asDriver(onErrorJustReturn: [])
@@ -120,7 +206,7 @@ class TrainSectionViewController: UIViewController {
 	
 	private func setupDataSource() {
 		dataSource = RxTableViewSectionedAnimatedDataSource<TrainSectionItemModel>(
-			animationConfiguration: AnimationConfiguration(insertAnimation: .right,
+			animationConfiguration: AnimationConfiguration(insertAnimation: .top,
 														   reloadAnimation: .none),
 			configureCell: configureCell
 		)

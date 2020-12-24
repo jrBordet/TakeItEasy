@@ -60,6 +60,7 @@ enum TrainSectionAction: Equatable {
 	case trainSectionsResponse([TrainSection])
 	
 	case select(Station?)
+	case selectTrain(Int?)
 	
 	case none
 }
@@ -88,5 +89,8 @@ func trainSectionReducer(
 		return [
 			
 		]
+	case let .selectTrain(value):
+		state.trainNumber = value
+		return []
 	}
 }

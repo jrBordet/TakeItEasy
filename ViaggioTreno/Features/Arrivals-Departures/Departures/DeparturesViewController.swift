@@ -40,7 +40,7 @@ extension Reactive where Base: Store<ArrivalsDeparturesViewState, ArrivalsDepart
 	}
 }
 
-class DeparturesViewController: UIViewController {
+class DeparturesViewController: BaseViewController {
 	@IBOutlet weak var tableView: UITableView!
 	
 	typealias ArrivalsDeparturesListSectionModel = AnimatableSectionModel<String, ArrivalDepartureSectionItem>

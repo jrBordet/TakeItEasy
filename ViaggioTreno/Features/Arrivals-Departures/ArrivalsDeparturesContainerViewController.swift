@@ -15,6 +15,7 @@ import Networking
 import Caprice
 import Tabman
 import Pageboy
+import SceneBuilder
 
 class ArrivalsDeparturesContainerViewController: TabmanViewController {
 	public var viewControllers: [UIViewController] = []
@@ -32,7 +33,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 			return
 		}
 		
-		store.send(ArrivalsDeparturesViewAction.arrivalDepartures(ArrivalsDeparturesAction.select(nil)))
+		store.send(.arrivalDepartures(.select(nil)))
 	}
 	
 	override func viewDidLoad() {
@@ -66,20 +67,18 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		// MARK: - Train number selected
 		
-		store.value
-			.map { $0.trainNumber }
-			.debug("[\(self.debugDescription)]", trimOutput: false)
-			.subscribe()
-			.disposed(by: disposeBag)
-		
 		store
 			.value
 			.map { $0.trainNumber }
-			.debug("[\(self.debugDescription)]", trimOutput: false)
-			//.distinctUntilChanged()
+			.distinctUntilChanged()
 			.ignoreNil()
 			.subscribe(onNext: { trainNumber in
-				dump(trainNumber)
+				navigationLink(from: self, destination: Scene<TrainSectionViewController>(), completion: { vc in
+					vc.store = store.view(
+						value: { $0.trainSectionsState },
+						action: { .sections($0) }
+					)
+				}, isModal: true)
 			}).disposed(by: disposeBag)
 
 		// MARK: - Create bar

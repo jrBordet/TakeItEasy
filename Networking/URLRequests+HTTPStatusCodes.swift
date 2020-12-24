@@ -12,6 +12,7 @@ import UIKit
 public enum HTTPStatusCodes: Int {
     case Ok = 200 // 200 Success
     case Created = 201 // incomplete login
+	case NoContent = 204
     
     case NotModified = 300
     

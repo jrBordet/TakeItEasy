@@ -36,12 +36,12 @@ let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 	}
 )
 
+let sections = TrainSectionsRequest.fetch(from: "", train: "")
+
 let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 	arrivalsDepartures: arrivalsDeparturesEnvLive,
-	sections: { _, _ in
-		.sync { () -> [TrainSection] in
-			[]
-		}
+	sections: { train, station in
+		TrainSectionsRequest.fetch(from: station, train: train)
 	}
 )
 
