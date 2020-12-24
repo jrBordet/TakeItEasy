@@ -30,8 +30,8 @@ extension AppState {
 				arrivals: self.arrivals,
 				stations: self.stations,
 				favouritesStations: self.favouritesStations,
-				trainNumber: nil,
-				trainSections: []
+				trainNumber: self.trainNumber,
+				trainSections: self.trainSections
 			)
 		}
 		set {

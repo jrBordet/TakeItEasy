@@ -66,6 +66,12 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		// MARK: - Train number selected
 		
+		store.value
+			.map { $0.trainNumber }
+			.debug("[\(self.debugDescription)]", trimOutput: false)
+			.subscribe()
+			.disposed(by: disposeBag)
+		
 		store
 			.value
 			.map { $0.trainNumber }
