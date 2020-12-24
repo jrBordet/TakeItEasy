@@ -92,7 +92,7 @@ func stationsReducer(
 	switch action {
 	case let .autocomplete(value):
 		return [
-			environment.autocomplete(value).map(StationsAction.autocompleteResponse)
+			environment.autocomplete(value.trimmingCharacters(in: .whitespacesAndNewlines)).map(StationsAction.autocompleteResponse)
 		]
 	case let .autocompleteResponse(stations):
 		state.stations = stations

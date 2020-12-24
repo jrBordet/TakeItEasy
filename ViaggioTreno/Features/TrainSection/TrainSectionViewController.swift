@@ -41,6 +41,16 @@ extension TrainSectionItem: IdentifiableType {
 
 extension TrainSectionItem: Equatable { }
 
+func zip<A, B>(_ a: A?, _ b: B?) -> (A, B)? {
+	guard
+		let a = a,
+		let b = b else {
+		return nil
+	}
+	
+	return (a, b)
+}
+
 // MARK: - ViewController
 
 class TrainSectionViewController: UIViewController {
@@ -92,7 +102,7 @@ class TrainSectionViewController: UIViewController {
 		
 		trainStatusLabel
 			|> theme.primaryLabel
-			<> fontRegular(with: 19)
+			<> fontRegular(with: 17)
 			<> textColor(color: .white)
 		
 		trainLabel
@@ -120,38 +130,12 @@ class TrainSectionViewController: UIViewController {
 		store
 			.value
 			.map { (station: $0.selectedStation?.id, train: $0.train?.number) }
-			.map { (station: String?, train: String?) -> (String, String)? in
-				guard
-					let train = train,
-					let station = station else {
-					return nil
-				}
-				
-				return (station, train)
-			}
+			.map { zip($0, $1) }
 			.ignoreNil()
 			.distinctUntilChanged { $0 == $1 }
 			.map { (station: $0, train: String($1)) }
 			.bind(to: store.rx.sections)
 			.disposed(by: disposeBag)
-		
-//		store
-//			.value
-//			.map { (station: $0.selectedStation?.id, train: $0.train?.number) }
-//			.map { (station: String?, train: Int?) -> (String, Int)? in
-//				guard
-//					let train = train,
-//					let station = station else {
-//					return nil
-//				}
-//
-//				return (station, train)
-//			}
-//			.ignoreNil()
-//			.distinctUntilChanged { $0 == $1 }
-//			.map { (station: $0, train: String($1)) }
-//			.bind(to: store.rx.sections)
-//			.disposed(by: disposeBag)
 		
 		// MARK: - Bind dataSource
 		

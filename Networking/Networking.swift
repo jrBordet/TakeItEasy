@@ -30,7 +30,7 @@ public struct Networking<T: APIRequest> {
 		make(with: urlSession)
 	}
 	
-	public func mock(_ data: Data) -> T.Response {
+	public static func mock(_ data: Data) -> T.Response {
 		do {
 			return try JSONDecoder().decode(T.Response.self, from: data)
 		} catch let e {

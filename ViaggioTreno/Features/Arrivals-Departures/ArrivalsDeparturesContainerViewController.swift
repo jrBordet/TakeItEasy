@@ -90,9 +90,9 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		bar.layout.contentInset = UIEdgeInsets(top: -30.0, left: 20.0, bottom: 10.0, right: 20.0)
 		
 		bar.buttons.customize { [weak self] button in
-			button.tintColor = self?.theme.primaryColor.withAlphaComponent(0.6)
+			button.tintColor = self?.theme.primaryColor.withAlphaComponent(0.35)
 			button.selectedTintColor = self?.theme.primaryColor
-			button.font = UIFont.boldSystemFont(ofSize: 19)
+			button.font = UIFont.boldSystemFont(ofSize: 17)
 		}
 		
 		reloadData()

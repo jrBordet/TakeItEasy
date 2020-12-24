@@ -22,21 +22,30 @@ class HomeTests: XCTestCase {
 	var env: HomeViewEnvironment!
 	
 	override func setUp() {
-		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], trainNumber: nil, trainSections: [])
+		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], train: nil, trainSections: [])
 		
 		let stationsEnv: StationsViewEnvironment = (
 			autocomplete: { _ in Effect.sync { [] } },
 			saveFavourites: { _ in Effect.sync { false } },
 			retrieveFavourites: { Effect.sync { self.expectedResult } }
 		)
-
-		let arrivalsDeparturesViewEnv: ArrivalsDeparturesViewEnvironment = (
+		
+		let arrivalsDepartures: ArrivalsDeparturesEnvironment = (
 			departures: { _ in
 				Effect.sync { [] }
 			},
 			arrivals: { _ in
 				Effect.sync { [] }
 			}
+		)
+		
+		let sections: TrainSectionViewEnvironment = { _,_ in .sync { [] }
+			
+		}
+
+		let arrivalsDeparturesViewEnv: ArrivalsDeparturesViewEnvironment = (
+			arrivalsDepartures: arrivalsDepartures,
+			sections: sections
 		)
 		
 		env = (

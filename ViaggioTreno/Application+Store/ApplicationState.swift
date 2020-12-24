@@ -59,6 +59,71 @@ func activityFeed(
 	_ reducer: @escaping Reducer<AppState, AppAction, AppEnvironment>
 ) -> Reducer<AppState, AppAction, AppEnvironment> {
 	return { state, action, environment in
+		
+		switch action {
+		case let .stations(stationsAction):
+			switch stationsAction {
+			case let .stations(stations):
+				switch stations {
+				case let .autocomplete(value):
+					os_log("autocomplete %{public}@ ", log: OSLog.login, type: .info, [action, value])
+					break
+				case let .autocompleteResponse(value):
+					os_log("autocompleteResponse %{public}@ ", log: OSLog.login, type: .info, [action, value])
+					break
+				case .favourites:
+					break
+				case .favouritesResponse(_):
+					break
+				case .addFavorite(_):
+					break
+				case .updateFavouritesResponse(_):
+					break
+				case .removeFavourite(_):
+					break
+				case .select(_):
+					break
+				case .none:
+					break
+				}
+				break
+			}
+			break
+		case let .home(homeAction):
+			switch homeAction {
+			case let .favourites(favouritesAction):
+				switch favouritesAction {
+				case let .stations(stationsAction):
+					switch stationsAction {
+					case let .autocomplete(value):
+						os_log("autocomplete %{public}@ ", log: OSLog.login, type: .info, [action, value])
+						break
+					case let .autocompleteResponse(value):
+						os_log("autocompleteResponse %{public}@ ", log: OSLog.login, type: .info, [action, value])
+					case .favourites:
+						break
+					case .favouritesResponse(_):
+						break
+					case .addFavorite(_):
+						break
+					case .updateFavouritesResponse(_):
+						break
+					case .removeFavourite(_):
+						break
+					case .select(_):
+						break
+					case .none:
+						break
+					}
+					break
+				}
+				break
+			case .arrivalsDepartures(_):
+				break
+			}
+			break
+		}
+		
 		//        if case let .counter(.counter(counterAction)) = action {
 		//            switch counterAction {
 		//            case .incrTapped:
@@ -112,6 +177,8 @@ func activityFeed(
 
 extension OSLog {
 	private static var subsystem = Bundle.main.bundleIdentifier!
+	
+	static let board = OSLog(subsystem: subsystem, category: "Stations board")
 	
 	static let counter = OSLog(subsystem: subsystem, category: "Counter")
 	static let login = OSLog(subsystem: subsystem, category: "Login")

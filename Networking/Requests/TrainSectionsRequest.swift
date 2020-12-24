@@ -70,6 +70,10 @@ extension TrainSectionsRequest {
 			.sections(from: station, train: train)
 			.json(with: urlSession)
 	}
+	
+	public static func mock(_ data: Data) -> Self.Response {
+		Networking<Self>.mock(data)
+	}
 }
 
 extension Networking where T == TrainSectionsRequest {
