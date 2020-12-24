@@ -17,33 +17,9 @@ import Caprice
 extension Reactive where Base: Store<TrainSectionViewState, TrainSectionViewAction> {
 	var sections: Binder<(String, String)> {
 		Binder(self.base) { store, value in
-			store.send(.section(.trainSections(value.1, value.0)))
+			store.send(.section(.trainSections(value.0, value.1)))
 		}
 	}
-	
-//	var selectStation: Binder<Station?> {
-//		Binder(self.base) { store, value in
-//			store.send(.arrivalDepartures(.select(value)))
-//		}
-//	}
-//
-//	var selectTrain: Binder<Int?> {
-//		Binder(self.base) { store, value in
-//			store.send(.arrivalDepartures(.selectTrain(value)))
-//		}
-//	}
-//
-//	var departures: Binder<Station> {
-//		Binder(self.base) { store, value in
-//			store.send(.arrivalDepartures(.departures(value.id)))
-//		}
-//	}
-//
-//	var arrivals: Binder<Station> {
-//		Binder(self.base) { store, value in
-//			store.send(.arrivalDepartures(.arrivals(value.id)))
-//		}
-//	}
 }
 
 // MARK: - Data
@@ -93,7 +69,6 @@ class TrainSectionViewController: UIViewController {
 			return
 		}
 		
-		store.send(.section(.select(nil)))
 		store.send(TrainSectionViewAction.section(TrainSectionAction.selectTrain(nil)))
 	}
 	
@@ -125,23 +100,31 @@ class TrainSectionViewController: UIViewController {
 			<> fontRegular(with: 17)
 			<> textColor(color: .white)
 		
+		store
+			.value
+			.map { $0.trainNumber }
+			.ignoreNil()
+			.map { String($0) }
+			.bind(to: trainLabel.rx.text)
+			.disposed(by: disposeBag)
+		
 		// MARK: - retrieve data
 		
 		store
 			.value
-			.map { (train: $0.trainNumber, station: $0.selectedStation?.id) }
-			.map { (train: Int?, station: String?) -> (Int, String)? in
+			.map { (station: $0.selectedStation?.id, train: $0.trainNumber) }
+			.map { (station: String?, train: Int?) -> (String, Int)? in
 				guard
 					let train = train,
 					let station = station else {
 					return nil
 				}
 				
-				return (train, station)
+				return (station, train)
 			}
 			.ignoreNil()
 			.distinctUntilChanged { $0 == $1 }
-			.map { (train: String($0), station: $1) }
+			.map { (station: $0, train: String($1)) }
 			.bind(to: store.rx.sections)
 			.disposed(by: disposeBag)
 		
@@ -183,19 +166,21 @@ class TrainSectionViewController: UIViewController {
 
 		// MARK: - Sections
 		
+		func map(trainSection: TrainSection) -> TrainSectionItem {
+			TrainSectionItem(
+				number: trainSection.stazione,
+				name: trainSection.stazione,
+				time: formattedDate(with: (trainSection.fermata.partenza_teorica ?? trainSection.fermata.programmata) ?? 1000),
+				status: "status"
+			)
+		}
+		
 		store
 			.value
 			.distinctUntilChanged()
 			.map { $0.trainSections }
 			.map {
-				$0.map {
-					TrainSectionItem(
-						number: $0.stazione,
-						name: $0.stazione, time:
-							formattedDate(with: $0.fermata.partenzaReale ?? 1000),
-						status: "status"
-					)
-				}
+				$0.map { map(trainSection: $0) }
 			}.map { items -> [TrainSectionItemModel] in
 				[TrainSectionItemModel(model: "", items: items)]
 			}

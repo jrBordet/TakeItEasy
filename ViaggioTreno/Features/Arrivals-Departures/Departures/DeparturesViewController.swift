@@ -76,21 +76,6 @@ class DeparturesViewController: BaseViewController {
 			.bind(to: store.rx.departures)
 			.disposed(by: disposeBag)
 		
-//		store
-//			.value
-//			.map { $0.favouritesStationsState.selectedStation }
-//			.distinctUntilChanged()
-//			.ignoreNil()
-//			.subscribe(onNext: { station in
-//				navigationLink(from: self, destination: Scene<ArrivalsDeparturesContainerViewController>(), completion: { vc in
-//					vc.store = store.view(
-//						value: { $0.arrivalsDeparturesState },
-//						action: { .arrivalsDepartures($0) }
-//					)
-//				}, isModal: false)
-//			})
-//			.disposed(by: disposeBag)
-		
 		// MARK: - Select section
 		
 		tableView.rx
@@ -100,31 +85,23 @@ class DeparturesViewController: BaseViewController {
 			.bind(to: store.rx.selectTrain)
 			.disposed(by: disposeBag)
 		
-		store
-			.value
-			.map { $0.trainNumber }
-			.debug("[\(self.debugDescription)]", trimOutput: false)
-			.distinctUntilChanged()
-			.ignoreNil()
-			.subscribe(onNext: { trainNumber in
-				dump(trainNumber)
-			}).disposed(by: disposeBag)
-		
 		// MARK: - Bind dataSource
+		
+		func map(departure: Departure) -> ArrivalDepartureSectionItem {
+			ArrivalDepartureSectionItem(
+				number: departure.compNumeroTreno,
+				trainNumber: departure.numeroTreno,
+				name: departure.destinazione,
+				time: departure.compOrarioPartenza,
+				status: formatDelay(from: departure.compRitardo)
+			)
+		}
 		
 		store
 			.value
 			.distinctUntilChanged()
 			.map { $0.departures }
-			.map { $0.map {
-				ArrivalDepartureSectionItem(
-					number: $0.compNumeroTreno,
-					trainNumber: $0.numeroTreno,
-					name: $0.destinazione,
-					time: $0.compOrarioPartenza,
-					status: formatDelay(from: $0.compRitardo)
-				)}
-			}
+			.map { $0.map { map(departure: $0) } }
 			.map { (items: [ArrivalDepartureSectionItem]) -> [ArrivalsDeparturesListSectionModel] in
 				[ArrivalsDeparturesListSectionModel(model: "", items: items)]
 			}

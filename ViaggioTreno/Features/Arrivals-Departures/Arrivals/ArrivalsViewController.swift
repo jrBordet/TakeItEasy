@@ -80,29 +80,23 @@ class ArrivalsViewController: UIViewController {
 			.bind(to: store.rx.selectTrain)
 			.disposed(by: disposeBag)
 		
-		store
-			.value
-			.map { $0.trainNumber }
-			.distinctUntilChanged()
-			.ignoreNil()
-			.subscribe(onNext: { trainNumber in
-				dump(trainNumber)
-			}).disposed(by: disposeBag)
-		
 		// MARK: - Bind dataSource
+		
+		func map(arrival: Arrival) -> ArrivalDepartureSectionItem {
+			ArrivalDepartureSectionItem(
+				number: arrival.compNumeroTreno,
+				trainNumber: arrival.numeroTreno,
+				name: arrival.origine,
+				time: arrival.compOrarioArrivo,
+				status: formatDelay(from: arrival.compRitardo)
+			)
+		}
 		
 		store
 			.value
 			.distinctUntilChanged()
 			.map { $0.arrivals }
-			.map { $0.map {
-				ArrivalDepartureSectionItem(
-					number: $0.compNumeroTreno,
-					trainNumber: $0.numeroTreno,
-					name: $0.origine,
-					time: $0.compOrarioArrivo,
-					status: formatDelay(from: $0.compRitardo))}
-			}
+			.map { $0.map { map(arrival: $0) } }
 			.map { (items: [ArrivalDepartureSectionItem]) -> [ArrivalsDeparturesListSectionModel] in
 				[ArrivalsDeparturesListSectionModel(model: "", items: items)]
 			}

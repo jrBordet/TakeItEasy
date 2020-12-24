@@ -69,7 +69,6 @@ extension TrainSectionsRequest {
 		Networking<Self>
 			.sections(from: station, train: train)
 			.json(with: urlSession)
-			.debug("[TrainSectionsRequest]", trimOutput: false)
 	}
 }
 
