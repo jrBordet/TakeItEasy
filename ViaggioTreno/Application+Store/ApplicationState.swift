@@ -18,7 +18,7 @@ public struct AppState {
 	var stations: [Station]
 	var favouritesStations: [Station]
 	var trainSections: [TrainSection]
-	var trainNumber: Int?
+	var train: CurrentTrain?
 }
 
 extension AppState {
@@ -30,7 +30,7 @@ extension AppState {
 				arrivals: self.arrivals,
 				stations: self.stations,
 				favouritesStations: self.favouritesStations,
-				trainNumber: self.trainNumber,
+				train: self.train,
 				trainSections: self.trainSections
 			)
 		}
@@ -42,7 +42,7 @@ extension AppState {
 			self.stations = newValue.stations
 			self.favouritesStations = newValue.favouritesStations
 			self.trainSections = newValue.trainSections
-			self.trainNumber = newValue.trainNumber
+			self.train = newValue.train
 		}
 	}
 }

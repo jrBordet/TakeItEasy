@@ -16,9 +16,15 @@ import Caprice
 
 // MARK: - Data
 
+struct CurrentTrain: Equatable {
+	var number: String
+	var name: String
+	var status: String
+}
+
 struct ArrivalDepartureSectionItem {
 	var number: String
-	var trainNumber: Int
+	var train: Int
 	var name: String
 	var time: String
 	var status: String
@@ -75,7 +81,13 @@ class ArrivalsViewController: UIViewController {
 
 		tableView.rx
 			.modelSelected(ArrivalDepartureSectionItem.self)
-			.map { $0.trainNumber }
+			.map {
+				CurrentTrain(
+					number: String($0.train),
+					name: $0.number,
+					status: $0.status
+				)
+			}
 			.distinctUntilChanged()
 			.bind(to: store.rx.selectTrain)
 			.disposed(by: disposeBag)
@@ -85,7 +97,7 @@ class ArrivalsViewController: UIViewController {
 		func map(arrival: Arrival) -> ArrivalDepartureSectionItem {
 			ArrivalDepartureSectionItem(
 				number: arrival.compNumeroTreno,
-				trainNumber: arrival.numeroTreno,
+				train: arrival.numeroTreno,
 				name: arrival.origine,
 				time: arrival.compOrarioArrivo,
 				status: formatDelay(from: arrival.compRitardo)

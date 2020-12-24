@@ -21,7 +21,7 @@ extension Reactive where Base: Store<ArrivalsDeparturesViewState, ArrivalsDepart
 		}
 	}
 	
-	var selectTrain: Binder<Int?> {
+	var selectTrain: Binder<CurrentTrain?> {
 		Binder(self.base) { store, value in
  			store.send(.arrivalDepartures(.selectTrain(value)))
 		}
@@ -80,7 +80,13 @@ class DeparturesViewController: BaseViewController {
 		
 		tableView.rx
 			.modelSelected(ArrivalDepartureSectionItem.self)
-			.map { $0.trainNumber }
+			.map {
+				CurrentTrain(
+					number: String($0.train),
+					name: $0.number,
+					status: $0.status
+				)
+			}
 			.distinctUntilChanged()
 			.bind(to: store.rx.selectTrain)
 			.disposed(by: disposeBag)
@@ -90,7 +96,7 @@ class DeparturesViewController: BaseViewController {
 		func map(departure: Departure) -> ArrivalDepartureSectionItem {
 			ArrivalDepartureSectionItem(
 				number: departure.compNumeroTreno,
-				trainNumber: departure.numeroTreno,
+				train: departure.numeroTreno,
 				name: departure.destinazione,
 				time: departure.compOrarioPartenza,
 				status: formatDelay(from: departure.compRitardo)

@@ -69,7 +69,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		store
 			.value
-			.map { $0.trainNumber }
+			.map { $0.train?.number }
 			.distinctUntilChanged()
 			.ignoreNil()
 			.subscribe(onNext: { trainNumber in

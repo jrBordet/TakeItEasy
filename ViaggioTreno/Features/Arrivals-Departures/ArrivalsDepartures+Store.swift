@@ -13,20 +13,20 @@ struct ArrivalsDeparturesViewState: Equatable {
 	var selectedStation: Station?
 	var departures: [Departure]
 	var arrivals: [Arrival]
-	var trainNumber: Int?
+	var train: CurrentTrain?
 	var trainSections: [TrainSection]
 	
 	init(
 		selectedStation: Station?,
 		departures: [Departure],
 		arrivals: [Arrival],
-		trainNumber: Int?,
+		train: CurrentTrain?,
 		trainSections: [TrainSection]
 	) {
 		self.selectedStation = selectedStation
 		self.departures = departures
 		self.arrivals = arrivals
-		self.trainNumber = trainNumber
+		self.train = train
 		self.trainSections = trainSections
 	}
 	
@@ -35,13 +35,13 @@ struct ArrivalsDeparturesViewState: Equatable {
 			self.selectedStation,
 			self.departures,
 			self.arrivals,
-			self.trainNumber
+			self.train
 		) }
 		set {
 			self.selectedStation = newValue.selectedStation
 			self.departures = newValue.departures
 			self.arrivals = newValue.arrivals
-			self.trainNumber = newValue.trainNumber
+			self.train = newValue.train
 		 }
 	}
 	
@@ -49,14 +49,14 @@ struct ArrivalsDeparturesViewState: Equatable {
 		get {
 			TrainSectionViewState(
 				selectedStation: self.selectedStation,
-				trainNumber: self.trainNumber,
+				train: self.train,
 				trainSections: self.trainSections
 			)
 		}
 		
 		set {
 			self.selectedStation = newValue.selectedStation
-			self.trainNumber = newValue.trainNumber
+			self.train = newValue.train
 			self.trainSections = newValue.trainSections
 		}
 	}
@@ -89,11 +89,11 @@ let arrivalsDeparturesViewReducer: Reducer<ArrivalsDeparturesViewState, Arrivals
 
 // MARk: - State
 
-public typealias ArrivalsDeparturesState = (selectedStation: Station?, departures: [Departure], arrivals: [Arrival], trainNumber: Int?)
+typealias ArrivalsDeparturesState = (selectedStation: Station?, departures: [Departure], arrivals: [Arrival], train: CurrentTrain?)
 
 // MARk: - Action
 
-public enum ArrivalsDeparturesAction: Equatable {
+enum ArrivalsDeparturesAction: Equatable {
 	case departures(String)
 	case departuresResponse([Departure])
 	
@@ -102,7 +102,7 @@ public enum ArrivalsDeparturesAction: Equatable {
 	
 	case select(Station?)
 	
-	case selectTrain(Int?)
+	case selectTrain(CurrentTrain?)
 	
 	case none
 }
@@ -140,7 +140,7 @@ func arrivalsDeparturesReducer(
 		state.selectedStation = station
 		return []
 	case let .selectTrain(value):
-		state.trainNumber = value
+		state.train = value
 		return []
 	}
 }

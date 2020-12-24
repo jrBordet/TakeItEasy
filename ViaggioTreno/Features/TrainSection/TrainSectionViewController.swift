@@ -102,18 +102,25 @@ class TrainSectionViewController: UIViewController {
 		
 		store
 			.value
-			.map { $0.trainNumber }
+			.map { $0.train?.name }
 			.ignoreNil()
-			.map { String($0) }
+			.map { String($0).capitalized }
 			.bind(to: trainLabel.rx.text)
+			.disposed(by: disposeBag)
+		
+		store
+			.value
+			.map { $0.train?.status }
+			.ignoreNil()
+			.bind(to: trainStatusLabel.rx.text)
 			.disposed(by: disposeBag)
 		
 		// MARK: - retrieve data
 		
 		store
 			.value
-			.map { (station: $0.selectedStation?.id, train: $0.trainNumber) }
-			.map { (station: String?, train: Int?) -> (String, Int)? in
+			.map { (station: $0.selectedStation?.id, train: $0.train?.number) }
+			.map { (station: String?, train: String?) -> (String, String)? in
 				guard
 					let train = train,
 					let station = station else {
@@ -127,6 +134,24 @@ class TrainSectionViewController: UIViewController {
 			.map { (station: $0, train: String($1)) }
 			.bind(to: store.rx.sections)
 			.disposed(by: disposeBag)
+		
+//		store
+//			.value
+//			.map { (station: $0.selectedStation?.id, train: $0.train?.number) }
+//			.map { (station: String?, train: Int?) -> (String, Int)? in
+//				guard
+//					let train = train,
+//					let station = station else {
+//					return nil
+//				}
+//
+//				return (station, train)
+//			}
+//			.ignoreNil()
+//			.distinctUntilChanged { $0 == $1 }
+//			.map { (station: $0, train: String($1)) }
+//			.bind(to: store.rx.sections)
+//			.disposed(by: disposeBag)
 		
 		// MARK: - Bind dataSource
 		

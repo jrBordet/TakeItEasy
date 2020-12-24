@@ -20,24 +20,24 @@ let trainSectionViewReducer: Reducer<TrainSectionViewState, TrainSectionViewActi
 
 struct TrainSectionViewState: Equatable {
 	var selectedStation: Station?
-	var trainNumber: Int?
+	var train: CurrentTrain?
 	var trainSections: [TrainSection]
 	
 	init(
 		selectedStation: Station?,
-		trainNumber: Int?,
+		train: CurrentTrain?,
 		trainSections: [TrainSection]
 	) {
 		self.selectedStation = selectedStation
-		self.trainNumber = trainNumber
+		self.train = train
 		self.trainSections = trainSections
 	}
 	
 	var sectionState: TrainSectionState {
-		get { (self.selectedStation,  self.trainNumber, self.trainSections) }
+		get { (self.selectedStation,  self.train, self.trainSections) }
 		set {
 			self.selectedStation = newValue.selectedStation
-			self.trainNumber = newValue.trainNumber
+			self.train = newValue.train
 			self.trainSections = newValue.trainSections
 		}
 	}
@@ -51,7 +51,7 @@ typealias TrainSectionViewEnvironment = (String, String) -> Effect<[TrainSection
 
 // MARk: - State
 
-typealias TrainSectionState = (selectedStation: Station?, trainNumber: Int?, trainSections: [TrainSection])
+typealias TrainSectionState = (selectedStation: Station?, train: CurrentTrain?, trainSections: [TrainSection])
 
 // MARk: - Action
 
@@ -60,7 +60,7 @@ enum TrainSectionAction: Equatable {
 	case trainSectionsResponse([TrainSection])
 	
 	case select(Station?)
-	case selectTrain(Int?)
+	case selectTrain(CurrentTrain?)
 	
 	case none
 }
@@ -90,7 +90,7 @@ func trainSectionReducer(
 			
 		]
 	case let .selectTrain(value):
-		state.trainNumber = value
+		state.train = value
 		return []
 	}
 }

@@ -15,7 +15,7 @@ public struct HomeViewState: Equatable {
 	var arrivals: [Arrival]
 	var stations: [Station]
 	var favouritesStations: [Station]
-	var trainNumber: Int?
+	var train: CurrentTrain?
 	var trainSections: [TrainSection]
 	
 	init(
@@ -24,7 +24,7 @@ public struct HomeViewState: Equatable {
 		arrivals: [Arrival],
 		stations: [Station],
 		favouritesStations: [Station],
-		trainNumber: Int?,
+		train: CurrentTrain?,
 		trainSections: [TrainSection]
 	) {
 		self.selectedStation = selectedStation
@@ -32,7 +32,7 @@ public struct HomeViewState: Equatable {
 		self.arrivals = arrivals
 		self.stations = stations
 		self.favouritesStations = favouritesStations
-		self.trainNumber = trainNumber
+		self.train = train
 		self.trainSections = trainSections
 	}
 	
@@ -58,7 +58,7 @@ public struct HomeViewState: Equatable {
 				selectedStation: self.selectedStation,
 				departures: self.departures,
 				arrivals: self.arrivals,
-				trainNumber: self.trainNumber,
+				train: self.train,
 				trainSections: self.trainSections
 			)
 		}
@@ -67,7 +67,7 @@ public struct HomeViewState: Equatable {
 			self.selectedStation = newValue.selectedStation
 			self.departures = newValue.departures
 			self.arrivals = newValue.arrivals
-			self.trainNumber = newValue.trainNumber
+			self.train = newValue.train
 			self.trainSections = newValue.trainSections
 		}
 	}
