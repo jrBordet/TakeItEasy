@@ -9,7 +9,7 @@ import XCTest
 import Networking
 import RxBlocking
 
-class TrainSectionsTests: XCTestCase {
+class NetworkingTrainSectionsTests: XCTestCase {
 	var urlSession: URLSession!
 	
 	override func setUpWithError() throws {

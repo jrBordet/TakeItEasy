@@ -14,6 +14,8 @@ import RxComposableArchitecture
 import Networking
 import Caprice
 
+// MARK: - Data
+
 struct ArrivalDepartureSectionItem {
 	var number: String
 	var name: String
@@ -30,6 +32,8 @@ extension ArrivalDepartureSectionItem: IdentifiableType {
 }
 
 extension ArrivalDepartureSectionItem: Equatable { }
+
+// MARK: - ViewController
 
 class ArrivalsViewController: UIViewController {
 	@IBOutlet weak var tableView: UITableView!
@@ -56,6 +60,8 @@ class ArrivalsViewController: UIViewController {
 		
 		setupDataSource()
 		
+		// MARK: - Select station
+		
 		store
 			.value
 			.map { $0.selectedStation }
@@ -63,6 +69,8 @@ class ArrivalsViewController: UIViewController {
 			.ignoreNil()
 			.bind(to: store.rx.select)
 			.disposed(by: disposeBag)
+		
+		// MARK: - Bind dataSource
 		
 		store
 			.value
@@ -86,7 +94,7 @@ class ArrivalsViewController: UIViewController {
 	}
 }
 
-// MARK: Data Source Configuration
+// MARK: - Data Source Configuration
 
 extension ArrivalsViewController {
 	private var configureCell: RxTableViewSectionedAnimatedDataSource<ArrivalsDeparturesListSectionModel>.ConfigureCell {
@@ -108,6 +116,6 @@ func delay(from compRitardo: [String]) -> String {
 	if Locale.current.identifier == "it_IT" {
 		return compRitardo.first ?? ""
 	} else {
-		return compRitardo[1]
+		return compRitardo[1] // English
 	}
 }

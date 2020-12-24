@@ -97,6 +97,9 @@
 		F8AD62842591DF35007249F2 /* DeparturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD62822591DF35007249F2 /* DeparturesViewController.swift */; };
 		F8AD62852591DF35007249F2 /* DeparturesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AD62832591DF35007249F2 /* DeparturesViewController.xib */; };
 		F8AD62C32591EDB5007249F2 /* Utils+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD62C22591EDB5007249F2 /* Utils+Rx.swift */; };
+		F8AD639A25926978007249F2 /* TrainSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD639825926977007249F2 /* TrainSectionViewController.swift */; };
+		F8AD639B25926978007249F2 /* TrainSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AD639925926977007249F2 /* TrainSectionViewController.xib */; };
+		F8AD63A5259269C5007249F2 /* TrainSection+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AD63A4259269C5007249F2 /* TrainSection+Store.swift */; };
 		F8B2C4982590856A002419E8 /* Home+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C4972590856A002419E8 /* Home+Store.swift */; };
 		F8B2C4A325908C18002419E8 /* HomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C4A225908C18002419E8 /* HomeTests.swift */; };
 		F8B2C5722590D9DC002419E8 /* ArrivalsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5702590D9DC002419E8 /* ArrivalsViewController.swift */; };
@@ -104,6 +107,10 @@
 		F8B2C57B2590DAF6002419E8 /* ArrivalsDeparturesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5792590DAF6002419E8 /* ArrivalsDeparturesCell.swift */; };
 		F8B2C57C2590DAF6002419E8 /* ArrivalsDeparturesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8B2C57A2590DAF6002419E8 /* ArrivalsDeparturesCell.xib */; };
 		F8B2C5862590E9CB002419E8 /* ArrivalsDepartures+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2C5852590E9CB002419E8 /* ArrivalsDepartures+Store.swift */; };
+		F8C2ADFC259323B500CC88FB /* TrainSectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C2ADFB259323B500CC88FB /* TrainSectionsTests.swift */; };
+		F8C2AE042593329A00CC88FB /* TrainSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C2AE022593329A00CC88FB /* TrainSectionCell.swift */; };
+		F8C2AE052593329A00CC88FB /* TrainSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C2AE032593329A00CC88FB /* TrainSectionCell.xib */; };
+		F8C2AE182593372500CC88FB /* Mock+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C2AE172593372500CC88FB /* Mock+.swift */; };
 		F9EEE7A3D6FEF820FDCE0D75 /* departures.json in Resources */ = {isa = PBXBuildFile; fileRef = ADF23D1258755B3F63E0EB27 /* departures.json */; };
 		FAE68B41CD056D77DBC41AE2 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF02743C77A6447841A6399 /* Roboto-LightItalic.ttf */; };
 		FDD6896D34798BFDEA02E7D9 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B01E786EA0FF0B5145C4A /* Localizable.swift */; };
@@ -268,6 +275,9 @@
 		F8AD62822591DF35007249F2 /* DeparturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesViewController.swift; sourceTree = "<group>"; };
 		F8AD62832591DF35007249F2 /* DeparturesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeparturesViewController.xib; sourceTree = "<group>"; };
 		F8AD62C22591EDB5007249F2 /* Utils+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utils+Rx.swift"; sourceTree = "<group>"; };
+		F8AD639825926977007249F2 /* TrainSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionViewController.swift; sourceTree = "<group>"; };
+		F8AD639925926977007249F2 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
+		F8AD63A4259269C5007249F2 /* TrainSection+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainSection+Store.swift"; sourceTree = "<group>"; };
 		F8B2C4972590856A002419E8 /* Home+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home+Store.swift"; sourceTree = "<group>"; };
 		F8B2C4A225908C18002419E8 /* HomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTests.swift; sourceTree = "<group>"; };
 		F8B2C5702590D9DC002419E8 /* ArrivalsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsViewController.swift; sourceTree = "<group>"; };
@@ -275,6 +285,10 @@
 		F8B2C5792590DAF6002419E8 /* ArrivalsDeparturesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivalsDeparturesCell.swift; sourceTree = "<group>"; };
 		F8B2C57A2590DAF6002419E8 /* ArrivalsDeparturesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArrivalsDeparturesCell.xib; sourceTree = "<group>"; };
 		F8B2C5852590E9CB002419E8 /* ArrivalsDepartures+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArrivalsDepartures+Store.swift"; sourceTree = "<group>"; };
+		F8C2ADFB259323B500CC88FB /* TrainSectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionsTests.swift; sourceTree = "<group>"; };
+		F8C2AE022593329A00CC88FB /* TrainSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionCell.swift; sourceTree = "<group>"; };
+		F8C2AE032593329A00CC88FB /* TrainSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionCell.xib; sourceTree = "<group>"; };
+		F8C2AE172593372500CC88FB /* Mock+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mock+.swift"; sourceTree = "<group>"; };
 		F8ECD865B0CD3EC91C4D74D2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FCA9EA6614503E208567B732 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FD9A20DFE4DED2C5F1A10229 /* train_sections.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = train_sections.json; sourceTree = "<group>"; };
@@ -338,6 +352,7 @@
 				311C76BEFFE9BCB448C60395 /* Supporting Files */,
 				F8AD62C22591EDB5007249F2 /* Utils+Rx.swift */,
 				E3F0638C57C372FF25025688 /* BaseViewController.swift */,
+				F8C2AE172593372500CC88FB /* Mock+.swift */,
 			);
 			path = ViaggioTreno;
 			sourceTree = "<group>";
@@ -620,6 +635,7 @@
 		B357E5B710664829144B7C2A /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F8AD639725926930007249F2 /* TrainSection */,
 				74091DA6B0C78045EF627E68 /* Home */,
 				6338D144AEA36724E00882D0 /* Stations */,
 				F8B2C5512590D966002419E8 /* Arrivals-Departures */,
@@ -694,6 +710,7 @@
 				8D029142DB8D2F5A5ED7A70F /* SnapshotTests */,
 				DE2290072BD45E18A91C2151 /* StationsTests */,
 				F8B2C4A125908BEA002419E8 /* HomeTests */,
+				F8AD63AA25926CDF007249F2 /* TrainSections */,
 				C5569130BE92EE996575E9CC /* NetworkingTests */,
 			);
 			path = ViaggioTrenoTests;
@@ -738,6 +755,25 @@
 			path = "Application+Store";
 			sourceTree = "<group>";
 		};
+		F8AD639725926930007249F2 /* TrainSection */ = {
+			isa = PBXGroup;
+			children = (
+				F8C2AE012593327A00CC88FB /* Cell */,
+				F8AD639825926977007249F2 /* TrainSectionViewController.swift */,
+				F8AD639925926977007249F2 /* TrainSectionViewController.xib */,
+				F8AD63A4259269C5007249F2 /* TrainSection+Store.swift */,
+			);
+			path = TrainSection;
+			sourceTree = "<group>";
+		};
+		F8AD63AA25926CDF007249F2 /* TrainSections */ = {
+			isa = PBXGroup;
+			children = (
+				F8C2ADFB259323B500CC88FB /* TrainSectionsTests.swift */,
+			);
+			path = TrainSections;
+			sourceTree = "<group>";
+		};
 		F8B2C49625908553002419E8 /* Home+Store */ = {
 			isa = PBXGroup;
 			children = (
@@ -772,6 +808,15 @@
 			children = (
 				F8B2C5792590DAF6002419E8 /* ArrivalsDeparturesCell.swift */,
 				F8B2C57A2590DAF6002419E8 /* ArrivalsDeparturesCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		F8C2AE012593327A00CC88FB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F8C2AE022593329A00CC88FB /* TrainSectionCell.swift */,
+				F8C2AE032593329A00CC88FB /* TrainSectionCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -939,12 +984,14 @@
 				C74BFA133C7AAA2D80D30D75 /* StationCell.xib in Resources */,
 				60A25BCBF908D3EFA0400631 /* StationsSectionHeader.xib in Resources */,
 				6F0468C416C611A81AA36E43 /* StationsViewController.xib in Resources */,
+				F8C2AE052593329A00CC88FB /* TrainSectionCell.xib in Resources */,
 				F8B2C57C2590DAF6002419E8 /* ArrivalsDeparturesCell.xib in Resources */,
 				F8B2C5732590D9DC002419E8 /* ArrivalsViewController.xib in Resources */,
 				109D08A9AFFDF5884F04F980 /* arrivals.json in Resources */,
 				0BCDEE7590E48782C0FD8A3B /* arrivals_broken.json in Resources */,
 				F9EEE7A3D6FEF820FDCE0D75 /* departures.json in Resources */,
 				330021AFCBDE1AFE1BCDB3D4 /* departures_broken.json in Resources */,
+				F8AD639B25926978007249F2 /* TrainSectionViewController.xib in Resources */,
 				F8AD626F2591D791007249F2 /* ArrivalsDeparturesContainerViewController.xib in Resources */,
 				D887481AB8BCD949970C9B9F /* stations.txt in Resources */,
 				356644C6FAD49B8DC539E1F2 /* stations_broken.txt in Resources */,
@@ -1118,6 +1165,7 @@
 				8B53C22F4A783404BACF69BC /* NetworkingTrainSectionsTests.swift in Sources */,
 				B9690F38B669FD49C3B16B2E /* StationsTests.swift in Sources */,
 				8D1CE804D37A730F4E04A092 /* UIStationsTests.swift in Sources */,
+				F8C2ADFC259323B500CC88FB /* TrainSectionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1144,13 +1192,16 @@
 				0851710126B482E777FE118A /* AppDelegate.swift in Sources */,
 				F8B2C57B2590DAF6002419E8 /* ArrivalsDeparturesCell.swift in Sources */,
 				7B1E9FDC5802C7BED7A8FD32 /* AppReducer.swift in Sources */,
+				F8C2AE182593372500CC88FB /* Mock+.swift in Sources */,
 				F8B2C5862590E9CB002419E8 /* ArrivalsDepartures+Store.swift in Sources */,
 				F8B2C5722590D9DC002419E8 /* ArrivalsViewController.swift in Sources */,
 				F8AD626E2591D791007249F2 /* ArrivalsDeparturesContainerViewController.swift in Sources */,
 				9A3408FCD3CC761B5B737E52 /* AppState.swift in Sources */,
 				F89A10E8258D0DB900363072 /* FavouritesStationsCell.swift in Sources */,
+				F8AD63A5259269C5007249F2 /* TrainSection+Store.swift in Sources */,
 				585238B3639C6F188F8177F8 /* AppStore.swift in Sources */,
 				DB760463E09671AAF325EAB8 /* BaseViewController.swift in Sources */,
+				F8C2AE042593329A00CC88FB /* TrainSectionCell.swift in Sources */,
 				F8AD62842591DF35007249F2 /* DeparturesViewController.swift in Sources */,
 				649CFB07468CEC4E6316ECA5 /* Environment.swift in Sources */,
 				F8B2C4982590856A002419E8 /* Home+Store.swift in Sources */,
@@ -1158,6 +1209,7 @@
 				AB44C0487505C20204466B64 /* Localizable.swift in Sources */,
 				564DC8F3F2584EE8BE0F4D94 /* StationCell.swift in Sources */,
 				1C8BDA58AD9AB7D0F82B0338 /* StationsSectionHeader.swift in Sources */,
+				F8AD639A25926978007249F2 /* TrainSectionViewController.swift in Sources */,
 				F7EEAA286804B6A9AA95BD86 /* StationsState.swift in Sources */,
 				C4747CD146317DBBDC6F07FC /* StationsViewController.swift in Sources */,
 				F8AD62C32591EDB5007249F2 /* Utils+Rx.swift in Sources */,

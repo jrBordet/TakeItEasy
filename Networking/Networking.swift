@@ -30,6 +30,14 @@ public struct Networking<T: APIRequest> {
 		make(with: urlSession)
 	}
 	
+	public func mock(_ data: Data) -> T.Response {
+		do {
+			return try JSONDecoder().decode(T.Response.self, from: data)
+		} catch let e {
+			fatalError(e.localizedDescription)
+		}
+	}
+	
 	private func make(with urlSession: URLSession = .shared, parse: ((String) -> T.Response)? = nil) -> Observable<T.Response> {
 		return Observable<T.Response>.create { observer -> Disposable in
 			urlSession.dataTask(with: self.API.request) { (data, response, error) in

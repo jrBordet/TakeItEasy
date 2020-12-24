@@ -8,20 +8,21 @@
 import Foundation
 import RxSwift
 
-public struct TrainSection: Codable {
-		public let last: Bool
-		public let stazioneCorrente: Bool
-		public let id: String
-		public let stazione: String
-		public let fermata: TrainStop
+public struct TrainSection: Codable, Equatable {
+	public let last: Bool
+	public let stazioneCorrente: Bool
+	public let id: String
+	public let stazione: String
+	public let fermata: TrainStop
 	
-	public struct TrainStop: Codable {
+	public struct TrainStop: Codable, Equatable {
 		public let programmata: TimeInterval?
 		public let effettiva: TimeInterval?
 		public let ritardo: Int?
 		public let partenza_teorica: TimeInterval?
 		public let arrivo_teorico: TimeInterval?
 		public let progressivo: Int? // delay
+		public let partenzaReale: TimeInterval?
 	}
 }
 
@@ -31,7 +32,7 @@ public struct TrainSection: Codable {
 ///
 /// - Parameters:
 ///   - codeDeparture: the station code. Example S06000
-///   - codeTrain: the station code. Example 6660
+///   - codeTrain: the station code. Example 666
 /// - Returns: a collection of TravelDetail
 
 public struct TrainSectionsRequest: APIRequest, CustomDebugStringConvertible {

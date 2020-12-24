@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainSectionViewController" customModule="ViaggioTreno" customModuleProvider="target">
+            <connections>
+                <outlet property="headerHeightConstraint" destination="Y7C-Y5-eGF" id="Thj-aD-3bu"/>
+                <outlet property="headerView" destination="XhX-Cx-aef" id="glH-50-4jl"/>
+                <outlet property="tableView" destination="RAf-Wx-Bhr" id="lvg-He-oNO"/>
+                <outlet property="trainLabel" destination="SmG-Dd-FKx" id="x3v-My-Dsn"/>
+                <outlet property="trainStatusLabel" destination="QHf-dI-0Dm" id="qgV-Cy-YsQ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XhX-Cx-aef">
+                    <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REG 2735" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmG-Dd-FKx">
+                            <rect key="frame" x="20" y="21.5" width="76.5" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="in orario" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHf-dI-0Dm">
+                            <rect key="frame" x="332" y="21.5" width="62" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="SmG-Dd-FKx" firstAttribute="centerY" secondItem="XhX-Cx-aef" secondAttribute="centerY" id="2dJ-Gs-HXJ"/>
+                        <constraint firstItem="QHf-dI-0Dm" firstAttribute="centerY" secondItem="XhX-Cx-aef" secondAttribute="centerY" id="RSA-01-a8z"/>
+                        <constraint firstAttribute="height" constant="64" id="Y7C-Y5-eGF"/>
+                        <constraint firstItem="SmG-Dd-FKx" firstAttribute="leading" secondItem="XhX-Cx-aef" secondAttribute="leading" constant="20" id="icp-ef-DFq"/>
+                        <constraint firstAttribute="trailing" secondItem="QHf-dI-0Dm" secondAttribute="trailing" constant="20" id="qyk-qH-reA"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-Wx-Bhr">
+                    <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="XhX-Cx-aef" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0kT-rO-j5r"/>
+                <constraint firstItem="XhX-Cx-aef" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="4MY-tO-bmi"/>
+                <constraint firstItem="RAf-Wx-Bhr" firstAttribute="top" secondItem="XhX-Cx-aef" secondAttribute="bottom" id="8jU-sN-NrV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RAf-Wx-Bhr" secondAttribute="bottom" id="Aoh-eA-gni"/>
+                <constraint firstItem="XhX-Cx-aef" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BR2-gI-WsY"/>
+                <constraint firstItem="RAf-Wx-Bhr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Uli-c0-yaa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RAf-Wx-Bhr" secondAttribute="trailing" id="bca-K4-LBB"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
