@@ -70,14 +70,25 @@ extension Station {
 	}
 }
 
-extension Networking where T == StationsRequest {
-	public static func autocompleteStation(with s: String) -> Self {
-		Self(
+let sr = Networking(API: StationsRequest(station: ""), httpMethod: "GET")
+
+extension Networking {
+	public static func autocompleteStation(with s: String) -> Networking<StationsRequest> {
+		Networking<StationsRequest>(
 			API: StationsRequest(station: s),
 			httpMethod: "GET"
 		)
 	}
 }
+
+//extension Networking where T == StationsRequest {
+//	public static func autocompleteStation(with s: String) -> Self {
+//		Self(
+//			API: StationsRequest(station: s),
+//			httpMethod: "GET"
+//		)
+//	}
+//}
 
 extension String {
 	public func parseStations() -> [Station] {

@@ -68,10 +68,10 @@ extension DeparturesRequest {
 	}
 }
 
-extension Networking where T == DeparturesRequest {
-	public static func departure(from station: String, date: Date = Date()) -> Self {
-		Self(
-			API: T(code: station, date: date),
+extension Networking {
+	public static func departure(from station: String, date: Date = Date()) -> Networking<DeparturesRequest> {
+		Networking<DeparturesRequest>(
+			API: DeparturesRequest(code: station, date: date),
 			httpMethod: "GET"
 		)
 	}

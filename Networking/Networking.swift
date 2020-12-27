@@ -16,7 +16,79 @@ extension OSLog {
 	static let networking = OSLog(subsystem: subsystem, category: "Networking")
 }
 
-public struct Networking<T: APIRequest> {
+extension APIRequest {
+	public func execute(with urlSession: URLSession = .shared, parse: ((String) -> Self.Response)? = nil) -> Observable<Self.Response> {
+		return Observable<Self.Response>.create { observer -> Disposable in
+			
+			os_log("execute %{public}@ ", log: OSLog.networking, type: .info, ["request", request.debugDescription.removingPercentEncoding])
+			
+			urlSession.dataTask(with: request) { (data, response, error) in
+				guard let statusCode = HTTPStatusCodes.decode(from: response) else {
+					observer.onError(APIError.undefinedStatusCode)
+					return
+				}
+				
+				os_log("response %{public}@ ", log: OSLog.networking, type: .info, ["statusCode", statusCode])
+				
+				guard 200...299 ~= statusCode.rawValue else {
+					observer.onError(APIError.code(statusCode))
+					return
+				}
+				
+				guard
+					let data = data,
+					let result = String(data: data, encoding: .utf8) else {
+					os_log("response %{public}@ ", log: OSLog.networking, type: .error, ["error", "dataCorrupted"])
+					
+					observer.onError(APIError.dataCorrupted)
+					return
+				}
+				
+				if let parse = parse {
+					observer.onNext(parse(result))
+				} else {
+					do {
+						let result = try JSONDecoder().decode(Self.Response.self, from: data)
+						
+						os_log("response %{public}@ ", log: OSLog.networking, type: .debug, ["result", result])
+						
+						observer.onNext(result)
+
+					}  catch let error {
+						os_log("response %{public}@ ", log: OSLog.networking, type: .error, ["error", error.localizedDescription])
+						
+						guard let e = error as? DecodingError else {
+							observer.onError(APIError.decoding(error.localizedDescription))
+							return
+						}
+						
+						switch e {
+						case let .typeMismatch(_, value), let .valueNotFound(_, value):
+							if let key = value.codingPath.last {
+								observer.onError(APIError.decoding("Decoding error on key '\(key.stringValue)': " + value.debugDescription))
+							}
+							
+							observer.onError(APIError.decoding(value.debugDescription))
+						case let .keyNotFound(_, value):
+							observer.onError(APIError.decoding(value.underlyingError?.localizedDescription ?? ""))
+						case let .dataCorrupted(value):
+							observer.onError(APIError.decoding(value.underlyingError?.localizedDescription ?? ""))
+						@unknown default:
+							observer.onError(APIError.dataCorrupted)
+						}
+					}
+				}
+				
+				observer.onCompleted()
+			}.resume()
+			
+			return Disposables.create()
+		}
+	}
+}
+
+
+public class Networking<T: APIRequest> {
 	public var API: T
 	public var response: T.Response?
 	public let httpMethod: String
@@ -46,8 +118,13 @@ public struct Networking<T: APIRequest> {
 	}
 	
 	private func make(with urlSession: URLSession = .shared, parse: ((String) -> T.Response)? = nil) -> Observable<T.Response> {
-		return Observable<T.Response>.create { observer -> Disposable in
-			os_log("make %{public}@ ", log: OSLog.networking, type: .info, ["request",self.API.request.url?.absoluteString.removingPercentEncoding])
+		return Observable<T.Response>.create { [weak self] observer -> Disposable in
+			dump(self)
+			guard let self = self else {
+				return Disposables.create()
+			}
+			
+			os_log("make %{public}@ ", log: OSLog.networking, type: .info, ["request", self.API.request.url?.absoluteString.removingPercentEncoding])
 						
 			urlSession.dataTask(with: self.API.request) { (data, response, error) in
 				guard let statusCode = HTTPStatusCodes.decode(from: response) else {

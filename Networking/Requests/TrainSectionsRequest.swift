@@ -76,10 +76,10 @@ extension TrainSectionsRequest {
 	}
 }
 
-extension Networking where T == TrainSectionsRequest {
-	public static func sections(from station: String, train: String) -> Self {
-		Self(
-			API: T(station: station, train: train),
+extension Networking {
+	public static func sections(from station: String, train: String) -> Networking<TrainSectionsRequest> {
+		Networking<TrainSectionsRequest>(
+			API: TrainSectionsRequest(station: station, train: train),
 			httpMethod: "GET"
 		)
 	}

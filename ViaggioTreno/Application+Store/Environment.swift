@@ -9,30 +9,33 @@ import Foundation
 import RxComposableArchitecture
 import Networking
 import FileClient
+import os.log
+import RxSwift
 
 typealias AppEnvironment = HomeViewEnvironment
 
+extension OSLog {
+	private static var subsystem = Bundle.main.bundleIdentifier!
+	
+	static let networking = OSLog(subsystem: subsystem, category: "Networking")
+}
+
 let stationsEnvLive: StationsViewEnvironment = (
-	autocomplete: { StationsRequest.autocompleteStation(with: $0)},
+	autocomplete: {
+		StationsRequest(station: $0).execute(parse: {
+			$0.parseStations()
+		})
+	},
 	saveFavourites: { saveFavourites(stations: $0) } ,
 	retrieveFavourites: { retrieveFavourites() }
 )
 
-//typealias ArrivalsDeparturesViewEnvironment = (
-//	arrivalsDepartures: ArrivalsDeparturesEnvironment,
-//	sections: TrainSectionViewEnvironment
-//)
-
 let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
-	departures: { id in
-		DeparturesRequest
-			.fetch(from: id)
-			.debug("[DeparturesRequest]", trimOutput: false)
+	departures: { station in
+		DeparturesRequest(code: station, date: Date()).execute()
 	},
 	arrivals: { id in
-		ArrivalsRequest
-			.fetch(from: id)
-			.debug("[ArrivalsRequest]", trimOutput: false)
+		ArrivalsRequest(code: id, date: Date()).execute()
 	}
 )
 
@@ -41,7 +44,7 @@ let sections = TrainSectionsRequest.fetch(from: "", train: "")
 let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 	arrivalsDepartures: arrivalsDeparturesEnvLive,
 	sections: { station, train in
-		TrainSectionsRequest.fetch(from: station, train: train)
+		TrainSectionsRequest(station: station, train: train).execute()
 	}
 )
 
