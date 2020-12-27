@@ -29,6 +29,7 @@ struct TrainSectionItem {
 	var name: String
 	var time: String
 	var status: String
+	var current: Bool
 }
 
 extension TrainSectionItem: IdentifiableType {
@@ -180,7 +181,8 @@ class TrainSectionViewController: UIViewController {
 				number: trainSection.stazione,
 				name: trainSection.stazione,
 				time: formattedDate(with: (trainSection.fermata.partenza_teorica ?? trainSection.fermata.programmata) ?? 1000),
-				status: "status"
+				status: "status",
+				current: trainSection.stazioneCorrente
 			)
 		}
 		
@@ -218,6 +220,7 @@ extension TrainSectionViewController {
 			
 			cell.sectionLabel.text = item.name.capitalized
 			cell.timeLabel.text = item.time
+			cell.currentContainer.isHidden = item.current == false
 			
 			return cell
 		}

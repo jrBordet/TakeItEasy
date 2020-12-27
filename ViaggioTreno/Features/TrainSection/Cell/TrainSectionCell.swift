@@ -13,6 +13,8 @@ class TrainSectionCell: UITableViewCell {
 	@IBOutlet var timeLabel: UILabel!
 	@IBOutlet var sectionLabel: UILabel!
 	@IBOutlet var cardView: UIView!
+	@IBOutlet var currentContainer: UIView!
+	@IBOutlet var currentView: UIView!
 	
 	let theme: AppThemeMaterial = .theme
 	
@@ -29,6 +31,10 @@ class TrainSectionCell: UITableViewCell {
 		sectionLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 17)
+		
+		currentView
+			|> { [weak self] in $0.backgroundColor = self?.theme.primaryColor }
+			<> rounded()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
