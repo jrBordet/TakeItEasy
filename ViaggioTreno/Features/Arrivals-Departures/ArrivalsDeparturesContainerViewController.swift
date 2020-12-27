@@ -65,14 +65,14 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		viewControllers.append(arrivals)
 		
-		// MARK: - Train number selected
+		// MARK: - Train selected
 		
 		store
 			.value
 			.map { $0.train?.number }
 			.distinctUntilChanged()
 			.ignoreNil()
-			.subscribe(onNext: { trainNumber in
+			.subscribe(onNext: { _ in
 				navigationLink(from: self, destination: Scene<TrainSectionViewController>(), completion: { vc in
 					vc.store = store.view(
 						value: { $0.trainSectionsState },

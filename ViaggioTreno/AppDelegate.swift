@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let trainSections = Scene<TrainSectionViewController>().render()
 		
 		trainSections.store = Store<TrainSectionViewState, TrainSectionViewAction>(
-			initialValue: TrainSectionViewState(selectedStation: nil, train: nil, trainSections: r),
+			initialValue: TrainSectionViewState(selectedStation: nil, train: nil, trainSections: r, originCode: nil),
 			reducer: trainSectionViewReducer,
 			environment: env
 		)

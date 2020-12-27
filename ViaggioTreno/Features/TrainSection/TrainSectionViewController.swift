@@ -130,11 +130,11 @@ class TrainSectionViewController: UIViewController {
 		
 		store
 			.value
-			.map { (station: $0.selectedStation?.id, train: $0.train?.number) }
+			.map { (originCode: $0.originCode, train: $0.train?.number) }
 			.map { zip($0, $1) }
 			.ignoreNil()
 			.distinctUntilChanged { $0 == $1 }
-			.map { (station: $0, train: String($1)) }
+			.map { (originCode: $0, train: String($1)) }
 			.bind(to: store.rx.sections)
 			.disposed(by: disposeBag)
 		
@@ -182,7 +182,7 @@ class TrainSectionViewController: UIViewController {
 				name: trainSection.stazione,
 				time: formattedDate(with: (trainSection.fermata.partenza_teorica ?? trainSection.fermata.programmata) ?? 1000),
 				status: "status",
-				current: trainSection.stazioneCorrente
+				current: trainSection.stazioneCorrente ?? false
 			)
 		}
 		

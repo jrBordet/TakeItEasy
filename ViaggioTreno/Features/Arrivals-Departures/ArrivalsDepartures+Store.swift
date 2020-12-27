@@ -15,19 +15,22 @@ struct ArrivalsDeparturesViewState: Equatable {
 	var arrivals: [Arrival]
 	var train: CurrentTrain?
 	var trainSections: [TrainSection]
+	var originCode: String?
 	
 	init(
 		selectedStation: Station?,
 		departures: [Departure],
 		arrivals: [Arrival],
 		train: CurrentTrain?,
-		trainSections: [TrainSection]
+		trainSections: [TrainSection],
+		originCode: String?
 	) {
 		self.selectedStation = selectedStation
 		self.departures = departures
 		self.arrivals = arrivals
 		self.train = train
 		self.trainSections = trainSections
+		self.originCode = originCode
 	}
 	
 	var stationsState: ArrivalsDeparturesState {
@@ -50,7 +53,8 @@ struct ArrivalsDeparturesViewState: Equatable {
 			TrainSectionViewState(
 				selectedStation: self.selectedStation,
 				train: self.train,
-				trainSections: self.trainSections
+				trainSections: self.trainSections,
+				originCode: self.train?.originCode
 			)
 		}
 		
@@ -58,6 +62,7 @@ struct ArrivalsDeparturesViewState: Equatable {
 			self.selectedStation = newValue.selectedStation
 			self.train = newValue.train
 			self.trainSections = newValue.trainSections
+			self.originCode = newValue.train?.originCode
 		}
 	}
 }

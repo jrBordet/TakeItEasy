@@ -51,6 +51,12 @@ class DeparturesViewController: BaseViewController {
 	
 	private let disposeBag = DisposeBag()
 	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		store?.send(.arrivalDepartures(.selectTrain(nil)))
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -76,7 +82,7 @@ class DeparturesViewController: BaseViewController {
 			.bind(to: store.rx.departures)
 			.disposed(by: disposeBag)
 		
-		// MARK: - Select section
+		// MARK: - Select train
 		
 		tableView.rx
 			.modelSelected(ArrivalDepartureSectionItem.self)
@@ -84,7 +90,8 @@ class DeparturesViewController: BaseViewController {
 				CurrentTrain(
 					number: String($0.train),
 					name: $0.number,
-					status: $0.status
+					status: $0.status,
+					originCode: $0.originCode
 				)
 			}
 			.distinctUntilChanged()
@@ -99,7 +106,8 @@ class DeparturesViewController: BaseViewController {
 				train: departure.numeroTreno,
 				name: departure.destinazione,
 				time: departure.compOrarioPartenza,
-				status: formatDelay(from: departure.compRitardo)
+				status: formatDelay(from: departure.compRitardo),
+				originCode: departure.codOrigine
 			)
 		}
 		

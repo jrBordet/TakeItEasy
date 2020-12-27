@@ -8,6 +8,13 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import os.log
+
+extension OSLog {
+	private static var subsystem = Bundle.main.bundleIdentifier!
+	
+	static let networking = OSLog(subsystem: subsystem, category: "Networking")
+}
 
 public struct Networking<T: APIRequest> {
 	public var API: T
@@ -40,13 +47,15 @@ public struct Networking<T: APIRequest> {
 	
 	private func make(with urlSession: URLSession = .shared, parse: ((String) -> T.Response)? = nil) -> Observable<T.Response> {
 		return Observable<T.Response>.create { observer -> Disposable in
-			dump("[Networking] make: \(self.API.request)")
-			
+			os_log("make %{public}@ ", log: OSLog.networking, type: .info, ["request",self.API.request.url?.absoluteString.removingPercentEncoding])
+						
 			urlSession.dataTask(with: self.API.request) { (data, response, error) in
 				guard let statusCode = HTTPStatusCodes.decode(from: response) else {
 					observer.onError(APIError.undefinedStatusCode)
 					return
 				}
+				
+				os_log("statusCode %{public}@ ", log: OSLog.networking, type: .info, ["statusCode", statusCode])
 				
 				guard 200...299 ~= statusCode.rawValue else {
 					observer.onError(APIError.code(statusCode))
@@ -56,6 +65,8 @@ public struct Networking<T: APIRequest> {
 				guard
 					let data = data,
 					let result = String(data: data, encoding: .utf8) else {
+					os_log("statusCode %{public}@ ", log: OSLog.networking, type: .error, ["error", "dataCorrupted"])
+
 					observer.onError(APIError.dataCorrupted)
 					return
 				}
@@ -65,8 +76,10 @@ public struct Networking<T: APIRequest> {
 				} else {
 					do {
 						try observer.onNext(JSONDecoder().decode(T.Response.self, from: data))
-						observer.onCompleted()
+						//observer.onCompleted()
 					}  catch let error {
+						os_log("error %{public}@ ", log: OSLog.networking, type: .error, ["error", error.localizedDescription])
+
 						guard let e = error as? DecodingError else {
 							observer.onError(APIError.decoding(error.localizedDescription))
 							return

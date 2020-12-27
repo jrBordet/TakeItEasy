@@ -632,10 +632,10 @@
 		B357E5B710664829144B7C2A /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				F8AD639725926930007249F2 /* TrainSection */,
 				74091DA6B0C78045EF627E68 /* Home */,
 				6338D144AEA36724E00882D0 /* Stations */,
 				F8B2C5512590D966002419E8 /* Arrivals-Departures */,
+				F8AD639725926930007249F2 /* TrainSection */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -755,10 +755,10 @@
 		F8AD639725926930007249F2 /* TrainSection */ = {
 			isa = PBXGroup;
 			children = (
-				F8C2AE012593327A00CC88FB /* Cell */,
+				F8AD63A4259269C5007249F2 /* TrainSection+Store.swift */,
 				F8AD639825926977007249F2 /* TrainSectionViewController.swift */,
 				F8AD639925926977007249F2 /* TrainSectionViewController.xib */,
-				F8AD63A4259269C5007249F2 /* TrainSection+Store.swift */,
+				F8C2AE012593327A00CC88FB /* Cell */,
 			);
 			path = TrainSection;
 			sourceTree = "<group>";

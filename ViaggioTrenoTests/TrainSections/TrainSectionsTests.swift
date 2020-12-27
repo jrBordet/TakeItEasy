@@ -23,7 +23,7 @@ class TrainSectionsTests: XCTestCase {
 	
 	override func setUp() {
 		
-		initialState = TrainSectionViewState(selectedStation: nil, train: nil, trainSections: [])
+		initialState = TrainSectionViewState(selectedStation: nil, train: nil, trainSections: [], originCode: nil)
 		
 		env = { _, _ in
 			Effect.sync { self.expectedResult }

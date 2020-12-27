@@ -13,6 +13,7 @@ public struct Arrival: Codable {
 	public let compOrarioArrivo: String
 	public let compNumeroTreno: String
 	public let compRitardo: [String]
+	public let codOrigine: String
 }
 
 extension Arrival: Equatable {

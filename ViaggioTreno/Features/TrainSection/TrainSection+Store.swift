@@ -22,23 +22,32 @@ struct TrainSectionViewState: Equatable {
 	var selectedStation: Station?
 	var train: CurrentTrain?
 	var trainSections: [TrainSection]
+	var originCode: String?
 	
 	init(
 		selectedStation: Station?,
 		train: CurrentTrain?,
-		trainSections: [TrainSection]
+		trainSections: [TrainSection],
+		originCode: String?
 	) {
 		self.selectedStation = selectedStation
 		self.train = train
 		self.trainSections = trainSections
+		self.originCode = originCode
 	}
 	
 	var sectionState: TrainSectionState {
-		get { (self.selectedStation,  self.train, self.trainSections) }
+		get {(
+			self.selectedStation,
+			self.originCode,
+			self.train,
+			self.trainSections
+		)}
 		set {
 			self.selectedStation = newValue.selectedStation
 			self.train = newValue.train
 			self.trainSections = newValue.trainSections
+			self.originCode = newValue.originCode
 		}
 	}
 }
@@ -51,7 +60,7 @@ typealias TrainSectionViewEnvironment = (String, String) -> Effect<[TrainSection
 
 // MARk: - State
 
-typealias TrainSectionState = (selectedStation: Station?, train: CurrentTrain?, trainSections: [TrainSection])
+typealias TrainSectionState = (selectedStation: Station?, originCode: String?, train: CurrentTrain?, trainSections: [TrainSection])
 
 // MARk: - Action
 
@@ -67,7 +76,7 @@ enum TrainSectionAction: Equatable {
 
 // MARK: - Environment
 
-typealias TrainSectionEnvironment = (_ station: String, _ train: String) -> Effect<[TrainSection]>
+typealias TrainSectionEnvironment = (_ originCode: String, _ train: String) -> Effect<[TrainSection]>
 
 func trainSectionReducer(
 	state: inout TrainSectionState,
@@ -75,9 +84,9 @@ func trainSectionReducer(
 	environment: TrainSectionEnvironment
 ) -> [Effect<TrainSectionAction>] {
 	switch action {
-	case let .trainSections(station, train):
+	case let .trainSections(originCode, train):
 		return [
-			environment(station, train).map(TrainSectionAction.trainSectionsResponse)
+			environment(originCode, train).map(TrainSectionAction.trainSectionsResponse)
 		]
 	case let .trainSectionsResponse(trainSections):
 		state.trainSections = trainSections

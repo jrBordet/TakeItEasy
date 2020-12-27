@@ -10,7 +10,7 @@ import RxSwift
 
 public struct TrainSection: Codable, Equatable {
 	public let last: Bool
-	public let stazioneCorrente: Bool
+	public let stazioneCorrente: Bool?
 	public let id: String
 	public let stazione: String
 	public let fermata: TrainStop

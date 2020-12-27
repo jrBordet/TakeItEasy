@@ -15,6 +15,7 @@ public struct Departure: Codable {
 	public let compOrarioPartenza: String
 	public let ritardo: Int
 	public let compRitardo: [String]
+	public let codOrigine: String
 }
 
 extension Departure: Equatable {

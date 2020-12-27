@@ -20,6 +20,7 @@ struct CurrentTrain: Equatable {
 	var number: String
 	var name: String
 	var status: String
+	var originCode: String
 }
 
 struct ArrivalDepartureSectionItem {
@@ -28,6 +29,7 @@ struct ArrivalDepartureSectionItem {
 	var name: String
 	var time: String
 	var status: String
+	var originCode: String
 }
 
 extension ArrivalDepartureSectionItem: IdentifiableType {
@@ -53,6 +55,12 @@ class ArrivalsViewController: UIViewController {
 	
 	private let disposeBag = DisposeBag()
 	
+	override func viewDidDisappear(_ animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		store?.send(.arrivalDepartures(.selectTrain(nil)))
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -77,7 +85,7 @@ class ArrivalsViewController: UIViewController {
 			.bind(to: store.rx.arrivals)
 			.disposed(by: disposeBag)
 		
-		// MARK: - Select section
+		// MARK: - Select train
 
 		tableView.rx
 			.modelSelected(ArrivalDepartureSectionItem.self)
@@ -85,7 +93,8 @@ class ArrivalsViewController: UIViewController {
 				CurrentTrain(
 					number: String($0.train),
 					name: $0.number,
-					status: $0.status
+					status: $0.status,
+					originCode: $0.originCode
 				)
 			}
 			.distinctUntilChanged()
@@ -100,7 +109,8 @@ class ArrivalsViewController: UIViewController {
 				train: arrival.numeroTreno,
 				name: arrival.origine,
 				time: arrival.compOrarioArrivo,
-				status: formatDelay(from: arrival.compRitardo)
+				status: formatDelay(from: arrival.compRitardo),
+				originCode: arrival.codOrigine
 			)
 		}
 		

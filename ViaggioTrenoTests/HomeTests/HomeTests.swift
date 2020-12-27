@@ -22,7 +22,7 @@ class HomeTests: XCTestCase {
 	var env: HomeViewEnvironment!
 	
 	override func setUp() {
-		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], train: nil, trainSections: [])
+		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], train: nil, trainSections: [], origincode: nil)
 		
 		let stationsEnv: StationsViewEnvironment = (
 			autocomplete: { _ in Effect.sync { [] } },
