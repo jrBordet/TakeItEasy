@@ -67,7 +67,7 @@ public class HomeViewController: BaseViewController {
 		
 		emptyStationsLabel
 			|> theme.primaryLabel
-			<> fontRegular(with: 17)
+			<> fontThin(with: 17)
 			<> textLabel(L10n.App.Home.disclaimer)
 		
 		// MARK: - Collection view layout

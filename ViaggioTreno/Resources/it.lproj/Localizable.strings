@@ -20,7 +20,7 @@
 
 "app.home.plus" = "+";
 "app.home.addStations" = "Aggiungi stazioni";
-"app.home.disclaimer" = "Sembra che non ci siano stazioni tra i tuoi preferiti...";
+"app.home.disclaimer" = "Sembra che non ci siano ancora \nstazioni tra i tuoi preferiti";
 
 // MARK: - Stations
 

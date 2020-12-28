@@ -62,8 +62,9 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5l6-t8-SsK">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZm-c0-wtt">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="141"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZm-c0-wtt">
+                                            <rect key="frame" x="15" y="0.0" width="384" height="141"/>
+                                            <string key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -71,9 +72,9 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="mZm-c0-wtt" secondAttribute="trailing" id="4iO-yO-ZfW"/>
+                                        <constraint firstAttribute="trailing" secondItem="mZm-c0-wtt" secondAttribute="trailing" constant="15" id="4iO-yO-ZfW"/>
                                         <constraint firstItem="mZm-c0-wtt" firstAttribute="top" secondItem="5l6-t8-SsK" secondAttribute="top" id="Mlh-MP-cFN"/>
-                                        <constraint firstItem="mZm-c0-wtt" firstAttribute="leading" secondItem="5l6-t8-SsK" secondAttribute="leading" id="hfp-oZ-iJR"/>
+                                        <constraint firstItem="mZm-c0-wtt" firstAttribute="leading" secondItem="5l6-t8-SsK" secondAttribute="leading" constant="15" id="hfp-oZ-iJR"/>
                                         <constraint firstAttribute="bottom" secondItem="mZm-c0-wtt" secondAttribute="bottom" id="pwh-a7-1oO"/>
                                     </constraints>
                                 </view>
