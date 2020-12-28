@@ -61,117 +61,16 @@ func activityFeed(
 	_ reducer: @escaping Reducer<AppState, AppAction, AppEnvironment>
 ) -> Reducer<AppState, AppAction, AppEnvironment> {
 	return { state, action, environment in
+				
+		let mirror = Mirror(reflecting: action)
 		
-		switch action {
-		case let .stations(stationsAction):
-			switch stationsAction {
-			case let .stations(stations):
-				switch stations {
-				case let .autocomplete(value):
-					os_log("autocomplete %{public}@ ", log: OSLog.login, type: .info, [action, value])
-					break
-				case let .autocompleteResponse(value):
-					os_log("autocompleteResponse %{public}@ ", log: OSLog.login, type: .info, [action, value])
-					break
-				case .favourites:
-					break
-				case .favouritesResponse(_):
-					break
-				case .addFavorite(_):
-					break
-				case .updateFavouritesResponse(_):
-					break
-				case .removeFavourite(_):
-					break
-				case .select(_):
-					break
-				case .none:
-					break
-				}
-				break
+		if let f = mirror.children.first {
+			let value = String(reflecting: f.value)
+			
+			if let sAction = value.components(separatedBy: ".").last {
+				os_log("activityFeed %{public}@ ", log: OSLog.activityFeed, type: .info, [sAction, value])
 			}
-			break
-		case let .home(homeAction):
-			switch homeAction {
-			case let .favourites(favouritesAction):
-				switch favouritesAction {
-				case let .stations(stationsAction):
-					switch stationsAction {
-					case let .autocomplete(value):
-						os_log("autocomplete %{public}@ ", log: OSLog.login, type: .info, [action, value])
-						break
-					case let .autocompleteResponse(value):
-						os_log("autocompleteResponse %{public}@ ", log: OSLog.login, type: .info, [action, value])
-					case .favourites:
-						break
-					case .favouritesResponse(_):
-						break
-					case .addFavorite(_):
-						break
-					case .updateFavouritesResponse(_):
-						break
-					case .removeFavourite(_):
-						break
-					case .select(_):
-						break
-					case .none:
-						break
-					}
-					break
-				}
-				break
-			case .arrivalsDepartures(_):
-				break
-			}
-			break
 		}
-		
-		//        if case let .counter(.counter(counterAction)) = action {
-		//            switch counterAction {
-		//            case .incrTapped:
-		//                os_log("incrTapped %{public}@ ", log: OSLog.counter, type: .info, [state])
-		//                break
-		//            case .decrTapped:
-		//                break
-		//            case .nthPrimeButtonTapped:
-		//                break
-		//            case .nthPrimeResponse(_):
-		//                break
-		//            case .alertDismissButtonTapped:
-		//                break
-		//            }
-		//        }
-		//
-		//        if case let .login(.login(loginAction)) = action {
-		//            os_log("login %{public}@ ", log: OSLog.login, type: .info, [action, state])
-		//
-		//            switch loginAction {
-		//            case .username(_):
-		//                break
-		//            case .password(_):
-		//                break
-		//            case .login:
-		//                break
-		//            case .loginResponse(_):
-		//                break
-		//            case .checkRememberMeStatus:
-		//                break
-		//            case .checkRememberMeStatusResponse(_, _):
-		//                break
-		//            case .rememberMe:
-		//                break
-		//            case .rememberMeResponse(_):
-		//                break
-		//            case .dismissAlert:
-		//                break
-		//            case .retrieveCredentials:
-		//                break
-		//            case .retrieveCredentialsResponse(_, _):
-		//                break
-		//            case .none:
-		//                break
-		//            }
-		//        }
 		
 		return reducer(&state, action, environment)
 	}
@@ -184,4 +83,6 @@ extension OSLog {
 	
 	static let counter = OSLog(subsystem: subsystem, category: "Counter")
 	static let login = OSLog(subsystem: subsystem, category: "Login")
+	
+	static let activityFeed = OSLog(subsystem: subsystem, category: "activityFeed")
 }
