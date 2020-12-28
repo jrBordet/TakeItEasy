@@ -67,7 +67,7 @@ class NetworkingTests: XCTestCase {
 	func test_stations_autocomplete() throws {
 		let result = try
 			StationsRequest(station: "mi")
-			.execute(with: urlSession)
+			.execute(with: urlSession, parse: { $0.parseStations() })
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -81,7 +81,7 @@ class NetworkingTests: XCTestCase {
 		
 		let result = try
 			StationsRequest(station: "mi")
-			.execute(with: urlSession)
+			.execute(with: urlSession, parse: { $0.parseStations() })
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -94,7 +94,7 @@ class NetworkingTests: XCTestCase {
 		
 		let result = try
 			StationsRequest(station: "mi")
-			.execute(with: urlSession)
+			.execute(with: urlSession, parse: { $0.parseStations() })
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -107,7 +107,7 @@ class NetworkingTests: XCTestCase {
 		
 		let result = try
 			StationsRequest(station: "mi")
-			.execute(with: urlSession)
+			.execute(with: urlSession, parse: { $0.parseStations() })
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first

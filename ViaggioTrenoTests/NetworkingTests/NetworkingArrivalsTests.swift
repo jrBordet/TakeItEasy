@@ -44,13 +44,12 @@ class ArrivalsTests: XCTestCase {
 	func test_arrivals_decoding_error() throws {
 		MockUrlProtocol.requestHandler = requestHandler(with: .arrivals_broken)
 		
-		let result = try ArrivalsRequest(code: "S01700", date: Date())
-			.execute(with: urlSession)
-			.toBlocking(timeout: 10)
-			.toArray()
-			.first
-		
-		XCTAssertThrowsError(result) { error in
+		do {
+			_ = try ArrivalsRequest(code: "S01700", date: Date())
+				.execute(with: urlSession)
+				.toBlocking(timeout: 30)
+				.toArray()
+		} catch let error {
 			XCTAssertEqual(error as? APIError, APIError.decoding("Decoding error on key 'numeroTreno': Expected to decode Int but found a string/data instead."))
 		}
 	}
@@ -58,13 +57,12 @@ class ArrivalsTests: XCTestCase {
 	func test_arrivals_500() throws {
 		MockUrlProtocol.requestHandler = requestHandler(with: .departures_broken, statusCode: 500)
 		
-		let result = try ArrivalsRequest(code: "S01700", date: Date())
-			.execute(with: urlSession)
-			.toBlocking(timeout: 10)
-			.toArray()
-			.first
-		
-		XCTAssertThrowsError(result) { error in
+		do {
+			_ = try ArrivalsRequest(code: "S01700", date: Date())
+				.execute(with: urlSession)
+				.toBlocking(timeout: 10)
+				.toArray()
+		}  catch let error {
 			XCTAssertEqual(error as? APIError, APIError.code(HTTPStatusCodes.InternalServerError))
 		}
 	}
