@@ -15,6 +15,7 @@
 "app.common.arrivals" = "Arrivals";
 "app.common.departures" = "Departures";
 "app.common.board" = "Board";
+"app.common.x" = "X";
 
 // MARK: - Home
 

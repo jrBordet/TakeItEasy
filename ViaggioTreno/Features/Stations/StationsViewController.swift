@@ -89,8 +89,6 @@ extension StationsViewController {
 	}
 }
 
-//https://jakubturek.com/uicollectionview-self-sizing-cells-animation/
-
 extension Store: ReactiveCompatible {}
 
 public extension Reactive where Base: Store<StationsViewState, StationsViewAction> {
@@ -135,6 +133,9 @@ public class StationsViewController: BaseViewController {
 	@IBOutlet var searchBar: UISearchBar!
 	@IBOutlet var tableView: UITableView?
 	
+	@IBOutlet var closeButton: UIButton!
+	@IBOutlet var closeContainer: UIView!
+	
 	var dataSource: RxTableViewSectionedReloadDataSource<StationSectionModel> = StationsViewController.dataSource()
 	
 	private let disposeBag = DisposeBag()
@@ -160,10 +161,20 @@ public class StationsViewController: BaseViewController {
 		
 		searchBar.placeholder = L10n.Stations.searchbar
 		
+		closeContainer |> backgroundColor(with: theme.primaryColor)
+		
+		closeButton
+			|> {
+				$0?.setTitleColor(.white, for: .normal)
+				$0?.setTitle(L10n.App.Common.x, for: .normal)
+			}
+
 		if #available(iOS 13.0, *) {
 			searchBar.searchTextField |> fontTextField(with: 15)
+			closeContainer.isHidden = true
 		} else {
 			// Fallback on earlier versions
+			closeContainer.isHidden = false
 		}
 		
 		tableView.rowHeight = 72
@@ -183,10 +194,18 @@ public class StationsViewController: BaseViewController {
 			.setDelegate(self)
 			.disposed(by: disposeBag)
 		
+		// MARK: - Model Selected
+		
 		let modelSelected =
 			tableView.rx
 			.modelSelected(StationSectionItem.self)
 			.share()
+		
+		// MARK: - Close
+		
+		closeButton.rx.tap.bind { [weak self] in
+			self?.dismiss(animated: true, completion: nil)
+		}.disposed(by: disposeBag)
 		
 		// MARK: - Can edit
 		

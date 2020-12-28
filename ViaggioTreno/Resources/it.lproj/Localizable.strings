@@ -15,6 +15,7 @@
 "app.common.arrivals" = "Arrivi";
 "app.common.departures" = "Partenze";
 "app.common.board" = "Tabellone";
+"app.common.x" = "X";
 
 // MARK: - Home
 

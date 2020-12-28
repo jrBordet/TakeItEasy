@@ -25,11 +25,13 @@ internal enum L10n {
       internal static let dismiss = L10n.tr("Localizable", "app.common.dismiss")
       /// Save
       internal static let save = L10n.tr("Localizable", "app.common.save")
+      /// X
+      internal static let x = L10n.tr("Localizable", "app.common.x")
     }
     internal enum Home {
       /// Add stations
       internal static let addStations = L10n.tr("Localizable", "app.home.addStations")
-      /// No stations on your favourites...
+      /// No stations on your favourites
       internal static let disclaimer = L10n.tr("Localizable", "app.home.disclaimer")
       /// +
       internal static let plus = L10n.tr("Localizable", "app.home.plus")
