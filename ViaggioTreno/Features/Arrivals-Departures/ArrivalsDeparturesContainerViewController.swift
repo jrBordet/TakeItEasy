@@ -72,7 +72,11 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 			.map { $0.train?.number }
 			.distinctUntilChanged()
 			.ignoreNil()
-			.subscribe(onNext: { _ in
+			.subscribe(onNext: { [weak self] _ in
+				guard let self = self else {
+					return
+				}
+				
 				navigationLink(from: self, destination: Scene<TrainSectionViewController>(), completion: { vc in
 					vc.store = store.view(
 						value: { $0.trainSectionsState },
