@@ -1,6 +1,6 @@
-name: ViaggioTreno
+name: pendolarestanco
 options: # Some general settings for the project
-    bundleIdPrefix: com.viaggiotreno
+    bundleIdPrefix: com.bordet
     createIntermediateGroups: true # If the folders are nested, also nest the groups in Xcode
     indentWidth: 4 # indent by 2 spaces
     tabWidth: 4 # a tab is 2 spaces

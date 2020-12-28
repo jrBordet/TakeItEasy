@@ -47,9 +47,7 @@ public struct ArrivalsRequest: APIRequest, CustomDebugStringConvertible {
 		
 		var request = URLRequest(url: url)
 		request.httpMethod = "GET"
-		
-		print(request)
-		
+				
 		return request
 	}
 	

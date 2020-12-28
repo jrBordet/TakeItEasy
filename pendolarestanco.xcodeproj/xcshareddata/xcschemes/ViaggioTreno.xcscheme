@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "62E1CB155C6FFB751C7EF184"
+               BlueprintIdentifier = "E14C3A465C7AB95390021113"
                BuildableName = "ViaggioTreno.app"
                BlueprintName = "ViaggioTreno"
-               ReferencedContainer = "container:ViaggioTreno.xcodeproj">
+               ReferencedContainer = "container:pendolarestanco.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,17 +32,17 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "01B30C36CDD646207ECAB7F3"
-            BuildableName = "Networking.framework"
-            BlueprintName = "Networking"
-            ReferencedContainer = "container:ViaggioTreno.xcodeproj">
+            BlueprintIdentifier = "E14C3A465C7AB95390021113"
+            BuildableName = "ViaggioTreno.app"
+            BlueprintName = "ViaggioTreno"
+            ReferencedContainer = "container:pendolarestanco.xcodeproj">
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "62E1CB155C6FFB751C7EF184"
-            BuildableName = "ViaggioTreno.app"
-            BlueprintName = "ViaggioTreno"
-            ReferencedContainer = "container:ViaggioTreno.xcodeproj">
+            BlueprintIdentifier = "A05297D6956CC0EF9EFD0783"
+            BuildableName = "Networking.framework"
+            BlueprintName = "Networking"
+            ReferencedContainer = "container:pendolarestanco.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -50,10 +50,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4E2573C6EF332B80F017E7EB"
+               BlueprintIdentifier = "A017D6F53785B09C72D5F83D"
                BuildableName = "ViaggioTrenoTests.xctest"
                BlueprintName = "ViaggioTrenoTests"
-               ReferencedContainer = "container:ViaggioTreno.xcodeproj">
+               ReferencedContainer = "container:pendolarestanco.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -62,8 +62,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "it"
-      region = "IT"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -74,10 +72,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "62E1CB155C6FFB751C7EF184"
+            BlueprintIdentifier = "E14C3A465C7AB95390021113"
             BuildableName = "ViaggioTreno.app"
             BlueprintName = "ViaggioTreno"
-            ReferencedContainer = "container:ViaggioTreno.xcodeproj">
+            ReferencedContainer = "container:pendolarestanco.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -91,10 +89,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "62E1CB155C6FFB751C7EF184"
+            BlueprintIdentifier = "E14C3A465C7AB95390021113"
             BuildableName = "ViaggioTreno.app"
             BlueprintName = "ViaggioTreno"
-            ReferencedContainer = "container:ViaggioTreno.xcodeproj">
+            ReferencedContainer = "container:pendolarestanco.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

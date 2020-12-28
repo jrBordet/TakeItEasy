@@ -25,6 +25,11 @@ target 'ViaggioTreno' do
   pod 'RxDataSources', '4.0.1'
 	pod 'Tabman', '~> 2.9'
 	
+	# add the Firebase pod for Google Analytics
+	pod 'Firebase/Analytics'
+	# add pods for any other desired Firebase products
+	# https://firebase.google.com/docs/ios/setup#available-pods
+	
   target 'ViaggioTrenoTests' do
     inherit! :search_paths
     # Pods for testing

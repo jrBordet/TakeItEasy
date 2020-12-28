@@ -146,6 +146,8 @@ class TrainSectionViewController: UIViewController {
 		store
 			.error
 			.map { e -> Bool in
+				return false
+
 				guard ((e as? APIError) != nil) else {
 					return false
 				}

@@ -38,7 +38,7 @@ let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 				guard sections.isEmpty == false else {
 					throw APIError.noContent
 				}
-
+				
 				return sections
 			}
 	},
@@ -49,7 +49,7 @@ let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 				guard sections.isEmpty == false else {
 					throw APIError.noContent
 				}
-
+				
 				return sections
 			}
 	}
@@ -76,23 +76,13 @@ let live: AppEnvironment = (
 )
 
 func saveFavourites(stations s: [Station]) -> Effect<Bool> {
-	.sync { () -> Bool in
-		switch FavouritesFileClient().persist(s) {
-		case let .success(v):
-			return v
-		case .failure:
-			return false
-		}
-	}
+	FavouritesFileClient()
+		.persist(with: s)
+		.catchErrorJustReturn(false)
 }
 
 func retrieveFavourites() -> Effect<[Station]> {
-	.sync { () -> [Station] in
-		switch FavouritesFileClient().retrieve() {
-		case let .success(stations):
-			return stations
-		case .failure(_):
-			return []
-		}
-	}
+	FavouritesFileClient()
+		.fetch()
+		.catchErrorJustReturn([])
 }
