@@ -72,7 +72,7 @@ class TrainSectionViewController: UIViewController {
 			return
 		}
 		
-		store.send(TrainSectionViewAction.section(TrainSectionAction.selectTrain(nil)))
+		store.send(.section(.selectTrain(nil)))
 	}
 	
 	override func viewDidLoad() {
@@ -149,7 +149,7 @@ class TrainSectionViewController: UIViewController {
 				guard ((e as? APIError) != nil) else {
 					return false
 				}
-				
+								
 				return true
 			}
 			.bind(to: emptyContainer.rx.isVisible)

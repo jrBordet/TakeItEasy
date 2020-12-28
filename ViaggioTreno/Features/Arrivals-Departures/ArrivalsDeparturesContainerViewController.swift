@@ -18,6 +18,9 @@ import Pageboy
 import SceneBuilder
 
 class ArrivalsDeparturesContainerViewController: TabmanViewController {
+	@IBOutlet var emptyContainer: UIView!
+	@IBOutlet var emptyLabel: UILabel!
+	
 	public var viewControllers: [UIViewController] = []
 	
 	let theme: AppThemeMaterial = .theme
@@ -64,6 +67,45 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		arrivals.store = store
 		
 		viewControllers.append(arrivals)
+		
+		// MARK: - Error
+		
+		store
+			.error
+			.distinctUntilChanged({ (e1: Error?, e2: Error?) -> Bool in
+				let errors = zip(e1, e2)
+				
+				guard let e1 = errors?.0 as? APIError, let e2 = errors?.1 as? APIError else {
+					return false
+				}
+				
+				guard e1 == e2 else {
+					return false
+				}
+				
+				return true
+			})
+			.map { e -> Bool in
+				return false
+				
+				// TODO: handle error
+				
+				guard ((e as? APIError) != nil) else {
+					return false
+				}
+				
+				store.send(.arrivalDepartures(.arrivalsResponse([])))
+				store.send(.arrivalDepartures(.departuresResponse([])))
+				
+				return true
+			}
+			.bind(to: emptyContainer.rx.isVisible)
+			.disposed(by: disposeBag)
+		
+		emptyLabel
+			|> theme.primaryLabel
+			<> fontThin(with: 23)
+			<> textLabel(L10n.Sections.empty)
 		
 		// MARK: - Train selected
 		

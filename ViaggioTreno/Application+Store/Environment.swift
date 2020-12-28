@@ -32,17 +32,41 @@ let stationsEnvLive: StationsViewEnvironment = (
 
 let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 	departures: { station in
-		DeparturesRequest(code: station, date: Date()).execute()
+		DeparturesRequest(code: station, date: Date())
+			.execute()
+			.map { sections in
+				guard sections.isEmpty == false else {
+					throw APIError.noContent
+				}
+
+				return sections
+			}
 	},
 	arrivals: { id in
-		ArrivalsRequest(code: id, date: Date()).execute()
+		ArrivalsRequest(code: id, date: Date())
+			.execute()
+			.map { sections in
+				guard sections.isEmpty == false else {
+					throw APIError.noContent
+				}
+
+				return sections
+			}
 	}
 )
 
 let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 	arrivalsDepartures: arrivalsDeparturesEnvLive,
 	sections: { station, train in
-		TrainSectionsRequest(station: station, train: train).execute()
+		TrainSectionsRequest(station: station, train: train)
+			.execute()
+			.map { sections in
+				guard sections.isEmpty == false else {
+					throw APIError.noContent
+				}
+				
+				return sections
+			}
 	}
 )
 
