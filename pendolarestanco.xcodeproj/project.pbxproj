@@ -115,6 +115,7 @@
 		F55715B895369C504435A90C /* DeparturesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565FBC4BA0274F690A66D47C /* DeparturesRequest.swift */; };
 		F7B3B4923A9A786A249488AC /* FavouritesStationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A21C5C8C10AD5BC67D4923 /* FavouritesStationsCell.xib */; };
 		F806F311259A587E00ACE439 /* ZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F310259A587E00ACE439 /* ZipTests.swift */; };
+		F806F32A259A5B5100ACE439 /* DeparturesArrivalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */; };
 		F84805BE08735ED9E0ACA42A /* Pods_ViaggioTrenoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CE7A619885ACE53BFFD8F7 /* Pods_ViaggioTrenoTests.framework */; };
 		F9D16C0977279839AAF4D531 /* ApplicationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1135204E8690B4468F92B9 /* ApplicationAction.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
@@ -295,6 +296,7 @@
 		F5A6479125BDF498493D3C26 /* TrainSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionCell.xib; sourceTree = "<group>"; };
 		F607F2D0DCD30537CEC8F9E3 /* Pods-Styling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Styling.debug.xcconfig"; path = "Target Support Files/Pods-Styling/Pods-Styling.debug.xcconfig"; sourceTree = "<group>"; };
 		F806F310259A587E00ACE439 /* ZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipTests.swift; sourceTree = "<group>"; };
+		F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesArrivalsTests.swift; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FAED8DE6CC80A25D52C08FB4 /* Pods-ViaggioTrenoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaggioTrenoTests.release.xcconfig"; path = "Target Support Files/Pods-ViaggioTrenoTests/Pods-ViaggioTrenoTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 				2D28E1F7F8C6BD5A3FF0437A /* SnapshotTests */,
 				AB6AF1527CBEB60EF87D5F5F /* HomeTests */,
 				E7BC163B52D2D504C8A8EFBD /* StationsTests */,
+				F806F328259A5B2B00ACE439 /* DeparturesArrivalsTests */,
 				C628ED13FFDFFB1BC7D62141 /* TrainSections */,
 				A2FAA7A5C5851FB7B43E0ADF /* NetworkingTests */,
 			);
@@ -840,6 +843,14 @@
 				BFCA2B29CA2DCF9CF8CE2524 /* TrainSection+Store.swift */,
 			);
 			path = "TrainSection+Store";
+			sourceTree = "<group>";
+		};
+		F806F328259A5B2B00ACE439 /* DeparturesArrivalsTests */ = {
+			isa = PBXGroup;
+			children = (
+				F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */,
+			);
+			path = DeparturesArrivalsTests;
 			sourceTree = "<group>";
 		};
 		FE5C982C12AECC508D34C39A /* Networking */ = {
@@ -1204,6 +1215,7 @@
 				80A3A5DB0FD4EA64B7639C1E /* TrainSectionsTests.swift in Sources */,
 				5ED3783B98342B4D9CC0493F /* UIStationsTests.swift in Sources */,
 				F806F311259A587E00ACE439 /* ZipTests.swift in Sources */,
+				F806F32A259A5B5100ACE439 /* DeparturesArrivalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
