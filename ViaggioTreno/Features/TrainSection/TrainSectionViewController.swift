@@ -42,16 +42,6 @@ extension TrainSectionItem: IdentifiableType {
 
 extension TrainSectionItem: Equatable { }
 
-func zip<A, B>(_ a: A?, _ b: B?) -> (A, B)? {
-	guard
-		let a = a,
-		let b = b else {
-		return nil
-	}
-	
-	return (a, b)
-}
-
 // MARK: - ViewController
 
 class TrainSectionViewController: UIViewController {
@@ -60,6 +50,8 @@ class TrainSectionViewController: UIViewController {
 	@IBOutlet var trainLabel: UILabel!
 	@IBOutlet var headerView: UIView!
 	@IBOutlet var headerHeightConstraint: NSLayoutConstraint!
+	@IBOutlet var emptyContainer: UIView!
+	@IBOutlet var emptyLabel: UILabel!
 	
 	let theme: AppThemeMaterial = .theme
 	
@@ -145,34 +137,28 @@ class TrainSectionViewController: UIViewController {
 			
 			dateFormatter.dateStyle = .none
 			dateFormatter.timeStyle = .short
-			
-			//dateFormatter.locale = Locale(identifier: "it_IT")
-			
+						
 			return dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time / 1000)))
 		}
 		
-		// MARK: - Errors
+		// MARK: - Error
 		
 		store
 			.error
-			.subscribe(onNext: { error in
-				if let error = error as? APIError {
-					switch error {
-					case .code(_):
-						break
-					case .undefinedStatusCode:
-						break
-					case .empty:
-						break
-					case let .decoding(value):
-						print(value)
-						break
-					case .dataCorrupted:
-						break
-					}
+			.map { e -> Bool in
+				guard ((e as? APIError) != nil) else {
+					return false
 				}
-			})
+				
+				return true
+			}
+			.bind(to: emptyContainer.rx.isVisible)
 			.disposed(by: disposeBag)
+		
+		emptyLabel
+			|> theme.primaryLabel
+			<> fontThin(with: 23)
+			<> textLabel(L10n.Sections.empty)
 
 		// MARK: - Sections
 		

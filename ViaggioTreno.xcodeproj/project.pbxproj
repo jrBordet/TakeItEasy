@@ -110,6 +110,7 @@
 		F8C2AE042593329A00CC88FB /* TrainSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C2AE022593329A00CC88FB /* TrainSectionCell.swift */; };
 		F8C2AE052593329A00CC88FB /* TrainSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8C2AE032593329A00CC88FB /* TrainSectionCell.xib */; };
 		F8C2AE182593372500CC88FB /* Mock+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C2AE172593372500CC88FB /* Mock+.swift */; };
+		F8DB713D2599DDEB00849271 /* Utils+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DB713C2599DDEB00849271 /* Utils+.swift */; };
 		F9EEE7A3D6FEF820FDCE0D75 /* departures.json in Resources */ = {isa = PBXBuildFile; fileRef = ADF23D1258755B3F63E0EB27 /* departures.json */; };
 		FAE68B41CD056D77DBC41AE2 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BF02743C77A6447841A6399 /* Roboto-LightItalic.ttf */; };
 		FDD6896D34798BFDEA02E7D9 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4B01E786EA0FF0B5145C4A /* Localizable.swift */; };
@@ -287,6 +288,7 @@
 		F8C2AE022593329A00CC88FB /* TrainSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionCell.swift; sourceTree = "<group>"; };
 		F8C2AE032593329A00CC88FB /* TrainSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionCell.xib; sourceTree = "<group>"; };
 		F8C2AE172593372500CC88FB /* Mock+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mock+.swift"; sourceTree = "<group>"; };
+		F8DB713C2599DDEB00849271 /* Utils+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utils+.swift"; sourceTree = "<group>"; };
 		F8ECD865B0CD3EC91C4D74D2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		FCA9EA6614503E208567B732 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		FD9A20DFE4DED2C5F1A10229 /* train_sections.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = train_sections.json; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				F8AD62C22591EDB5007249F2 /* Utils+Rx.swift */,
 				E3F0638C57C372FF25025688 /* BaseViewController.swift */,
 				F8C2AE172593372500CC88FB /* Mock+.swift */,
+				F8DB713C2599DDEB00849271 /* Utils+.swift */,
 			);
 			path = ViaggioTreno;
 			sourceTree = "<group>";
@@ -1201,6 +1204,7 @@
 				F8AD62842591DF35007249F2 /* DeparturesViewController.swift in Sources */,
 				649CFB07468CEC4E6316ECA5 /* Environment.swift in Sources */,
 				F8B2C4982590856A002419E8 /* Home+Store.swift in Sources */,
+				F8DB713D2599DDEB00849271 /* Utils+.swift in Sources */,
 				5FA7D43FFAC90A97A8DFA812 /* HomeViewController.swift in Sources */,
 				AB44C0487505C20204466B64 /* Localizable.swift in Sources */,
 				564DC8F3F2584EE8BE0F4D94 /* StationCell.swift in Sources */,

@@ -29,3 +29,7 @@
 "stations.searchbar" = "Cerca...";
 "stations.header.favourites" = "Le mie stazioni";
 "stations.header.results" = "Risultati";
+
+// MARK: - Sections
+
+"sections.empty" = "Nessun risultato";

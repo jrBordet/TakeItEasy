@@ -38,6 +38,11 @@ internal enum L10n {
     }
   }
 
+  internal enum Sections {
+    /// No results
+    internal static let empty = L10n.tr("Localizable", "sections.empty")
+  }
+
   internal enum Stations {
     /// Search...
     internal static let searchbar = L10n.tr("Localizable", "stations.searchbar")

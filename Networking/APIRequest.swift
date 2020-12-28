@@ -14,4 +14,5 @@ public enum APIError: Error, Equatable {
 	case empty
 	case decoding(String)
 	case dataCorrupted
+	case noContent
 }

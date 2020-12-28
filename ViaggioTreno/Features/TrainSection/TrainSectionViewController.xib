@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainSectionViewController" customModule="ViaggioTreno" customModuleProvider="target">
             <connections>
+                <outlet property="emptyContainer" destination="ROk-r3-kjG" id="e9a-Tv-UYW"/>
+                <outlet property="emptyLabel" destination="BDG-2o-rQy" id="QgP-3E-yOx"/>
                 <outlet property="headerHeightConstraint" destination="Y7C-Y5-eGF" id="Thj-aD-3bu"/>
                 <outlet property="headerView" destination="XhX-Cx-aef" id="glH-50-4jl"/>
                 <outlet property="tableView" destination="RAf-Wx-Bhr" id="lvg-He-oNO"/>
@@ -53,6 +55,24 @@
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROk-r3-kjG">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDG-2o-rQy">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="BDG-2o-rQy" firstAttribute="leading" secondItem="ROk-r3-kjG" secondAttribute="leading" id="5Dq-9k-McJ"/>
+                        <constraint firstAttribute="bottom" secondItem="BDG-2o-rQy" secondAttribute="bottom" id="GtS-vc-9dm"/>
+                        <constraint firstItem="BDG-2o-rQy" firstAttribute="top" secondItem="ROk-r3-kjG" secondAttribute="top" id="rQP-bJ-2ry"/>
+                        <constraint firstAttribute="trailing" secondItem="BDG-2o-rQy" secondAttribute="trailing" id="uA1-yS-1Y1"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,10 +82,14 @@
                 <constraint firstItem="RAf-Wx-Bhr" firstAttribute="top" secondItem="XhX-Cx-aef" secondAttribute="bottom" id="8jU-sN-NrV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RAf-Wx-Bhr" secondAttribute="bottom" id="Aoh-eA-gni"/>
                 <constraint firstItem="XhX-Cx-aef" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BR2-gI-WsY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ROk-r3-kjG" secondAttribute="trailing" id="Bb4-6x-YRU"/>
+                <constraint firstItem="ROk-r3-kjG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="H38-Yz-TND"/>
+                <constraint firstItem="ROk-r3-kjG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KOn-pU-Mr2"/>
                 <constraint firstItem="RAf-Wx-Bhr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Uli-c0-yaa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RAf-Wx-Bhr" secondAttribute="trailing" id="bca-K4-LBB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ROk-r3-kjG" secondAttribute="bottom" id="oup-R6-ceV"/>
             </constraints>
-            <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
+            <point key="canvasLocation" x="120" y="72"/>
         </view>
     </objects>
     <resources>
