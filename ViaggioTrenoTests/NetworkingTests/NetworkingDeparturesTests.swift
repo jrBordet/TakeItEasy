@@ -25,16 +25,16 @@ class DeparturesTests: XCTestCase {
 	}
 	
 	func test_departure_request() {
-		let departuresRequest = Networking<DeparturesRequest>.departure(from: "S01700", date: Date(timeIntervalSince1970: 315568800))
+		let departuresRequest = DeparturesRequest(code: "S01700", date: Date(timeIntervalSince1970: 315568800))
 		
-		XCTAssertEqual(departuresRequest.API.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/partenze/S01700/Tue%20Jan%2001%201980%2010:00:00%20GMT+0100")
-		XCTAssertEqual(departuresRequest.API.request.httpMethod, "GET")
+		XCTAssertEqual(departuresRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/partenze/S01700/Tue%20Jan%2001%201980%2010:00:00%20GMT+0100")
+		XCTAssertEqual(departuresRequest.request.httpMethod, "GET")
 	}
 	
 	func test_departures() throws {
 		let result = try
-			DeparturesRequest
-			.fetch(from: "S01700", date: Date(), urlSession: urlSession)
+			DeparturesRequest(code: "S01700", date: Date())
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -46,8 +46,8 @@ class DeparturesTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: .departures_broken)
 		
 		let result =
-			DeparturesRequest
-			.fetch(from: "S01700", date: Date(), urlSession: urlSession)
+			DeparturesRequest(code: "S01700", date: Date())
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
@@ -59,8 +59,8 @@ class DeparturesTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: .departures_broken, statusCode: 500)
 		
 		let result =
-			DeparturesRequest
-			.fetch(from: "S01700", date: Date(), urlSession: urlSession)
+			DeparturesRequest(code: "S01700", date: Date())
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in

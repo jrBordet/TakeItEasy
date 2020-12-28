@@ -39,8 +39,6 @@ let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 	}
 )
 
-let sections = TrainSectionsRequest.fetch(from: "", train: "")
-
 let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 	arrivalsDepartures: arrivalsDeparturesEnvLive,
 	sections: { station, train in

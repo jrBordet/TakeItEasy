@@ -60,23 +60,6 @@ public struct DeparturesRequest: APIRequest, CustomDebugStringConvertible {
 	}
 }
 
-extension DeparturesRequest {
-	public static func fetch(from station: String, date: Date = Date(), urlSession: URLSession = .shared) -> Observable<Self.Response> {
-		Networking<DeparturesRequest>
-			.departure(from: station, date: date)
-			.json(with: urlSession)
-	}
-}
-
-extension Networking {
-	public static func departure(from station: String, date: Date = Date()) -> Networking<DeparturesRequest> {
-		Networking<DeparturesRequest>(
-			API: DeparturesRequest(code: station, date: date),
-			httpMethod: "GET"
-		)
-	}
-}
-
 /// Create an encoded date with format EEE MMM dd yyyy HH:mm:ss GMT+0100
 ///
 /// - Returns: a String representing the current date.

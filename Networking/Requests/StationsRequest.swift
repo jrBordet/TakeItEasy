@@ -44,14 +44,6 @@ public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
 	}
 }
 
-extension StationsRequest {
-	public static func autocompleteStation(with v: String, urlSession: URLSession = .shared) -> Observable<Self.Response> {
-		Networking<StationsRequest>
-			.autocompleteStation(with: v)
-			.data(with: urlSession) { $0.parseStations() }
-	}
-}
-
 public struct Station: Codable, Equatable {
 	public let id: String
 	public let name: String
@@ -69,26 +61,6 @@ extension Station {
 		]
 	}
 }
-
-let sr = Networking(API: StationsRequest(station: ""), httpMethod: "GET")
-
-extension Networking {
-	public static func autocompleteStation(with s: String) -> Networking<StationsRequest> {
-		Networking<StationsRequest>(
-			API: StationsRequest(station: s),
-			httpMethod: "GET"
-		)
-	}
-}
-
-//extension Networking where T == StationsRequest {
-//	public static func autocompleteStation(with s: String) -> Self {
-//		Self(
-//			API: StationsRequest(station: s),
-//			httpMethod: "GET"
-//		)
-//	}
-//}
 
 extension String {
 	public func parseStations() -> [Station] {

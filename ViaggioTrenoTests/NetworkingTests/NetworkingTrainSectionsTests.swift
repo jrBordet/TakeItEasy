@@ -26,16 +26,16 @@ class NetworkingTrainSectionsTests: XCTestCase {
 	}
 	
 	func test_sections_request() {
-		let sectionsRequest = Networking<TrainSectionsRequest>.sections(from: "S06000", train: "667")
+		let sectionsRequest = TrainSectionsRequest(station: "S06000", train: "667")
 		
-		XCTAssertEqual(sectionsRequest.API.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/tratteCanvas/S06000/667")
-		XCTAssertEqual(sectionsRequest.API.request.httpMethod, "GET")
+		XCTAssertEqual(sectionsRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/tratteCanvas/S06000/667")
+		XCTAssertEqual(sectionsRequest.request.httpMethod, "GET")
 	}
 	
 	func test_sections() throws {
 		let result = try
-			TrainSectionsRequest
-			.fetch(from: "S06000", train: "667", urlSession: urlSession)
+			TrainSectionsRequest(station: "S06000", train: "667")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -48,8 +48,8 @@ class NetworkingTrainSectionsTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: .train_sections_broken)
 		
 		let result =
-			TrainSectionsRequest
-			.fetch(from: "S06000", train: "667", urlSession: urlSession)
+			TrainSectionsRequest(station: "S06000", train: "667")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in
@@ -61,8 +61,8 @@ class NetworkingTrainSectionsTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: .train_sections_broken, statusCode: 500)
 		
 		let result =
-			TrainSectionsRequest
-			.fetch(from: "S06000", train: "667", urlSession: urlSession)
+			TrainSectionsRequest(station: "S06000", train: "667")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in

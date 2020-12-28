@@ -26,10 +26,10 @@ class NetworkingTests: XCTestCase {
 	}
 	
 	func test_station_request() {
-		let stationRequest = Networking<StationsRequest>.autocompleteStation(with: "mi")
+		let stationRequest = StationsRequest(station: "mi")
 		
-		XCTAssertEqual(stationRequest.API.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
-		XCTAssertEqual(stationRequest.API.request.httpMethod, "GET")
+		XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
+		XCTAssertEqual(stationRequest.request.httpMethod, "GET")
 	}
 	
 	func test_parse_stations() {
@@ -66,8 +66,8 @@ class NetworkingTests: XCTestCase {
 	
 	func test_stations_autocomplete() throws {
 		let result = try
-			StationsRequest
-			.autocompleteStation(with: "mi", urlSession: urlSession)
+			StationsRequest(station: "mi")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -80,8 +80,8 @@ class NetworkingTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: "".data(using: .utf8), statusCode: 200)
 		
 		let result = try
-			StationsRequest
-			.autocompleteStation(with: "mi", urlSession: urlSession)
+			StationsRequest(station: "mi")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -93,8 +93,8 @@ class NetworkingTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: "".data(using: .utf8), statusCode: 200)
 		
 		let result = try
-			StationsRequest
-			.autocompleteStation(with: "mi", urlSession: urlSession)
+			StationsRequest(station: "mi")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -106,8 +106,8 @@ class NetworkingTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: .stations_broken, statusCode: 200)
 		
 		let result = try
-			StationsRequest
-			.autocompleteStation(with: "mi", urlSession: urlSession)
+			StationsRequest(station: "mi")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -120,8 +120,8 @@ class NetworkingTests: XCTestCase {
 		MockUrlProtocol.requestHandler = requestHandler(with: .stations_broken, statusCode: 404)
 		
 		let result =
-			StationsRequest
-			.autocompleteStation(with: "mi", urlSession: urlSession)
+			StationsRequest(station: "mi")
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 		
 		XCTAssertThrowsError(try result.toArray()) { error in

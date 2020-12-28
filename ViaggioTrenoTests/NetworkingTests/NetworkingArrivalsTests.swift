@@ -25,16 +25,15 @@ class ArrivalsTests: XCTestCase {
 	}
 	
 	func test_arrival_request() {
-		let arrivalRequest = Networking<ArrivalsRequest>.arrivals(from: "S01700", date: Date(timeIntervalSince1970: 315568800))
+		let arrivalRequest = ArrivalsRequest(code: "S01700", date: Date(timeIntervalSince1970: 315568800))
 		
-		XCTAssertEqual(arrivalRequest.API.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/arrivi/S01700/Tue%20Jan%2001%201980%2010:00:00%20GMT+0100")
-		XCTAssertEqual(arrivalRequest.API.request.httpMethod, "GET")
+		XCTAssertEqual(arrivalRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/arrivi/S01700/Tue%20Jan%2001%201980%2010:00:00%20GMT+0100")
+		XCTAssertEqual(arrivalRequest.request.httpMethod, "GET")
 	}
 	
 	func test_arrivals() throws {
-		let result = try
-			ArrivalsRequest
-			.fetch(from: "S01700", date: Date(), urlSession: urlSession)
+		let result = try ArrivalsRequest(code: "S01700", date: Date())
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
 			.toArray()
 			.first
@@ -45,12 +44,13 @@ class ArrivalsTests: XCTestCase {
 	func test_arrivals_decoding_error() throws {
 		MockUrlProtocol.requestHandler = requestHandler(with: .arrivals_broken)
 		
-		let result =
-			ArrivalsRequest
-			.fetch(from: "S01700", date: Date(), urlSession: urlSession)
+		let result = try ArrivalsRequest(code: "S01700", date: Date())
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
+			.toArray()
+			.first
 		
-		XCTAssertThrowsError(try result.toArray()) { error in
+		XCTAssertThrowsError(result) { error in
 			XCTAssertEqual(error as? APIError, APIError.decoding("Decoding error on key 'numeroTreno': Expected to decode Int but found a string/data instead."))
 		}
 	}
@@ -58,12 +58,13 @@ class ArrivalsTests: XCTestCase {
 	func test_arrivals_500() throws {
 		MockUrlProtocol.requestHandler = requestHandler(with: .departures_broken, statusCode: 500)
 		
-		let result =
-			ArrivalsRequest
-			.fetch(from: "S01700", date: Date(), urlSession: urlSession)
+		let result = try ArrivalsRequest(code: "S01700", date: Date())
+			.execute(with: urlSession)
 			.toBlocking(timeout: 10)
+			.toArray()
+			.first
 		
-		XCTAssertThrowsError(try result.toArray()) { error in
+		XCTAssertThrowsError(result) { error in
 			XCTAssertEqual(error as? APIError, APIError.code(HTTPStatusCodes.InternalServerError))
 		}
 	}

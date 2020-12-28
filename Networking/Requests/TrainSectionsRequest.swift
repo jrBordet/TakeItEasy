@@ -63,24 +63,3 @@ public struct TrainSectionsRequest: APIRequest, CustomDebugStringConvertible {
 		self.train = train
 	}
 }
-
-extension TrainSectionsRequest {
-	public static func fetch(from station: String, train: String, urlSession: URLSession = .shared) -> Observable<Self.Response> {
-		Networking<Self>
-			.sections(from: station, train: train)
-			.json(with: urlSession)
-	}
-	
-	public static func mock(_ data: Data) -> Self.Response {
-		Networking<Self>.mock(data)
-	}
-}
-
-extension Networking {
-	public static func sections(from station: String, train: String) -> Networking<TrainSectionsRequest> {
-		Networking<TrainSectionsRequest>(
-			API: TrainSectionsRequest(station: station, train: train),
-			httpMethod: "GET"
-		)
-	}
-}

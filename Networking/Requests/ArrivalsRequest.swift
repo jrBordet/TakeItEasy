@@ -58,20 +58,3 @@ public struct ArrivalsRequest: APIRequest, CustomDebugStringConvertible {
 		self.date = date
 	}
 }
-
-extension ArrivalsRequest {
-	public static func fetch(from station: String, date: Date = Date(), urlSession: URLSession = .shared) -> Observable<Self.Response> {
-		return Networking<Self>
-			.arrivals(from: station, date: date)
-			.json(with: urlSession)
-	}
-}
-
-extension Networking {
-	public static func arrivals(from station: String, date: Date = Date()) -> Networking<ArrivalsRequest> {
-		Networking<ArrivalsRequest>(
-			API: ArrivalsRequest(code: station, date: date),
-			httpMethod: "GET"
-		)
-	}
-}
