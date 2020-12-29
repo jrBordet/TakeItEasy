@@ -19,11 +19,14 @@ class StationsTests: XCTestCase {
 	
 	var initialState: StationsViewState!
 	
-	var autocompleteResponseExpectedResult = Station.milano
+	var autocompleteResponseExpectedResult: [Station] = [
+		Station("S05188", name: "MODENA PIAZZA MANZONI"),
+		Station("S05997", name: "MEZZOLARA")
+	]
 	
 	var env: StationsViewEnvironment!
 	
-	var selectedStationExpectedResult = Station.milano.first!
+	var selectedStationExpectedResult = Station("S05188", name: "MODENA PIAZZA MANZONI")
 	
 	override func setUp() {
 		initialState = StationsViewState(stations: [], favouritesStations: [], selectedStation: nil)
