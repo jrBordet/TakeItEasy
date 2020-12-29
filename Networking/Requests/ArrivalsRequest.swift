@@ -40,9 +40,9 @@ public struct ArrivalsRequest: APIRequest, CustomDebugStringConvertible {
 	private (set) var code: String
 	private (set) var date: Date
 	
-	public var request: URLRequest {
+	public var request: URLRequest? {
 		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(code)/\(encoded(date))") else {
-			fatalError()
+			return nil
 		}
 		
 		var request = URLRequest(url: url)

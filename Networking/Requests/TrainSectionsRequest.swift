@@ -47,9 +47,9 @@ public struct TrainSectionsRequest: APIRequest, CustomDebugStringConvertible {
 	private (set) var station: String
 	private (set) var train: String
 	
-	public var request: URLRequest {
+	public var request: URLRequest? {
 		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station)/\(train)") else {
-			fatalError()
+			return nil
 		}
 		
 		var request = URLRequest(url: url)

@@ -28,8 +28,8 @@ class NetworkingTrainSectionsTests: XCTestCase {
 	func test_sections_request() {
 		let sectionsRequest = TrainSectionsRequest(station: "S06000", train: "667")
 		
-		XCTAssertEqual(sectionsRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/tratteCanvas/S06000/667")
-		XCTAssertEqual(sectionsRequest.request.httpMethod, "GET")
+		XCTAssertEqual(sectionsRequest.request?.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/tratteCanvas/S06000/667")
+		XCTAssertEqual(sectionsRequest.request?.httpMethod, "GET")
 	}
 	
 	func test_sections() throws {

@@ -28,22 +28,22 @@ class NetworkingTests: XCTestCase {
 	func test_station_request() {
 		let stationRequest = StationsRequest(station: "mi")
 		
-		XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
-		XCTAssertEqual(stationRequest.request.httpMethod, "GET")
+		XCTAssertEqual(stationRequest.request?.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/mi")
+		XCTAssertEqual(stationRequest.request?.httpMethod, "GET")
 	}
 	
 	func test_station_request_with_spaces() {
 		let stationRequest = StationsRequest(station: " mi la no   ")
 		
-		XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/milano")
-		XCTAssertEqual(stationRequest.request.httpMethod, "GET")
+		XCTAssertEqual(stationRequest.request?.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/milano")
+		XCTAssertEqual(stationRequest.request?.httpMethod, "GET")
 	}
 	
 	func test_station_request_with_emoji() {
 		let stationRequest = StationsRequest(station: " mi la no  🍌 ")
 		
-		XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/milano")
-		XCTAssertEqual(stationRequest.request.httpMethod, "GET")
+		XCTAssertEqual(stationRequest.request?.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/milano")
+		XCTAssertEqual(stationRequest.request?.httpMethod, "GET")
 	}
 	
 	func test_parse_stations() {

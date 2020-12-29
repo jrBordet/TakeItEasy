@@ -22,6 +22,11 @@ extension APIRequest {
 			
 			os_log("execute %{public}@ ", log: OSLog.networking, type: .info, ["request", request.debugDescription.removingPercentEncoding])
 			
+			guard let request = self.request else {
+				observer.onError(APIError.wrongRequest)
+				return Disposables.create()
+			}
+			
 			urlSession.dataTask(with: request) { (data, response, error) in
 				guard let statusCode = HTTPStatusCodes.decode(from: response) else {
 					observer.onError(APIError.undefinedStatusCode)

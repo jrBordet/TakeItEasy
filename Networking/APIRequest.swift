@@ -5,10 +5,11 @@ public protocol APIRequest {
 	
 	var endpoint: String { get }
 	
-	var request: URLRequest { get }
+	var request: URLRequest? { get }
 }
 
 public enum APIError: Error, Equatable {
+	case wrongRequest
 	case code(HTTPStatusCodes)
 	case undefinedStatusCode
 	case empty
