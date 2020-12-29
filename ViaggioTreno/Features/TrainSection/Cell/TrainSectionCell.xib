@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
@@ -25,10 +25,10 @@
                                 <rect key="frame" x="15" y="4" width="437" height="48"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mnc-Xc-9X8">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="48"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0o-Dh-yIe">
-                                                <rect key="frame" x="20" y="19" width="10" height="10"/>
+                                                <rect key="frame" x="10" y="19" width="10" height="10"/>
                                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10" id="VND-rp-VGP"/>
@@ -39,21 +39,21 @@
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="W0o-Dh-yIe" firstAttribute="centerY" secondItem="Mnc-Xc-9X8" secondAttribute="centerY" id="6ne-fb-5ZK"/>
-                                            <constraint firstAttribute="width" constant="50" id="Uhp-28-xHH"/>
+                                            <constraint firstAttribute="width" constant="30" id="Uhp-28-xHH"/>
                                             <constraint firstItem="W0o-Dh-yIe" firstAttribute="centerX" secondItem="Mnc-Xc-9X8" secondAttribute="centerX" id="zKC-Yc-LQf"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="17:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqn-sU-daE">
-                                        <rect key="frame" x="58" y="0.0" width="70" height="48"/>
+                                        <rect key="frame" x="38" y="0.0" width="80" height="48"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="70" id="WUF-Rm-kAt"/>
+                                            <constraint firstAttribute="width" constant="80" id="WUF-Rm-kAt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-9m-lft">
-                                        <rect key="frame" x="136" y="0.0" width="301" height="48"/>
+                                        <rect key="frame" x="126" y="0.0" width="311" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>

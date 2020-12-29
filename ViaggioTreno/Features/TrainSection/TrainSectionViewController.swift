@@ -52,6 +52,8 @@ class TrainSectionViewController: UIViewController {
 	@IBOutlet var headerHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var emptyContainer: UIView!
 	@IBOutlet var emptyLabel: UILabel!
+	@IBOutlet var closeButton: UIButton!
+	@IBOutlet var closeContainer: UIView!
 	
 	let theme: AppThemeMaterial = .theme
 	
@@ -93,6 +95,21 @@ class TrainSectionViewController: UIViewController {
 		
 		headerView |> { $0?.backgroundColor = theme.primaryColor }
 		
+		if #available(iOS 13.0, *) {
+			closeContainer.isHidden = true
+		} else {
+			// Fallback on earlier versions
+			closeContainer.isHidden = false
+		}
+		
+		closeContainer |> backgroundColor(with: theme.primaryColor)
+		
+		closeButton
+			|> {
+				$0?.setTitleColor(.white, for: .normal)
+				$0?.setTitle(L10n.App.Common.x, for: .normal)
+			}
+		
 		trainStatusLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 17)
@@ -117,6 +134,12 @@ class TrainSectionViewController: UIViewController {
 			.ignoreNil()
 			.bind(to: trainStatusLabel.rx.text)
 			.disposed(by: disposeBag)
+		
+		// MARK: - Close
+		
+		closeButton.rx.tap.bind { [weak self] in
+			self?.dismiss(animated: true, completion: nil)
+		}.disposed(by: disposeBag)
 		
 		// MARK: - retrieve data
 		

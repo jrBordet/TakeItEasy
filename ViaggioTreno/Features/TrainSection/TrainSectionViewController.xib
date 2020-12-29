@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainSectionViewController" customModule="ViaggioTreno" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="rRf-js-F3D" id="5Lh-mm-cmT"/>
+                <outlet property="closeContainer" destination="lGd-mM-dRM" id="Dw2-LR-A8o"/>
                 <outlet property="emptyContainer" destination="ROk-r3-kjG" id="e9a-Tv-UYW"/>
                 <outlet property="emptyLabel" destination="BDG-2o-rQy" id="QgP-3E-yOx"/>
                 <outlet property="headerHeightConstraint" destination="Y7C-Y5-eGF" id="Thj-aD-3bu"/>
@@ -55,7 +57,24 @@
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROk-r3-kjG">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-mM-dRM">
+                    <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-js-F3D">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <state key="normal" title="X"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="rRf-js-F3D" secondAttribute="bottom" id="0zV-FV-7L0"/>
+                        <constraint firstItem="rRf-js-F3D" firstAttribute="top" secondItem="lGd-mM-dRM" secondAttribute="top" id="TbZ-s9-Wvu"/>
+                        <constraint firstItem="rRf-js-F3D" firstAttribute="leading" secondItem="lGd-mM-dRM" secondAttribute="leading" id="sTi-9a-V0z"/>
+                        <constraint firstAttribute="trailing" secondItem="rRf-js-F3D" secondAttribute="trailing" id="shf-nj-fAv"/>
+                        <constraint firstAttribute="height" constant="44" id="yS1-Te-p7p"/>
+                    </constraints>
+                </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROk-r3-kjG">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDG-2o-rQy">
@@ -80,6 +99,7 @@
                 <constraint firstItem="XhX-Cx-aef" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0kT-rO-j5r"/>
                 <constraint firstItem="XhX-Cx-aef" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="4MY-tO-bmi"/>
                 <constraint firstItem="RAf-Wx-Bhr" firstAttribute="top" secondItem="XhX-Cx-aef" secondAttribute="bottom" id="8jU-sN-NrV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lGd-mM-dRM" secondAttribute="bottom" id="AjF-l7-hA1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RAf-Wx-Bhr" secondAttribute="bottom" id="Aoh-eA-gni"/>
                 <constraint firstItem="XhX-Cx-aef" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BR2-gI-WsY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ROk-r3-kjG" secondAttribute="trailing" id="Bb4-6x-YRU"/>
@@ -87,7 +107,9 @@
                 <constraint firstItem="ROk-r3-kjG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KOn-pU-Mr2"/>
                 <constraint firstItem="RAf-Wx-Bhr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Uli-c0-yaa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RAf-Wx-Bhr" secondAttribute="trailing" id="bca-K4-LBB"/>
+                <constraint firstItem="lGd-mM-dRM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eik-Ho-e2v"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ROk-r3-kjG" secondAttribute="bottom" id="oup-R6-ceV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lGd-mM-dRM" secondAttribute="trailing" id="rDU-dj-Z55"/>
             </constraints>
             <point key="canvasLocation" x="120" y="72"/>
         </view>
