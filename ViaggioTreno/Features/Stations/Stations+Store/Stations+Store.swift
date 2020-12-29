@@ -111,6 +111,11 @@ func stationsReducer(
 			return []
 		}
 		
+		guard (state.stations.filter { station ==  $0 }).isEmpty == false else {
+			return []
+		}
+		
+		// remove the favourite from all stations
 		state.stations = state.stations
 			.map { $0.id == station.id ? nil : $0 }
 			.compactMap { $0 }

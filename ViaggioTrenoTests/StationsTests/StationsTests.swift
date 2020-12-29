@@ -15,17 +15,21 @@ import RxCocoa
 import Networking
 
 class StationsTests: XCTestCase {
+	let reducer: Reducer<StationsViewState, StationsViewAction, StationsViewEnvironment> = stationsViewReducer
+	
 	var initialState: StationsViewState!
 	
-	var expectedResult = Station.milano
+	var autocompleteResponseExpectedResult = Station.milano
 	
 	var env: StationsViewEnvironment!
+	
+	var selectedStationExpectedResult = Station.milano.first!
 	
 	override func setUp() {
 		initialState = StationsViewState(stations: [], favouritesStations: [], selectedStation: nil)
 		
 		env = (
-			autocomplete: { _ in .sync { self.expectedResult } },
+			autocomplete: { _ in .sync { self.autocompleteResponseExpectedResult } },
 			saveFavourites: { _ in .sync { true } } ,
 			retrieveFavourites: { .sync { [] }}
 		)
@@ -35,14 +39,37 @@ class StationsTests: XCTestCase {
 		// Put teardown code here. This method is called after the invocation of each test method in the class.
 	}
 	
+	// MARK: - Tests
+	
+	func test_none() {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .stations(.none), { _ in
+			})
+		)
+	}
+	
+	func test_select_station() {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .stations(.select(selectedStationExpectedResult)), { state in
+				state.selectedStation = self.selectedStationExpectedResult
+			})
+		)
+	}
+	
 	func test_autocomplete_success() {
 		assert(
 			initialValue: initialState,
-			reducer: stationsViewReducer,
+			reducer: reducer,
 			environment: env,
-			steps: Step(.send, StationsViewAction.stations(StationsAction.autocomplete("mil")), { _ in }),
-			Step(.receive, StationsViewAction.stations(StationsAction.autocompleteResponse(expectedResult)), { state in
-				state.stations = self.expectedResult
+			steps: Step(.send, .stations(.autocomplete("mil")), { _ in }),
+			Step(.receive, .stations(.autocompleteResponse(autocompleteResponseExpectedResult)), { state in
+				state.stations = self.autocompleteResponseExpectedResult
 			})
 		)
 	}
@@ -51,46 +78,104 @@ class StationsTests: XCTestCase {
 		let station = Station("S01010", name: "TestStation")
 		let station_01 = Station("S0001", name: "TestStation 1")
 		
-		expectedResult = [station, station_01]
-
+		autocompleteResponseExpectedResult = [station, station_01]
+		
 		assert(
 			initialValue: initialState,
-			reducer: stationsViewReducer,
+			reducer: reducer,
 			environment: env,
-			steps: Step(.send, StationsViewAction.stations(StationsAction.autocomplete("mil")), { _ in }),
-			Step(.receive, StationsViewAction.stations(StationsAction.autocompleteResponse(expectedResult)), { state in
-				state.stations = self.expectedResult
+			steps: Step(.send, .stations(StationsAction.autocomplete("mil")), { _ in }),
+			Step(.receive, .stations(.autocompleteResponse(autocompleteResponseExpectedResult)), { state in
+				state.stations = self.autocompleteResponseExpectedResult
 			}),
-			Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
+			Step(.send, .stations(StationsAction.addFavorite(station)), { state in
 				state.favouritesStations = [station]
 				state.stations = [station_01]
 			}),
-			Step(.receive, StationsViewAction.stations(StationsAction.updateFavouritesResponse(true)), { state in
+			Step(.receive, .stations(.updateFavouritesResponse(true)), { state in
 				
 			})
 		)
 	}
 	
-	func test_remove_favorite_station() {
+	func test_add_favorite_station_already_added() {
 		let station = Station("S01010", name: "TestStation")
+		let station_01 = Station("S0001", name: "TestStation 1")
+		
+		autocompleteResponseExpectedResult = [station, station_01]
 		
 		assert(
 			initialValue: initialState,
-			reducer: stationsViewReducer,
+			reducer: reducer,
 			environment: env,
-			steps: Step(.send, StationsViewAction.stations(StationsAction.addFavorite(station)), { state in
-				state.favouritesStations = [station]
+			steps: Step(.send, .stations(.autocomplete("mil")), { _ in }),
+			Step(.receive, .stations(.autocompleteResponse(autocompleteResponseExpectedResult)), { state in
+				state.stations = self.autocompleteResponseExpectedResult
 			}),
-			Step(.receive, StationsViewAction.stations(StationsAction.updateFavouritesResponse(true)), { state in
+			Step(.send, .stations(.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+				state.stations = [station_01]
+			}),
+			Step(.receive, .stations(.updateFavouritesResponse(true)), { state in
 				
 			}),
-			Step(.send, StationsViewAction.stations(StationsAction.removeFavourite(station)), { state in
+			Step(.send, .stations(.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+				state.stations = [station_01]
+			})
+		)
+	}
+	
+	func test_add_favorite_station_not_found() {
+		let station = Station("S01010", name: "TestStation")
+		let station_01 = Station("S0001", name: "TestStation 1")
+		
+		let wrongStation = Station("wrong", name: "wrong")
+		
+		autocompleteResponseExpectedResult = [station, station_01]
+		
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .stations(.autocomplete("mil")), { _ in
+			}),
+			Step(.receive, .stations(.autocompleteResponse(autocompleteResponseExpectedResult)), { state in
+				state.stations = self.autocompleteResponseExpectedResult
+			}),
+			Step(.send, .stations(.addFavorite(wrongStation)), { state in
+				state.favouritesStations = []
+				state.stations = self.autocompleteResponseExpectedResult
+			})
+		)
+	}
+	
+	func test_remove_favorite_station() {
+		let station = Station.milano.first!
+		
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .stations(.autocomplete("mil")), { _ in
+			}),
+			Step(.receive, .stations(.autocompleteResponse(autocompleteResponseExpectedResult)), { state in
+				state.stations = self.autocompleteResponseExpectedResult
+			}),
+			Step(.send, .stations(.addFavorite(station)), { state in
+				state.favouritesStations = [station]
+				state.stations = [Station.milano.last!]
+			}),
+			Step(.receive, .stations(.updateFavouritesResponse(true)), { state in
+				
+			}),
+			Step(.send, .stations(.removeFavourite(station)), { state in
 				state.favouritesStations = []
 			}),
-			Step(.receive, StationsViewAction.stations(StationsAction.updateFavouritesResponse(true)), { state in
+			Step(.receive, .stations(.updateFavouritesResponse(true)), { state in
 				
 			}),
-			Step(.send, StationsViewAction.stations(StationsAction.removeFavourite(station)), { state in
+			Step(.send, .stations(.removeFavourite(station)), { state in
 				state.favouritesStations = []
 			})
 		)
