@@ -32,6 +32,20 @@ class NetworkingTests: XCTestCase {
 		XCTAssertEqual(stationRequest.request.httpMethod, "GET")
 	}
 	
+	func test_station_request_with_spaces() {
+		let stationRequest = StationsRequest(station: " mi la no   ")
+		
+		XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/milano")
+		XCTAssertEqual(stationRequest.request.httpMethod, "GET")
+	}
+	
+	func test_station_request_with_emoji() {
+		let stationRequest = StationsRequest(station: " mi la no  🍌 ")
+		
+		XCTAssertEqual(stationRequest.request.url?.absoluteString, "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno/autocompletaStazione/milano")
+		XCTAssertEqual(stationRequest.request.httpMethod, "GET")
+	}
+	
 	func test_parse_stations() {
 		let s = """
 		\n  MOCK|S0666\n  MILITELLO|S12276\n  MIMMOLE|S06954\n  MINEO|S12275\n  MINERVINO MURGE|S11403\n  MINTURNO|S09150\n  MINUCCIANO - PIEVE - CASOLA|S06227\n  MIRA MIRANO|S02588\n  MIRADOLO TERME|S01867\n  MIRAMARE|S03311\n  MIRANDOLA|S05311\n  MIRTO CROSIA|S11814\n  MISANO ADRIATICO|S07119\n

@@ -117,6 +117,7 @@
 		F806F311259A587E00ACE439 /* ZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F310259A587E00ACE439 /* ZipTests.swift */; };
 		F806F32A259A5B5100ACE439 /* DeparturesArrivalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */; };
 		F84805BE08735ED9E0ACA42A /* Pods_ViaggioTrenoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CE7A619885ACE53BFFD8F7 /* Pods_ViaggioTrenoTests.framework */; };
+		F8AB1418259B3528005895E3 /* Utils+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB1417259B3528005895E3 /* Utils+.swift */; };
 		F9D16C0977279839AAF4D531 /* ApplicationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1135204E8690B4468F92B9 /* ApplicationAction.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
 /* End PBXBuildFile section */
@@ -297,6 +298,7 @@
 		F607F2D0DCD30537CEC8F9E3 /* Pods-Styling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Styling.debug.xcconfig"; path = "Target Support Files/Pods-Styling/Pods-Styling.debug.xcconfig"; sourceTree = "<group>"; };
 		F806F310259A587E00ACE439 /* ZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipTests.swift; sourceTree = "<group>"; };
 		F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesArrivalsTests.swift; sourceTree = "<group>"; };
+		F8AB1417259B3528005895E3 /* Utils+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utils+.swift"; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FAED8DE6CC80A25D52C08FB4 /* Pods-ViaggioTrenoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaggioTrenoTests.release.xcconfig"; path = "Target Support Files/Pods-ViaggioTrenoTests/Pods-ViaggioTrenoTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
@@ -679,10 +681,10 @@
 		AD5BE1E552398DEEA4AF69FA /* ViaggioTrenoTests */ = {
 			isa = PBXGroup;
 			children = (
-				E057068FE0771477FAFF041C /* Difference+.swift */,
 				1EE99FAE6941424BB158FE8A /* Info.plist */,
+				E057068FE0771477FAFF041C /* Difference+.swift */,
 				0AFA7C873E47894074686B6E /* Mock+resources.swift */,
-				F806F30F259A586700ACE439 /* Utils */,
+				F806F30F259A586700ACE439 /* UtilsTests */,
 				2D28E1F7F8C6BD5A3FF0437A /* SnapshotTests */,
 				AB6AF1527CBEB60EF87D5F5F /* HomeTests */,
 				E7BC163B52D2D504C8A8EFBD /* StationsTests */,
@@ -821,12 +823,12 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F806F30F259A586700ACE439 /* Utils */ = {
+		F806F30F259A586700ACE439 /* UtilsTests */ = {
 			isa = PBXGroup;
 			children = (
 				F806F310259A587E00ACE439 /* ZipTests.swift */,
 			);
-			path = Utils;
+			path = UtilsTests;
 			sourceTree = "<group>";
 		};
 		F806F31A259A5A4600ACE439 /* Arrivals-Departures+Store */ = {
@@ -861,6 +863,7 @@
 				082C2827F0A8DFCCBF7CC8C4 /* Networking.swift */,
 				3A52834BA41550E6978CC781 /* URLRequests+HTTPStatusCodes.swift */,
 				39ADDD9E951C95361C0A8C72 /* Requests */,
+				F8AB1417259B3528005895E3 /* Utils+.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1255,6 +1258,7 @@
 				DEFFFB98DE02C0561EC46062 /* APIRequest.swift in Sources */,
 				09E08085A773CC64022787C9 /* ArrivalsRequest.swift in Sources */,
 				F55715B895369C504435A90C /* DeparturesRequest.swift in Sources */,
+				F8AB1418259B3528005895E3 /* Utils+.swift in Sources */,
 				70D1036CEABA573677E128C1 /* Networking.swift in Sources */,
 				DB037288E7D465164828F44A /* StationsRequest.swift in Sources */,
 				5BE4516A1DCDB77C97B2D6E6 /* TrainSectionsRequest.swift in Sources */,

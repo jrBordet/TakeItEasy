@@ -29,7 +29,7 @@ public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
 	private (set) var station: String
 	
 	public var request: URLRequest {
-		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station)") else {
+		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station.trimSpaces.emojilessStringWithSubstitution)") else {
 			fatalError()
 		}
 		
