@@ -14,12 +14,6 @@ import RxSwift
 
 typealias AppEnvironment = HomeViewEnvironment
 
-extension OSLog {
-	private static var subsystem = Bundle.main.bundleIdentifier!
-	
-	static let networking = OSLog(subsystem: subsystem, category: "Networking")
-}
-
 let stationsEnvLive: StationsViewEnvironment = (
 	autocomplete: {
 		StationsRequest(station: $0).execute(parse: {
