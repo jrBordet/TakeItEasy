@@ -22,7 +22,12 @@ class DeparturesArrivalsTests: XCTestCase {
 	var initialState: ArrivalsDeparturesViewState!
 	
 	var expectedResult = DeparturesRequest.mock(Data.departures!)
-
+	let arrivalsExpectedResult = ArrivalsRequest.mock(Data.arrivals!)
+	var sectionsExpectedResult: [TrainSection] = TrainSectionsRequest.mock(Data.train_sections!)
+	
+	var selectedStationExpectedResult = Station.milano.first!
+	var currentTrain = CurrentTrain(number: "S0129", name: "Milano", status: "in orario", originCode: "S1245")
+	
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 		
@@ -38,9 +43,9 @@ class DeparturesArrivalsTests: XCTestCase {
 		env = (
 			arrivalsDepartures: (
 				departures: { _ in Effect.sync { self.expectedResult } },
-				arrivals: { _ in Effect.sync { [] } }
+				arrivals: { _ in Effect.sync { self.arrivalsExpectedResult } }
 			),
-			sections: { _, _ in Effect.sync { [] } }
+			sections: { _, _ in Effect.sync { self.sectionsExpectedResult } }
 		)
 		
     }
@@ -49,12 +54,12 @@ class DeparturesArrivalsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_retreive_departures() throws {
+    func test_retrieve_departures() throws {
 		assert(
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
-			steps: Step(.send, .arrivalDepartures(.departures("mock_departures")), { state in
+			steps: Step(.send, .arrivalDepartures(.departures("station")), { state in
 				
 			}),
 			Step(.receive, .arrivalDepartures(.departuresResponse(expectedResult)), { state in
@@ -62,12 +67,63 @@ class DeparturesArrivalsTests: XCTestCase {
 			})
 		)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+	
+	func test_retrieve_arrivals() throws {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .arrivalDepartures(.arrivals("station")), { state in
+				
+			}),
+			Step(.receive, .arrivalDepartures(.arrivalsResponse(arrivalsExpectedResult)), { state in
+				state.arrivals = self.arrivalsExpectedResult
+			})
+		)
+	}
+	
+	func test_select_station() throws {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .arrivalDepartures(.select(selectedStationExpectedResult)), { state in
+				state.selectedStation = self.selectedStationExpectedResult
+			})
+		)
+	}
+	
+	func test_select_train() throws {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .arrivalDepartures(.selectTrain(currentTrain)), { state in
+				state.train = self.currentTrain
+			})
+		)
+	}
+	
+	func test_retrieve_sections() throws {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .sections(.section(.trainSections("originCode", "station"))), { state in
+				
+			}),
+			Step(.receive, .sections(.section(.trainSectionsResponse(self.sectionsExpectedResult))), { state in
+				state.trainSections = self.sectionsExpectedResult
+			})
+		)
+	}
+	
+	func test_none() throws {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .arrivalDepartures(.none), { _ in })
+		)
+	}
 }
