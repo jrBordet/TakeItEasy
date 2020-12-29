@@ -15,11 +15,18 @@ import RxCocoa
 import Networking
 
 class HomeTests: XCTestCase {
+	let reducer: Reducer<HomeViewState, HomeViewAction, HomeViewEnvironment> = homeViewReducer
+	
 	var initialState: HomeViewState!
 	
-	var expectedResult = Station.milano
+	var expectedResult: [Station] = [
+		Station("S05188", name: "MODENA PIAZZA MANZONI"),
+		Station("S05997", name: "MEZZOLARA")
+	]
 	
 	var env: HomeViewEnvironment!
+	
+	let arrivalsExpectedResult = ArrivalsRequest.mock(Data.arrivals!)
 	
 	override func setUp() {
 		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], train: nil, trainSections: [], origincode: nil)
@@ -35,7 +42,7 @@ class HomeTests: XCTestCase {
 				Effect.sync { [] }
 			},
 			arrivals: { _ in
-				Effect.sync { [] }
+				Effect.sync { self.arrivalsExpectedResult }
 			}
 		)
 		
@@ -59,27 +66,39 @@ class HomeTests: XCTestCase {
 			initialValue: initialState,
 			reducer: homeViewReducer,
 			environment: env,
-			steps: Step(.send, HomeViewAction.favourites(StationsViewAction.stations(StationsAction.favourites)), { _ in }),
-			Step(.receive, HomeViewAction.favourites(StationsViewAction.stations(.favouritesResponse(self.expectedResult))), { state in
+			steps: Step(.send, .favourites(.stations(.favourites)), { _ in }),
+			Step(.receive, .favourites(.stations(.favouritesResponse(self.expectedResult))), { state in
 				state.favouritesStations = self.expectedResult
 			})
 		)
 	}
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
+	
+	func test_arrivals_departures() {
+		assert(
+			initialValue: initialState,
+			reducer: homeViewReducer,
+			environment: env,
+			steps: Step(.send, .arrivalsDepartures(.arrivalDepartures(.arrivals("station"))), { _ in }),
+			
+			Step(.receive, .arrivalsDepartures(.arrivalDepartures(.arrivalsResponse(arrivalsExpectedResult))), { state in
+				state.arrivals = self.arrivalsExpectedResult
+			})
+		)
+	}
+	
+	func test_sections_none() {
+		assert(
+			initialValue: initialState,
+			reducer: homeViewReducer,
+			environment: env,
+			steps: Step(.send, .arrivalsDepartures(.arrivalDepartures(.arrivals("station"))), { _ in }),
+			
+			Step(.receive, .arrivalsDepartures(.arrivalDepartures(.arrivalsResponse(arrivalsExpectedResult))), { state in
+				state.arrivals = self.arrivalsExpectedResult
+			}),
+			Step(.send, .arrivalsDepartures(.sections(.section(.none))), { state in
+				
+			})
+		)
+	}
 }
