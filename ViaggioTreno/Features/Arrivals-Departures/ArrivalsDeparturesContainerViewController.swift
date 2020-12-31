@@ -53,7 +53,9 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		store
 			.value
-			.map { $0.selectedStation?.name.capitalized ?? L10n.App.Common.board }
+			.map { $0.selectedStation?.name }
+			.ignoreNil()
+			.map { $0.capitalized }
 			.bind(to: self.rx.title)
 			.disposed(by: disposeBag)
 
