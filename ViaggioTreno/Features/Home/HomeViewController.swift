@@ -42,12 +42,23 @@ public class HomeViewController: BaseViewController {
 	
 	private let itemsPerRow: CGFloat = 1
 	
+	public override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.title = "Viaggio Treno"
+	}
+	
+	public override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		self.title = ""
+	}
+	
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		
 		self.navigationController?.navigationBar.isHidden = false
 		self.navigationController?.navigationBar.tintColor = theme.primaryColor
-		self.title = "Viaggio Treno"
 
 		self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.primaryColor]
 		

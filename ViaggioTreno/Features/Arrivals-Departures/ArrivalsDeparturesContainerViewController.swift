@@ -50,7 +50,12 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		self.navigationController?.navigationBar.isHidden = false
 		self.navigationController?.navigationBar.tintColor = theme.primaryColor
-		self.title = L10n.App.Common.board
+		
+		store
+			.value
+			.map { $0.selectedStation?.name.capitalized ?? L10n.App.Common.board }
+			.bind(to: self.rx.title)
+			.disposed(by: disposeBag)
 
 		self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.primaryColor]
 		

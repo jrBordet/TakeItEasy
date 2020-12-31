@@ -187,7 +187,7 @@
 		0AFA7C873E47894074686B6E /* Mock+resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mock+resources.swift"; sourceTree = "<group>"; };
 		0BFB1BA847D4F3F1316AECFA /* DeparturesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeparturesViewController.xib; sourceTree = "<group>"; };
 		0ECFAB4D63D8815DF58A2FE4 /* TrainSectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionsTests.swift; sourceTree = "<group>"; };
-		12D828EA05AAD3D204D69BF2 /* ViaggioTreno.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ViaggioTreno.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12D828EA05AAD3D204D69BF2 /* ViaggioTreno.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViaggioTreno.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		133CE446D4BFFF1A26187974 /* Pods-Networking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Networking.release.xcconfig"; path = "Target Support Files/Pods-Networking/Pods-Networking.release.xcconfig"; sourceTree = "<group>"; };
 		14F3EEED2050A7DEF30AB250 /* TrainSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainSectionViewController.swift; sourceTree = "<group>"; };
 		159AC0618028DCFA74657EFC /* StationsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsSectionHeader.swift; sourceTree = "<group>"; };
@@ -986,9 +986,6 @@
 					A05297D6956CC0EF9EFD0783 = {
 						DevelopmentTeam = None;
 					};
-					E14C3A465C7AB95390021113 = {
-						DevelopmentTeam = None;
-					};
 					F6CFB3E0FEF69C42C17D6C6B = {
 						DevelopmentTeam = None;
 					};
@@ -1435,6 +1432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1678,6 +1676,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
