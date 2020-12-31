@@ -29,6 +29,8 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 	
 	private let disposeBag = DisposeBag()
 	
+	// MARK: - Life cycle
+	
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		
@@ -112,6 +114,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		store
 			.value
 			.map { $0.train?.number }
+			.debug("[\(self.debugDescription)]", trimOutput: false)
 			.distinctUntilChanged()
 			.ignoreNil()
 			.subscribe(onNext: { [weak self] _ in

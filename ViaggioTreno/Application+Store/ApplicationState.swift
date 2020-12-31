@@ -56,33 +56,3 @@ let initialAppState = AppState(
 	favouritesStations: [],
 	trainSections: []
 )
-
-func activityFeed(
-	_ reducer: @escaping Reducer<AppState, AppAction, AppEnvironment>
-) -> Reducer<AppState, AppAction, AppEnvironment> {
-	return { state, action, environment in
-				
-		let mirror = Mirror(reflecting: action)
-		
-		if let f = mirror.children.first {
-			let value = String(reflecting: f.value)
-			
-			if let sAction = value.components(separatedBy: ".").last {
-				os_log("activityFeed %{public}@ ", log: OSLog.activityFeed, type: .info, [sAction, value])
-			}
-		}
-		
-		return reducer(&state, action, environment)
-	}
-}
-
-extension OSLog {
-	private static var subsystem = Bundle.main.bundleIdentifier!
-	
-	static let board = OSLog(subsystem: subsystem, category: "Stations board")
-	
-	static let counter = OSLog(subsystem: subsystem, category: "Counter")
-	static let login = OSLog(subsystem: subsystem, category: "Login")
-	
-	static let activityFeed = OSLog(subsystem: subsystem, category: "activityFeed")
-}

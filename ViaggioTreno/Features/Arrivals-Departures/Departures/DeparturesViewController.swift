@@ -51,11 +51,13 @@ class DeparturesViewController: BaseViewController {
 	
 	private let disposeBag = DisposeBag()
 	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		
-		store?.send(.arrivalDepartures(.selectTrain(nil)))
-	}
+//	override func viewDidDisappear(_ animated: Bool) {
+//		super.viewDidDisappear(animated)
+//		
+//		store?.send(.arrivalDepartures(.selectTrain(nil)))
+//	}
+	
+	// MARK: - Life cycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -94,7 +96,6 @@ class DeparturesViewController: BaseViewController {
 					originCode: $0.originCode
 				)
 			}
-			.distinctUntilChanged()
 			.bind(to: store.rx.selectTrain)
 			.disposed(by: disposeBag)
 		

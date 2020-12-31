@@ -74,6 +74,16 @@ class TrainSectionViewController: UIViewController {
 			return
 		}
 		
+		//store.send(.section(.selectTrain(nil)))
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		guard let store = self.store else {
+			return
+		}
+		
 		store.send(.section(.selectTrain(nil)))
 	}
 	
@@ -84,7 +94,7 @@ class TrainSectionViewController: UIViewController {
 			return
 		}
 		
-		self.navigationController?.navigationBar.isHidden = true
+		self.navigationController?.navigationBar.isHidden = false
 		
 		tableView.rowHeight = 85
 		tableView.separatorColor = .white

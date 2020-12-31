@@ -118,6 +118,7 @@
 		F806F32A259A5B5100ACE439 /* DeparturesArrivalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */; };
 		F84805BE08735ED9E0ACA42A /* Pods_ViaggioTrenoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CE7A619885ACE53BFFD8F7 /* Pods_ViaggioTrenoTests.framework */; };
 		F8AB1418259B3528005895E3 /* Utils+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB1417259B3528005895E3 /* Utils+.swift */; };
+		F8AB1426259CE9C8005895E3 /* Application+ActivityFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB1425259CE9C8005895E3 /* Application+ActivityFeed.swift */; };
 		F9D16C0977279839AAF4D531 /* ApplicationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1135204E8690B4468F92B9 /* ApplicationAction.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
 /* End PBXBuildFile section */
@@ -299,6 +300,7 @@
 		F806F310259A587E00ACE439 /* ZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipTests.swift; sourceTree = "<group>"; };
 		F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesArrivalsTests.swift; sourceTree = "<group>"; };
 		F8AB1417259B3528005895E3 /* Utils+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utils+.swift"; sourceTree = "<group>"; };
+		F8AB1425259CE9C8005895E3 /* Application+ActivityFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Application+ActivityFeed.swift"; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FAED8DE6CC80A25D52C08FB4 /* Pods-ViaggioTrenoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViaggioTrenoTests.release.xcconfig"; path = "Target Support Files/Pods-ViaggioTrenoTests/Pods-ViaggioTrenoTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
@@ -358,9 +360,9 @@
 				F806F31A259A5A4600ACE439 /* Arrivals-Departures+Store */,
 				C9FF6FE1902DF7A9B62AAAD3 /* ArrivalsDeparturesContainerViewController.swift */,
 				1B95D6E5E24A4EF64C06DEB9 /* ArrivalsDeparturesContainerViewController.xib */,
+				CB489CB7E3113B6C6B4EB664 /* Departures */,
 				A21DF845D9E4EA6913F3B199 /* Arrivals */,
 				1C8DE1DAA312671CCA1A4136 /* Cell */,
-				CB489CB7E3113B6C6B4EB664 /* Departures */,
 			);
 			path = "Arrivals-Departures";
 			sourceTree = "<group>";
@@ -526,6 +528,7 @@
 				A7D2991D645DA72F7378AAB2 /* ApplicationState.swift */,
 				A829FD4692E4DD778A38A03A /* ApplicationStore.swift */,
 				AC7965BE0C53901712BFD3DD /* Environment.swift */,
+				F8AB1425259CE9C8005895E3 /* Application+ActivityFeed.swift */,
 			);
 			path = "Application+Store";
 			sourceTree = "<group>";
@@ -777,9 +780,9 @@
 		D96A597B46972F405716E17A /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				02EAE5C87D9BCDC00D20E976 /* Arrivals-Departures */,
 				DF0FAABE9718B8B80B677EDD /* Home */,
 				2DB3D2204EF7ABC6D30EF5EC /* Stations */,
+				02EAE5C87D9BCDC00D20E976 /* Arrivals-Departures */,
 				07B315A9AF322701FC42F84E /* TrainSection */,
 			);
 			path = Features;
@@ -1295,6 +1298,7 @@
 				7D3EA332A19869CD3DA14497 /* TrainSection+Store.swift in Sources */,
 				4174A872E114BCCF348C00D2 /* TrainSectionCell.swift in Sources */,
 				7971A31043D133E3F8D5E75A /* TrainSectionViewController.swift in Sources */,
+				F8AB1426259CE9C8005895E3 /* Application+ActivityFeed.swift in Sources */,
 				7F22175830C84821BC1643DC /* Utils+.swift in Sources */,
 				EB986950E07769BC04B175D7 /* Utils+Rx.swift in Sources */,
 			);
