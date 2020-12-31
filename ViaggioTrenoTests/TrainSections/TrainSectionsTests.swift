@@ -26,7 +26,7 @@ class TrainSectionsTests: XCTestCase {
 	var env: TrainSectionViewEnvironment!
 	
 	override func setUp() {
-		initialState = TrainSectionViewState(selectedStation: nil, train: nil, trainSections: [], originCode: nil)
+		initialState = TrainSectionViewState(selectedStation: nil, train: nil, trainSections: [], originCode: nil, isRefreshing: false)
 		
 		env = { _, _ in
 			.sync { self.expectedResult }
@@ -52,6 +52,21 @@ class TrainSectionsTests: XCTestCase {
 			environment: env,
 			steps: Step(.send, .section(.select(selectedStationExpectedResult)), { state in
 				state.selectedStation = self.selectedStationExpectedResult
+			})
+		)
+	}
+	
+	func test_refresh() {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .section(.refresh("", "")), { state in
+				state.isRefreshing = true
+			}),
+			Step(.receive, .section(.trainSectionsResponse(expectedResult)), { state in
+				state.isRefreshing = false
+				state.trainSections = self.expectedResult
 			})
 		)
 	}

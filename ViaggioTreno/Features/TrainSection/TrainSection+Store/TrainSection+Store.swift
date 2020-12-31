@@ -23,17 +23,20 @@ struct TrainSectionViewState: Equatable {
 	var train: CurrentTrain?
 	var trainSections: [TrainSection]
 	var originCode: String?
+	var isRefreshing: Bool
 	
 	init(
 		selectedStation: Station?,
 		train: CurrentTrain?,
 		trainSections: [TrainSection],
-		originCode: String?
+		originCode: String?,
+		isRefreshing: Bool
 	) {
 		self.selectedStation = selectedStation
 		self.train = train
 		self.trainSections = trainSections
 		self.originCode = originCode
+		self.isRefreshing = isRefreshing
 	}
 	
 	var sectionState: TrainSectionState {
@@ -41,13 +44,15 @@ struct TrainSectionViewState: Equatable {
 			self.selectedStation,
 			self.originCode,
 			self.train,
-			self.trainSections
+			self.trainSections,
+			self.isRefreshing
 		)}
 		set {
 			self.selectedStation = newValue.selectedStation
 			self.train = newValue.train
 			self.trainSections = newValue.trainSections
 			self.originCode = newValue.originCode
+			self.isRefreshing = newValue.isRefreshing
 		}
 	}
 }
@@ -60,7 +65,7 @@ typealias TrainSectionViewEnvironment = (String, String) -> Effect<[TrainSection
 
 // MARk: - State
 
-typealias TrainSectionState = (selectedStation: Station?, originCode: String?, train: CurrentTrain?, trainSections: [TrainSection])
+typealias TrainSectionState = (selectedStation: Station?, originCode: String?, train: CurrentTrain?, trainSections: [TrainSection], isRefreshing: Bool)
 
 // MARk: - Action
 
@@ -70,6 +75,8 @@ enum TrainSectionAction: Equatable {
 	
 	case select(Station?)
 	case selectTrain(CurrentTrain?)
+	
+	case refresh(String, String)
 	
 	case none
 }
@@ -90,16 +97,22 @@ func trainSectionReducer(
 		]
 	case let .trainSectionsResponse(trainSections):
 		state.trainSections = trainSections
+		state.isRefreshing = false
 		return []
 	case .none:
 		return []
 	case let .select(station):
 		state.selectedStation = station
 		return [
-			
 		]
 	case let .selectTrain(value):
 		state.train = value
 		return []
+	case let .refresh(originCode, train):
+		state.isRefreshing = true
+		
+		return [
+			environment(originCode, train).map(TrainSectionAction.trainSectionsResponse)
+		]
 	}
 }

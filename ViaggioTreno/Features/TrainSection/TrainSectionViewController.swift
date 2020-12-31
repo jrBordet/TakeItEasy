@@ -20,6 +20,12 @@ extension Reactive where Base: Store<TrainSectionViewState, TrainSectionViewActi
 			store.send(.section(.trainSections(value.0, value.1)))
 		}
 	}
+	
+	var refresh: Binder<(String, String)> {
+		Binder(self.base) { store, value in
+			store.send(.section(.refresh(value.0, value.1)))
+		}
+	}
 }
 
 // MARK: - Data
@@ -67,16 +73,6 @@ class TrainSectionViewController: UIViewController {
 	
 	// MARK: - Life cycle
 	
-	override func viewDidDisappear(_ animated: Bool) {
-		super.viewDidDisappear(animated)
-		
-		guard let store = self.store else {
-			return
-		}
-		
-		//store.send(.section(.selectTrain(nil)))
-	}
-	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
@@ -94,6 +90,15 @@ class TrainSectionViewController: UIViewController {
 			return
 		}
 		
+		// MARK: - Styling down
+		
+		let refreshControl = UIRefreshControl()
+		
+		refreshControl.tintColor = theme.primaryColor
+		
+		tableView.addSubview(refreshControl)
+		tableView.alwaysBounceVertical = true
+		
 		self.navigationController?.navigationBar.isHidden = false
 		
 		tableView.rowHeight = 85
@@ -105,12 +110,51 @@ class TrainSectionViewController: UIViewController {
 		
 		headerView |> { $0?.backgroundColor = theme.primaryColor }
 		
-		if #available(iOS 13.0, *) {
-			closeContainer.isHidden = true
-		} else {
-			// Fallback on earlier versions
-			closeContainer.isHidden = false
-		}
+		closeContainer.isHidden = true
+		
+		refreshControl
+			.rx
+			.controlEvent(.valueChanged)
+			.map { _ in () }
+			.subscribe(onNext: { _ in
+				//store.send(.globalInformations(.refresh))
+			})
+			.disposed(by: disposeBag)
+		
+		refreshControl
+			.rx
+			.controlEvent(.valueChanged)
+			.map { _ in () }
+			.flatMapLatest {
+				store
+					.value
+					.map { (originCode: $0.originCode, train: $0.train?.number) }
+					.map { zip($0, $1) }
+					.ignoreNil()
+					.distinctUntilChanged { $0 == $1 }
+					.map { (originCode: $0, train: String($1)) }
+			}
+			.bind(to: store.rx.refresh)
+			.disposed(by: disposeBag)
+		
+		// MARK: - Refresh
+		
+		store
+			.value
+			.map { $0.isRefreshing }
+			.debug("[\(self.debugDescription)]", trimOutput: false)
+			.distinctUntilChanged()
+			.debug("[\(self.debugDescription)]", trimOutput: false)
+			.asDriver(onErrorJustReturn: false)
+			.drive(refreshControl.rx.isRefreshing)
+			.disposed(by: disposeBag)
+		
+//		if #available(iOS 13.0, *) {
+//			closeContainer.isHidden = true
+//		} else {
+//			// Fallback on earlier versions
+//			closeContainer.isHidden = false
+//		}
 		
 		closeContainer |> backgroundColor(with: theme.primaryColor)
 		

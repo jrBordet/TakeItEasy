@@ -134,7 +134,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 						value: { $0.trainSectionsState },
 						action: { .sections($0) }
 					)
-				}, isModal: true)
+				}, isModal: false)
 			}).disposed(by: disposeBag)
 
 		// MARK: - Create bar

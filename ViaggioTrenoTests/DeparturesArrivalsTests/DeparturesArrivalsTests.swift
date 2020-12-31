@@ -37,7 +37,8 @@ class DeparturesArrivalsTests: XCTestCase {
 			arrivals: [],
 			train: nil,
 			trainSections: [],
-			originCode: nil
+			originCode: nil,
+			isRefreshing: false
 		)
 		
 		env = (

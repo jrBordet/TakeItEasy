@@ -61,16 +61,28 @@
                     <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-js-F3D">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <rect key="frame" x="185" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="1G6-0b-bce"/>
+                            </constraints>
                             <state key="normal" title="X"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fD-3j-PAL">
+                            <rect key="frame" x="355" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="9BP-SK-0qD"/>
+                                <constraint firstAttribute="width" constant="44" id="aLd-O8-atg"/>
+                            </constraints>
+                            <state key="normal" image="refresh"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="8fD-3j-PAL" firstAttribute="centerY" secondItem="lGd-mM-dRM" secondAttribute="centerY" id="0eD-r9-NQe"/>
                         <constraint firstAttribute="bottom" secondItem="rRf-js-F3D" secondAttribute="bottom" id="0zV-FV-7L0"/>
                         <constraint firstItem="rRf-js-F3D" firstAttribute="top" secondItem="lGd-mM-dRM" secondAttribute="top" id="TbZ-s9-Wvu"/>
-                        <constraint firstItem="rRf-js-F3D" firstAttribute="leading" secondItem="lGd-mM-dRM" secondAttribute="leading" id="sTi-9a-V0z"/>
-                        <constraint firstAttribute="trailing" secondItem="rRf-js-F3D" secondAttribute="trailing" id="shf-nj-fAv"/>
+                        <constraint firstItem="rRf-js-F3D" firstAttribute="centerX" secondItem="lGd-mM-dRM" secondAttribute="centerX" id="dmp-a2-0Sa"/>
+                        <constraint firstAttribute="trailing" secondItem="8fD-3j-PAL" secondAttribute="trailing" constant="15" id="o9S-mX-rBi"/>
                         <constraint firstAttribute="height" constant="44" id="yS1-Te-p7p"/>
                     </constraints>
                 </view>
@@ -115,6 +127,7 @@
         </view>
     </objects>
     <resources>
+        <image name="refresh" width="800" height="800"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

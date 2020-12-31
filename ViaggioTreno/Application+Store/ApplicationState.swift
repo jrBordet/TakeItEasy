@@ -20,6 +20,7 @@ public struct AppState {
 	var trainSections: [TrainSection]
 	var train: CurrentTrain?
 	var originCode: String?
+	var isRefreshing: Bool
 }
 
 extension AppState {
@@ -33,7 +34,8 @@ extension AppState {
 				favouritesStations: self.favouritesStations,
 				train: self.train,
 				trainSections: self.trainSections,
-				origincode: self.originCode
+				origincode: self.originCode,
+				isRefreshing: self.isRefreshing
 			)
 		}
 		set {
@@ -45,6 +47,7 @@ extension AppState {
 			self.trainSections = newValue.trainSections
 			self.train = newValue.train
 			self.originCode = newValue.originCode
+			self.isRefreshing = newValue.isRefreshing
 		}
 	}
 }
@@ -54,5 +57,6 @@ let initialAppState = AppState(
 	arrivals: [],
 	stations: [],
 	favouritesStations: [],
-	trainSections: []
+	trainSections: [],
+	isRefreshing: false
 )

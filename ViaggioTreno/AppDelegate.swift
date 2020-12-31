@@ -33,19 +33,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		//		var expectedResult: [TrainSection] = TrainSectionsRequest.mock(Data.train_sections!)
 		
-		let r = try! JSONDecoder().decode([TrainSection].self, from: Data.train_sections!)
-		
-		let env: TrainSectionViewEnvironment = { _, _ in
-			Effect.sync { r }
-		}
-		
-		let trainSections = Scene<TrainSectionViewController>().render()
-		
-		trainSections.store = Store<TrainSectionViewState, TrainSectionViewAction>(
-			initialValue: TrainSectionViewState(selectedStation: nil, train: nil, trainSections: r, originCode: nil),
-			reducer: trainSectionViewReducer,
-			environment: env
-		)
+//		let r = try! JSONDecoder().decode([TrainSection].self, from: Data.train_sections!)
+//
+//		let env: TrainSectionViewEnvironment = { _, _ in
+//			Effect.sync { r }
+//		}
+//
+//		let trainSections = Scene<TrainSectionViewController>().render()
+//
+//		trainSections.store = Store<TrainSectionViewState, TrainSectionViewAction>(
+//			initialValue: TrainSectionViewState(selectedStation: nil, train: nil, trainSections: r, originCode: nil, isRefreshing: false),
+//			reducer: trainSectionViewReducer,
+//			environment: env
+//		)
 		
 		let rootScene = Scene<HomeViewController>().render()
 		
