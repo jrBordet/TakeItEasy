@@ -13,11 +13,11 @@ def caprice
 		pod 'Caprice', '0.0.5'
 end
 
-target 'ViaggioTreno' do
+target 'PendolareStanco' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for ViaggioTreno
+  # Pods for PendolareStanco
   shared_pods
 
   # pod 'FileClient', :path => 'FileClient'
@@ -31,7 +31,7 @@ target 'ViaggioTreno' do
 	# add pods for any other desired Firebase products
 	# https://firebase.google.com/docs/ios/setup#available-pods
 	
-  target 'ViaggioTrenoTests' do
+  target 'PendolareStancoTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'SnapshotTesting', '~> 1.7.2'
