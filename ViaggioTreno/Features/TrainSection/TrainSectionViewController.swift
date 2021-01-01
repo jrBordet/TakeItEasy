@@ -101,7 +101,9 @@ class TrainSectionViewController: UIViewController {
 		
 		self.navigationController?.navigationBar.isHidden = false
 		
-		tableView.rowHeight = 85
+		tableView.estimatedRowHeight = 56
+		tableView.rowHeight = UITableView.automaticDimension
+	
 		tableView.separatorColor = .clear
 		
 		registerTableViewCell(with: tableView, cell: TrainSectionCell.self, reuseIdentifier: "TrainSectionCell")
@@ -240,7 +242,7 @@ class TrainSectionViewController: UIViewController {
 				number: trainSection.stazione,
 				name: trainSection.stazione,
 				time: formattedDate(with: (trainSection.fermata.partenza_teorica ?? trainSection.fermata.programmata) ?? 1000),
-				status: trainSection.fermata.ritardo |> trainSectionStatus(), //String(trainSection.fermata.ritardo ?? 0),
+				status: trainSection.fermata.ritardo |> trainSectionStatus(),
 				current: trainSection.stazioneCorrente ?? false
 			)
 		}
@@ -276,7 +278,7 @@ extension TrainSectionViewController {
 				return UITableViewCell(style: .default, reuseIdentifier: nil)
 			}
 			
-			cell.sectionLabel.text = item.name.capitalized
+			cell.sectionLabel.text = item.name.capitalized + item.name.capitalized
 			cell.timeLabel.text = item.time
 			cell.currentContainer.isHidden = item.current == false
 			cell.delayLabel.text = item.status
