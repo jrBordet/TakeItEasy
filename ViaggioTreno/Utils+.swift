@@ -17,3 +17,13 @@ func zip<A, B>(_ a: A?, _ b: B?) -> (A, B)? {
 	
 	return (a, b)
 }
+
+func trainSectionStatus() -> (Int?) -> String {
+	return { status in
+		guard let status = status, status != 0 else {
+			return ""
+		}
+		
+		return String("\(status)'")
+	}
+}

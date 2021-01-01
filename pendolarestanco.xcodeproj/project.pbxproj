@@ -114,7 +114,7 @@
 		F3FD3EAC0BF2B22BE719A147 /* Label+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A797B708124D2BA51C3F72C /* Label+Styles.swift */; };
 		F55715B895369C504435A90C /* DeparturesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565FBC4BA0274F690A66D47C /* DeparturesRequest.swift */; };
 		F7B3B4923A9A786A249488AC /* FavouritesStationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8A21C5C8C10AD5BC67D4923 /* FavouritesStationsCell.xib */; };
-		F806F311259A587E00ACE439 /* ZipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F310259A587E00ACE439 /* ZipTests.swift */; };
+		F806F311259A587E00ACE439 /* UtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F310259A587E00ACE439 /* UtilsTests.swift */; };
 		F806F32A259A5B5100ACE439 /* DeparturesArrivalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */; };
 		F84805BE08735ED9E0ACA42A /* Pods_ViaggioTrenoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CE7A619885ACE53BFFD8F7 /* Pods_ViaggioTrenoTests.framework */; };
 		F8AB1418259B3528005895E3 /* Utils+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AB1417259B3528005895E3 /* Utils+.swift */; };
@@ -297,7 +297,7 @@
 		F57B6F6B3EC7D95132A252DF /* StationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewController.swift; sourceTree = "<group>"; };
 		F5A6479125BDF498493D3C26 /* TrainSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionCell.xib; sourceTree = "<group>"; };
 		F607F2D0DCD30537CEC8F9E3 /* Pods-Styling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Styling.debug.xcconfig"; path = "Target Support Files/Pods-Styling/Pods-Styling.debug.xcconfig"; sourceTree = "<group>"; };
-		F806F310259A587E00ACE439 /* ZipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipTests.swift; sourceTree = "<group>"; };
+		F806F310259A587E00ACE439 /* UtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsTests.swift; sourceTree = "<group>"; };
 		F806F329259A5B5100ACE439 /* DeparturesArrivalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeparturesArrivalsTests.swift; sourceTree = "<group>"; };
 		F8AB1417259B3528005895E3 /* Utils+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utils+.swift"; sourceTree = "<group>"; };
 		F8AB1425259CE9C8005895E3 /* Application+ActivityFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Application+ActivityFeed.swift"; sourceTree = "<group>"; };
@@ -829,7 +829,7 @@
 		F806F30F259A586700ACE439 /* UtilsTests */ = {
 			isa = PBXGroup;
 			children = (
-				F806F310259A587E00ACE439 /* ZipTests.swift */,
+				F806F310259A587E00ACE439 /* UtilsTests.swift */,
 			);
 			path = UtilsTests;
 			sourceTree = "<group>";
@@ -1217,7 +1217,7 @@
 				E211663D22533C4EE3CB7921 /* StationsTests.swift in Sources */,
 				80A3A5DB0FD4EA64B7639C1E /* TrainSectionsTests.swift in Sources */,
 				5ED3783B98342B4D9CC0493F /* UIStationsTests.swift in Sources */,
-				F806F311259A587E00ACE439 /* ZipTests.swift in Sources */,
+				F806F311259A587E00ACE439 /* UtilsTests.swift in Sources */,
 				F806F32A259A5B5100ACE439 /* DeparturesArrivalsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1432,6 +1432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1676,6 +1677,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

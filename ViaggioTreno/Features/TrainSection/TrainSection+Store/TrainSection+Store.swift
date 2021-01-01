@@ -96,7 +96,7 @@ func trainSectionReducer(
 			environment(originCode, train).map(TrainSectionAction.trainSectionsResponse)
 		]
 	case let .trainSectionsResponse(trainSections):
-		state.trainSections = trainSections
+		state.trainSections = trainSections.sorted { $0.fermata.progressivo ?? 0 < $1.fermata.progressivo ?? 0 }
 		state.isRefreshing = false
 		return []
 	case .none:

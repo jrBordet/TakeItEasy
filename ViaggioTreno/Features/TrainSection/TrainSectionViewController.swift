@@ -114,6 +114,41 @@ class TrainSectionViewController: UIViewController {
 		
 		closeContainer.isHidden = true
 		
+		// MARK: - Scroll to current station
+		
+		store
+			.value
+			.map { $0.trainSections }
+			.distinctUntilChanged()
+			.filter { $0.isEmpty == false }
+			.map { $0.map { $0.stazioneCorrente } }
+			.map { $0.compactMap { $0 } }
+			.map { stations -> Int in
+				var index = 0
+				stations.enumerated().forEach { (i, item) in
+					if item == true {
+						index = i
+					}
+				}
+				
+				return index
+			}
+			.delay(.milliseconds(280), scheduler: MainScheduler.instance)
+			.asDriver(onErrorJustReturn: 0)
+			.drive(onNext: { [weak self] index in
+				guard let self = self else {
+					return
+				}
+				
+				guard index <= self.tableView.numberOfRows(inSection: 0) - 1 else {
+					return
+				}
+				
+				self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+			}).disposed(by: disposeBag)
+		
+		// MARK: - Refresh
+		
 		refreshControl
 			.rx
 			.controlEvent(.valueChanged)
@@ -129,8 +164,6 @@ class TrainSectionViewController: UIViewController {
 			}
 			.bind(to: store.rx.refresh)
 			.disposed(by: disposeBag)
-		
-		// MARK: - Refresh
 		
 		store
 			.value
@@ -227,16 +260,6 @@ class TrainSectionViewController: UIViewController {
 
 		// MARK: - Sections
 		
-		func trainSectionStatus() -> (Int?) -> String {
-			return { status in
-				guard let status = status, status != 0 else {
-					return ""
-				}
-				
-				return String("\(status)'")
-			}
-		}
-		
 		func map(trainSection: TrainSection) -> TrainSectionItem {
 			TrainSectionItem(
 				number: trainSection.stazione,
@@ -262,7 +285,7 @@ class TrainSectionViewController: UIViewController {
 	
 	private func setupDataSource() {
 		dataSource = RxTableViewSectionedAnimatedDataSource<TrainSectionItemModel>(
-			animationConfiguration: AnimationConfiguration(insertAnimation: .top,
+			animationConfiguration: AnimationConfiguration(insertAnimation: .none,
 														   reloadAnimation: .none),
 			configureCell: configureCell
 		)

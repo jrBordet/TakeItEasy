@@ -21,7 +21,7 @@ public struct TrainSection: Codable, Equatable {
 		public let ritardo: Int?
 		public let partenza_teorica: TimeInterval?
 		public let arrivo_teorico: TimeInterval?
-		public let progressivo: Int? // delay?
+		public let progressivo: Int?
 		public let partenzaReale: TimeInterval?
 	}
 }

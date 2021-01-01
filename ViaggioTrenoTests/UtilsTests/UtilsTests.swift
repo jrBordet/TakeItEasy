@@ -6,9 +6,10 @@
 //
 
 import XCTest
+import Caprice
 @testable import ViaggioTreno
 
-class ZipTests: XCTestCase {
+class UtilsTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -37,12 +38,23 @@ class ZipTests: XCTestCase {
 		XCTAssertNil(result?.0)
 		XCTAssertNil(result?.1)
 	}
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+	
+	func test_status_delay_with_number() {
+		let result = 1 |> trainSectionStatus()
+		
+		XCTAssertEqual("1'", result)
+	}
+	
+	func test_status_delay_with_nil() {
+		let result = nil |> trainSectionStatus()
+		
+		XCTAssertEqual("", result)
+	}
+	
+	func test_status_delay_with_zero() {
+		let result = 0 |> trainSectionStatus()
+		
+		XCTAssertEqual("", result)
+	}
 
 }
