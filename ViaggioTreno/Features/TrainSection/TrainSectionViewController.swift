@@ -278,7 +278,7 @@ extension TrainSectionViewController {
 				return UITableViewCell(style: .default, reuseIdentifier: nil)
 			}
 			
-			cell.sectionLabel.text = item.name.capitalized + item.name.capitalized
+			cell.sectionLabel.text = item.name.capitalized
 			cell.timeLabel.text = item.time
 			cell.currentContainer.isHidden = item.current == false
 			cell.delayLabel.text = item.status
