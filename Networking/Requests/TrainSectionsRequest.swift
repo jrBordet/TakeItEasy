@@ -8,21 +8,21 @@
 import Foundation
 import RxSwift
 
-public struct TrainSection: Codable {
-		public let last: Bool
-		public let stazioneCorrente: Bool
-		public let id: String
-		public let stazione: String
+public struct TrainSection: Codable, Equatable {
+	public let last: Bool
+	public let stazioneCorrente: Bool?
+	public let id: String
+	public let stazione: String
+	public let fermata: TrainStop
 	
-		public let fermata: TrainStop
-	
-	public struct TrainStop: Codable {
+	public struct TrainStop: Codable, Equatable {
 		public let programmata: TimeInterval?
 		public let effettiva: TimeInterval?
 		public let ritardo: Int?
 		public let partenza_teorica: TimeInterval?
 		public let arrivo_teorico: TimeInterval?
-		public let progressivo: Int? // delay
+		public let progressivo: Int?
+		public let partenzaReale: TimeInterval?
 	}
 }
 
@@ -32,7 +32,7 @@ public struct TrainSection: Codable {
 ///
 /// - Parameters:
 ///   - codeDeparture: the station code. Example S06000
-///   - codeTrain: the station code. Example 6660
+///   - codeTrain: the station code. Example 666
 /// - Returns: a collection of TravelDetail
 
 public struct TrainSectionsRequest: APIRequest, CustomDebugStringConvertible {
@@ -47,9 +47,9 @@ public struct TrainSectionsRequest: APIRequest, CustomDebugStringConvertible {
 	private (set) var station: String
 	private (set) var train: String
 	
-	public var request: URLRequest {
+	public var request: URLRequest? {
 		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station)/\(train)") else {
-			fatalError()
+			return nil
 		}
 		
 		var request = URLRequest(url: url)
@@ -61,22 +61,5 @@ public struct TrainSectionsRequest: APIRequest, CustomDebugStringConvertible {
 	public init(station: String, train: String) {
 		self.station = station
 		self.train = train
-	}
-}
-
-extension TrainSectionsRequest {
-	public static func fetch(from station: String, train: String, urlSession: URLSession = .shared) -> Observable<Self.Response> {
-		Networking<Self>
-			.sections(from: station, train: train)
-			.json(with: urlSession)
-	}
-}
-
-extension Networking where T == TrainSectionsRequest {
-	public static func sections(from station: String, train: String) -> Self {
-		Self(
-			API: T(station: station, train: train),
-			httpMethod: "GET"
-		)
 	}
 }

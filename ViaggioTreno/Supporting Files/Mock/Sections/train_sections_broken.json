@@ -1,8 +1,8 @@
 [
 		{
 				"last": 0,
-				"stazioneCorrente": false,
-				"id": 6000,
+				"stazioneCorrente": "false",
+				"id": "6000",
 				"stazione": "LA SPEZIA CENTRALE",
 				"fermata": {
 						"orientamento": null,

@@ -28,9 +28,9 @@ public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
 	
 	private (set) var station: String
 	
-	public var request: URLRequest {
-		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station)") else {
-			fatalError()
+	public var request: URLRequest? {
+		guard let url = URL(string: "http://www.viaggiatreno.it/viaggiatrenonew/resteasy/viaggiatreno" + "\(endpoint)/\(station.trimSpaces.emojilessStringWithSubstitution)") else {
+			return nil
 		}
 		
 		var request = URLRequest(url: url)
@@ -44,15 +44,7 @@ public struct StationsRequest: APIRequest, CustomDebugStringConvertible {
 	}
 }
 
-extension StationsRequest {
-	public static func autocompleteStation(with v: String, urlSession: URLSession = .shared) -> Observable<Self.Response> {
-		Networking<StationsRequest>
-			.autocompleteStation(with: v)
-			.data(with: urlSession) { $0.parseStations() }
-	}
-}
-
-public struct Station: Codable {
+public struct Station: Codable, Equatable {
 	public let id: String
 	public let name: String
 	
@@ -62,12 +54,11 @@ public struct Station: Codable {
 	}
 }
 
-extension Networking where T == StationsRequest {
-	public static func autocompleteStation(with s: String) -> Self {
-		Self(
-			API: StationsRequest(station: s),
-			httpMethod: "GET"
-		)
+extension Station {
+	public static var milano: [Station] { [
+			Station("S05188", name: "MODENA PIAZZA MANZONI"),
+			Station("S05997", name: "MEZZOLARA")
+		]
 	}
 }
 
@@ -82,8 +73,11 @@ extension String {
 					return nil
 				}
 				
-				return Station(String(v[1]), name: String(v[0]))
+				return Station(String(v[1]).trimSpaces, name: String(v[0]))
 			}
 			.compactMap { $0 }
+			.filter { station -> Bool in
+				station.id != "S00143" && station.id != "S00146"
+			}
 	}
 }

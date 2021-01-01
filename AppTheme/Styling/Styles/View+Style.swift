@@ -28,6 +28,12 @@ public func rounded(with radius: CGFloat = 5) -> ViewStyle {
     }
 }
 
+public func backgroundColor(with color: UIColor) -> ViewStyle {
+	return {
+		$0.backgroundColor = color
+	}
+}
+
 public func primaryBackgroundColor() -> ViewStyle {
     return {
         $0.backgroundColor = .darkGray

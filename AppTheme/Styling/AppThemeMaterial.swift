@@ -81,7 +81,7 @@ public struct AppThemeMaterial {
 }
 
 extension AppThemeMaterial {
-    public static let alarmSoundsGood = AppThemeMaterial(
+    public static let theme = AppThemeMaterial(
         primaryLabel:
         lightLabelStyle
             <> { $0.font = FontFamily.Roboto.thin.font(size: 56) }

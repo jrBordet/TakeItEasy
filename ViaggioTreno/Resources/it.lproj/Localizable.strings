@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  AlarmsDemo
+
+  Created by Jean Raphael Bordet on 17/06/2020.
+  
+*/
+
+"app.name" = "";
+
+// MARK: - Common
+
+"app.common.save" = "Salva";
+"app.common.dismiss" = "Chiudi";
+"app.common.arrivals" = "Arrivi";
+"app.common.departures" = "Partenze";
+"app.common.board" = "Tabellone";
+"app.common.x" = "X";
+
+// MARK: - Home
+
+"app.home.plus" = "+";
+"app.home.addStations" = "Aggiungi stazioni";
+"app.home.disclaimer" = "Sembra che non ci siano ancora \nstazioni tra i tuoi preferiti";
+
+// MARK: - Stations
+
+"stations.title" = "Stazioni";
+"stations.searchbar" = "Cerca...";
+"stations.header.favourites" = "Le mie stazioni";
+"stations.header.results" = "Risultati";
+
+// MARK: - Sections
+
+"sections.empty" = "Nessun risultato";

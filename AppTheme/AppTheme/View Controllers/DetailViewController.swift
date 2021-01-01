@@ -14,7 +14,7 @@ class DetailViewController: UIViewController {
     @IBOutlet var mainLabel: UILabel!
     @IBOutlet var field: UITextField!
     
-    let theme: AppThemeMaterial = .alarmSoundsGood
+    let theme: AppThemeMaterial = .theme
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +27,6 @@ class DetailViewController: UIViewController {
             <> backgroundLabel(with: .clear)
         
         field |> fontTextField(with: 17)
-        
-            //|> fontTextFieldStyle(of: FontFamily.Roboto.thin.font(size: 21))
-            //<> { field.text = "my text" }
-                
-        
     }
 
 }
