@@ -14,6 +14,8 @@ import Styling
 import Networking
 import Firebase
 
+let theme: AppThemeMaterial = .theme
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?

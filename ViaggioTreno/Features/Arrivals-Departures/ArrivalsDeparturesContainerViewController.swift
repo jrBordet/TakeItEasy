@@ -69,6 +69,14 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		viewControllers.append(departures)
 		
+		store
+			.value
+			.map { $0.selectedStation }
+			.distinctUntilChanged()
+			.ignoreNil()
+			.bind(to: store.rx.departures)
+			.disposed(by: disposeBag)
+		
 		// MARK: - Arrivals
 		
 		let arrivals = ArrivalsViewController()
@@ -76,6 +84,15 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		arrivals.store = store
 		
 		viewControllers.append(arrivals)
+		
+		store
+			.value
+			.map { $0.selectedStation }
+			.debug("[\(self.debugDescription)]", trimOutput: false)
+			.distinctUntilChanged()
+			.ignoreNil()
+			.bind(to: store.rx.arrivals)
+			.disposed(by: disposeBag)
 		
 		// MARK: - Error
 		
@@ -141,7 +158,9 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		let bar = TMBar.TabBar()
 		bar.layout.transitionStyle = .snap
-		bar.backgroundColor?.setFill()
+		
+		let systemBar = bar.systemBar()
+		systemBar.backgroundStyle = .blur(style: .dark)
 		
 		bar.layout.contentInset = UIEdgeInsets(top: -30.0, left: 20.0, bottom: 10.0, right: 20.0)
 		
@@ -149,6 +168,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 			button.tintColor = self?.theme.primaryColor.withAlphaComponent(0.35)
 			button.selectedTintColor = self?.theme.primaryColor
 			button.font = UIFont.boldSystemFont(ofSize: 17)
+			button.backgroundColor = .clear
 		}
 		
 		reloadData()

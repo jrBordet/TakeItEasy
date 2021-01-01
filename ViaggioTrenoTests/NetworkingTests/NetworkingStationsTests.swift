@@ -57,6 +57,17 @@ class NetworkingTests: XCTestCase {
 		XCTAssertEqual(stations.first?.name, "MOCK")
 	}
 	
+	func test_parse_stations_from_aosta() {
+		let s = """
+		AOSTA|S00137 \n AOSTA ISTITUTO|S00143   \n AOSTA VIALE EUROPA|S00146
+		"""
+		
+		let stations = s.parseStations()
+		
+		XCTAssertEqual(1, stations.count)
+		XCTAssertEqual("S00137", stations.first?.id)
+	}
+	
 	func test_parse_stations_broken() {
 		let s = """
 			MOCKMOCKK|

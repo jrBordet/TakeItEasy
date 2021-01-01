@@ -55,12 +55,6 @@ class ArrivalsViewController: UIViewController {
 	
 	private let disposeBag = DisposeBag()
 	
-//	override func viewDidDisappear(_ animated: Bool) {
-//		super.viewDidDisappear(animated)
-//		
-//		store?.send(.arrivalDepartures(.selectTrain(nil)))
-//	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -69,7 +63,7 @@ class ArrivalsViewController: UIViewController {
 		}
 		
 		tableView.rowHeight = 85
-		tableView.separatorColor = .white
+		tableView.separatorColor = .clear
 		
 		registerTableViewCell(with: tableView, cell: ArrivalsDeparturesCell.self, reuseIdentifier: "ArrivalsDeparturesCell")
 		
@@ -77,13 +71,14 @@ class ArrivalsViewController: UIViewController {
 		
 		// MARK: - Selected station
 		
-		store
-			.value
-			.map { $0.selectedStation }
-			.distinctUntilChanged()
-			.ignoreNil()
-			.bind(to: store.rx.arrivals)
-			.disposed(by: disposeBag)
+//		store
+//			.value
+//			.map { $0.selectedStation }
+//			.debug("[\(self.debugDescription)]", trimOutput: false)
+//			.distinctUntilChanged()
+//			.ignoreNil()
+//			.bind(to: store.rx.arrivals)
+//			.disposed(by: disposeBag)
 		
 		// MARK: - Select train
 
@@ -148,6 +143,8 @@ extension ArrivalsViewController {
 			cell.titleLabel.text = item.name.capitalized
 			cell.timeLabel.text = item.time
 			cell.statusLabel.text = item.status
+			
+			cell |> cellSelectionView()
 			
 			return cell
 		}

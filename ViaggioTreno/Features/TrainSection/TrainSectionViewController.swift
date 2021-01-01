@@ -60,9 +60,7 @@ class TrainSectionViewController: UIViewController {
 	@IBOutlet var emptyLabel: UILabel!
 	@IBOutlet var closeButton: UIButton!
 	@IBOutlet var closeContainer: UIView!
-	
-	let theme: AppThemeMaterial = .theme
-	
+		
 	typealias TrainSectionItemModel = AnimatableSectionModel<String, TrainSectionItem>
 	
 	var dataSource: RxTableViewSectionedAnimatedDataSource<TrainSectionItemModel>!
@@ -92,6 +90,8 @@ class TrainSectionViewController: UIViewController {
 		
 		// MARK: - Styling down
 		
+		tableView.allowsSelection = false
+		
 		let refreshControl = UIRefreshControl()
 		
 		refreshControl.tintColor = theme.primaryColor
@@ -102,7 +102,7 @@ class TrainSectionViewController: UIViewController {
 		self.navigationController?.navigationBar.isHidden = false
 		
 		tableView.rowHeight = 85
-		tableView.separatorColor = .white
+		tableView.separatorColor = .clear
 		
 		registerTableViewCell(with: tableView, cell: TrainSectionCell.self, reuseIdentifier: "TrainSectionCell")
 		
@@ -111,15 +111,6 @@ class TrainSectionViewController: UIViewController {
 		headerView |> { $0?.backgroundColor = theme.primaryColor }
 		
 		closeContainer.isHidden = true
-		
-		refreshControl
-			.rx
-			.controlEvent(.valueChanged)
-			.map { _ in () }
-			.subscribe(onNext: { _ in
-				//store.send(.globalInformations(.refresh))
-			})
-			.disposed(by: disposeBag)
 		
 		refreshControl
 			.rx
@@ -148,13 +139,6 @@ class TrainSectionViewController: UIViewController {
 			.asDriver(onErrorJustReturn: false)
 			.drive(refreshControl.rx.isRefreshing)
 			.disposed(by: disposeBag)
-		
-//		if #available(iOS 13.0, *) {
-//			closeContainer.isHidden = true
-//		} else {
-//			// Fallback on earlier versions
-//			closeContainer.isHidden = false
-//		}
 		
 		closeContainer |> backgroundColor(with: theme.primaryColor)
 		
@@ -191,7 +175,9 @@ class TrainSectionViewController: UIViewController {
 		
 		// MARK: - Close
 		
-		closeButton.rx.tap.bind { [weak self] in
+		closeButton.rx
+			.tap
+			.bind { [weak self] in
 			self?.dismiss(animated: true, completion: nil)
 		}.disposed(by: disposeBag)
 		

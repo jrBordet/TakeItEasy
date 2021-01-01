@@ -29,11 +29,11 @@ class ArrivalsDeparturesCell: UITableViewCell {
 		
 		titleLabel
 			|> theme.primaryLabel
-			<> fontRegular(with: 17)
+			<> fontRegular(with: 19)
 		
 		statusLabel
 			|> theme.primaryLabel
-			<> fontRegular(with: 17)
+			<> fontThin(with: 19)
 	}
 
     override func setSelected(_ selected: Bool, animated: Bool) {

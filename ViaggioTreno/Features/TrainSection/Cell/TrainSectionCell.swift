@@ -30,7 +30,7 @@ class TrainSectionCell: UITableViewCell {
 		
 		sectionLabel
 			|> theme.primaryLabel
-			<> fontRegular(with: 17)
+			<> fontRegular(with: 19)
 		
 		currentView
 			|> { [weak self] in $0.backgroundColor = self?.theme.primaryColor }

@@ -67,7 +67,7 @@ class DeparturesViewController: BaseViewController {
 		}
 		
 		tableView.rowHeight = 85
-		tableView.separatorColor = .white
+		tableView.separatorColor = .clear
 		
 		// Do any additional setup after loading the view.
 		registerTableViewCell(with: tableView, cell: ArrivalsDeparturesCell.self, reuseIdentifier: "ArrivalsDeparturesCell")
@@ -76,14 +76,14 @@ class DeparturesViewController: BaseViewController {
 		
 		// MARK: - Selected station
 		
-		store
-			.value
-			.map { $0.selectedStation }
-			.distinctUntilChanged()
-			.ignoreNil()
-			.bind(to: store.rx.departures)
-			.disposed(by: disposeBag)
-		
+//		store
+//			.value
+//			.map { $0.selectedStation }
+//			.distinctUntilChanged()
+//			.ignoreNil()
+//			.bind(to: store.rx.departures)
+//			.disposed(by: disposeBag)
+				
 		// MARK: - Select train
 		
 		tableView.rx
@@ -147,7 +147,18 @@ extension DeparturesViewController {
 			cell.timeLabel.text = item.time
 			cell.statusLabel.text = item.status
 			
+			cell |> cellSelectionView()
+			
 			return cell
 		}
 	}
 }
+
+func cellSelectionView() -> (UITableViewCell) -> Void {
+	return { cell in
+		let backgroundView = UIView()
+		backgroundView.backgroundColor = theme.selectionColor
+		cell.selectedBackgroundView = backgroundView
+	}
+}
+

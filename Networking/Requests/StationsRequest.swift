@@ -73,8 +73,11 @@ extension String {
 					return nil
 				}
 				
-				return Station(String(v[1]), name: String(v[0]))
+				return Station(String(v[1]).trimSpaces, name: String(v[0]))
 			}
 			.compactMap { $0 }
+			.filter { station -> Bool in
+				station.id != "S00143" && station.id != "S00146"
+			}
 	}
 }

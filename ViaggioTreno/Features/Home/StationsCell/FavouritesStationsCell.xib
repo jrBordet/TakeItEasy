@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8Jo-a1-DKD" firstAttribute="centerY" secondItem="Vvo-LZ-P1q" secondAttribute="centerY" id="0r2-ZX-fdW"/>
                             <constraint firstItem="8Jo-a1-DKD" firstAttribute="width" secondItem="Vvo-LZ-P1q" secondAttribute="width" id="1s7-00-qMh"/>
@@ -60,7 +60,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" red="0.054901960780000002" green="0.84705882349999995" blue="0.71764705880000002" alpha="0.89771511130000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="lEd-2E-dij" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4Bf-nI-dvp"/>
                 <constraint firstAttribute="trailing" secondItem="lEd-2E-dij" secondAttribute="trailing" id="JqK-i1-UTf"/>

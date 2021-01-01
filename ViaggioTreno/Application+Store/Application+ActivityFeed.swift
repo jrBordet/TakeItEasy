@@ -19,7 +19,7 @@ func activityFeed(
 		print("[APPLICATION][state]\(state)")
 				
 		let mirror = Mirror(reflecting: action)
-		
+				
 		if let f = mirror.children.first {
 			let value = String(reflecting: f.value)
 			
