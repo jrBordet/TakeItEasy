@@ -15,6 +15,7 @@ class TrainSectionCell: UITableViewCell {
 	@IBOutlet var cardView: UIView!
 	@IBOutlet var currentContainer: UIView!
 	@IBOutlet var currentView: UIView!
+	@IBOutlet var delayLabel: UILabel!
 	
 	let theme: AppThemeMaterial = .theme
 	
@@ -31,6 +32,10 @@ class TrainSectionCell: UITableViewCell {
 		sectionLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 19)
+		
+		delayLabel
+			|> theme.primaryLabel
+			<> fontThin(with: 19)
 		
 		currentView
 			|> { [weak self] in $0.backgroundColor = self?.theme.primaryColor }

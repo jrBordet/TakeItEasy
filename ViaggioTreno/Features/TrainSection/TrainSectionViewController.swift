@@ -225,12 +225,22 @@ class TrainSectionViewController: UIViewController {
 
 		// MARK: - Sections
 		
+		func trainSectionStatus() -> (Int?) -> String {
+			return { status in
+				guard let status = status, status != 0 else {
+					return ""
+				}
+				
+				return String("\(status)'")
+			}
+		}
+		
 		func map(trainSection: TrainSection) -> TrainSectionItem {
 			TrainSectionItem(
 				number: trainSection.stazione,
 				name: trainSection.stazione,
 				time: formattedDate(with: (trainSection.fermata.partenza_teorica ?? trainSection.fermata.programmata) ?? 1000),
-				status: "status",
+				status: trainSection.fermata.ritardo |> trainSectionStatus(), //String(trainSection.fermata.ritardo ?? 0),
 				current: trainSection.stazioneCorrente ?? false
 			)
 		}
@@ -239,9 +249,8 @@ class TrainSectionViewController: UIViewController {
 			.value
 			.distinctUntilChanged()
 			.map { $0.trainSections }
-			.map {
-				$0.map { map(trainSection: $0) }
-			}.map { items -> [TrainSectionItemModel] in
+			.map { $0.map { map(trainSection: $0) } }
+			.map { items -> [TrainSectionItemModel] in
 				[TrainSectionItemModel(model: "", items: items)]
 			}
 			.asDriver(onErrorJustReturn: [])
@@ -270,6 +279,7 @@ extension TrainSectionViewController {
 			cell.sectionLabel.text = item.name.capitalized
 			cell.timeLabel.text = item.time
 			cell.currentContainer.isHidden = item.current == false
+			cell.delayLabel.text = item.status
 			
 			return cell
 		}

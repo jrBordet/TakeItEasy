@@ -22,7 +22,7 @@
                         <rect key="frame" x="8" y="8" width="467" height="56"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="caJ-G2-aE2">
-                                <rect key="frame" x="15" y="4" width="437" height="48"/>
+                                <rect key="frame" x="15" y="4" width="291.5" height="48"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mnc-Xc-9X8">
                                         <rect key="frame" x="0.0" y="0.0" width="30" height="48"/>
@@ -52,21 +52,29 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-9m-lft">
-                                        <rect key="frame" x="126" y="0.0" width="311" height="48"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="LabelLabelLabelLabel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-9m-lft">
+                                        <rect key="frame" x="126" y="0.0" width="165.5" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="1'" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SpE-zy-yE4">
+                                <rect key="frame" x="314.5" y="18" width="137.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SpE-zy-yE4" secondAttribute="trailing" constant="15" id="00X-zx-9cY"/>
+                            <constraint firstItem="SpE-zy-yE4" firstAttribute="leading" secondItem="caJ-G2-aE2" secondAttribute="trailing" constant="8" id="IfG-ya-9vu"/>
                             <constraint firstAttribute="bottom" secondItem="caJ-G2-aE2" secondAttribute="bottom" constant="4" id="Irr-yW-kVn"/>
                             <constraint firstItem="caJ-G2-aE2" firstAttribute="top" secondItem="Pbh-D5-ulZ" secondAttribute="top" constant="4" id="SoM-yW-LwX"/>
                             <constraint firstItem="caJ-G2-aE2" firstAttribute="leading" secondItem="Pbh-D5-ulZ" secondAttribute="leading" constant="15" id="Y0p-k0-MFe"/>
-                            <constraint firstAttribute="trailing" secondItem="caJ-G2-aE2" secondAttribute="trailing" constant="15" id="esM-k5-43J"/>
+                            <constraint firstItem="SpE-zy-yE4" firstAttribute="centerY" secondItem="Pbh-D5-ulZ" secondAttribute="centerY" id="h2F-Wt-ZYh"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -82,10 +90,11 @@
                 <outlet property="cardView" destination="Pbh-D5-ulZ" id="RS5-P2-G4h"/>
                 <outlet property="currentContainer" destination="Mnc-Xc-9X8" id="29g-CA-w0H"/>
                 <outlet property="currentView" destination="W0o-Dh-yIe" id="Iaz-3N-qa0"/>
+                <outlet property="delayLabel" destination="SpE-zy-yE4" id="u6u-f6-DEw"/>
                 <outlet property="sectionLabel" destination="GVH-9m-lft" id="Vyc-z9-jrh"/>
                 <outlet property="timeLabel" destination="Fqn-sU-daE" id="4Tc-4x-hxg"/>
             </connections>
-            <point key="canvasLocation" x="175" y="181"/>
+            <point key="canvasLocation" x="173.4375" y="180"/>
         </tableViewCell>
     </objects>
     <resources>
