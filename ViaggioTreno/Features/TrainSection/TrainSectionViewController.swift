@@ -133,9 +133,7 @@ class TrainSectionViewController: UIViewController {
 		store
 			.value
 			.map { $0.isRefreshing }
-			.debug("[\(self.debugDescription)]", trimOutput: false)
 			.distinctUntilChanged()
-			.debug("[\(self.debugDescription)]", trimOutput: false)
 			.asDriver(onErrorJustReturn: false)
 			.drive(refreshControl.rx.isRefreshing)
 			.disposed(by: disposeBag)

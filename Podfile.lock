@@ -91,6 +91,7 @@ PODS:
     - RxSwift (~> 5)
   - SceneBuilder (1.0.0)
   - SnapshotTesting (1.7.2)
+  - SwiftPrettyPrint (1.1.0)
   - SwiftSpinner (2.1.0)
   - Tabman (2.9.1):
     - Pageboy (~> 3.6.0)
@@ -108,6 +109,7 @@ DEPENDENCIES:
   - RxTest
   - SceneBuilder (= 1.0.0)
   - SnapshotTesting (~> 1.7.2)
+  - SwiftPrettyPrint (~> 1.1.0)
   - Tabman (~> 2.9)
 
 SPEC REPOS:
@@ -137,6 +139,7 @@ SPEC REPOS:
     - RxSwift
     - RxTest
     - SnapshotTesting
+    - SwiftPrettyPrint
     - SwiftSpinner
     - Tabman
 
@@ -165,9 +168,10 @@ SPEC CHECKSUMS:
   RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SceneBuilder: e8beec60660be16524eb651df022f310e7a200aa
   SnapshotTesting: 8caa6661fea7c8019d5b46de77c16bab99c36c5c
+  SwiftPrettyPrint: 3af0e8c4dca181184522a276e9f8c9ce30f77f22
   SwiftSpinner: 0f15c006307f8d8bbac075638927ec1361b565d7
   Tabman: 085d89c65be9e883629bdaf5b1453a6397e57846
 
-PODFILE CHECKSUM: d21e517d364a03647f9f01a7fe32b5a63c4cdfd5
+PODFILE CHECKSUM: a74602dec6600962a58693cf2e95c5cd8db4d4be
 
 COCOAPODS: 1.9.3

@@ -88,7 +88,6 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		store
 			.value
 			.map { $0.selectedStation }
-			.debug("[\(self.debugDescription)]", trimOutput: false)
 			.distinctUntilChanged()
 			.ignoreNil()
 			.bind(to: store.rx.arrivals)
@@ -138,7 +137,6 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		store
 			.value
 			.map { $0.train?.number }
-			.debug("[\(self.debugDescription)]", trimOutput: false)
 			.distinctUntilChanged()
 			.ignoreNil()
 			.subscribe(onNext: { [weak self] _ in

@@ -24,6 +24,7 @@ target 'ViaggioTreno' do
 
   pod 'RxDataSources', '4.0.1'
 	pod 'Tabman', '~> 2.9'
+	pod "SwiftPrettyPrint", "~> 1.1.0", :configuration => "Debug"
 	
 	# add the Firebase pod for Google Analytics
 	pod 'Firebase/Analytics'

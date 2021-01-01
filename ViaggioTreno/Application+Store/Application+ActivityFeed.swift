@@ -14,21 +14,21 @@ func activityFeed(
 ) -> Reducer<AppState, AppAction, AppEnvironment> {
 	return { state, action, environment in
 		
-
-		print("[APPLICATION][action]\(action)")
-		print("[APPLICATION][state]\(state)")
-				
-		let mirror = Mirror(reflecting: action)
-				
-		if let f = mirror.children.first {
-			let value = String(reflecting: f.value)
-			
-			if let sAction = value.components(separatedBy: ".").last {
-				os_log("activityFeed action:  %{public}@ ", log: OSLog.activityFeed, type: .info, sAction)
-
-				os_log("activityFeed value: %{public}@ ", log: OSLog.activityFeed, type: .info, value)
-			}
-		}
+//
+//		print("[APPLICATION][action]\(action)")
+//		print("[APPLICATION][state]\(state)")
+//				
+//		let mirror = Mirror(reflecting: action)
+//				
+//		if let f = mirror.children.first {
+//			let value = String(reflecting: f.value)
+//			
+//			if let sAction = value.components(separatedBy: ".").last {
+//				os_log("activityFeed action:  %{public}@ ", log: OSLog.activityFeed, type: .info, sAction)
+//
+//				os_log("activityFeed value: %{public}@ ", log: OSLog.activityFeed, type: .info, value)
+//			}
+//		}
 		
 		return reducer(&state, action, environment)
 	}
