@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="closeButton" destination="fdc-37-4lc" id="MK4-dP-pKT"/>
                 <outlet property="closeContainer" destination="zmk-nO-ogb" id="DXZ-qX-XZc"/>
+                <outlet property="closeContainerHeightConstraint" destination="Ert-Lo-aMO" id="KMW-9X-Qa6"/>
                 <outlet property="searchBar" destination="hq4-Om-02i" id="HxF-p3-jG1"/>
                 <outlet property="tableView" destination="UWu-fi-stg" id="7dk-F5-xFN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

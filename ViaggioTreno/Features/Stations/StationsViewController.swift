@@ -133,6 +133,7 @@ public class StationsViewController: BaseViewController {
 	@IBOutlet var searchBar: UISearchBar!
 	@IBOutlet var tableView: UITableView?
 	
+	@IBOutlet var closeContainerHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var closeButton: UIButton!
 	@IBOutlet var closeContainer: UIView!
 	
@@ -155,7 +156,7 @@ public class StationsViewController: BaseViewController {
 		
 		// MARK: - styling
 		title = L10n.Stations.title
-		self.view |> backgroundColor(with: theme.selectionColor)
+		//self.view |> backgroundColor(with: theme.selectionColor)
 		//self.tableView?.backgroundColor = .clear
 		
 		tableView.tableFooterView = UIView()
@@ -173,10 +174,10 @@ public class StationsViewController: BaseViewController {
 
 		if #available(iOS 13.0, *) {
 			searchBar.searchTextField |> fontTextField(with: 15)
-			closeContainer.isHidden = true
+			closeContainerHeightConstraint.constant = 0
 		} else {
 			// Fallback on earlier versions
-			closeContainer.isHidden = false
+			closeContainerHeightConstraint.constant = 44
 		}
 		
 		tableView.rowHeight = 72
