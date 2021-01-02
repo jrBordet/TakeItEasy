@@ -23,9 +23,11 @@ class FollowingTrainsTests: XCTestCase {
 		Train.sample
 	]
 	
-	var selectedExpectedResult: Train = Train.sample
+	var selectedExpectedResult = Train.sample
 	
 	var env: TrainsViewEnvironment!
+	
+	// MARK: - Setup
 	
 	override func setUpWithError() throws {
 		initialState = TrainsViewState(trains: [], selectedTrain: nil, error: nil)

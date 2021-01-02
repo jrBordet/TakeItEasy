@@ -14,7 +14,13 @@ let trainSectionViewReducer: Reducer<TrainSectionViewState, TrainSectionViewActi
 		trainSectionReducer,
 		value: \TrainSectionViewState.sectionState,
 		action: /TrainSectionViewAction.section,
-		environment: { $0 }
+		environment: { $0.sections }
+	),
+	pullback(
+		trainsViewReducer,
+		value: \TrainSectionViewState.followingTrainsViewState,
+		action: /TrainSectionViewAction.following,
+		environment: { $0.followingTrains }
 	)
 )
 
@@ -25,19 +31,25 @@ struct TrainSectionViewState: Equatable {
 	var originCode: String?
 	var isRefreshing: Bool
 	
+	var followingTrainsState: TrainsViewState
+	
 	init(
 		selectedStation: Station?,
 		train: CurrentTrain?,
 		trainSections: [TrainSection],
 		originCode: String?,
-		isRefreshing: Bool
+		isRefreshing: Bool,
+		followingTrainsState: TrainsViewState
 	) {
 		self.selectedStation = selectedStation
 		self.train = train
 		self.trainSections = trainSections
 		self.originCode = originCode
 		self.isRefreshing = isRefreshing
+		self.followingTrainsState = followingTrainsState
 	}
+	
+	// MARK: Sections
 	
 	var sectionState: TrainSectionState {
 		get {(
@@ -55,13 +67,33 @@ struct TrainSectionViewState: Equatable {
 			self.isRefreshing = newValue.isRefreshing
 		}
 	}
+	
+	var followingTrainsViewState: TrainsViewState {
+		get {
+			self.followingTrainsState
+		}
+		
+		set {
+			self.followingTrainsState = TrainsViewState(
+				trains: newValue.trains,
+				selectedTrain: newValue.selectedTrain,
+				error: newValue.error
+			)
+		}
+	}
+	
+	// MARK: Following trains
 }
 
 enum TrainSectionViewAction: Equatable {
 	case section(TrainSectionAction)
+	case following(TrainsViewAction)
 }
 
-typealias TrainSectionViewEnvironment = (String, String) -> Effect<[TrainSection]>
+typealias TrainSectionViewEnvironment = (
+	sections: TrainSectionEnvironment,
+	followingTrains: TrainsViewEnvironment
+)
 
 // MARK: - State
 

@@ -49,8 +49,20 @@ let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 	}
 )
 
-let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
-	arrivalsDepartures: arrivalsDeparturesEnvLive,
+let followingEnvMock: TrainsViewEnvironment = (
+	saveTrains: { _ in
+		Effect.sync {
+			false
+		}
+	},
+	retrieveTrains: {
+		Effect.sync {
+			[]
+		}
+	}
+)
+
+let sectionsEnv: TrainSectionViewEnvironment = (
 	sections: { station, train in
 		TrainSectionsRequest(station: station, train: train)
 			.execute()
@@ -58,10 +70,16 @@ let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 				guard sections.isEmpty == false else {
 					throw APIError.noContent
 				}
-				
+
 				return sections
 			}
-	}
+	},
+	followingTrains: followingEnvMock
+)
+
+let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
+	arrivalsDepartures: arrivalsDeparturesEnvLive,
+	sections: sectionsEnv
 )
 
 let live: AppEnvironment = (

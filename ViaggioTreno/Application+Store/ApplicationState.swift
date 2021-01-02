@@ -21,6 +21,8 @@ public struct AppState {
 	var train: CurrentTrain?
 	var originCode: String?
 	var isRefreshing: Bool
+	
+	var followingTrainsState: TrainsViewState
 }
 
 extension AppState {
@@ -35,7 +37,8 @@ extension AppState {
 				train: self.train,
 				trainSections: self.trainSections,
 				origincode: self.originCode,
-				isRefreshing: self.isRefreshing
+				isRefreshing: self.isRefreshing,
+				followingTrainsState: self.followingTrainsState
 			)
 		}
 		set {
@@ -58,5 +61,10 @@ let initialAppState = AppState(
 	stations: [],
 	favouritesStations: [],
 	trainSections: [],
-	isRefreshing: false
+	isRefreshing: false,
+	followingTrainsState: TrainsViewState(
+		trains: [],
+		selectedTrain: nil,
+		error: nil
+	)
 )
