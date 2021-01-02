@@ -41,6 +41,14 @@ extension Data {
 		data(from: "stations", type: ".txt")
 	}
 	
+	static var trend: Data? {
+		data(from: "trend", type: ".json")
+	}
+	
+	static var trend_broken: Data? {
+		data(from: "trend_broken", type: ".json")
+	}
+	
 	private static func data(from file: String, type: String) -> Data? {
 		Bundle.main
 			.path(forResource: file, ofType: type)
