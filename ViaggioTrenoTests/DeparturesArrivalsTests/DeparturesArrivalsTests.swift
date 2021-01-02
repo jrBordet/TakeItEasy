@@ -28,8 +28,8 @@ class DeparturesArrivalsTests: XCTestCase {
 	var selectedStationExpectedResult = Station.milano.first!
 	var currentTrain = CurrentTrain(number: "S0129", name: "Milano", status: "in orario", originCode: "S1245")
 	
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+	override func setUpWithError() throws {
+		// Put setup code here. This method is called before the invocation of each test method in the class.
 		
 		initialState = ArrivalsDeparturesViewState(
 			selectedStation: nil,
@@ -38,7 +38,30 @@ class DeparturesArrivalsTests: XCTestCase {
 			train: nil,
 			trainSections: [],
 			originCode: nil,
-			isRefreshing: false
+			isRefreshing: false,
+			followingTrainsState: TrainsViewState(
+				trains: [],
+				selectedTrain: nil,
+				error: nil
+			)
+		)
+		
+		let followingEnvMock: TrainsViewEnvironment = (
+			saveTrains: { _ in
+				Effect.sync {
+					false
+				}
+			},
+			retrieveTrains: {
+				Effect.sync {
+					[]
+				}
+			}
+		)
+		
+		let sectionsEnv: TrainSectionViewEnvironment = (
+			sections: { _, _ in Effect.sync { self.sectionsExpectedResult } },
+			followingTrains: followingEnvMock
 		)
 		
 		env = (
@@ -46,14 +69,14 @@ class DeparturesArrivalsTests: XCTestCase {
 				departures: { _ in Effect.sync { self.expectedResult } },
 				arrivals: { _ in Effect.sync { self.arrivalsExpectedResult } }
 			),
-			sections: { _, _ in Effect.sync { self.sectionsExpectedResult } }
+			sections: sectionsEnv
 		)
 		
-    }
+	}
 	
 	// MARK: - TESTS
-
-    func test_retrieve_departures() throws {
+	
+	func test_retrieve_departures() throws {
 		assert(
 			initialValue: initialState,
 			reducer: reducer,
@@ -65,7 +88,7 @@ class DeparturesArrivalsTests: XCTestCase {
 				state.departures = self.expectedResult
 			})
 		)
-    }
+	}
 	
 	func test_retrieve_arrivals() throws {
 		assert(

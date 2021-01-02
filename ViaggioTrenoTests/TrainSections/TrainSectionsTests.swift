@@ -16,21 +16,49 @@ import Networking
 
 class TrainSectionsTests: XCTestCase {
 	let reducer: Reducer<TrainSectionViewState, TrainSectionViewAction, TrainSectionViewEnvironment> = trainSectionViewReducer
-
+	
 	var initialState: TrainSectionViewState!
 	
 	var expectedResult = TrainSectionsRequest.mock(Data.train_sections!)
 	var selectedStationExpectedResult = Station("S05188", name: "MODENA PIAZZA MANZONI")
 	var currentTrain = CurrentTrain(number: "S0129", name: "Milano", status: "in orario", originCode: "S1245")
-
+	
 	var env: TrainSectionViewEnvironment!
 	
 	override func setUp() {
-		initialState = TrainSectionViewState(selectedStation: nil, train: nil, trainSections: [], originCode: nil, isRefreshing: false)
+		initialState = TrainSectionViewState(
+			selectedStation: nil,
+			train: nil,
+			trainSections: [],
+			originCode: nil,
+			isRefreshing: false,
+			followingTrainsState:
+				TrainsViewState(
+					trains: [],
+					selectedTrain: nil,
+					error: nil
+				)
+		)
 		
-		env = { _, _ in
-			.sync { self.expectedResult }
-		}
+		let followingEnvMock: TrainsViewEnvironment = (
+			saveTrains: { _ in
+				Effect.sync {
+					false
+				}
+			},
+			retrieveTrains: {
+				Effect.sync {
+					[]
+				}
+			}
+		)
+		
+		let sectionsEnv: TrainSectionViewEnvironment = (
+			sections: { _, _ in Effect.sync { self.expectedResult } },
+			followingTrains: followingEnvMock
+		)
+		
+		env = sectionsEnv
 	}
 	
 	func test_retrieve_favorite_stations() {
