@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import ViaggioTreno
+@testable import PendolareStanco
 import RxComposableArchitectureTests
 import SnapshotTesting
 import Difference

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import ViaggioTreno
+@testable import PendolareStanco
 import RxComposableArchitectureTests
 import Difference
 import RxComposableArchitecture
@@ -32,17 +32,17 @@ class HomeTests: XCTestCase {
 		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], train: nil, trainSections: [], origincode: nil, isRefreshing: false)
 		
 		let stationsEnv: StationsViewEnvironment = (
-			autocomplete: { _ in Effect.sync { [] } },
-			saveFavourites: { _ in Effect.sync { false } },
-			retrieveFavourites: { Effect.sync { self.expectedResult } }
+			autocomplete: { _ in .sync { [] } },
+			saveFavourites: { _ in .sync { false } },
+			retrieveFavourites: { .sync { self.expectedResult } }
 		)
 		
 		let arrivalsDepartures: ArrivalsDeparturesEnvironment = (
 			departures: { _ in
-				Effect.sync { [] }
+				.sync { [] }
 			},
 			arrivals: { _ in
-				Effect.sync { self.arrivalsExpectedResult }
+				.sync { self.arrivalsExpectedResult }
 			}
 		)
 		

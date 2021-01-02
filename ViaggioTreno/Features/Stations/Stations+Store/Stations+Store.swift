@@ -49,11 +49,11 @@ public let stationsViewReducer: Reducer<StationsViewState, StationsViewAction, S
 	)
 )
 
-// MARk: - State
+// MARK: - State
 
 public typealias StationsState = (stations: [Station], favouritesStations: [Station], selectedStation: Station?)
 
-// MARk: - Action
+// MARK: - Action
 
 public enum StationsAction: Equatable {
 	case autocomplete(String)

@@ -63,11 +63,11 @@ enum TrainSectionViewAction: Equatable {
 
 typealias TrainSectionViewEnvironment = (String, String) -> Effect<[TrainSection]>
 
-// MARk: - State
+// MARK: - State
 
 typealias TrainSectionState = (selectedStation: Station?, originCode: String?, train: CurrentTrain?, trainSections: [TrainSection], isRefreshing: Bool)
 
-// MARk: - Action
+// MARK: - Action
 
 enum TrainSectionAction: Equatable {
 	case trainSections(String, String)

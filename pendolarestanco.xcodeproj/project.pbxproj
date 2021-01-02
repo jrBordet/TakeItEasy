@@ -117,6 +117,8 @@
 		F3FD3EAC0BF2B22BE719A147 /* Label+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A797B708124D2BA51C3F72C /* Label+Styles.swift */; };
 		F55715B895369C504435A90C /* DeparturesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565FBC4BA0274F690A66D47C /* DeparturesRequest.swift */; };
 		F6BA31AF882F15FEE3BF9B5D /* NetworkingDeparturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404C1118B39EE36E34976DB6 /* NetworkingDeparturesTests.swift */; };
+		F8613A2725A06DD200F81594 /* FollowingTrains+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613A1925A067AD00F81594 /* FollowingTrains+Store.swift */; };
+		F8613A2E25A070B600F81594 /* FollowingTrainsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613A2D25A070B600F81594 /* FollowingTrainsTests.swift */; };
 		FB5C00A7A8870C61D664B6C1 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A902A32B13ECA9539A754414 /* StationCell.swift */; };
 		FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7965BE0C53901712BFD3DD /* Environment.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
@@ -303,6 +305,8 @@
 		F57B6F6B3EC7D95132A252DF /* StationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewController.swift; sourceTree = "<group>"; };
 		F5A6479125BDF498493D3C26 /* TrainSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionCell.xib; sourceTree = "<group>"; };
 		F83BA14FE60F53C3456F4F02 /* Pods-Styling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Styling.release.xcconfig"; path = "Target Support Files/Pods-Styling/Pods-Styling.release.xcconfig"; sourceTree = "<group>"; };
+		F8613A1925A067AD00F81594 /* FollowingTrains+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FollowingTrains+Store.swift"; sourceTree = "<group>"; };
+		F8613A2D25A070B600F81594 /* FollowingTrainsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTrainsTests.swift; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -379,10 +383,10 @@
 		07B315A9AF322701FC42F84E /* TrainSection */ = {
 			isa = PBXGroup;
 			children = (
+				5D9C8B2477525EA1AE42E018 /* TrainSection+Store */,
 				14F3EEED2050A7DEF30AB250 /* TrainSectionViewController.swift */,
 				FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */,
 				766F31645468A0F1BF459B8F /* Cell */,
-				5D9C8B2477525EA1AE42E018 /* TrainSection+Store */,
 			);
 			path = TrainSection;
 			sourceTree = "<group>";
@@ -710,6 +714,7 @@
 				0AFA7C873E47894074686B6E /* Mock+resources.swift */,
 				859C761C3EA1694F484BE464 /* DeparturesArrivalsTests */,
 				AB6AF1527CBEB60EF87D5F5F /* HomeTests */,
+				F8613A2C25A0709100F81594 /* FollowingTrains */,
 				A2FAA7A5C5851FB7B43E0ADF /* NetworkingTests */,
 				2D28E1F7F8C6BD5A3FF0437A /* SnapshotTests */,
 				E7BC163B52D2D504C8A8EFBD /* StationsTests */,
@@ -786,6 +791,7 @@
 		D96A597B46972F405716E17A /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F8613A1825A0673400F81594 /* FollowingTrains */,
 				02EAE5C87D9BCDC00D20E976 /* Arrivals-Departures */,
 				DF0FAABE9718B8B80B677EDD /* Home */,
 				2DB3D2204EF7ABC6D30EF5EC /* Stations */,
@@ -845,6 +851,22 @@
 				F83BA14FE60F53C3456F4F02 /* Pods-Styling.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F8613A1825A0673400F81594 /* FollowingTrains */ = {
+			isa = PBXGroup;
+			children = (
+				F8613A1925A067AD00F81594 /* FollowingTrains+Store.swift */,
+			);
+			path = FollowingTrains;
+			sourceTree = "<group>";
+		};
+		F8613A2C25A0709100F81594 /* FollowingTrains */ = {
+			isa = PBXGroup;
+			children = (
+				F8613A2D25A070B600F81594 /* FollowingTrainsTests.swift */,
+			);
+			path = FollowingTrains;
 			sourceTree = "<group>";
 		};
 		FDDB5CD478B777EAA020B7DF /* Frameworks */ = {
@@ -1228,6 +1250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8613A2E25A070B600F81594 /* FollowingTrainsTests.swift in Sources */,
 				CF5700F6664AE68E32D56383 /* DeparturesArrivalsTests.swift in Sources */,
 				F0DDDDFEEAE083D0E335D635 /* Difference+.swift in Sources */,
 				22CD1E684FB1D83411B9F1AE /* HomeTests.swift in Sources */,
@@ -1259,6 +1282,7 @@
 				FF13F7E8E997C98091C16268 /* ArrivalsDeparturesContainerViewController.swift in Sources */,
 				F36660E8B28CE8AADB295983 /* ArrivalsViewController.swift in Sources */,
 				5FB489690ACD6F1A21120671 /* BaseViewController.swift in Sources */,
+				F8613A2725A06DD200F81594 /* FollowingTrains+Store.swift in Sources */,
 				7E5DADB18589C4E14E245CB6 /* DeparturesViewController.swift in Sources */,
 				FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */,
 				726747A8E566826BFA146128 /* FavouritesStationsCell.swift in Sources */,

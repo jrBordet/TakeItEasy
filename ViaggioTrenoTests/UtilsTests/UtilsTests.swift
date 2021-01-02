@@ -7,7 +7,7 @@
 
 import XCTest
 import Caprice
-@testable import ViaggioTreno
+@testable import PendolareStanco
 
 class UtilsTests: XCTestCase {
 
