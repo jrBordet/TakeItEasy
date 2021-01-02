@@ -43,12 +43,12 @@ class TrainSectionsTests: XCTestCase {
 		let followingEnvMock: TrainsViewEnvironment = (
 			saveTrains: { _ in
 				Effect.sync {
-					false
+					true
 				}
 			},
 			retrieveTrains: {
 				Effect.sync {
-					[]
+					[Train.sample]
 				}
 			}
 		)
@@ -106,6 +106,20 @@ class TrainSectionsTests: XCTestCase {
 			environment: env,
 			steps: Step(.send, .section(.selectTrain(currentTrain)), { state in
 				state.train = self.currentTrain
+			})
+		)
+	}
+	
+	func test_follow_train() {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .following(.trains(.add(Train.sample))), { state in
+				state.followingTrainsState = TrainsViewState(trains: [Train.sample], selectedTrain: nil, error: nil)
+			}),
+			Step(.receive, .following(.trains(.updateResponse(true))), { state in
+				
 			})
 		)
 	}

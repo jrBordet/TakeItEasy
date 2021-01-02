@@ -7,6 +7,7 @@
 
 import Foundation
 import RxComposableArchitecture
+import Networking
 
 struct Train: Equatable {
 	var number: String
@@ -95,6 +96,9 @@ enum TrainsAction: Equatable {
 	case trains
 	case trainsResponse([Train])
 	
+	case trend(String, String) // originCode, trainNumber
+	case trendResponse(Train, [TrainSection])
+	
 	case add(Train)
 	case remove(Train)
 	
@@ -157,6 +161,10 @@ func trainsReducer(
 		state.selectedTrain = train
 		return []
 	case .none:
+		return []
+	case let .trend(origin, number):
+		return []
+	case let .trendResponse(train, sections):
 		return []
 	}
 }

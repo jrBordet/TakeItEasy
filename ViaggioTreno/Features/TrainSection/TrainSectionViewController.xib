@@ -9,12 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainSectionViewController" customModule="ViaggioTreno" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainSectionViewController" customModule="PendolareStanco" customModuleProvider="target">
             <connections>
-                <outlet property="closeButton" destination="rRf-js-F3D" id="5Lh-mm-cmT"/>
-                <outlet property="closeContainer" destination="lGd-mM-dRM" id="Dw2-LR-A8o"/>
                 <outlet property="emptyContainer" destination="ROk-r3-kjG" id="e9a-Tv-UYW"/>
                 <outlet property="emptyLabel" destination="BDG-2o-rQy" id="QgP-3E-yOx"/>
+                <outlet property="followButton" destination="rse-9K-KGs" id="xZF-Q4-vKc"/>
                 <outlet property="headerHeightConstraint" destination="Y7C-Y5-eGF" id="Thj-aD-3bu"/>
                 <outlet property="headerView" destination="XhX-Cx-aef" id="glH-50-4jl"/>
                 <outlet property="tableView" destination="RAf-Wx-Bhr" id="lvg-He-oNO"/>
@@ -54,36 +53,24 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-Wx-Bhr">
-                    <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                    <rect key="frame" x="0.0" y="108" width="414" height="698"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-mM-dRM">
-                    <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-js-F3D">
-                            <rect key="frame" x="185" y="0.0" width="44" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="44" id="1G6-0b-bce"/>
-                            </constraints>
-                            <state key="normal" title="X"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fD-3j-PAL">
-                            <rect key="frame" x="355" y="0.0" width="44" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="9BP-SK-0qD"/>
-                                <constraint firstAttribute="width" constant="44" id="aLd-O8-atg"/>
-                            </constraints>
-                            <state key="normal" image="refresh"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rse-9K-KGs">
+                            <rect key="frame" x="15" y="5" width="384" height="46"/>
+                            <state key="normal" title="Button"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="8fD-3j-PAL" firstAttribute="centerY" secondItem="lGd-mM-dRM" secondAttribute="centerY" id="0eD-r9-NQe"/>
-                        <constraint firstAttribute="bottom" secondItem="rRf-js-F3D" secondAttribute="bottom" id="0zV-FV-7L0"/>
-                        <constraint firstItem="rRf-js-F3D" firstAttribute="top" secondItem="lGd-mM-dRM" secondAttribute="top" id="TbZ-s9-Wvu"/>
-                        <constraint firstItem="rRf-js-F3D" firstAttribute="centerX" secondItem="lGd-mM-dRM" secondAttribute="centerX" id="dmp-a2-0Sa"/>
-                        <constraint firstAttribute="trailing" secondItem="8fD-3j-PAL" secondAttribute="trailing" constant="15" id="o9S-mX-rBi"/>
-                        <constraint firstAttribute="height" constant="44" id="yS1-Te-p7p"/>
+                        <constraint firstItem="rse-9K-KGs" firstAttribute="leading" secondItem="lGd-mM-dRM" secondAttribute="leading" constant="15" id="LWc-lR-7P5"/>
+                        <constraint firstAttribute="trailing" secondItem="rse-9K-KGs" secondAttribute="trailing" constant="15" id="V2B-0k-vEq"/>
+                        <constraint firstAttribute="bottom" secondItem="rse-9K-KGs" secondAttribute="bottom" constant="5" id="bv4-3O-uUA"/>
+                        <constraint firstAttribute="height" constant="56" id="yS1-Te-p7p"/>
+                        <constraint firstItem="rse-9K-KGs" firstAttribute="top" secondItem="lGd-mM-dRM" secondAttribute="top" constant="5" id="zcA-Zl-WBn"/>
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROk-r3-kjG">
@@ -112,9 +99,9 @@
                 <constraint firstItem="XhX-Cx-aef" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="4MY-tO-bmi"/>
                 <constraint firstItem="RAf-Wx-Bhr" firstAttribute="top" secondItem="XhX-Cx-aef" secondAttribute="bottom" id="8jU-sN-NrV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lGd-mM-dRM" secondAttribute="bottom" id="AjF-l7-hA1"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RAf-Wx-Bhr" secondAttribute="bottom" id="Aoh-eA-gni"/>
                 <constraint firstItem="XhX-Cx-aef" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="BR2-gI-WsY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ROk-r3-kjG" secondAttribute="trailing" id="Bb4-6x-YRU"/>
+                <constraint firstItem="lGd-mM-dRM" firstAttribute="top" secondItem="RAf-Wx-Bhr" secondAttribute="bottom" id="Ebf-Y7-7uL"/>
                 <constraint firstItem="ROk-r3-kjG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="H38-Yz-TND"/>
                 <constraint firstItem="ROk-r3-kjG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KOn-pU-Mr2"/>
                 <constraint firstItem="RAf-Wx-Bhr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Uli-c0-yaa"/>
@@ -123,11 +110,10 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ROk-r3-kjG" secondAttribute="bottom" id="oup-R6-ceV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lGd-mM-dRM" secondAttribute="trailing" id="rDU-dj-Z55"/>
             </constraints>
-            <point key="canvasLocation" x="120" y="72"/>
+            <point key="canvasLocation" x="118.84057971014494" y="71.651785714285708"/>
         </view>
     </objects>
     <resources>
-        <image name="refresh" width="800" height="800"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

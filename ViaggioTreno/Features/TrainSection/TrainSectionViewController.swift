@@ -58,9 +58,8 @@ class TrainSectionViewController: UIViewController {
 	@IBOutlet var headerHeightConstraint: NSLayoutConstraint!
 	@IBOutlet var emptyContainer: UIView!
 	@IBOutlet var emptyLabel: UILabel!
-	@IBOutlet var closeButton: UIButton!
-	@IBOutlet var closeContainer: UIView!
-		
+	@IBOutlet var followButton: UIButton!
+	
 	typealias TrainSectionItemModel = AnimatableSectionModel<String, TrainSectionItem>
 	
 	var dataSource: RxTableViewSectionedAnimatedDataSource<TrainSectionItemModel>!
@@ -103,7 +102,7 @@ class TrainSectionViewController: UIViewController {
 		
 		tableView.estimatedRowHeight = 56
 		tableView.rowHeight = UITableView.automaticDimension
-	
+		
 		tableView.separatorColor = .clear
 		
 		registerTableViewCell(with: tableView, cell: TrainSectionCell.self, reuseIdentifier: "TrainSectionCell")
@@ -112,7 +111,44 @@ class TrainSectionViewController: UIViewController {
 		
 		headerView |> { $0?.backgroundColor = theme.primaryColor }
 		
-		closeContainer.isHidden = true
+		// MARK: - Follow
+		
+		followButton
+			|> theme.primaryButton
+			<> { $0.setTitle("segui", for: .normal) }
+		
+		followButton
+			.rx
+			.tap
+			.bind {
+				let t = Train.sample
+				store.send(.following(.trains(.select(t))))
+			}.disposed(by: disposeBag)
+		
+		followButton
+			.rx
+			.tap
+			.flatMapLatest { _ -> Observable<CurrentTrain?> in
+				store.value.map { $0.train }
+			}
+			.ignoreNil()
+			.map { (ct: CurrentTrain) -> Train in
+				Train(
+					number: ct.number,
+					status: ct.status,
+					originCode: ct.originCode,
+					from: Train.Station(
+						time: 0,
+						name: ""
+					),
+					to: Train.Station(
+						time: 0,
+						name: ""
+					), duration: "1:22"
+				)
+			}
+			.subscribe()
+			.disposed(by: disposeBag)
 		
 		// MARK: - Scroll to current station
 		
@@ -173,13 +209,13 @@ class TrainSectionViewController: UIViewController {
 			.drive(refreshControl.rx.isRefreshing)
 			.disposed(by: disposeBag)
 		
-		closeContainer |> backgroundColor(with: theme.primaryColor)
-		
-		closeButton
-			|> {
-				$0?.setTitleColor(.white, for: .normal)
-				$0?.setTitle(L10n.App.Common.x, for: .normal)
-			}
+		//		closeContainer |> backgroundColor(with: theme.primaryColor)
+		//
+		//		closeButton
+		//			|> {
+		//				$0?.setTitleColor(.white, for: .normal)
+		//				$0?.setTitle(L10n.App.Common.x, for: .normal)
+		//			}
 		
 		trainStatusLabel
 			|> theme.primaryLabel
@@ -208,11 +244,11 @@ class TrainSectionViewController: UIViewController {
 		
 		// MARK: - Close
 		
-		closeButton.rx
-			.tap
-			.bind { [weak self] in
-			self?.dismiss(animated: true, completion: nil)
-		}.disposed(by: disposeBag)
+		//		closeButton.rx
+		//			.tap
+		//			.bind { [weak self] in
+		//			self?.dismiss(animated: true, completion: nil)
+		//		}.disposed(by: disposeBag)
 		
 		// MARK: - retrieve data
 		
@@ -233,7 +269,7 @@ class TrainSectionViewController: UIViewController {
 			
 			dateFormatter.dateStyle = .none
 			dateFormatter.timeStyle = .short
-						
+			
 			return dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(time / 1000)))
 		}
 		
@@ -243,11 +279,11 @@ class TrainSectionViewController: UIViewController {
 			.error
 			.map { e -> Bool in
 				return false
-
+				
 				guard ((e as? APIError) != nil) else {
 					return false
 				}
-								
+				
 				return true
 			}
 			.bind(to: emptyContainer.rx.isVisible)
@@ -257,7 +293,7 @@ class TrainSectionViewController: UIViewController {
 			|> theme.primaryLabel
 			<> fontThin(with: 23)
 			<> textLabel(L10n.Sections.empty)
-
+		
 		// MARK: - Sections
 		
 		func map(trainSection: TrainSection) -> TrainSectionItem {
