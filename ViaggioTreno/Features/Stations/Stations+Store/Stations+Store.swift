@@ -121,6 +121,7 @@ func stationsReducer(
 			.compactMap { $0 }
 		
 		state.favouritesStations.append(station)
+		
 		return [
 			environment.saveFavourites(state.favouritesStations).map { StationsAction.updateFavouritesResponse($0) }
 		]

@@ -45,23 +45,28 @@ let trainsViewReducer: Reducer<TrainsViewState, TrainsViewAction, TrainsViewEnvi
 struct TrainsViewState: Equatable {
 	var trains: [Train]
 	var selectedTrain: Train?
+	var error: FollowingTrainsError?
 	
 	init(
 		trains: [Train],
-		selectedTrain: Train?
+		selectedTrain: Train?,
+		error: FollowingTrainsError?
 	) {
 		self.selectedTrain = selectedTrain
 		self.trains = trains
+		self.error = error
 	}
 	
 	var trainsState: TrainsState {
 		get {(
 			self.trains,
-			self.selectedTrain
+			self.selectedTrain,
+			self.error
 		)}
 		set {
 			self.selectedTrain = newValue.selectedTrain
 			self.trains = newValue.trains
+			self.error = newValue.error
 		}
 	}
 }
@@ -77,7 +82,12 @@ typealias TrainsViewEnvironment = (
 
 // MARK: - State
 
-typealias TrainsState = (trains: [Train], selectedTrain: Train?)
+public enum FollowingTrainsError: Error, Equatable {
+	case generic(String)
+	case notSaved
+}
+
+typealias TrainsState = (trains: [Train], selectedTrain: Train?, error: FollowingTrainsError?)
 
 // MARK: - Action
 
@@ -86,9 +96,9 @@ enum TrainsAction: Equatable {
 	case trainsResponse([Train])
 	
 	case add(Train)
-	case addResponse(Bool)
-	
 	case remove(Train)
+	
+	case updateResponse(Bool)
 	
 	case select(Train?)
 	
@@ -115,13 +125,36 @@ func trainsReducer(
 	case let .trainsResponse(result):
 		state.trains = result
 		return []
-	case .add(_):
+	case let .add(train):
+		guard (state.trains.filter { train ==  $0 }).isEmpty else {
+			return []
+		}
+		
+		state.trains.append(train)
+		
+		return [
+			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
+		]
+	case let .updateResponse(response):
+		guard response == true else {
+			state.error = FollowingTrainsError.notSaved
+			return []
+		}
 		return []
-	case .addResponse(_):
-		return []
-	case .remove(_):
-		return []
-	case .select(_):
+	case let .remove(train):
+		guard (state.trains.filter { train ==  $0 }).isEmpty == false else {
+			return []
+		}
+		
+		state.trains = state.trains
+			.map { $0.number == train.number ? nil : $0 }
+			.compactMap { $0 }
+		
+		return [
+			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
+		]
+	case let .select(train):
+		state.selectedTrain = train
 		return []
 	case .none:
 		return []
