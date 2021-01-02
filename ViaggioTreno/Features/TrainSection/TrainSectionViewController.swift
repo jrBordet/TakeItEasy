@@ -123,14 +123,6 @@ class TrainSectionViewController: UIViewController {
 			|> theme.primaryButton
 			<> { $0.setTitle("segui", for: .normal) }
 		
-//		followButton
-//			.rx
-//			.tap
-//			.bind {
-//				let t = Train.sample
-//				store.send(.following(.trains(.select(t))))
-//			}.disposed(by: disposeBag)
-		
 		let originTrain = store
 			.value
 			.map { (originCode: $0.originCode, train: $0.train?.number) }
@@ -188,15 +180,10 @@ class TrainSectionViewController: UIViewController {
 			.rx
 			.controlEvent(.valueChanged)
 			.map { _ in () }
-			.flatMapLatest {
-				store
-					.value
-					.map { (originCode: $0.originCode, train: $0.train?.number) }
-					.map { zip($0, $1) }
-					.ignoreNil()
-					.distinctUntilChanged { $0 == $1 }
-					.map { (originCode: $0, train: String($1)) }
+			.flatMapLatest { _ -> Observable<(originCode: String, train: String)> in
+				originTrain
 			}
+			.map { (originCode: $0, train: String($1)) }
 			.bind(to: store.rx.refresh)
 			.disposed(by: disposeBag)
 		
@@ -250,13 +237,8 @@ class TrainSectionViewController: UIViewController {
 		//		}.disposed(by: disposeBag)
 		
 		// MARK: - retrieve data
-		
-		store
-			.value
-			.map { (originCode: $0.originCode, train: $0.train?.number) }
-			.map { zip($0, $1) }
-			.ignoreNil()
-			.distinctUntilChanged { $0 == $1 }
+
+		originTrain			
 			.map { (originCode: $0, train: String($1)) }
 			.bind(to: store.rx.sections)
 			.disposed(by: disposeBag)
