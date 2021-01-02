@@ -59,6 +59,11 @@ let followingEnvMock: TrainsViewEnvironment = (
 		Effect.sync {
 			[]
 		}
+	}, retrieveTrend: { origin, train in
+		TrendRequest(origin: origin, train: train)
+			.execute()
+			.map { $0 }
+				//Effect.sync { nil }
 	}
 )
 

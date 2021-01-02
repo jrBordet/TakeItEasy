@@ -19,9 +19,11 @@ class FollowingTrainsTests: XCTestCase {
 	
 	var initialState: TrainsViewState!
 	
-	var expectedResult: [Train] = [
-		Train.sample
+	var expectedResult: [Trend] = [
+		TrendRequest.mock(Data.trend!)
 	]
+	
+	var trendSample = TrendRequest.mock(Data.trend!)
 	
 	var selectedExpectedResult = Train.sample
 	
@@ -41,6 +43,11 @@ class FollowingTrainsTests: XCTestCase {
 			retrieveTrains: {
 				.sync {
 					self.expectedResult
+				}
+			},
+			retrieveTrend: { _, _ in
+				.sync {
+					self.trendSample
 				}
 			}
 		)
@@ -73,8 +80,8 @@ class FollowingTrainsTests: XCTestCase {
 			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
 				state.trains = self.expectedResult
 			}),
-			Step.init(.send, .trains(.select(self.selectedExpectedResult)), { state in
-				state.selectedTrain = self.selectedExpectedResult
+			Step.init(.send, .trains(.select(trendSample)), { state in
+				state.selectedTrain = self.trendSample
 			})
 		)
 	}
@@ -84,7 +91,7 @@ class FollowingTrainsTests: XCTestCase {
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
-			steps: Step(.send, .trains(.add(Train.sample)), { state in
+			steps: Step(.send, .trains(.add(trendSample)), { state in
 				state.trains = self.expectedResult
 			}),
 			Step(.receive, .trains(.updateResponse(true)), { _ in })
@@ -92,13 +99,13 @@ class FollowingTrainsTests: XCTestCase {
 	}
 	
 	func test_remove_train_success() {
-		initialState = TrainsViewState(trains: [Train.sample], selectedTrain: nil, error: nil)
+		initialState = TrainsViewState(trains: [trendSample], selectedTrain: nil, error: nil)
 		
 		assert(
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
-			steps: Step(.send, .trains(.remove(Train.sample)), { state in
+			steps: Step(.send, .trains(.remove(trendSample)), { state in
 				state.trains = []
 			}),
 			Step(.receive, .trains(.updateResponse(true)), { _ in })
@@ -116,6 +123,9 @@ class FollowingTrainsTests: XCTestCase {
 				.sync {
 					self.expectedResult
 				}
+			},
+			retrieveTrend: { _, _ in
+				Effect.sync { nil }
 			}
 		)
 		
@@ -123,11 +133,59 @@ class FollowingTrainsTests: XCTestCase {
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
-			steps: Step(.send, .trains(.add(Train.sample)), { state in
+			steps: Step(.send, .trains(.add(trendSample)), { state in
 				state.trains = self.expectedResult
 			}),
 			Step(.receive, .trains(.updateResponse(false)), { state in
 				state.error = .notSaved
+			})
+		)
+	}
+	
+	func test_retreive_trend_success() {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .trains(.trend("origin", "train")), { state in
+			}),
+			Step(.receive, .trains(.trendResponse(trendSample)), { state in
+			}),
+			Step(.receive, TrainsViewAction.trains(TrainsAction.add(trendSample)), { state in
+				state.trains = [self.trendSample]
+			}),
+			Step(.receive, .trains(.updateResponse(true)), { state in
+			})
+		)
+	}
+	
+	func test_retreive_trend_failure() {
+		env = (
+			saveTrains: { _ in
+				.sync {
+					true
+				}
+			},
+			retrieveTrains: {
+				.sync {
+					[]
+				}
+			},
+			retrieveTrend: { _, _ in
+				.sync {
+					nil
+				}
+			}
+		)
+		
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .trains(.trend("origin", "train")), { state in
+			}),
+			Step(.receive, .trains(.trendResponse(nil)), { state in
+				state.trains = []
 			})
 		)
 	}

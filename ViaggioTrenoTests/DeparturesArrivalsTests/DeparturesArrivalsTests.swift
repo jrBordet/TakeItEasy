@@ -56,6 +56,9 @@ class DeparturesArrivalsTests: XCTestCase {
 				Effect.sync {
 					[]
 				}
+			},
+			retrieveTrend: { _, _ in
+				Effect.sync { nil }
 			}
 		)
 		

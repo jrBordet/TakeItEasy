@@ -51,6 +51,7 @@ extension AppState {
 			self.train = newValue.train
 			self.originCode = newValue.originCode
 			self.isRefreshing = newValue.isRefreshing
+			self.followingTrainsState = newValue.followingTrainsState
 		}
 	}
 }

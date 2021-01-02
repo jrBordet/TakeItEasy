@@ -44,13 +44,13 @@ let trainsViewReducer: Reducer<TrainsViewState, TrainsViewAction, TrainsViewEnvi
 )
 
 struct TrainsViewState: Equatable {
-	var trains: [Train]
-	var selectedTrain: Train?
+	var trains: [Trend]
+	var selectedTrain: Trend?
 	var error: FollowingTrainsError?
 	
 	init(
-		trains: [Train],
-		selectedTrain: Train?,
+		trains: [Trend],
+		selectedTrain: Trend?,
 		error: FollowingTrainsError?
 	) {
 		self.selectedTrain = selectedTrain
@@ -77,8 +77,9 @@ enum TrainsViewAction: Equatable {
 }
 
 typealias TrainsViewEnvironment = (
-	saveTrains: ([Train]) -> Effect<Bool>,
-	retrieveTrains: () -> Effect<[Train]>
+	saveTrains: ([Trend]) -> Effect<Bool>,
+	retrieveTrains: () -> Effect<[Trend]>,
+	retrieveTrend: (String, String) -> Effect<Trend?>
 )
 
 // MARK: - State
@@ -88,23 +89,23 @@ public enum FollowingTrainsError: Error, Equatable {
 	case notSaved
 }
 
-typealias TrainsState = (trains: [Train], selectedTrain: Train?, error: FollowingTrainsError?)
+typealias TrainsState = (trains: [Trend], selectedTrain: Trend?, error: FollowingTrainsError?)
 
 // MARK: - Action
 
 enum TrainsAction: Equatable {
 	case trains
-	case trainsResponse([Train])
+	case trainsResponse([Trend])
 	
 	case trend(String, String) // originCode, trainNumber
-	case trendResponse(Train, [TrainSection])
+	case trendResponse(Trend?)
 	
-	case add(Train)
-	case remove(Train)
+	case add(Trend)
+	case remove(Trend)
 	
 	case updateResponse(Bool)
 	
-	case select(Train?)
+	case select(Trend?)
 	
 	case none
 }
@@ -112,8 +113,9 @@ enum TrainsAction: Equatable {
 // MARK: - Environment
 
 typealias TrainsEnvironment = (
-	saveTrains: ([Train]) -> Effect<Bool>,
-	retrieveTrains: () -> Effect<[Train]>
+	saveTrains: ([Trend]) -> Effect<Bool>,
+	retrieveTrains: () -> Effect<[Trend]>,
+	retrieveTrend: (String, String) -> Effect<Trend?>
 )
 
 func trainsReducer(
@@ -151,7 +153,7 @@ func trainsReducer(
 		}
 		
 		state.trains = state.trains
-			.map { $0.number == train.number ? nil : $0 }
+			.map { $0.numeroTreno == train.numeroTreno ? nil : $0 }
 			.compactMap { $0 }
 		
 		return [
@@ -163,8 +165,16 @@ func trainsReducer(
 	case .none:
 		return []
 	case let .trend(origin, number):
-		return []
-	case let .trendResponse(train, sections):
-		return []
+		return [
+			environment.retrieveTrend(origin, number).map(TrainsAction.trendResponse)
+		]
+	case let .trendResponse(trend):
+		guard let trend = trend else {
+			return []
+		}
+		
+		return [
+			Effect.sync { }.map { TrainsAction.add(trend) }
+		]
 	}
 }

@@ -26,6 +26,12 @@ extension Reactive where Base: Store<TrainSectionViewState, TrainSectionViewActi
 			store.send(.section(.refresh(value.0, value.1)))
 		}
 	}
+	
+	var trend: Binder<(String, String)> {
+		Binder(self.base) { store, value in
+			store.send(.following(.trains(.trend(value.0, value.1))))
+		}
+	}
 }
 
 // MARK: - Data
@@ -117,37 +123,30 @@ class TrainSectionViewController: UIViewController {
 			|> theme.primaryButton
 			<> { $0.setTitle("segui", for: .normal) }
 		
-		followButton
-			.rx
-			.tap
-			.bind {
-				let t = Train.sample
-				store.send(.following(.trains(.select(t))))
-			}.disposed(by: disposeBag)
+//		followButton
+//			.rx
+//			.tap
+//			.bind {
+//				let t = Train.sample
+//				store.send(.following(.trains(.select(t))))
+//			}.disposed(by: disposeBag)
+		
+		let originTrain = store
+			.value
+			.map { (originCode: $0.originCode, train: $0.train?.number) }
+			.map { zip($0, $1) }
+			.ignoreNil()
+			.distinctUntilChanged { $0 == $1 }
+			.map { (originCode: $0, train: String($1)) }
 		
 		followButton
 			.rx
 			.tap
-			.flatMapLatest { _ -> Observable<CurrentTrain?> in
-				store.value.map { $0.train }
+			.flatMapLatest { _ -> Observable<(originCode: String, train: String)> in
+				originTrain
 			}
-			.ignoreNil()
-			.map { (ct: CurrentTrain) -> Train in
-				Train(
-					number: ct.number,
-					status: ct.status,
-					originCode: ct.originCode,
-					from: Train.Station(
-						time: 0,
-						name: ""
-					),
-					to: Train.Station(
-						time: 0,
-						name: ""
-					), duration: "1:22"
-				)
-			}
-			.subscribe()
+			.map { (originCode: $0, train: String($1)) }
+			.bind(to: store.rx.trend)
 			.disposed(by: disposeBag)
 		
 		// MARK: - Scroll to current station
