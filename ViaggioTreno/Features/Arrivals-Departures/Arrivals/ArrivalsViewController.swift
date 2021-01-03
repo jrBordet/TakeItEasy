@@ -36,7 +36,7 @@ extension ArrivalDepartureSectionItem: IdentifiableType {
 	public typealias Identity = String
 	
 	public var identity: String {
-		return "\(number)\(String(train))\(time))"
+		return "\(number)\(String(train))\(time)\(originCode)"
 	}
 }
 
