@@ -69,17 +69,6 @@ class ArrivalsViewController: UIViewController {
 		
 		setupDataSource()
 		
-		// MARK: - Selected station
-		
-//		store
-//			.value
-//			.map { $0.selectedStation }
-//			.debug("[\(self.debugDescription)]", trimOutput: false)
-//			.distinctUntilChanged()
-//			.ignoreNil()
-//			.bind(to: store.rx.arrivals)
-//			.disposed(by: disposeBag)
-		
 		// MARK: - Select train
 
 		tableView.rx

@@ -51,7 +51,7 @@ public class HomeViewController: BaseViewController {
 	public override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.title = "Viaggio Treno"
+		self.title = L10n.App.name
 	}
 	
 	public override func viewWillDisappear(_ animated: Bool) {
