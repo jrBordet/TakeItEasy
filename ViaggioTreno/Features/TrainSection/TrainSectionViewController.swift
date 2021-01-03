@@ -121,26 +121,28 @@ class TrainSectionViewController: UIViewController {
 		
 		// Retrieve trains
 		store.send(.following(.trains(.trains)))
-		
-		let followingTrains = store
-			.value
-			.map { $0.followingTrainsState.trains }
-			.distinctUntilChanged()
+//
+//		let followingTrains = store
+//			.value
+//			.map { $0.followingTrainsState.trains }
+//			.distinctUntilChanged()
 		
 		let currentTrain = store
 			.value
 			.map { $0.train }
 			.ignoreNil()
 			.distinctUntilChanged()
-//			.debug("[\(self.debugDescription)] 1 ", trimOutput: false)
-			.flatMapLatest { train -> Observable<[Trend]> in
-				print("[\(self.debugDescription)] train origin \(train.originCode) number \(train.number)\n")
-				print("\n\n")
+			//			.debug("[\(self.debugDescription)] 1 ", trimOutput: false)
+			.flatMapLatest { [weak self] train -> Observable<[Trend]> in
+				print("[\(self?.debugDescription)] train origin \(train.originCode) number \(train.number)\n")
 				
-				return followingTrains.map {
+				return store
+					.value
+					.map { $0.followingTrainsState.trains }
+					.distinctUntilChanged().map { [weak self] in
 						$0.filter { trend -> Bool in
-							print("[\(self.debugDescription)] trend idOrigine \(trend.idOrigine) numeroTreno \(trend.numeroTreno)")
-
+							print("[\(self?.debugDescription)] trend idOrigine \(trend.idOrigine) numeroTreno \(trend.numeroTreno)")
+							
 							return String(trend.numeroTreno) == train.number && trend.idOrigine == train.originCode
 						}
 					}
@@ -224,14 +226,6 @@ class TrainSectionViewController: UIViewController {
 			.drive(refreshControl.rx.isRefreshing)
 			.disposed(by: disposeBag)
 		
-		//		closeContainer |> backgroundColor(with: theme.primaryColor)
-		//
-		//		closeButton
-		//			|> {
-		//				$0?.setTitleColor(.white, for: .normal)
-		//				$0?.setTitle(L10n.App.Common.x, for: .normal)
-		//			}
-		
 		trainStatusLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 17)
@@ -256,14 +250,6 @@ class TrainSectionViewController: UIViewController {
 			.ignoreNil()
 			.bind(to: trainStatusLabel.rx.text)
 			.disposed(by: disposeBag)
-		
-		// MARK: - Close
-		
-		//		closeButton.rx
-		//			.tap
-		//			.bind { [weak self] in
-		//			self?.dismiss(animated: true, completion: nil)
-		//		}.disposed(by: disposeBag)
 		
 		// MARK: - retrieve data
 
