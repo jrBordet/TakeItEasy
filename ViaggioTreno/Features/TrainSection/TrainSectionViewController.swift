@@ -119,9 +119,42 @@ class TrainSectionViewController: UIViewController {
 		
 		// MARK: - Follow
 		
+		// Retrieve trains
+		store.send(.following(.trains(.trains)))
+		
+		let followingTrains = store
+			.value
+			.map { $0.followingTrainsState.trains }
+			.distinctUntilChanged()
+		
+		let currentTrain = store
+			.value
+			.map { $0.train }
+			.ignoreNil()
+			.distinctUntilChanged()
+//			.debug("[\(self.debugDescription)] 1 ", trimOutput: false)
+			.flatMapLatest { train -> Observable<[Trend]> in
+				print("[\(self.debugDescription)] train origin \(train.originCode) number \(train.number)\n")
+				print("\n\n")
+				
+				return followingTrains.map {
+						$0.filter { trend -> Bool in
+							print("[\(self.debugDescription)] trend idOrigine \(trend.idOrigine) numeroTreno \(trend.numeroTreno)")
+
+							return String(trend.numeroTreno) == train.number && trend.idOrigine == train.originCode
+						}
+					}
+			}
+			.distinctUntilChanged()
+			//.debug("[\(self.debugDescription)] 2 ", trimOutput: false)
+			.map { $0.isEmpty == false ? L10n.Trend.Follow.stop : L10n.Trend.follow }
+			//.debug("[\(self.debugDescription)] 3 ", trimOutput: false)
+			.asDriver(onErrorJustReturn: "")
+			.drive(followButton.rx.title(for: .normal))
+			.disposed(by: disposeBag)
+		
 		followButton
 			|> theme.primaryButton
-			<> { $0.setTitle("segui", for: .normal) }
 		
 		let originTrain = store
 			.value
@@ -134,9 +167,7 @@ class TrainSectionViewController: UIViewController {
 		followButton
 			.rx
 			.tap
-			.flatMapLatest { _ -> Observable<(originCode: String, train: String)> in
-				originTrain
-			}
+			.flatMapLatest { originTrain }
 			.map { (originCode: $0, train: String($1)) }
 			.bind(to: store.rx.trend)
 			.disposed(by: disposeBag)
@@ -180,9 +211,7 @@ class TrainSectionViewController: UIViewController {
 			.rx
 			.controlEvent(.valueChanged)
 			.map { _ in () }
-			.flatMapLatest { _ -> Observable<(originCode: String, train: String)> in
-				originTrain
-			}
+			.flatMapLatest { originTrain }
 			.map { (originCode: $0, train: String($1)) }
 			.bind(to: store.rx.refresh)
 			.disposed(by: disposeBag)

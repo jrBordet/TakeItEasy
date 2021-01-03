@@ -326,7 +326,7 @@
 	"motivoRitardoPrevalente": null,
 	"descrizioneVCO": "",
 	"materiale_label": null,
-	"numeroTreno": 11824,
+	"numeroTreno": 2776,
 	"categoria": "REG",
 	"categoriaDescrizione": null,
 	"origine": "AOSTA",
@@ -376,7 +376,7 @@
 	"compOrarioArrivoZero": "11:06",
 	"compOrarioArrivo": "11:06",
 	"compOrarioPartenza": "09:55",
-	"compNumeroTreno": "REG 11824",
+	"compNumeroTreno": "REG 2776",
 	"compOrientamento": [
 		"--",
 		"--",

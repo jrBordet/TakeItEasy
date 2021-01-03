@@ -64,9 +64,11 @@ let initialAppState = AppState(
 	trainSections: [],
 	isRefreshing: false,
 	followingTrainsState: TrainsViewState(
-		trains: [TrendRequest.mock(Data.trend!), TrendRequest.mock(Data.trend_torino_p_nuova_reggio_calabria!), TrendRequest.mock(Data.trend_milano_centrale!), TrendRequest.mock(Data.trend!)],
+		trains: [],
 		selectedTrain: nil,
 		error: nil
 	)
 )
+
+// [TrendRequest.mock(Data.trend!), TrendRequest.mock(Data.trend_torino_p_nuova_reggio_calabria!), TrendRequest.mock(Data.trend_milano_centrale!)]
 

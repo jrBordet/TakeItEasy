@@ -45,7 +45,7 @@ extension Data {
 		data(from: "trend", type: ".json")
 	}
 	
-	static var trend: Data? {
+	static var trend_broken: Data? {
 		data(from: "trend_broken", type: ".json")
 	}
 	

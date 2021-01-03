@@ -49,21 +49,16 @@ let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 	}
 )
 
-let followingEnvMock: TrainsViewEnvironment = (
-	saveTrains: { _ in
-		Effect.sync {
-			false
-		}
+let followingEnvLive: TrainsViewEnvironment = (
+	saveTrains: {
+		saveTrend(with: $0)
 	},
 	retrieveTrains: {
-		Effect.sync {
-			[]
-		}
+		retrieveTrend()
 	}, retrieveTrend: { origin, train in
 		TrendRequest(origin: origin, train: train)
 			.execute()
 			.map { $0 }
-				//Effect.sync { nil }
 	}
 )
 
@@ -79,7 +74,7 @@ let sectionsEnv: TrainSectionViewEnvironment = (
 				return sections
 			}
 	},
-	followingTrains: followingEnvMock
+	followingTrains: followingEnvLive
 )
 
 let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
@@ -91,6 +86,18 @@ let live: AppEnvironment = (
 	stations: stationsEnvLive,
 	arrivalsDepartures: arrivalsDeparturesViewEnvLive
 )
+
+func saveTrend(with t: [Trend]) -> Effect<Bool> {
+	TrendFileClient()
+		.persist(with: t)
+		.catchErrorJustReturn(false)
+}
+
+func retrieveTrend() -> Effect<[Trend]> {
+	TrendFileClient()
+		.fetch()
+		.catchErrorJustReturn([])
+}
 
 func saveFavourites(stations s: [Station]) -> Effect<Bool> {
 	FavouritesFileClient()

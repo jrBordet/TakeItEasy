@@ -12,7 +12,7 @@ import Foundation
 internal enum L10n {
 
   internal enum App {
-    /// 
+    /// Pendolare Stanco
     internal static let name = L10n.tr("Localizable", "app.name")
     internal enum Common {
       /// Arrivals
@@ -53,6 +53,15 @@ internal enum L10n {
       internal static let favourites = L10n.tr("Localizable", "stations.header.favourites")
       /// Results
       internal static let results = L10n.tr("Localizable", "stations.header.results")
+    }
+  }
+
+  internal enum Trend {
+    /// Follow
+    internal static let follow = L10n.tr("Localizable", "trend.follow")
+    internal enum Follow {
+      /// Follow
+      internal static let stop = L10n.tr("Localizable", "trend.follow.stop")
     }
   }
 }

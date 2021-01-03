@@ -130,6 +130,7 @@
 		F8613B2025A1D00200F81594 /* Mock+resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFA7C873E47894074686B6E /* Mock+resources.swift */; };
 		F8613B2625A1D1D400F81594 /* trend_milano_centrale.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613B2525A1D1D400F81594 /* trend_milano_centrale.json */; };
 		F8613B3025A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613B2F25A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json */; };
+		F8613B3A25A233B600F81594 /* Trend+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613B3925A233B600F81594 /* Trend+FileClient.swift */; };
 		FB5C00A7A8870C61D664B6C1 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A902A32B13ECA9539A754414 /* StationCell.swift */; };
 		FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7965BE0C53901712BFD3DD /* Environment.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
@@ -329,6 +330,7 @@
 		F8613B0825A1C24500F81594 /* FollowingTrainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowingTrainCell.xib; sourceTree = "<group>"; };
 		F8613B2525A1D1D400F81594 /* trend_milano_centrale.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trend_milano_centrale.json; sourceTree = "<group>"; };
 		F8613B2F25A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trend_torino_p_nuova_reggio_calabria.json; sourceTree = "<group>"; };
+		F8613B3925A233B600F81594 /* Trend+FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trend+FileClient.swift"; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -417,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				8BF5BC2F1521BB188AB78F11 /* Favourites+FileClient.swift */,
+				F8613B3925A233B600F81594 /* Trend+FileClient.swift */,
 				CB8FD6F04466965CA8A1915E /* Fileclient.swift */,
 				7903081E1B647F37B5888948 /* Info.plist */,
 				7E1715A3566AC3060925CA6D /* Models */,
@@ -1382,6 +1385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8613B3A25A233B600F81594 /* Trend+FileClient.swift in Sources */,
 				86DC852DE725B71B37CD7D19 /* Favourites+FileClient.swift in Sources */,
 				1380B3EAC77D91C92C73C4E6 /* Fileclient.swift in Sources */,
 				82D3BF8DCAB127604C2C283F /* User.swift in Sources */,

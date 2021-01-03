@@ -180,6 +180,9 @@ public class HomeViewController: BaseViewController {
 			.bind(to: stationsCollectionView.rx.items(dataSource: stationsDataSource))
 			.disposed(by: disposeBag)
 		
+		// MARK: - Retrieve trains
+		// TODO: - Retrieve trains
+
 		// MARK: - Select stations
 		
 		stationsCollectionView.rx

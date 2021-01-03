@@ -33,3 +33,8 @@
 // MARK: - Sections
 
 "sections.empty" = "Nessun risultato";
+
+// MARK: - Trend
+
+"trend.follow" = "Segui";
+"trend.follow.stop" = "Smetti di seguire";
