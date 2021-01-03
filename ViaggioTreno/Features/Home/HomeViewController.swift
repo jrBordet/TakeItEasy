@@ -42,6 +42,12 @@ public class HomeViewController: BaseViewController {
 	
 	private let itemsPerRow: CGFloat = 1
 	
+	let staionsCollectionViewDelegate = CollectionViewDelegate(
+		itemsPerRow: 1,
+		sectionInsets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 0),
+		size: CGSize(width: 65, height: 120)
+	)
+	
 	public override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
@@ -59,13 +65,13 @@ public class HomeViewController: BaseViewController {
 		
 		self.navigationController?.navigationBar.isHidden = false
 		self.navigationController?.navigationBar.tintColor = theme.primaryColor
-
+		
 		self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.primaryColor]
 		
 		guard let store = self.store else {
 			return
 		}
-				
+		
 		// MARK: - styling
 		
 		addLabel
@@ -83,7 +89,7 @@ public class HomeViewController: BaseViewController {
 		
 		// MARK: - Collection view layout
 		
-		stationsCollectionView.delegate = self
+		stationsCollectionView.delegate = staionsCollectionViewDelegate
 		
 		// Do any additional setup after loading the view.
 		
@@ -120,7 +126,7 @@ public class HomeViewController: BaseViewController {
 			.modelSelected(Station.self)
 			.bind(to: store.rx.select)
 			.disposed(by: disposeBag)
-				
+		
 		store
 			.value
 			.map { $0.favouritesStationsState.selectedStation }
@@ -156,44 +162,15 @@ public class HomeViewController: BaseViewController {
 	
 }
 
-// MARK: - Collection View Flow Layout Delegate
-
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
-	
-	public func collectionView(_ collectionView: UICollectionView,
-							   layout collectionViewLayout: UICollectionViewLayout,
-							   sizeForItemAt indexPath: IndexPath) -> CGSize {
-		
-		let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-		let widthPerItem = 65 + paddingSpace / itemsPerRow
-		
-		return CGSize(width: widthPerItem, height: 120)
-	}
-	
-	
-	public func collectionView(_ collectionView: UICollectionView,
-							   layout collectionViewLayout: UICollectionViewLayout,
-							   insetForSectionAt section: Int) -> UIEdgeInsets {
-		return sectionInsets
-	}
-	
-	
-	public func collectionView(_ collectionView: UICollectionView,
-							   layout collectionViewLayout: UICollectionViewLayout,
-							   minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-		return sectionInsets.left
-	}
-}
-
 // MARK: - ConfigureCell
 
 extension HomeViewController {
 	static func favouritesStationCollectionViewDataSource() -> CollectionViewSectionedDataSource<HomeStationsSection>.ConfigureCell {
 		return { dataSource, cv, idxPath, item in
 			let cell = cv.dequeueReusableCell(withReuseIdentifier: "FavouritesStationsCell", for: idxPath) as! FavouritesStationsCell
-
+			
 			cell.configure(with: item)
-
+			
 			return cell
 		}
 	}

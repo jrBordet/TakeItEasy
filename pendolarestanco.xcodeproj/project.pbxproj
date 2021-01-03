@@ -123,6 +123,7 @@
 		F8613A6125A0B8CB00F81594 /* NetworkingTrendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613A6025A0B8CB00F81594 /* NetworkingTrendTests.swift */; };
 		F8613A7525A0B94300F81594 /* trend.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613A6725A0B93A00F81594 /* trend.json */; };
 		F8613A7B25A0BED300F81594 /* trend_broken.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613A7A25A0BED300F81594 /* trend_broken.json */; };
+		F8613AC025A105D300F81594 /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613ABF25A105D300F81594 /* CollectionViewDelegate.swift */; };
 		FB5C00A7A8870C61D664B6C1 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A902A32B13ECA9539A754414 /* StationCell.swift */; };
 		FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7965BE0C53901712BFD3DD /* Environment.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
@@ -315,6 +316,7 @@
 		F8613A6025A0B8CB00F81594 /* NetworkingTrendTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingTrendTests.swift; sourceTree = "<group>"; };
 		F8613A6725A0B93A00F81594 /* trend.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = trend.json; sourceTree = "<group>"; };
 		F8613A7A25A0BED300F81594 /* trend_broken.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = trend_broken.json; sourceTree = "<group>"; };
+		F8613ABF25A105D300F81594 /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -369,12 +371,12 @@
 		02EAE5C87D9BCDC00D20E976 /* Arrivals-Departures */ = {
 			isa = PBXGroup;
 			children = (
+				9A2F07455ECF3948F28391CD /* Arrivals-Departures+Store */,
 				C9FF6FE1902DF7A9B62AAAD3 /* ArrivalsDeparturesContainerViewController.swift */,
 				1B95D6E5E24A4EF64C06DEB9 /* ArrivalsDeparturesContainerViewController.xib */,
-				A21DF845D9E4EA6913F3B199 /* Arrivals */,
-				9A2F07455ECF3948F28391CD /* Arrivals-Departures+Store */,
-				1C8DE1DAA312671CCA1A4136 /* Cell */,
 				CB489CB7E3113B6C6B4EB664 /* Departures */,
+				A21DF845D9E4EA6913F3B199 /* Arrivals */,
+				1C8DE1DAA312671CCA1A4136 /* Cell */,
 			);
 			path = "Arrivals-Departures";
 			sourceTree = "<group>";
@@ -654,6 +656,7 @@
 				D96A597B46972F405716E17A /* Features */,
 				AF42A48BDF2FC63479898FF7 /* Resources */,
 				F1595E80F83DCD512C786FBC /* Supporting Files */,
+				F8613ABF25A105D300F81594 /* CollectionViewDelegate.swift */,
 			);
 			path = ViaggioTreno;
 			sourceTree = "<group>";
@@ -1311,6 +1314,7 @@
 				726747A8E566826BFA146128 /* FavouritesStationsCell.swift in Sources */,
 				8936B9F1DEFFC2B8A22B16B4 /* FileClient+Rx.swift in Sources */,
 				B6466A2F84FC8F78401663A8 /* Home+Store.swift in Sources */,
+				F8613AC025A105D300F81594 /* CollectionViewDelegate.swift in Sources */,
 				F1925E749AAA309E5C87DC69 /* HomeViewController.swift in Sources */,
 				D226CEE2E20FC691CEF8ACBF /* Localizable.swift in Sources */,
 				A85D744A062B74E2F076E4B0 /* Mock+.swift in Sources */,
