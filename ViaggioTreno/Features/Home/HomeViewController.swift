@@ -24,12 +24,14 @@ extension Reactive where Base: Store<HomeViewState, HomeViewAction> {
 }
 
 public class HomeViewController: BaseViewController {
+	@IBOutlet var titleLabel: UILabel!
 	@IBOutlet var searchStationsButton: UIButton!
 	@IBOutlet var stationsCollectionView: UICollectionView!
 	@IBOutlet var addLabel: UILabel!
 	@IBOutlet var emptyStationsView: UIView!
 	@IBOutlet var emptyStationsLabel: UILabel!
 	
+	@IBOutlet var followingTrainTitleLabel: UILabel!
 	@IBOutlet var followingTrainsCollectionView: UICollectionView!
 	
 	let theme: AppThemeMaterial = .theme
@@ -53,7 +55,7 @@ public class HomeViewController: BaseViewController {
 	let trainsCollectionViewDelegate = CollectionViewDelegate(
 		itemsPerRow: 1,
 		sectionInsets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 0),
-		size: CGSize(width: 160, height: 110)
+		size: CGSize(width: 320, height: 110)
 	)
 	
 	// MARK: - Life cycle
@@ -62,6 +64,7 @@ public class HomeViewController: BaseViewController {
 		super.viewWillAppear(animated)
 		
 		self.title = L10n.App.name
+		self.navigationController?.navigationBar.isHidden = true
 	}
 	
 	public override func viewWillDisappear(_ animated: Bool) {
@@ -73,7 +76,7 @@ public class HomeViewController: BaseViewController {
 	override public func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.navigationController?.navigationBar.isHidden = false
+		self.navigationController?.navigationBar.isHidden = true
 		self.navigationController?.navigationBar.tintColor = theme.primaryColor
 		
 		self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: theme.primaryColor]
@@ -83,6 +86,18 @@ public class HomeViewController: BaseViewController {
 		}
 		
 		// MARK: - styling
+		
+		titleLabel
+			|> theme.primaryLabel
+			<> fontMedium(with: 17)
+			<> textLabel("le mie stazioni")
+			<> textColor(color: theme.primaryColor)
+		
+		followingTrainTitleLabel
+			|> theme.primaryLabel
+			<> fontMedium(with: 17)
+			<> textLabel("treni seguiti")
+			<> textColor(color: theme.primaryColor)
 		
 		addLabel
 			|> theme.primaryLabel
