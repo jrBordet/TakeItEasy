@@ -238,7 +238,7 @@ class TrainSectionViewController: UIViewController {
 		
 		// MARK: - retrieve data
 
-		originTrain			
+		originTrain
 			.map { (originCode: $0, train: String($1)) }
 			.bind(to: store.rx.sections)
 			.disposed(by: disposeBag)
@@ -299,7 +299,11 @@ class TrainSectionViewController: UIViewController {
 			.drive(tableView.rx.items(dataSource: dataSource))
 			.disposed(by: disposeBag)
 	}
-	
+}
+
+// MARK: - Data Source Configuration
+
+extension TrainSectionViewController {
 	private func setupDataSource() {
 		dataSource = RxTableViewSectionedAnimatedDataSource<TrainSectionItemModel>(
 			animationConfiguration: AnimationConfiguration(insertAnimation: .none,
@@ -307,11 +311,7 @@ class TrainSectionViewController: UIViewController {
 			configureCell: configureCell
 		)
 	}
-}
-
-// MARK: - Data Source Configuration
-
-extension TrainSectionViewController {
+	
 	private var configureCell: RxTableViewSectionedAnimatedDataSource<TrainSectionItemModel>.ConfigureCell {
 		return { _, table, idxPath, item in
 			guard let cell = table.dequeueReusableCell(withIdentifier: "TrainSectionCell", for: idxPath) as? TrainSectionCell else {
