@@ -49,6 +49,17 @@ let arrivalsDeparturesEnvLive: ArrivalsDeparturesEnvironment = (
 	}
 )
 
+let followingEnvMock: TrainsViewEnvironment = (
+	saveTrains: { _ in
+		Effect.sync {  true }
+	},
+	retrieveTrains: {
+		Effect.sync { [] }
+	}, retrieveTrend: { origin, train in
+		Effect.sync { nil }
+	}
+)
+
 let followingEnvLive: TrainsViewEnvironment = (
 	saveTrains: {
 		saveTrend(with: $0)
