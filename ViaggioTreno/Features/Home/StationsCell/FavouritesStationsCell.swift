@@ -14,9 +14,7 @@ class FavouritesStationsCell: UICollectionViewCell {
 	@IBOutlet private var initialNameLabel: UILabel!
 	@IBOutlet var completeNameLabel: UILabel!
 	@IBOutlet var cardView: UIView!
-	
-	let theme: AppThemeMaterial = .theme
-	
+		
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

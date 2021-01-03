@@ -30,6 +30,8 @@ public class HomeViewController: BaseViewController {
 	@IBOutlet var emptyStationsView: UIView!
 	@IBOutlet var emptyStationsLabel: UILabel!
 	
+	@IBOutlet var followingTrainsCollectionView: UICollectionView!
+	
 	let theme: AppThemeMaterial = .theme
 	
 	private let disposeBag = DisposeBag()
@@ -47,6 +49,14 @@ public class HomeViewController: BaseViewController {
 		sectionInsets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 0),
 		size: CGSize(width: 65, height: 120)
 	)
+	
+	let trainsCollectionViewDelegate = CollectionViewDelegate(
+		itemsPerRow: 1,
+		sectionInsets: UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 0),
+		size: CGSize(width: 160, height: 110)
+	)
+	
+	// MARK: - Life cycle
 	
 	public override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -87,19 +97,54 @@ public class HomeViewController: BaseViewController {
 			<> fontThin(with: 17)
 			<> textLabel(L10n.App.Home.disclaimer)
 		
-		// MARK: - Collection view layout
+		// MARK: - Collections view layout
+		
+		// MARK: stations
 		
 		stationsCollectionView.delegate = staionsCollectionViewDelegate
+				
+		let configureStationsCell = HomeViewController.favouritesStationCollectionViewDataSource()
 		
-		// Do any additional setup after loading the view.
-		
-		let configureViewCell = HomeViewController.favouritesStationCollectionViewDataSource()
-		
-		let dataSource = RxCollectionViewSectionedAnimatedDataSource(configureCell: configureViewCell)
+		let stationsDataSource = RxCollectionViewSectionedAnimatedDataSource(configureCell: configureStationsCell)
 		
 		register(with: stationsCollectionView, cell: FavouritesStationsCell.self, identifier: "FavouritesStationsCell")
 		
-		// MARK: - bind dataSource
+		// MARK: following trains
+		
+		followingTrainsCollectionView.delegate = trainsCollectionViewDelegate
+		
+		let configureTrainsCell = HomeViewController.configureFollowingTrainCell()
+		
+		let trainsDataSource = RxCollectionViewSectionedAnimatedDataSource(configureCell: configureTrainsCell)
+		
+		register(with: followingTrainsCollectionView, cell: FollowingTrainCell.self, identifier: "FollowingTrainCell")
+		
+		// MARK: - Trains bind dataSource
+				
+		store
+			.value
+			.map { $0.followingTrainsState.trains }
+			.map { (trains: [Trend]) -> [Trend] in
+				trains
+			}
+			.distinctUntilChanged()
+			.map { trends -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
+				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ trend -> FollowingTrainsSectionItem in
+					FollowingTrainsSectionItem(
+						number: String(trend.numeroTreno),
+						train: trend.numeroTreno,
+						name: String(trend.numeroTreno),
+						time: "",
+						status: "",
+						originCode: trend.origine
+					)
+				})]
+			}
+			.asDriver(onErrorJustReturn: [])
+			.drive(followingTrainsCollectionView.rx.items(dataSource: trainsDataSource))
+			.disposed(by: disposeBag)
+
+		// MARK: - Stations bind dataSource
 		
 		store.send(.favourites(.stations(.favourites)))
 		
@@ -117,7 +162,7 @@ public class HomeViewController: BaseViewController {
 			.map { stations -> [HomeStationsSection] in
 				[HomeStationsSection(header: "", stations: stations, updated: Date())]
 			}
-			.bind(to: stationsCollectionView.rx.items(dataSource: dataSource))
+			.bind(to: stationsCollectionView.rx.items(dataSource: stationsDataSource))
 			.disposed(by: disposeBag)
 		
 		// MARK: - Select stations
@@ -159,79 +204,4 @@ public class HomeViewController: BaseViewController {
 				}, isModal: true)
 			}.disposed(by: disposeBag)
 	}
-	
-}
-
-// MARK: - ConfigureCell
-
-extension HomeViewController {
-	static func favouritesStationCollectionViewDataSource() -> CollectionViewSectionedDataSource<HomeStationsSection>.ConfigureCell {
-		return { dataSource, cv, idxPath, item in
-			let cell = cv.dequeueReusableCell(withReuseIdentifier: "FavouritesStationsCell", for: idxPath) as! FavouritesStationsCell
-			
-			cell.configure(with: item)
-			
-			return cell
-		}
-	}
-}
-
-// MARK: - Data
-
-struct HomeStationsSection {
-	var header: String
-	
-	var stations: [Station]
-	
-	var updated: Date
-	
-	init(header: String, stations: [Item], updated: Date) {
-		self.header = header
-		self.stations = stations
-		self.updated = updated
-	}
-}
-
-// MARK: - Just extensions to say how to determine identity and how to determine is entity updated
-
-extension HomeStationsSection: AnimatableSectionModelType {
-	typealias Item = Station
-	typealias Identity = String
-	
-	var identity: String {
-		return header
-	}
-	
-	var items: [Station] {
-		return stations
-	}
-	
-	init(original: HomeStationsSection, items: [Item]) {
-		self = original
-		self.stations = items
-	}
-}
-
-extension HomeStationsSection: CustomDebugStringConvertible {
-	var debugDescription: String {
-		let interval = updated.timeIntervalSince1970
-		let numbersDescription = stations.map { "\n\($0.name)" }.joined(separator: "")
-		return "HomeStationsSection(header: \"\(self.header)\", numbers: \(numbersDescription)\n, updated: \(interval))"
-	}
-}
-
-extension Station: IdentifiableType {
-	public typealias Identity = String
-	
-	public var identity: String {
-		return id
-	}
-}
-
-extension HomeStationsSection: Equatable {
-	
-}
-
-func == (lhs: HomeStationsSection, rhs: HomeStationsSection) -> Bool {
-	return lhs.header == rhs.header && lhs.items == rhs.items && lhs.updated == rhs.updated
 }

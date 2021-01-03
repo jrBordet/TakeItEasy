@@ -8,11 +8,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="ViaggioTreno" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="PendolareStanco" customModuleProvider="target">
             <connections>
                 <outlet property="addLabel" destination="Mkd-2z-pyX" id="028-Qz-geO"/>
                 <outlet property="emptyStationsLabel" destination="mZm-c0-wtt" id="nHv-z3-3LK"/>
                 <outlet property="emptyStationsView" destination="5l6-t8-SsK" id="CaZ-tt-Nas"/>
+                <outlet property="followingTrainsCollectionView" destination="Ssr-Al-jLx" id="hMl-Cr-tUv"/>
                 <outlet property="searchStationsButton" destination="i4m-KC-qim" id="GYa-wY-Mqp"/>
                 <outlet property="stationsCollectionView" destination="oIG-Zx-35e" id="P7d-62-msH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="PyR-7H-mpk">
-                    <rect key="frame" x="0.0" y="44" width="414" height="200"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="400"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gou-i5-WFg">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -101,6 +102,29 @@
                                 <constraint firstAttribute="trailing" secondItem="i4m-KC-qim" secondAttribute="trailing" constant="15" id="rZk-Pn-hVj"/>
                                 <constraint firstItem="Mkd-2z-pyX" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" constant="15" id="up3-1X-aBR"/>
                                 <constraint firstItem="oIG-Zx-35e" firstAttribute="leading" secondItem="gou-i5-WFg" secondAttribute="leading" id="zFF-Ko-KTe"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9G-rV-aiL">
+                            <rect key="frame" x="0.0" y="200" width="414" height="200"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ssr-Al-jLx">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nr6-Vl-NuP">
+                                        <size key="itemSize" width="128" height="128"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="Ssr-Al-jLx" firstAttribute="top" secondItem="D9G-rV-aiL" secondAttribute="top" id="Aul-6b-bvX"/>
+                                <constraint firstItem="Ssr-Al-jLx" firstAttribute="leading" secondItem="D9G-rV-aiL" secondAttribute="leading" id="VBq-0J-bHp"/>
+                                <constraint firstAttribute="height" constant="200" id="fou-bV-A7e"/>
+                                <constraint firstAttribute="bottom" secondItem="Ssr-Al-jLx" secondAttribute="bottom" id="gAS-LE-eLe"/>
+                                <constraint firstAttribute="trailing" secondItem="Ssr-Al-jLx" secondAttribute="trailing" id="zQm-qa-yHq"/>
                             </constraints>
                         </view>
                     </subviews>

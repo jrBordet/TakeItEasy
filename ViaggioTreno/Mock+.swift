@@ -40,6 +40,22 @@ extension Data {
 		data(from: "stations", type: ".txt")
 	}
 	
+	static var trend: Data? {
+		data(from: "trend", type: ".json")
+	}
+	
+	static var trend_broken: Data? {
+		data(from: "trend_broken", type: ".json")
+	}
+	
+	static var trend_milano_centrale: Data? {
+		data(from: "trend_milano_centrale", type: ".json")
+	}
+	
+	static var trend_torino_p_nuova_reggio_calabria: Data? {
+		data(from: "trend_torino_p_nuova_reggio_calabria", type: ".json")
+	}
+	
 	private static func data(from file: String, type: String) -> Data? {
 		Bundle.main
 			.path(forResource: file, ofType: type)
