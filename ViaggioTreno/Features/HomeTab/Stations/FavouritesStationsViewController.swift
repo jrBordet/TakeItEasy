@@ -13,6 +13,15 @@ import Styling
 import RxComposableArchitecture
 import Networking
 import Caprice
+import SceneBuilder
+
+extension Reactive where Base: Store<StationsViewState, StationsViewAction> {
+	var selectStation: Binder<FavouritesStationsSectionItem> {
+		Binder(self.base) { store, value in
+			store.send(StationsViewAction.stations(StationsAction.select(Station.milano.first!)))
+		}
+	}
+}
 
 class FavouritesStationsViewController: UIViewController {
 	@IBOutlet var tableView: UITableView!
@@ -43,6 +52,40 @@ class FavouritesStationsViewController: UIViewController {
 		// MARK: - Load favourites
 		
 		store.send(.stations(.favourites))
+		
+		// MARK: - Select station
+		
+		tableView
+			.rx
+			.modelSelected(FavouritesStationsSectionItem.self)
+			.bind(to: store.rx.selectStation)
+			.disposed(by: disposeBag)
+		
+		store
+			.value
+			.map { $0.selectedStation }
+			.distinctUntilChanged()
+			.ignoreNil()
+			.subscribe(onNext: { station in
+				navigationLink(from: self, destination: Scene<ArrivalsDeparturesContainerViewController>(), completion: { vc in
+					vc.store = store.view(
+						value: { $0.arrivalsDeparturesState },
+						action: { .arrivalsDepartures($0) }
+					)
+					
+//					store.view {
+//						$0
+//					}, action: {
+//						.stations($0)
+//					}
+
+//					vc.store = store.view(
+//						value: { $0. },
+//						action: { .arrivalsDepartures($0) }
+//					)
+				}, isModal: false)
+			})
+			.disposed(by: disposeBag)
 		
 		// MARK: - Bind dataSource
 		
