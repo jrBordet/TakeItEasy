@@ -19,7 +19,6 @@ extension Trend: IdentifiableType {
 	}
 }
 
-
 typealias FollowingTrainsListSectionModel = AnimatableSectionModel<String, FollowingTrainsSectionItem>
 
 struct FollowingTrainsSectionItem {

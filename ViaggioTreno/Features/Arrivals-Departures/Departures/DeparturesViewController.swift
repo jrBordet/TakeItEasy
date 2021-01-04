@@ -118,7 +118,7 @@ class DeparturesViewController: BaseViewController {
 	}
 }
 
-// MARK: Data Source Configuration
+// MARK: - Data Source Configuration
 
 extension DeparturesViewController {
 	private var configureCell: RxTableViewSectionedAnimatedDataSource<ArrivalsDeparturesListSectionModel>.ConfigureCell {

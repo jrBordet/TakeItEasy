@@ -23,11 +23,27 @@ class HomeTabViewController: TabmanViewController {
 		FavouritesStationsViewController(),
 		DeparturesViewController()
 	]
+	
+	var store: Store<HomeViewState, HomeViewAction>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+		guard let store = self.store else {
+			return
+		}
+		
+		// MARK: - Stations
+	
+		
+		if let stations = viewControllers.first as? FavouritesStationsViewController {
+			stations.store = store.view {
+				$0.favouritesStationsState
+			} action: {
+				.favourites($0)
+			}
+		}
+
 		// MARK: - Create bar
 		
 		let bar = TMBar.TabBar()
@@ -36,7 +52,7 @@ class HomeTabViewController: TabmanViewController {
 		let systemBar = bar.systemBar()
 		systemBar.backgroundStyle = .blur(style: .dark)
 		
-		bar.layout.contentInset = UIEdgeInsets(top: -30.0, left: 20.0, bottom: 10.0, right: 20.0)
+		bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 10.0, right: 20.0)
 		
 		bar.buttons.customize { button in
 			button.tintColor = theme.primaryColor.withAlphaComponent(0.35)
@@ -52,17 +68,6 @@ class HomeTabViewController: TabmanViewController {
 		
 		self.dataSource = self
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -89,7 +94,7 @@ extension HomeTabViewController: PageboyViewControllerDataSource, TMBarDataSourc
 		
 		switch tab {
 		case .stations:
-			return TMBarItem(title: L10n.App.Common.arrivals)
+			return TMBarItem(title: L10n.Stations.title)
 		case .trains:
 			return TMBarItem(title: L10n.App.Common.departures)
 		}

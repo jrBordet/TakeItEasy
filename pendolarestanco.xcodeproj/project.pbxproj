@@ -138,6 +138,9 @@
 		F892D1AF25A3764A00DEDFDC /* TrainsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F892D1AD25A3764A00DEDFDC /* TrainsViewController.xib */; };
 		F892D22725A39C2D00DEDFDC /* FavouritesStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F892D22525A39C2D00DEDFDC /* FavouritesStationsViewController.swift */; };
 		F892D22825A39C2D00DEDFDC /* FavouritesStationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F892D22625A39C2D00DEDFDC /* FavouritesStationsViewController.xib */; };
+		F892D23C25A3A09800DEDFDC /* StationsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F892D23A25A3A09800DEDFDC /* StationsCell.swift */; };
+		F892D23D25A3A09800DEDFDC /* StationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F892D23B25A3A09800DEDFDC /* StationsCell.xib */; };
+		F892D24725A3A15100DEDFDC /* FavouritesStationsSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F892D24625A3A15100DEDFDC /* FavouritesStationsSectionItem.swift */; };
 		FB5C00A7A8870C61D664B6C1 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A902A32B13ECA9539A754414 /* StationCell.swift */; };
 		FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7965BE0C53901712BFD3DD /* Environment.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
@@ -345,6 +348,9 @@
 		F892D1AD25A3764A00DEDFDC /* TrainsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainsViewController.xib; sourceTree = "<group>"; };
 		F892D22525A39C2D00DEDFDC /* FavouritesStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesStationsViewController.swift; sourceTree = "<group>"; };
 		F892D22625A39C2D00DEDFDC /* FavouritesStationsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouritesStationsViewController.xib; sourceTree = "<group>"; };
+		F892D23A25A3A09800DEDFDC /* StationsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsCell.swift; sourceTree = "<group>"; };
+		F892D23B25A3A09800DEDFDC /* StationsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationsCell.xib; sourceTree = "<group>"; };
+		F892D24625A3A15100DEDFDC /* FavouritesStationsSectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesStationsSectionItem.swift; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -975,8 +981,10 @@
 		F892D1A625A3762400DEDFDC /* Stations */ = {
 			isa = PBXGroup;
 			children = (
+				F892D23925A3A08400DEDFDC /* Cell */,
 				F892D22525A39C2D00DEDFDC /* FavouritesStationsViewController.swift */,
 				F892D22625A39C2D00DEDFDC /* FavouritesStationsViewController.xib */,
+				F892D24625A3A15100DEDFDC /* FavouritesStationsSectionItem.swift */,
 			);
 			path = Stations;
 			sourceTree = "<group>";
@@ -988,6 +996,15 @@
 				F892D1AD25A3764A00DEDFDC /* TrainsViewController.xib */,
 			);
 			path = Trains;
+			sourceTree = "<group>";
+		};
+		F892D23925A3A08400DEDFDC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F892D23A25A3A09800DEDFDC /* StationsCell.swift */,
+				F892D23B25A3A09800DEDFDC /* StationsCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		FDDB5CD478B777EAA020B7DF /* Frameworks */ = {
@@ -1192,6 +1209,7 @@
 				F8613B3025A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json in Resources */,
 				2ECF20D55419C028657C2A89 /* TrainSectionCell.xib in Resources */,
 				6E258BE3BA9AA2969B2A4445 /* TrainSectionViewController.xib in Resources */,
+				F892D23D25A3A09800DEDFDC /* StationsCell.xib in Resources */,
 				C342B81D2F68E28D467186AA /* arrivals.json in Resources */,
 				6973CA5355A34F5D59ADAC70 /* arrivals_broken.json in Resources */,
 				C466A4B28B5D16A05046085A /* departures.json in Resources */,
@@ -1421,12 +1439,14 @@
 				F892D1A025A3761D00DEDFDC /* HomeTabViewController.swift in Sources */,
 				FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */,
 				726747A8E566826BFA146128 /* FavouritesStationsCell.swift in Sources */,
+				F892D24725A3A15100DEDFDC /* FavouritesStationsSectionItem.swift in Sources */,
 				8936B9F1DEFFC2B8A22B16B4 /* FileClient+Rx.swift in Sources */,
 				F8613B5A25A3551E00F81594 /* Trend+FileClient.swift in Sources */,
 				B6466A2F84FC8F78401663A8 /* Home+Store.swift in Sources */,
 				F8613AC025A105D300F81594 /* CollectionViewDelegate.swift in Sources */,
 				F1925E749AAA309E5C87DC69 /* HomeViewController.swift in Sources */,
 				D226CEE2E20FC691CEF8ACBF /* Localizable.swift in Sources */,
+				F892D23C25A3A09800DEDFDC /* StationsCell.swift in Sources */,
 				A85D744A062B74E2F076E4B0 /* Mock+.swift in Sources */,
 				FB5C00A7A8870C61D664B6C1 /* StationCell.swift in Sources */,
 				F8613B0925A1C24500F81594 /* FollowingTrainCell.swift in Sources */,
