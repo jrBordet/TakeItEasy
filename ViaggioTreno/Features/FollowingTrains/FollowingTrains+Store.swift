@@ -8,6 +8,7 @@
 import Foundation
 import RxComposableArchitecture
 import Networking
+import Caprice
 
 struct Train: Equatable {
 	var number: String
@@ -44,30 +45,40 @@ let trainsViewReducer: Reducer<TrainsViewState, TrainsViewAction, TrainsViewEnvi
 )
 
 struct TrainsViewState: Equatable {
-	var trains: [Trend]
+	var trains: [FollowingTrain]
+	var trends: [Trend]
 	var selectedTrend: Trend?
 	var error: FollowingTrainsError?
+	var selectedTrain: FollowingTrain?
 	
 	init(
-		trains: [Trend],
+		trains: [FollowingTrain],
+		trends: [Trend],
 		selectedTrend: Trend?,
-		error: FollowingTrainsError?
+		error: FollowingTrainsError?,
+		selectedTrain: FollowingTrain?
 	) {
-		self.selectedTrend = selectedTrend
 		self.trains = trains
+		self.selectedTrend = selectedTrend
+		self.trends = trends
 		self.error = error
+		self.selectedTrain = selectedTrain
 	}
 	
 	var trainsState: TrainsState {
 		get {(
 			self.trains,
+			self.trends,
 			self.selectedTrend,
-			self.error
+			self.error,
+			self.selectedTrain
 		)}
 		set {
-			self.selectedTrend = newValue.selectedTrend
 			self.trains = newValue.trains
+			self.selectedTrend = newValue.selectedTrend
+			self.trends = newValue.trends
 			self.error = newValue.error
+			self.selectedTrain = newValue.selectedTrain
 		}
 	}
 }
@@ -89,7 +100,13 @@ public enum FollowingTrainsError: Error, Equatable {
 	case notSaved
 }
 
-typealias TrainsState = (trains: [Trend], selectedTrend: Trend?, error: FollowingTrainsError?)
+typealias TrainsState = (trains: [FollowingTrain], trends: [Trend], selectedTrend: Trend?, error: FollowingTrainsError?, selectedTrain: FollowingTrain?)
+
+struct FollowingTrain: Equatable {
+	var originCode: String
+	var trainNumber: String
+	var isFollowing: Bool = false
+}
 
 // MARK: - Action
 
@@ -106,6 +123,8 @@ enum TrainsAction: Equatable {
 	case updateResponse(Bool)
 	
 	case select(Trend?)
+	
+	//case selectTrain(SelectedTrain?)
 	
 	case none
 }
@@ -124,22 +143,38 @@ func trainsReducer(
 	environment: TrainsEnvironment
 ) -> [Effect<TrainsAction>] {
 	switch action {
+//	case let .selectTrain(t):
+//		state.selectedTrain = t
+//		return []
 	case .trains:
 		return [
 			environment.retrieveTrains().map(TrainsAction.trainsResponse)
 		]
 	case let .trainsResponse(result):
-		state.trains = result
+		state.trends = result
+		
+		guard let train = state.selectedTrain else {
+			return []
+		}
+		        
+		if result.filter({ trend -> Bool in
+			trend.idOrigine == train.originCode && String(trend.numeroTreno) == train.trainNumber
+		}).count > 0 {
+			state.selectedTrain?.isFollowing = true
+		}
+		
 		return []
 	case let .add(train):
-		guard (state.trains.filter { train ==  $0 }).isEmpty else {
+		guard (state.trends.filter { train ==  $0 }).isEmpty else {
 			return []
 		}
 		
-		state.trains.append(train)
+		state.selectedTrain = FollowingTrain(originCode: train.idOrigine, trainNumber: String(train.numeroTreno), isFollowing: true)
+		
+		state.trends.append(train)
 		
 		return [
-			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
+			environment.saveTrains(state.trends).map(TrainsAction.updateResponse)
 		]
 	case let .updateResponse(response):
 		guard response == true else {
@@ -148,16 +183,16 @@ func trainsReducer(
 		}
 		return []
 	case let .remove(train):
-		guard (state.trains.filter { train ==  $0 }).isEmpty == false else {
+		guard (state.trends.filter { train ==  $0 }).isEmpty == false else {
 			return []
 		}
 		
-		state.trains = state.trains
+		state.trends = state.trends
 			.map { $0.numeroTreno == train.numeroTreno ? nil : $0 }
 			.compactMap { $0 }
 		
 		return [
-			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
+			environment.saveTrains(state.trends).map(TrainsAction.updateResponse)
 		]
 	case let .select(trend):
 		state.selectedTrend = trend
@@ -165,6 +200,8 @@ func trainsReducer(
 	case .none:
 		return []
 	case let .trend(origin, number):
+		state.selectedTrain = FollowingTrain(originCode: origin, trainNumber: number, isFollowing: false)
+		
 		return [
 			environment.retrieveTrend(origin, number).map(TrainsAction.trendResponse)
 		]

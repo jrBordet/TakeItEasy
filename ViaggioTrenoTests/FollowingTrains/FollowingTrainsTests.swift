@@ -13,6 +13,7 @@ import RxComposableArchitecture
 import RxSwift
 import RxCocoa
 import Networking
+import Caprice
 
 class FollowingTrainsTests: XCTestCase {
 	let reducer: Reducer<TrainsViewState, TrainsViewAction, TrainsViewEnvironment> = trainsViewReducer
@@ -27,12 +28,14 @@ class FollowingTrainsTests: XCTestCase {
 	
 	var selectedExpectedResult = Train.sample
 	
+	var selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false) // Aosta - Ivrea
+	
 	var env: TrainsViewEnvironment!
 	
 	// MARK: - Setup
 	
 	override func setUpWithError() throws {
-		initialState = TrainsViewState(trains: [], selectedTrend: nil, error: nil)
+		initialState = TrainsViewState(trains: [], trends: [], selectedTrend: nil, error: nil, selectedTrain: nil)
 		
 		env = (
 			saveTrains: { _ in
@@ -66,25 +69,73 @@ class FollowingTrainsTests: XCTestCase {
 			environment: env,
 			steps: Step(.send, .trains(.trains), { _ in }),
 			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
-				state.trains = self.expectedResult
+				state.trends = self.expectedResult
 			})
 		)
 	}
 	
-	func test_select() {
+//	func test_select_train() {
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.selectTrain(selectedTrain)), { state in
+//				state.selectedTrain = self.selectedTrain
+//			})
+//		)
+//	}
+	
+	func test_select_trend() {
 		assert(
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
 			steps: Step(.send, .trains(.trains), { _ in }),
 			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
-				state.trains = self.expectedResult
+				state.trends = self.expectedResult
 			}),
-			Step.init(.send, .trains(.select(trendSample)), { state in
+			Step(.send, .trains(.select(trendSample)), { state in
 				state.selectedTrend = self.trendSample
 			})
 		)
 	}
+	
+//	func test_is_following_train() {
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.selectTrain(selectedTrain)), { state in
+//				state.selectedTrain = self.selectedTrain
+//			}),
+//			Step(.send, .trains(.trains), { _ in }),
+//			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
+//				state.trains = self.expectedResult
+//												
+//				state.selectedTrain = self.selectedTrain |> \.isFollowing *~ true
+//			})
+//		)
+//	}
+//	
+//	func test_is_not_following_train() {
+//		selectedTrain = self.selectedTrain
+//			|> \SelectedTrain.originCode *~ "S00000"
+//			|> \SelectedTrain.trainNumber *~ "000"
+//					
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.selectTrain(self.selectedTrain)), { state in
+//				state.selectedTrain = self.selectedTrain
+//			}),
+//			Step(.send, .trains(.trains), { _ in }),
+//			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
+//				state.trains = self.expectedResult
+//				state.selectedTrain = self.selectedTrain
+//			})
+//		)
+//	}
 	
 	func test_add_train_success() {
 		assert(
@@ -92,21 +143,24 @@ class FollowingTrainsTests: XCTestCase {
 			reducer: reducer,
 			environment: env,
 			steps: Step(.send, .trains(.add(trendSample)), { state in
-				state.trains = self.expectedResult
+				state.trends = self.expectedResult
+				state.selectedTrain = self.selectedTrain |> \.isFollowing *~ true
 			}),
-			Step(.receive, .trains(.updateResponse(true)), { _ in })
+			Step(.receive, .trains(.updateResponse(true)), { state in
+				
+			})
 		)
 	}
 	
 	func test_remove_train_success() {
-		initialState = TrainsViewState(trains: [trendSample], selectedTrend: nil, error: nil)
+		initialState = TrainsViewState(trains: [], trends: [trendSample], selectedTrend: nil, error: nil, selectedTrain: nil)
 		
 		assert(
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
 			steps: Step(.send, .trains(.remove(trendSample)), { state in
-				state.trains = []
+				state.trends = []
 			}),
 			Step(.receive, .trains(.updateResponse(true)), { _ in })
 		)
@@ -134,7 +188,8 @@ class FollowingTrainsTests: XCTestCase {
 			reducer: reducer,
 			environment: env,
 			steps: Step(.send, .trains(.add(trendSample)), { state in
-				state.trains = self.expectedResult
+				state.trends = self.expectedResult
+				state.selectedTrain = self.selectedTrain
 			}),
 			Step(.receive, .trains(.updateResponse(false)), { state in
 				state.error = .notSaved
@@ -147,15 +202,15 @@ class FollowingTrainsTests: XCTestCase {
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
-			steps: Step(.send, .trains(.trend("origin", "train")), { state in
+			steps: Step(.send, .trains(.trend("S00137", "2776")), { state in
+				state.selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false)
 			}),
-			Step(.receive, .trains(.trendResponse(trendSample)), { state in
+			Step(.receive, .trains(.trendResponse(trendSample)), { _ in }),
+			Step(.receive, .trains(.add(trendSample)), { state in
+				state.trends = [self.trendSample]
+				state.selectedTrain = self.selectedTrain
 			}),
-			Step(.receive, TrainsViewAction.trains(TrainsAction.add(trendSample)), { state in
-				state.trains = [self.trendSample]
-			}),
-			Step(.receive, .trains(.updateResponse(true)), { state in
-			})
+			Step(.receive, .trains(.updateResponse(true)), { _ in })
 		)
 	}
 	
@@ -182,10 +237,11 @@ class FollowingTrainsTests: XCTestCase {
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
-			steps: Step(.send, .trains(.trend("origin", "train")), { state in
+			steps: Step(.send, .trains(.trend("S00137", "2776")), { state in
+				state.selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false)
 			}),
 			Step(.receive, .trains(.trendResponse(nil)), { state in
-				state.trains = []
+				state.trends = []
 			})
 		)
 	}

@@ -65,8 +65,10 @@ let initialAppState = AppState(
 	isRefreshing: false,
 	followingTrainsState: TrainsViewState(
 		trains: [],
+		trends: [],
 		selectedTrend: nil,
-		error: nil
+		error: nil,
+		selectedTrain: nil
 	)
 )
 

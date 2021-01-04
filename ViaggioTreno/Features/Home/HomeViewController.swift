@@ -138,7 +138,7 @@ public class HomeViewController: BaseViewController {
 				
 		store
 			.value
-			.map { $0.followingTrainsState.trains }
+			.map { $0.followingTrainsState.trends }
 			.map { (trains: [Trend]) -> [Trend] in
 				trains
 			}

@@ -29,7 +29,7 @@ class HomeTests: XCTestCase {
 	let arrivalsExpectedResult = ArrivalsRequest.mock(Data.arrivals!)
 	
 	override func setUp() {
-		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], train: nil, trainSections: [], origincode: nil, isRefreshing: false, followingTrainsState: TrainsViewState(trains: [], selectedTrend: nil, error: nil))
+		initialState = HomeViewState(selectedStation: nil, departures: [], arrivals: [], stations: [], favouritesStations: [], train: nil, trainSections: [], origincode: nil, isRefreshing: false, followingTrainsState: TrainsViewState(trains: [], trends: [], selectedTrend: nil, error: nil, selectedTrain: nil))
 		
 		let stationsEnv: StationsViewEnvironment = (
 			autocomplete: { _ in .sync { [] } },

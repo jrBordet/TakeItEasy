@@ -138,7 +138,7 @@ class TrainSectionViewController: UIViewController {
 				
 				return store
 					.value
-					.map { $0.followingTrainsState.trains }
+					.map { $0.followingTrainsState.trends }
 					.distinctUntilChanged().map { [weak self] in
 						$0.filter { trend -> Bool in
 							print("[\(self?.debugDescription)] trend idOrigine \(trend.idOrigine) numeroTreno \(trend.numeroTreno)")
