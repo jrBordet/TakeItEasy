@@ -138,20 +138,20 @@ public class HomeViewController: BaseViewController {
 				
 		store
 			.value
-			.map { $0.followingTrainsState.trends }
-			.map { (trains: [Trend]) -> [Trend] in
+			.map { $0.followingTrainsState.trains }
+			.map { (trains: [FollowingTrain]) -> [FollowingTrain] in
 				trains
 			}
 			.distinctUntilChanged()
 			.map { trends -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
-				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ trend -> FollowingTrainsSectionItem in
+				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ t -> FollowingTrainsSectionItem in
 					FollowingTrainsSectionItem(
-						number: String(trend.numeroTreno),
-						train: trend.numeroTreno,
-						name: String(trend.numeroTreno),
+						number: t.trainNumber,
+						train: 120,
+						name: "",
 						time: "",
 						status: "",
-						originCode: trend.origine
+						originCode: t.originCode
 					)
 				})]
 			}
