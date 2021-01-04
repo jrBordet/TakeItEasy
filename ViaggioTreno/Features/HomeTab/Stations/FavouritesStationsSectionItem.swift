@@ -36,7 +36,7 @@ extension FavouritesStationsViewController {
 				return UITableViewCell(style: .default, reuseIdentifier: nil)
 			}
 			
-			cell.nameLabel.text = item.name.capitalized
+			cell.configure(with: item)
 			
 			cell |> cellSelectionView()
 			

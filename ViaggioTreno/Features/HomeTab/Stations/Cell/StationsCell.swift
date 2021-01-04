@@ -11,26 +11,42 @@ import Styling
 
 class StationsCell: UITableViewCell {
 	@IBOutlet var nameLabel: UILabel!
+	@IBOutlet var containerShortNameView: UIView!
 	@IBOutlet var cardView: UIView!
 	@IBOutlet var shortNameLabel: UILabel!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+		
+		containerShortNameView
+			|> theme.cardView
+			<> { $0.layer.cornerRadius = $0.frame.width / 2 }
 		
 		cardView
-			|> theme.cardView
-			<> { $0.layer.cornerRadius = 5  }
+			|> { $0.layer.cornerRadius = 5 }
+			<> { $0.backgroundColor = .white }
+		
+		shortNameLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 18)
+			<> Styling.textColor(color: theme.primaryColor)
 		
 		nameLabel
 			|> theme.primaryLabel
 			<> fontRegular(with: 18)
     }
+	
+	func configure(with value: FavouritesStationsSectionItem) {
+		nameLabel.text = value.name.capitalized
+		
+		let stationNames = value.name.split(separator: " ")
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+		if let first = stationNames.first {
+			if let last = stationNames.last, stationNames.count > 1 {
+				self.shortNameLabel?.text = String(first.first ?? Character("")).uppercased() + String(last.first ?? Character("")).uppercased()
+			} else {
+				self.shortNameLabel?.text = String(first.first ?? Character("")).uppercased()
+			}
+		}
+	}
 }

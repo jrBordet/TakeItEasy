@@ -45,6 +45,7 @@ class FavouritesStationsCell: UICollectionViewCell {
 				self.initialNameLabel?.text = String(first.first ?? Character("")).uppercased()
 			}
 		}
+		
 	}
 
 }
