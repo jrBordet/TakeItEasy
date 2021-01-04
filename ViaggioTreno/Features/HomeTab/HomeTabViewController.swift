@@ -25,6 +25,12 @@ class HomeTabViewController: TabmanViewController {
 	]
 	
 	var store: Store<HomeViewState, HomeViewAction>?
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		navigationController?.navigationBar.isHidden = true
+	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +43,7 @@ class HomeTabViewController: TabmanViewController {
 	
 		
 		if let stations = viewControllers.first as? FavouritesStationsViewController {
-			stations.store = store.view {
-				$0.favouritesStationsState
-			} action: {
-				.favourites($0)
-			}
+			stations.store = store
 		}
 
 		// MARK: - Create bar
@@ -96,7 +98,7 @@ extension HomeTabViewController: PageboyViewControllerDataSource, TMBarDataSourc
 		case .stations:
 			return TMBarItem(title: L10n.Stations.title)
 		case .trains:
-			return TMBarItem(title: L10n.App.Common.departures)
+			return TMBarItem(title: "I miei treni")
 		}
 	}
 }

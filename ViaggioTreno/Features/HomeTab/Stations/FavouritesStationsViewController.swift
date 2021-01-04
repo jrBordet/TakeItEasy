@@ -29,7 +29,7 @@ class FavouritesStationsViewController: UIViewController {
 	
 	var dataSource: RxTableViewSectionedAnimatedDataSource<FavouritesStationsSectionModel>!
 	
-	public var store: Store<StationsViewState, StationsViewAction>?
+	public var store: Store<HomeViewState, HomeViewAction>?
 	
 	private let disposeBag = DisposeBag()
 	
@@ -63,23 +63,31 @@ class FavouritesStationsViewController: UIViewController {
 				}
 				
 				navigationLink(from: self, destination: Scene<StationsViewController>(), completion: { vc in
-//					vc.store = store.view (
-//						value: { $0.favouritesStationsState },
-//						action: { .favourites($0) }
-//					)
+					vc.store = store.view (
+						value: { $0.favouritesStationsState },
+						action: { .favourites($0) }
+					)
 				}, isModal: true)
 			}.disposed(by: disposeBag)
 		
 		// MARK: - Load favourites
 		
-		store.send(.stations(.favourites))
+		store.send(.favourites(.stations(.favourites)))
+		
+		//store.send(.stations(.favourites))
 		
 		// MARK: - Select station
 		
 		tableView
 			.rx
 			.modelSelected(FavouritesStationsSectionItem.self)
-			.bind(to: store.rx.selectStation)
+			.map { item -> Station in
+				Station(
+					item.id,
+					name: item.name
+				)
+			}
+			.bind(to: store.rx.select)
 			.disposed(by: disposeBag)
 		
 		store
@@ -89,21 +97,10 @@ class FavouritesStationsViewController: UIViewController {
 			.ignoreNil()
 			.subscribe(onNext: { station in
 				navigationLink(from: self, destination: Scene<ArrivalsDeparturesContainerViewController>(), completion: { vc in
-//					vc.store = store.view(
-//						value: { $0.arrivalsDeparturesState },
-//						action: { .arrivalsDepartures($0) }
-//					)
-					
-//					store.view {
-//						$0
-//					}, action: {
-//						.stations($0)
-//					}
-
-//					vc.store = store.view(
-//						value: { $0. },
-//						action: { .arrivalsDepartures($0) }
-//					)
+					vc.store = store.view(
+						value: { $0.arrivalsDeparturesState },
+						action: { .arrivalsDepartures($0) }
+					)
 				}, isModal: false)
 			})
 			.disposed(by: disposeBag)
@@ -117,7 +114,8 @@ class FavouritesStationsViewController: UIViewController {
 			.map { stations -> [FavouritesStationsSectionItem] in
 				stations.map { station -> FavouritesStationsSectionItem in
 					FavouritesStationsSectionItem(
-						name: station.name
+						name: station.name,
+						id: station.id
 					)
 				}
 			}

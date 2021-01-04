@@ -14,6 +14,7 @@ typealias FavouritesStationsSectionModel = AnimatableSectionModel<String, Favour
 
 struct FavouritesStationsSectionItem {
 	var name: String
+	var id: String
 }
 
 extension FavouritesStationsSectionItem: Equatable {
@@ -23,7 +24,7 @@ extension FavouritesStationsSectionItem: IdentifiableType {
 	public typealias Identity = String
 	
 	public var identity: String {
-		return "\(name)"
+		return "\(id)\(name)"
 	}
 }
 
