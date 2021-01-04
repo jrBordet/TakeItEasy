@@ -67,23 +67,11 @@ let followingEnvLive: TrainsViewEnvironment = (
 		retrieveTrains: {
 			retrieveTrains()
 		}, retrieveTrend: { origin, train in
-			Effect.sync { nil }
+			TrendRequest(origin: origin, train: train)
+				.execute()
+				.map { $0 }
 		}
 	)
-//	(
-//	saveTrains: {
-//		Effect.sync {  true }
-//		//saveTrend(with: $0)
-//	},
-//	retrieveTrains: {
-//		Effect.sync { [] }
-//		//retrieveTrend()
-//	}, retrieveTrend: { origin, train in
-//		TrendRequest(origin: origin, train: train)
-//			.execute()
-//			.map { $0 }
-//	}
-//)
 
 let sectionsEnv: TrainSectionViewEnvironment = (
 	sections: { station, train in

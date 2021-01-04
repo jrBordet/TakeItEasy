@@ -146,12 +146,12 @@ public class HomeViewController: BaseViewController {
 			.map { trends -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
 				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ t -> FollowingTrainsSectionItem in
 					FollowingTrainsSectionItem(
-						number: t.trainNumber,
+						number: t.originTitle ?? "",
 						train: 120,
-						name: "",
+						name: t.originTitle ?? "",
 						time: "",
 						status: "",
-						originCode: t.originCode
+						originCode: t.originTitle ?? ""
 					)
 				})]
 			}

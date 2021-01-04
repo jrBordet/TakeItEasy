@@ -110,6 +110,9 @@ typealias TrainsState = (trains: [FollowingTrain], trends: [Trend], selectedTren
 struct FollowingTrain {
 	var originCode: String
 	var trainNumber: String
+	var originTitle: String?
+	var destinationTile: String?
+	var duration: String?
 }
 
 extension FollowingTrain: Equatable {
@@ -163,9 +166,6 @@ func trainsReducer(
 	environment: TrainsEnvironment
 ) -> [Effect<TrainsAction>] {
 	switch action {
-//	case let .selectTrain(t):
-//		state.selectedTrain = t
-//		return []
 	case .trains:
 		return [
 			environment.retrieveTrains().map(TrainsAction.trainsResponse)
@@ -183,14 +183,15 @@ func trainsReducer(
 		return []
 	case let .follow(train):
 		guard (state.trains.filter { train.originCode ==  $0.originCode && train.trainNumber == $0.trainNumber }).isEmpty == false else {
-			state.trains.append(train)
+			// start follow
 			state.isFollowing = true
 			
 			return [
-				environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
+				Effect.sync { }.map { TrainsAction.trend(train.originCode, train.trainNumber) }
 			]
 		}
 		
+		// stop follow
 		state.isFollowing = false
 		
 		let result = state.trains.map { t -> FollowingTrain? in
@@ -208,7 +209,7 @@ func trainsReducer(
 		]
 	case let .updateResponse(response):
 		guard response == true else {
-			state.error = FollowingTrainsError.notSaved
+			state.error = .notSaved
 			return []
 		}
 		return []
@@ -227,8 +228,6 @@ func trainsReducer(
 	case let .select(trend):
 		state.selectedTrend = trend
 		return []
-	case .none:
-		return []
 	case let .trend(origin, number):
 		state.selectedTrain = FollowingTrain(originCode: origin, trainNumber: number)
 		
@@ -240,11 +239,23 @@ func trainsReducer(
 			return []
 		}
 		
+		// update current train with trend informations
+		guard let selectedTrain = state.selectedTrain else {
+			return []
+		}
+		
+		let train = selectedTrain
+			|> \FollowingTrain.originTitle *~ trend.origine
+			|> \FollowingTrain.destinationTile *~ trend.destinazione
+		
+		state.trains.append(train)
+		
 		return [
-			//Effect.sync { }.map { TrainsAction.add(trend) }
+			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
 		]
 	case let .selectTrain(train):
-		
+		return []
+	case .none:
 		return []
 	}
 }

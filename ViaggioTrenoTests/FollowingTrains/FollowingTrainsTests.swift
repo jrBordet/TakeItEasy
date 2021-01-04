@@ -56,8 +56,7 @@ class FollowingTrainsTests: XCTestCase {
 			},
 			retrieveTrend: { _, _ in
 				.sync {
-					nil
-					//self.trendSample
+					self.trendSample
 				}
 			}
 		)
@@ -105,14 +104,24 @@ class FollowingTrainsTests: XCTestCase {
 	}
 	
 	func test_follow_train_start_follow() {
+		let trainExpectedResult: FollowingTrain =
+			.sample_aosta_ivrea
+			|> \FollowingTrain.originTitle *~ "AOSTA"
+			|> \FollowingTrain.destinationTile *~ "IVREA"
+		
 		assert(
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
 			steps: Step(.send, .trains(.follow(.sample_aosta_ivrea)), { state in
-				state.trains = [.sample_aosta_ivrea]
 				state.selectedTrain = .sample_aosta_ivrea
 				state.isFollowing = true
+			}),
+			Step(.receive, .trains(.trend("S00137", "2776")), { _ in }),
+			Step(.receive, .trains(.trendResponse(self.trendSample)), { state in
+				state.trains = [
+					trainExpectedResult
+				]
 			}),
 			Step(.receive, .trains(.updateResponse(true)), { _ in })
 		)
