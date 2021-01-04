@@ -32,7 +32,7 @@ class FollowingTrainsTests: XCTestCase {
 	// MARK: - Setup
 	
 	override func setUpWithError() throws {
-		initialState = TrainsViewState(trains: [], selectedTrain: nil, error: nil)
+		initialState = TrainsViewState(trains: [], selectedTrend: nil, error: nil)
 		
 		env = (
 			saveTrains: { _ in
@@ -81,7 +81,7 @@ class FollowingTrainsTests: XCTestCase {
 				state.trains = self.expectedResult
 			}),
 			Step.init(.send, .trains(.select(trendSample)), { state in
-				state.selectedTrain = self.trendSample
+				state.selectedTrend = self.trendSample
 			})
 		)
 	}
@@ -99,7 +99,7 @@ class FollowingTrainsTests: XCTestCase {
 	}
 	
 	func test_remove_train_success() {
-		initialState = TrainsViewState(trains: [trendSample], selectedTrain: nil, error: nil)
+		initialState = TrainsViewState(trains: [trendSample], selectedTrend: nil, error: nil)
 		
 		assert(
 			initialValue: initialState,

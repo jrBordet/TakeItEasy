@@ -76,7 +76,7 @@ struct TrainSectionViewState: Equatable {
 		set {
 			self.followingTrainsState = TrainsViewState(
 				trains: newValue.trains,
-				selectedTrain: newValue.selectedTrain,
+				selectedTrend: newValue.selectedTrend,
 				error: newValue.error
 			)
 		}

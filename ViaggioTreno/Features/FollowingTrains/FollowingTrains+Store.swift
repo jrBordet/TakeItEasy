@@ -45,15 +45,15 @@ let trainsViewReducer: Reducer<TrainsViewState, TrainsViewAction, TrainsViewEnvi
 
 struct TrainsViewState: Equatable {
 	var trains: [Trend]
-	var selectedTrain: Trend?
+	var selectedTrend: Trend?
 	var error: FollowingTrainsError?
 	
 	init(
 		trains: [Trend],
-		selectedTrain: Trend?,
+		selectedTrend: Trend?,
 		error: FollowingTrainsError?
 	) {
-		self.selectedTrain = selectedTrain
+		self.selectedTrend = selectedTrend
 		self.trains = trains
 		self.error = error
 	}
@@ -61,11 +61,11 @@ struct TrainsViewState: Equatable {
 	var trainsState: TrainsState {
 		get {(
 			self.trains,
-			self.selectedTrain,
+			self.selectedTrend,
 			self.error
 		)}
 		set {
-			self.selectedTrain = newValue.selectedTrain
+			self.selectedTrend = newValue.selectedTrend
 			self.trains = newValue.trains
 			self.error = newValue.error
 		}
@@ -89,7 +89,7 @@ public enum FollowingTrainsError: Error, Equatable {
 	case notSaved
 }
 
-typealias TrainsState = (trains: [Trend], selectedTrain: Trend?, error: FollowingTrainsError?)
+typealias TrainsState = (trains: [Trend], selectedTrend: Trend?, error: FollowingTrainsError?)
 
 // MARK: - Action
 
@@ -159,8 +159,8 @@ func trainsReducer(
 		return [
 			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
 		]
-	case let .select(train):
-		state.selectedTrain = train
+	case let .select(trend):
+		state.selectedTrend = trend
 		return []
 	case .none:
 		return []

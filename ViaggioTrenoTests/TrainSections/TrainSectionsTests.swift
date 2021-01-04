@@ -38,7 +38,7 @@ class TrainSectionsTests: XCTestCase {
 			followingTrainsState:
 				TrainsViewState(
 					trains: [],
-					selectedTrain: nil,
+					selectedTrend: nil,
 					error: nil
 				)
 		)
@@ -122,7 +122,7 @@ class TrainSectionsTests: XCTestCase {
 			reducer: reducer,
 			environment: env,
 			steps: Step(.send, .following(.trains(.add(trendSample))), { state in
-				state.followingTrainsState = TrainsViewState(trains: [self.trendSample], selectedTrain: nil, error: nil)
+				state.followingTrainsState = TrainsViewState(trains: [self.trendSample], selectedTrend: nil, error: nil)
 			}),
 			Step(.receive, .following(.trains(.updateResponse(true))), { state in
 

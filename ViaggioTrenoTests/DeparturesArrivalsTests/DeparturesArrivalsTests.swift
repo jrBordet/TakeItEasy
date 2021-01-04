@@ -41,7 +41,7 @@ class DeparturesArrivalsTests: XCTestCase {
 			isRefreshing: false,
 			followingTrainsState: TrainsViewState(
 				trains: [],
-				selectedTrain: nil,
+				selectedTrend: nil,
 				error: nil
 			)
 		)
