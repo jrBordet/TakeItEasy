@@ -49,6 +49,27 @@ class FavouritesStationsViewController: UIViewController {
 		
 		setupDataSource()
 		
+		searchStationsButton
+			|> theme.primaryButton
+			<> { $0.setTitle(L10n.App.Home.addStations, for: .normal) }
+		
+		// MARK: - Search
+		
+		searchStationsButton.rx
+			.tap
+			.bind { [weak self] in
+				guard let self = self else {
+					return
+				}
+				
+				navigationLink(from: self, destination: Scene<StationsViewController>(), completion: { vc in
+//					vc.store = store.view (
+//						value: { $0.favouritesStationsState },
+//						action: { .favourites($0) }
+//					)
+				}, isModal: true)
+			}.disposed(by: disposeBag)
+		
 		// MARK: - Load favourites
 		
 		store.send(.stations(.favourites))
@@ -68,10 +89,10 @@ class FavouritesStationsViewController: UIViewController {
 			.ignoreNil()
 			.subscribe(onNext: { station in
 				navigationLink(from: self, destination: Scene<ArrivalsDeparturesContainerViewController>(), completion: { vc in
-					vc.store = store.view(
-						value: { $0.arrivalsDeparturesState },
-						action: { .arrivalsDepartures($0) }
-					)
+//					vc.store = store.view(
+//						value: { $0.arrivalsDeparturesState },
+//						action: { .arrivalsDepartures($0) }
+//					)
 					
 //					store.view {
 //						$0
