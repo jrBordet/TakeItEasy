@@ -79,7 +79,8 @@ struct TrainSectionViewState: Equatable {
 				trends: newValue.trends,
 				selectedTrend: newValue.selectedTrend,
 				error: newValue.error,
-				selectedTrain: newValue.selectedTrain
+				selectedTrain: newValue.selectedTrain,
+				isFollowing: newValue.isFollowing
 			)
 		}
 	}

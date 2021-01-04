@@ -68,7 +68,8 @@ let initialAppState = AppState(
 		trends: [],
 		selectedTrend: nil,
 		error: nil,
-		selectedTrain: nil
+		selectedTrain: nil,
+		isFollowing: false
 	)
 )
 

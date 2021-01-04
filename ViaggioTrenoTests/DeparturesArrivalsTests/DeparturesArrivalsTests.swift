@@ -44,7 +44,8 @@ class DeparturesArrivalsTests: XCTestCase {
 				trends: [],
 				selectedTrend: nil,
 				error: nil,
-				selectedTrain: nil
+				selectedTrain: nil,
+				isFollowing: false
 			)
 		)
 		

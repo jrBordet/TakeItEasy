@@ -50,19 +50,22 @@ struct TrainsViewState: Equatable {
 	var selectedTrend: Trend?
 	var error: FollowingTrainsError?
 	var selectedTrain: FollowingTrain?
+	var isFollowing: Bool
 	
 	init(
 		trains: [FollowingTrain],
 		trends: [Trend],
 		selectedTrend: Trend?,
 		error: FollowingTrainsError?,
-		selectedTrain: FollowingTrain?
+		selectedTrain: FollowingTrain?,
+		isFollowing: Bool
 	) {
 		self.trains = trains
 		self.selectedTrend = selectedTrend
 		self.trends = trends
 		self.error = error
 		self.selectedTrain = selectedTrain
+		self.isFollowing = isFollowing
 	}
 	
 	var trainsState: TrainsState {
@@ -71,7 +74,8 @@ struct TrainsViewState: Equatable {
 			self.trends,
 			self.selectedTrend,
 			self.error,
-			self.selectedTrain
+			self.selectedTrain,
+			self.isFollowing
 		)}
 		set {
 			self.trains = newValue.trains
@@ -79,6 +83,7 @@ struct TrainsViewState: Equatable {
 			self.trends = newValue.trends
 			self.error = newValue.error
 			self.selectedTrain = newValue.selectedTrain
+			self.isFollowing = newValue.isFollowing
 		}
 	}
 }
@@ -88,8 +93,8 @@ enum TrainsViewAction: Equatable {
 }
 
 typealias TrainsViewEnvironment = (
-	saveTrains: ([Trend]) -> Effect<Bool>,
-	retrieveTrains: () -> Effect<[Trend]>,
+	saveTrains: ([FollowingTrain]) -> Effect<Bool>,
+	retrieveTrains: () -> Effect<[FollowingTrain]>,
 	retrieveTrend: (String, String) -> Effect<Trend?>
 )
 
@@ -100,31 +105,40 @@ public enum FollowingTrainsError: Error, Equatable {
 	case notSaved
 }
 
-typealias TrainsState = (trains: [FollowingTrain], trends: [Trend], selectedTrend: Trend?, error: FollowingTrainsError?, selectedTrain: FollowingTrain?)
+typealias TrainsState = (trains: [FollowingTrain], trends: [Trend], selectedTrend: Trend?, error: FollowingTrainsError?, selectedTrain: FollowingTrain?, isFollowing: Bool)
 
-struct FollowingTrain: Equatable {
+struct FollowingTrain: Equatable, Codable {
 	var originCode: String
 	var trainNumber: String
-	var isFollowing: Bool = false
+}
+
+extension FollowingTrain {
+	static var sample_aosta_ivrea = Self(
+		originCode: "S00137", trainNumber: "2776"
+	)
+	
+	static var sample_milano_torino = Self(
+		originCode: "S09823", trainNumber: "9516"
+	)
 }
 
 // MARK: - Action
 
 enum TrainsAction: Equatable {
 	case trains
-	case trainsResponse([Trend])
+	case trainsResponse([FollowingTrain])
 	
 	case trend(String, String) // originCode, trainNumber
 	case trendResponse(Trend?)
 	
-	case add(Trend)
-	case remove(Trend)
+	case follow(FollowingTrain)
+	case remove(FollowingTrain)
 	
 	case updateResponse(Bool)
 	
 	case select(Trend?)
 	
-	//case selectTrain(SelectedTrain?)
+	case selectTrain(FollowingTrain?)
 	
 	case none
 }
@@ -132,8 +146,8 @@ enum TrainsAction: Equatable {
 // MARK: - Environment
 
 typealias TrainsEnvironment = (
-	saveTrains: ([Trend]) -> Effect<Bool>,
-	retrieveTrains: () -> Effect<[Trend]>,
+	saveTrains: ([FollowingTrain]) -> Effect<Bool>,
+	retrieveTrains: () -> Effect<[FollowingTrain]>,
 	retrieveTrend: (String, String) -> Effect<Trend?>
 )
 
@@ -151,30 +165,29 @@ func trainsReducer(
 			environment.retrieveTrains().map(TrainsAction.trainsResponse)
 		]
 	case let .trainsResponse(result):
-		state.trends = result
-		
-		guard let train = state.selectedTrain else {
-			return []
-		}
-		        
-		if result.filter({ trend -> Bool in
-			trend.idOrigine == train.originCode && String(trend.numeroTreno) == train.trainNumber
-		}).count > 0 {
-			state.selectedTrain?.isFollowing = true
-		}
-		
+		state.trains = result
 		return []
-	case let .add(train):
-		guard (state.trends.filter { train ==  $0 }).isEmpty else {
-			return []
+	case let .follow(train):
+		guard (state.trains.filter { train.originCode ==  $0.originCode && train.trainNumber == $0.trainNumber }).isEmpty == false else {
+			state.trains.append(train)
+			
+			return [
+				environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
+			]
 		}
 		
-		state.selectedTrain = FollowingTrain(originCode: train.idOrigine, trainNumber: String(train.numeroTreno), isFollowing: true)
+		let result = state.trains.map { t -> FollowingTrain? in
+			guard t.originCode == train.originCode && t.trainNumber == train.trainNumber else {
+				return t
+			}
+			
+			return nil
+		}
 		
-		state.trends.append(train)
+		state.trains = result.compactMap { $0 }
 		
 		return [
-			environment.saveTrains(state.trends).map(TrainsAction.updateResponse)
+			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
 		]
 	case let .updateResponse(response):
 		guard response == true else {
@@ -183,16 +196,16 @@ func trainsReducer(
 		}
 		return []
 	case let .remove(train):
-		guard (state.trends.filter { train ==  $0 }).isEmpty == false else {
-			return []
-		}
-		
-		state.trends = state.trends
-			.map { $0.numeroTreno == train.numeroTreno ? nil : $0 }
-			.compactMap { $0 }
+//		guard (state.trends.filter { train ==  $0 }).isEmpty == false else {
+//			return []
+//		}
+//
+//		state.trends = state.trends
+//			.map { $0.numeroTreno == train.numeroTreno ? nil : $0 }
+//			.compactMap { $0 }
 		
 		return [
-			environment.saveTrains(state.trends).map(TrainsAction.updateResponse)
+			//environment.saveTrains(state.trends).map(TrainsAction.updateResponse)
 		]
 	case let .select(trend):
 		state.selectedTrend = trend
@@ -200,7 +213,7 @@ func trainsReducer(
 	case .none:
 		return []
 	case let .trend(origin, number):
-		state.selectedTrain = FollowingTrain(originCode: origin, trainNumber: number, isFollowing: false)
+		state.selectedTrain = FollowingTrain(originCode: origin, trainNumber: number)
 		
 		return [
 			environment.retrieveTrend(origin, number).map(TrainsAction.trendResponse)
@@ -211,7 +224,10 @@ func trainsReducer(
 		}
 		
 		return [
-			Effect.sync { }.map { TrainsAction.add(trend) }
+			//Effect.sync { }.map { TrainsAction.add(trend) }
 		]
+	case let .selectTrain(train):
+		
+		return []
 	}
 }

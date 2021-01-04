@@ -20,22 +20,26 @@ class FollowingTrainsTests: XCTestCase {
 	
 	var initialState: TrainsViewState!
 	
-	var expectedResult: [Trend] = [
-		TrendRequest.mock(Data.trend!)
+	var expectedResult: [FollowingTrain] = [
 	]
 	
 	var trendSample = TrendRequest.mock(Data.trend!)
-	
-	var selectedExpectedResult = Train.sample
-	
-	var selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false) // Aosta - Ivrea
+		
+	var selectedTrain = FollowingTrain.sample_aosta_ivrea
 	
 	var env: TrainsViewEnvironment!
 	
 	// MARK: - Setup
 	
 	override func setUpWithError() throws {
-		initialState = TrainsViewState(trains: [], trends: [], selectedTrend: nil, error: nil, selectedTrain: nil)
+		initialState = TrainsViewState(
+			trains: [],
+			trends: [],
+			selectedTrend: nil,
+			error: nil,
+			selectedTrain: selectedTrain,
+			isFollowing: false
+		)
 		
 		env = (
 			saveTrains: { _ in
@@ -45,12 +49,14 @@ class FollowingTrainsTests: XCTestCase {
 			},
 			retrieveTrains: {
 				.sync {
-					self.expectedResult
+					[]
+					//self.expectedResult
 				}
 			},
 			retrieveTrend: { _, _ in
 				.sync {
-					self.trendSample
+					nil
+					//self.trendSample
 				}
 			}
 		)
@@ -62,6 +68,43 @@ class FollowingTrainsTests: XCTestCase {
 	
 	// MARK: - Tests
 	
+	func test_follow_train_start_follow() {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .trains(.follow(.sample_aosta_ivrea)), { state in
+				state.trains = [.sample_aosta_ivrea]
+				state.selectedTrain = .sample_aosta_ivrea
+			}),
+			Step(.receive, .trains(.updateResponse(true)), { _ in })
+		)
+	}
+	
+	func test_follow_train_stop_follow() {
+		let selectedTrain = FollowingTrain.sample_aosta_ivrea
+		
+		initialState = TrainsViewState(
+			trains: [.sample_aosta_ivrea],
+			trends: [],
+			selectedTrend: nil,
+			error: nil,
+			selectedTrain: selectedTrain,
+			isFollowing: false
+		)
+		
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .trains(.follow(selectedTrain)), { state in
+				state.trains = []
+				state.selectedTrain = selectedTrain
+			}),
+			Step(.receive, .trains(.updateResponse(true)), { _ in })
+		)
+	}
+	
 	func test_retrieve_trains() {
 		assert(
 			initialValue: initialState,
@@ -69,7 +112,7 @@ class FollowingTrainsTests: XCTestCase {
 			environment: env,
 			steps: Step(.send, .trains(.trains), { _ in }),
 			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
-				state.trends = self.expectedResult
+				//state.trends = self.expectedResult
 			})
 		)
 	}
@@ -85,20 +128,20 @@ class FollowingTrainsTests: XCTestCase {
 //		)
 //	}
 	
-	func test_select_trend() {
-		assert(
-			initialValue: initialState,
-			reducer: reducer,
-			environment: env,
-			steps: Step(.send, .trains(.trains), { _ in }),
-			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
-				state.trends = self.expectedResult
-			}),
-			Step(.send, .trains(.select(trendSample)), { state in
-				state.selectedTrend = self.trendSample
-			})
-		)
-	}
+//	func test_select_trend() {
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.trains), { _ in }),
+//			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
+//				state.trends = self.expectedResult
+//			}),
+//			Step(.send, .trains(.select(trendSample)), { state in
+//				state.selectedTrend = self.trendSample
+//			})
+//		)
+//	}
 	
 //	func test_is_following_train() {
 //		assert(
@@ -137,113 +180,113 @@ class FollowingTrainsTests: XCTestCase {
 //		)
 //	}
 	
-	func test_add_train_success() {
-		assert(
-			initialValue: initialState,
-			reducer: reducer,
-			environment: env,
-			steps: Step(.send, .trains(.add(trendSample)), { state in
-				state.trends = self.expectedResult
-				state.selectedTrain = self.selectedTrain |> \.isFollowing *~ true
-			}),
-			Step(.receive, .trains(.updateResponse(true)), { state in
-				
-			})
-		)
-	}
-	
-	func test_remove_train_success() {
-		initialState = TrainsViewState(trains: [], trends: [trendSample], selectedTrend: nil, error: nil, selectedTrain: nil)
-		
-		assert(
-			initialValue: initialState,
-			reducer: reducer,
-			environment: env,
-			steps: Step(.send, .trains(.remove(trendSample)), { state in
-				state.trends = []
-			}),
-			Step(.receive, .trains(.updateResponse(true)), { _ in })
-		)
-	}
-	
-	func test_add_train_failure() {
-		env = (
-			saveTrains: { _ in
-				.sync {
-					false
-				}
-			},
-			retrieveTrains: {
-				.sync {
-					self.expectedResult
-				}
-			},
-			retrieveTrend: { _, _ in
-				Effect.sync { nil }
-			}
-		)
-		
-		assert(
-			initialValue: initialState,
-			reducer: reducer,
-			environment: env,
-			steps: Step(.send, .trains(.add(trendSample)), { state in
-				state.trends = self.expectedResult
-				state.selectedTrain = self.selectedTrain
-			}),
-			Step(.receive, .trains(.updateResponse(false)), { state in
-				state.error = .notSaved
-			})
-		)
-	}
-	
-	func test_retreive_trend_success() {
-		assert(
-			initialValue: initialState,
-			reducer: reducer,
-			environment: env,
-			steps: Step(.send, .trains(.trend("S00137", "2776")), { state in
-				state.selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false)
-			}),
-			Step(.receive, .trains(.trendResponse(trendSample)), { _ in }),
-			Step(.receive, .trains(.add(trendSample)), { state in
-				state.trends = [self.trendSample]
-				state.selectedTrain = self.selectedTrain
-			}),
-			Step(.receive, .trains(.updateResponse(true)), { _ in })
-		)
-	}
-	
-	func test_retreive_trend_failure() {
-		env = (
-			saveTrains: { _ in
-				.sync {
-					true
-				}
-			},
-			retrieveTrains: {
-				.sync {
-					[]
-				}
-			},
-			retrieveTrend: { _, _ in
-				.sync {
-					nil
-				}
-			}
-		)
-		
-		assert(
-			initialValue: initialState,
-			reducer: reducer,
-			environment: env,
-			steps: Step(.send, .trains(.trend("S00137", "2776")), { state in
-				state.selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false)
-			}),
-			Step(.receive, .trains(.trendResponse(nil)), { state in
-				state.trends = []
-			})
-		)
-	}
+//	func test_add_train_success() {
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.add(trendSample)), { state in
+//				state.trends = self.expectedResult
+//				state.selectedTrain = self.selectedTrain |> \.isFollowing *~ true
+//			}),
+//			Step(.receive, .trains(.updateResponse(true)), { state in
+//
+//			})
+//		)
+//	}
+//
+//	func test_remove_train_success() {
+//		initialState = TrainsViewState(trains: [], trends: [trendSample], selectedTrend: nil, error: nil, selectedTrain: nil)
+//
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.remove(trendSample)), { state in
+//				state.trends = []
+//			}),
+//			Step(.receive, .trains(.updateResponse(true)), { _ in })
+//		)
+//	}
+//
+//	func test_add_train_failure() {
+//		env = (
+//			saveTrains: { _ in
+//				.sync {
+//					false
+//				}
+//			},
+//			retrieveTrains: {
+//				.sync {
+//					self.expectedResult
+//				}
+//			},
+//			retrieveTrend: { _, _ in
+//				Effect.sync { nil }
+//			}
+//		)
+//
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.add(trendSample)), { state in
+//				state.trends = self.expectedResult
+//				state.selectedTrain = self.selectedTrain
+//			}),
+//			Step(.receive, .trains(.updateResponse(false)), { state in
+//				state.error = .notSaved
+//			})
+//		)
+//	}
+//
+//	func test_retreive_trend_success() {
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.trend("S00137", "2776")), { state in
+//				state.selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false)
+//			}),
+//			Step(.receive, .trains(.trendResponse(trendSample)), { _ in }),
+//			Step(.receive, .trains(.add(trendSample)), { state in
+//				state.trends = [self.trendSample]
+//				state.selectedTrain = self.selectedTrain
+//			}),
+//			Step(.receive, .trains(.updateResponse(true)), { _ in })
+//		)
+//	}
+//
+//	func test_retreive_trend_failure() {
+//		env = (
+//			saveTrains: { _ in
+//				.sync {
+//					true
+//				}
+//			},
+//			retrieveTrains: {
+//				.sync {
+//					[]
+//				}
+//			},
+//			retrieveTrend: { _, _ in
+//				.sync {
+//					nil
+//				}
+//			}
+//		)
+//
+//		assert(
+//			initialValue: initialState,
+//			reducer: reducer,
+//			environment: env,
+//			steps: Step(.send, .trains(.trend("S00137", "2776")), { state in
+//				state.selectedTrain = FollowingTrain(originCode: "S00137", trainNumber: "2776", isFollowing: false)
+//			}),
+//			Step(.receive, .trains(.trendResponse(nil)), { state in
+//				state.trends = []
+//			})
+//		)
+//	}
 	
 }

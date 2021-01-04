@@ -41,7 +41,8 @@ class TrainSectionsTests: XCTestCase {
 					trends: [],
 					selectedTrend: nil,
 					error: nil,
-					selectedTrain: nil
+					selectedTrain: nil,
+					isFollowing: false
 				)
 		)
 		
@@ -53,7 +54,7 @@ class TrainSectionsTests: XCTestCase {
 			},
 			retrieveTrains: {
 				Effect.sync {
-					[self.trendExpectResult]
+					[] // self.trendExpectResult
 				}
 			},
 			retrieveTrend: { _, _ in
