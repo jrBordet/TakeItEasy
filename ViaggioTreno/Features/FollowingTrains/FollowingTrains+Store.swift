@@ -107,9 +107,15 @@ public enum FollowingTrainsError: Error, Equatable {
 
 typealias TrainsState = (trains: [FollowingTrain], trends: [Trend], selectedTrend: Trend?, error: FollowingTrainsError?, selectedTrain: FollowingTrain?, isFollowing: Bool)
 
-struct FollowingTrain: Equatable, Codable {
+struct FollowingTrain {
 	var originCode: String
 	var trainNumber: String
+}
+
+extension FollowingTrain: Equatable {
+}
+
+extension FollowingTrain: Codable {
 }
 
 extension FollowingTrain {
@@ -166,15 +172,26 @@ func trainsReducer(
 		]
 	case let .trainsResponse(result):
 		state.trains = result
+		
+		guard let train = state.selectedTrain else {
+			state.isFollowing = false
+			return []
+		}
+			
+		state.isFollowing = (result.filter { train.originCode == $0.originCode && train.trainNumber == $0.trainNumber }).isEmpty == false
+		
 		return []
 	case let .follow(train):
 		guard (state.trains.filter { train.originCode ==  $0.originCode && train.trainNumber == $0.trainNumber }).isEmpty == false else {
 			state.trains.append(train)
+			state.isFollowing = true
 			
 			return [
 				environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
 			]
 		}
+		
+		state.isFollowing = false
 		
 		let result = state.trains.map { t -> FollowingTrain? in
 			guard t.originCode == train.originCode && t.trainNumber == train.trainNumber else {
@@ -196,16 +213,16 @@ func trainsReducer(
 		}
 		return []
 	case let .remove(train):
-//		guard (state.trends.filter { train ==  $0 }).isEmpty == false else {
-//			return []
-//		}
-//
-//		state.trends = state.trends
-//			.map { $0.numeroTreno == train.numeroTreno ? nil : $0 }
-//			.compactMap { $0 }
+		guard (state.trains.filter { train.originCode ==  $0.originCode && train.trainNumber == $0.trainNumber }).isEmpty == false else {
+			return []
+		}
+		
+		state.trains = state.trains
+			.map { train.originCode ==  $0.originCode && $0.trainNumber == train.trainNumber ? nil : $0 }
+			.compactMap { $0 }
 		
 		return [
-			//environment.saveTrains(state.trends).map(TrainsAction.updateResponse)
+			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
 		]
 	case let .select(trend):
 		state.selectedTrend = trend

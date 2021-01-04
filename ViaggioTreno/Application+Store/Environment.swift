@@ -61,11 +61,11 @@ let followingEnvMock: TrainsViewEnvironment = (
 )
 
 let followingEnvLive: TrainsViewEnvironment = (
-		saveTrains: { _ in
-			Effect.sync {  true }
+		saveTrains: {
+			saveTrains(with: $0)
 		},
 		retrieveTrains: {
-			Effect.sync { [] }
+			retrieveTrains()
 		}, retrieveTrend: { origin, train in
 			Effect.sync { nil }
 		}
@@ -109,6 +109,18 @@ let live: AppEnvironment = (
 	stations: stationsEnvLive,
 	arrivalsDepartures: arrivalsDeparturesViewEnvLive
 )
+
+func saveTrains(with t: [FollowingTrain]) -> Effect<Bool> {
+	TrainsFavouritesFileClient()
+		.persist(with: t)
+		.catchErrorJustReturn(false)
+}
+
+func retrieveTrains() -> Effect<[FollowingTrain]> {
+	TrainsFavouritesFileClient()
+		.fetch()
+		.catchErrorJustReturn([])
+}
 
 func saveTrend(with t: [Trend]) -> Effect<Bool> {
 	TrendFileClient()

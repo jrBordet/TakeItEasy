@@ -21,11 +21,13 @@ class FollowingTrainsTests: XCTestCase {
 	var initialState: TrainsViewState!
 	
 	var expectedResult: [FollowingTrain] = [
+		.sample_aosta_ivrea,
+		.sample_milano_torino
 	]
 	
 	var trendSample = TrendRequest.mock(Data.trend!)
 		
-	var selectedTrain = FollowingTrain.sample_aosta_ivrea
+	var selectedTrain: FollowingTrain = .sample_aosta_ivrea
 	
 	var env: TrainsViewEnvironment!
 	
@@ -49,8 +51,7 @@ class FollowingTrainsTests: XCTestCase {
 			},
 			retrieveTrains: {
 				.sync {
-					[]
-					//self.expectedResult
+					self.expectedResult
 				}
 			},
 			retrieveTrend: { _, _ in
@@ -68,6 +69,41 @@ class FollowingTrainsTests: XCTestCase {
 	
 	// MARK: - Tests
 	
+	func test_retrieve_trains() {
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .trains(.trains), { _ in }),
+			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
+				state.trains = self.expectedResult
+				state.isFollowing = true
+			})
+		)
+	}
+	
+	func test_retrieve_trains_without_selected_train() {
+		initialState = TrainsViewState(
+			trains: [],
+			trends: [],
+			selectedTrend: nil,
+			error: nil,
+			selectedTrain: nil,
+			isFollowing: false
+		)
+		
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .trains(.trains), { _ in }),
+			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
+				state.trains = self.expectedResult
+				state.isFollowing = false
+			})
+		)
+	}
+	
 	func test_follow_train_start_follow() {
 		assert(
 			initialValue: initialState,
@@ -76,6 +112,7 @@ class FollowingTrainsTests: XCTestCase {
 			steps: Step(.send, .trains(.follow(.sample_aosta_ivrea)), { state in
 				state.trains = [.sample_aosta_ivrea]
 				state.selectedTrain = .sample_aosta_ivrea
+				state.isFollowing = true
 			}),
 			Step(.receive, .trains(.updateResponse(true)), { _ in })
 		)
@@ -100,19 +137,76 @@ class FollowingTrainsTests: XCTestCase {
 			steps: Step(.send, .trains(.follow(selectedTrain)), { state in
 				state.trains = []
 				state.selectedTrain = selectedTrain
+				state.isFollowing = false
 			}),
 			Step(.receive, .trains(.updateResponse(true)), { _ in })
 		)
 	}
 	
-	func test_retrieve_trains() {
+	func test_remove_train_success() {
+		let selectedTrain = FollowingTrain.sample_aosta_ivrea
+		
+		initialState = TrainsViewState(
+			trains: [
+				.sample_aosta_ivrea
+			],
+			trends: [],
+			selectedTrend: nil,
+			error: nil,
+			selectedTrain: selectedTrain,
+			isFollowing: false
+		)
+		
 		assert(
 			initialValue: initialState,
 			reducer: reducer,
 			environment: env,
-			steps: Step(.send, .trains(.trains), { _ in }),
-			Step(.receive, .trains(.trainsResponse(self.expectedResult)), { state in
-				//state.trends = self.expectedResult
+			steps: Step(.send, .trains(.remove(selectedTrain)), { state in
+				state.trains = []
+				state.isFollowing = false
+			}),
+			Step(.receive, .trains(.updateResponse(true)), { _ in })
+		)
+	}
+	
+	func test_add_train_failure() {
+		initialState = TrainsViewState(
+			trains: [
+			],
+			trends: [],
+			selectedTrend: nil,
+			error: nil,
+			selectedTrain: selectedTrain,
+			isFollowing: false
+		)
+		
+		env = (
+			saveTrains: { _ in
+				.sync {
+					false
+				}
+			},
+			retrieveTrains: {
+				.sync {
+					self.expectedResult
+				}
+			},
+			retrieveTrend: { _, _ in
+				Effect.sync { nil }
+			}
+		)
+		
+		assert(
+			initialValue: initialState,
+			reducer: reducer,
+			environment: env,
+			steps: Step(.send, .trains(.follow(selectedTrain)), { state in
+				state.trains = [self.selectedTrain]
+				state.selectedTrain = self.selectedTrain
+				state.isFollowing = true
+			}),
+			Step(.receive, .trains(.updateResponse(false)), { state in
+				state.error = .notSaved
 			})
 		)
 	}

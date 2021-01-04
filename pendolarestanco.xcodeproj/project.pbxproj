@@ -69,7 +69,6 @@
 		813BD1113DAC5EA6481F1B2E /* ApplicationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1135204E8690B4468F92B9 /* ApplicationAction.swift */; };
 		82D3BF8DCAB127604C2C283F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595FBB94EC3EEEF19F81488F /* User.swift */; };
 		86D93029F276A0E3B47CC009 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80B3D080FB1CAF8DAB71A0CF /* Roboto-ThinItalic.ttf */; };
-		86DC852DE725B71B37CD7D19 /* Favourites+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5BC2F1521BB188AB78F11 /* Favourites+FileClient.swift */; };
 		87374D3D40B3FBEBCAC0FCA3 /* ArrivalsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1847A47151136DAD24FA44B /* ArrivalsViewController.xib */; };
 		882F68266F26CB24B04ACEF2 /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFDB0B3BFD9345AFE6427E02 /* Networking.framework */; };
 		8847A9BDFDD264E9E2A69F89 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 864F7FE4DBDBF7E92902A5D1 /* Roboto-Thin.ttf */; };
@@ -130,7 +129,9 @@
 		F8613B2025A1D00200F81594 /* Mock+resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFA7C873E47894074686B6E /* Mock+resources.swift */; };
 		F8613B2625A1D1D400F81594 /* trend_milano_centrale.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613B2525A1D1D400F81594 /* trend_milano_centrale.json */; };
 		F8613B3025A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613B2F25A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json */; };
-		F8613B3A25A233B600F81594 /* Trend+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613B3925A233B600F81594 /* Trend+FileClient.swift */; };
+		F8613B5125A3546900F81594 /* TrainsFavourites+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613B4325A3544700F81594 /* TrainsFavourites+FileClient.swift */; };
+		F8613B5A25A3551E00F81594 /* Trend+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613B3925A233B600F81594 /* Trend+FileClient.swift */; };
+		F8613B5F25A3552C00F81594 /* Favourites+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5BC2F1521BB188AB78F11 /* Favourites+FileClient.swift */; };
 		FB5C00A7A8870C61D664B6C1 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A902A32B13ECA9539A754414 /* StationCell.swift */; };
 		FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7965BE0C53901712BFD3DD /* Environment.swift */; };
 		FDFD3B2CA7BF3E7C001F0981 /* Image+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAF044295F3D82C5D3A07F /* Image+Style.swift */; };
@@ -331,6 +332,7 @@
 		F8613B2525A1D1D400F81594 /* trend_milano_centrale.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trend_milano_centrale.json; sourceTree = "<group>"; };
 		F8613B2F25A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trend_torino_p_nuova_reggio_calabria.json; sourceTree = "<group>"; };
 		F8613B3925A233B600F81594 /* Trend+FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trend+FileClient.swift"; sourceTree = "<group>"; };
+		F8613B4325A3544700F81594 /* TrainsFavourites+FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainsFavourites+FileClient.swift"; sourceTree = "<group>"; };
 		F9288157ECA71398199B7C34 /* AppThemeMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeMaterial.swift; sourceTree = "<group>"; };
 		FD0EA881BEC72EE71F106C83 /* TrainSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainSectionViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -418,8 +420,6 @@
 		0AFAC3F310A56614EDC7E484 /* FileClient */ = {
 			isa = PBXGroup;
 			children = (
-				8BF5BC2F1521BB188AB78F11 /* Favourites+FileClient.swift */,
-				F8613B3925A233B600F81594 /* Trend+FileClient.swift */,
 				CB8FD6F04466965CA8A1915E /* Fileclient.swift */,
 				7903081E1B647F37B5888948 /* Info.plist */,
 				7E1715A3566AC3060925CA6D /* Models */,
@@ -661,6 +661,7 @@
 		9F0FB9BFF823E90548A2E412 /* ViaggioTreno */ = {
 			isa = PBXGroup;
 			children = (
+				F8613B6825A3554800F81594 /* LocalStorage */,
 				CA20079BB7A90B215491E61A /* AppDelegate.swift */,
 				B569605F4FE72DBBC9790069 /* BaseViewController.swift */,
 				D0CFBA880238B97A0CC60367 /* FileClient+Rx.swift */,
@@ -935,6 +936,16 @@
 				F8613B0825A1C24500F81594 /* FollowingTrainCell.xib */,
 			);
 			path = TrainsCell;
+			sourceTree = "<group>";
+		};
+		F8613B6825A3554800F81594 /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				8BF5BC2F1521BB188AB78F11 /* Favourites+FileClient.swift */,
+				F8613B3925A233B600F81594 /* Trend+FileClient.swift */,
+				F8613B4325A3544700F81594 /* TrainsFavourites+FileClient.swift */,
+			);
+			path = LocalStorage;
 			sourceTree = "<group>";
 		};
 		FDDB5CD478B777EAA020B7DF /* Frameworks */ = {
@@ -1356,12 +1367,15 @@
 				A5F03AD5B8924F2C1273EEC4 /* ArrivalsDeparturesCell.swift in Sources */,
 				FF13F7E8E997C98091C16268 /* ArrivalsDeparturesContainerViewController.swift in Sources */,
 				F36660E8B28CE8AADB295983 /* ArrivalsViewController.swift in Sources */,
+				F8613B5125A3546900F81594 /* TrainsFavourites+FileClient.swift in Sources */,
+				F8613B5F25A3552C00F81594 /* Favourites+FileClient.swift in Sources */,
 				5FB489690ACD6F1A21120671 /* BaseViewController.swift in Sources */,
 				F8613A2725A06DD200F81594 /* FollowingTrains+Store.swift in Sources */,
 				7E5DADB18589C4E14E245CB6 /* DeparturesViewController.swift in Sources */,
 				FCD5B8D230F50A096DC289AB /* Environment.swift in Sources */,
 				726747A8E566826BFA146128 /* FavouritesStationsCell.swift in Sources */,
 				8936B9F1DEFFC2B8A22B16B4 /* FileClient+Rx.swift in Sources */,
+				F8613B5A25A3551E00F81594 /* Trend+FileClient.swift in Sources */,
 				B6466A2F84FC8F78401663A8 /* Home+Store.swift in Sources */,
 				F8613AC025A105D300F81594 /* CollectionViewDelegate.swift in Sources */,
 				F1925E749AAA309E5C87DC69 /* HomeViewController.swift in Sources */,
@@ -1385,8 +1399,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8613B3A25A233B600F81594 /* Trend+FileClient.swift in Sources */,
-				86DC852DE725B71B37CD7D19 /* Favourites+FileClient.swift in Sources */,
 				1380B3EAC77D91C92C73C4E6 /* Fileclient.swift in Sources */,
 				82D3BF8DCAB127604C2C283F /* User.swift in Sources */,
 			);

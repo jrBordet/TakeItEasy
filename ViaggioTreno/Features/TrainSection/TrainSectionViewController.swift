@@ -32,6 +32,12 @@ extension Reactive where Base: Store<TrainSectionViewState, TrainSectionViewActi
 			store.send(.following(.trains(.trend(value.0, value.1))))
 		}
 	}
+	
+	var follow: Binder<(String, String)> {
+		Binder(self.base) { store, value in
+			store.send(.following(.trains(.follow(FollowingTrain(originCode: value.0, trainNumber: value.1)))))
+		}
+	}
 }
 
 // MARK: - Data
@@ -121,40 +127,15 @@ class TrainSectionViewController: UIViewController {
 		
 		// Retrieve trains
 		store.send(.following(.trains(.trains)))
-//
-//		let followingTrains = store
-//			.value
-//			.map { $0.followingTrainsState.trains }
-//			.distinctUntilChanged()
-		
-		let currentTrain = store
-			.value
-			.map { $0.train }
-			.ignoreNil()
-			.distinctUntilChanged()
-			//			.debug("[\(self.debugDescription)] 1 ", trimOutput: false)
-			.flatMapLatest { [weak self] train -> Observable<[Trend]> in
-				print("[\(self?.debugDescription)] train origin \(train.originCode) number \(train.number)\n")
 				
-				return store
-					.value
-					.map { $0.followingTrainsState.trends }
-					.distinctUntilChanged().map { [weak self] in
-						$0.filter { trend -> Bool in
-							print("[\(self?.debugDescription)] trend idOrigine \(trend.idOrigine) numeroTreno \(trend.numeroTreno)")
-							
-							return String(trend.numeroTreno) == train.number && trend.idOrigine == train.originCode
-						}
-					}
-			}
-			.distinctUntilChanged()
-			//.debug("[\(self.debugDescription)] 2 ", trimOutput: false)
-			.map { $0.isEmpty == false ? L10n.Trend.Follow.stop : L10n.Trend.follow }
-			//.debug("[\(self.debugDescription)] 3 ", trimOutput: false)
-			.asDriver(onErrorJustReturn: "")
+		store
+			.value
+			.map { $0.followingTrainsState.isFollowing }
+			.asDriver(onErrorJustReturn: false)
+			.map { $0 ? L10n.Trend.Follow.stop : L10n.Trend.follow }
 			.drive(followButton.rx.title(for: .normal))
 			.disposed(by: disposeBag)
-		
+				
 		followButton
 			|> theme.primaryButton
 		
@@ -171,7 +152,7 @@ class TrainSectionViewController: UIViewController {
 			.tap
 			.flatMapLatest { originTrain }
 			.map { (originCode: $0, train: String($1)) }
-			.bind(to: store.rx.trend)
+			.bind(to: store.rx.follow)
 			.disposed(by: disposeBag)
 		
 		// MARK: - Scroll to current station

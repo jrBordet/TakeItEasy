@@ -37,4 +37,4 @@
 // MARK: - Trend
 
 "trend.follow" = "Follow";
-"trend.follow.stop" = "Follow";
+"trend.follow.stop" = "Stop follow";
