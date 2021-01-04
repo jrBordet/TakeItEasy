@@ -49,12 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //			environment: env
 //		)
 		
-		let rootScene = Scene<HomeViewController>().render()
+		let rootScene = Scene<HomeTabViewController>().render()
 		
-		rootScene.store = applicationStore.view(
-			value: { $0.homeState },
-			action: { .home($0) }
-		)
+//		rootScene.store = applicationStore.view(
+//			value: { $0.homeState },
+//			action: { .home($0) }
+//		)
 		
 		self.window?.rootViewController = UINavigationController(rootViewController: rootScene)
 		

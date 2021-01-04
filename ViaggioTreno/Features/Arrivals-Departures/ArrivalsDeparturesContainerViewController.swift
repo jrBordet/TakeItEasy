@@ -22,9 +22,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 	@IBOutlet var emptyLabel: UILabel!
 	
 	public var viewControllers: [UIViewController] = []
-	
-	let theme: AppThemeMaterial = .theme
-	
+		
 	public var store: Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction>?
 	
 	private let disposeBag = DisposeBag()
@@ -162,9 +160,9 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		bar.layout.contentInset = UIEdgeInsets(top: -30.0, left: 20.0, bottom: 10.0, right: 20.0)
 		
-		bar.buttons.customize { [weak self] button in
-			button.tintColor = self?.theme.primaryColor.withAlphaComponent(0.35)
-			button.selectedTintColor = self?.theme.primaryColor
+		bar.buttons.customize { button in
+			button.tintColor = theme.primaryColor.withAlphaComponent(0.35)
+			button.selectedTintColor = theme.primaryColor
 			button.font = UIFont.boldSystemFont(ofSize: 17)
 			button.backgroundColor = .clear
 		}
