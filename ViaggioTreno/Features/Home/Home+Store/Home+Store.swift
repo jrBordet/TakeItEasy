@@ -46,6 +46,8 @@ public struct HomeViewState: Equatable {
 		self.followingTrainsState = followingTrainsState
 	}
 	
+	// MARK: View states
+	
 	var favouritesStationsState: StationsViewState {
 		get {
 			StationsViewState(
@@ -87,16 +89,38 @@ public struct HomeViewState: Equatable {
 			self.followingTrainsState = newValue.followingTrainsState
 		}
 	}
+	
+	var followingTrainsViewState: TrainsViewState {
+		get {
+			self.followingTrainsState
+		}
+		
+		set {
+			self.followingTrainsState = TrainsViewState(
+				trains: newValue.trains,
+				trends: newValue.trends,
+				selectedTrend: newValue.selectedTrend,
+				error: newValue.error,
+				selectedTrain: FollowingTrain(
+					originCode: self.train?.originCode ?? "",
+					trainNumber: self.train?.number ?? ""
+				),
+				isFollowing: newValue.isFollowing
+			)
+		}
+	}	
 }
 
 enum HomeViewAction: Equatable {
 	case favourites(StationsViewAction)
 	case arrivalsDepartures(ArrivalsDeparturesViewAction)
+	case following(TrainsViewAction)
 }
 
 typealias HomeViewEnvironment = (
 	stations: StationsEnvironment,
-	arrivalsDepartures: ArrivalsDeparturesViewEnvironment
+	arrivalsDepartures: ArrivalsDeparturesViewEnvironment,
+	followingTrains: TrainsViewEnvironment
 )
 
 let homeViewReducer: Reducer<HomeViewState, HomeViewAction, HomeViewEnvironment> = combine(
@@ -111,5 +135,11 @@ let homeViewReducer: Reducer<HomeViewState, HomeViewAction, HomeViewEnvironment>
 		value: \HomeViewState.arrivalsDeparturesState,
 		action: /HomeViewAction.arrivalsDepartures,
 		environment: { $0.arrivalsDepartures }
+	),
+	pullback(
+		trainsViewReducer,
+		value: \HomeViewState.followingTrainsViewState,
+		action: /HomeViewAction.following,
+		environment: { $0.followingTrains }
 	)
 )

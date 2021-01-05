@@ -21,7 +21,7 @@ class HomeTabViewController: TabmanViewController {
 	
 	public var viewControllers: [UIViewController] = [
 		FavouritesStationsViewController(),
-		DeparturesViewController()
+		TrainsViewController()
 	]
 	
 	var store: Store<HomeViewState, HomeViewAction>?
@@ -41,9 +41,14 @@ class HomeTabViewController: TabmanViewController {
 		
 		// MARK: - Stations
 	
-		
 		if let stations = viewControllers.first as? FavouritesStationsViewController {
 			stations.store = store
+		}
+		
+		// MARK: - Trains
+	
+		if let trains = viewControllers.last as? TrainsViewController {
+			trains.store = store
 		}
 
 		// MARK: - Create bar

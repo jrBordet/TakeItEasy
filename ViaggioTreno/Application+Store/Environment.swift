@@ -95,7 +95,8 @@ let arrivalsDeparturesViewEnvLive: ArrivalsDeparturesViewEnvironment = (
 
 let live: AppEnvironment = (
 	stations: stationsEnvLive,
-	arrivalsDepartures: arrivalsDeparturesViewEnvLive
+	arrivalsDepartures: arrivalsDeparturesViewEnvLive,
+	followingTrains: followingEnvLive
 )
 
 func saveTrains(with t: [FollowingTrain]) -> Effect<Bool> {

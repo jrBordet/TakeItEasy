@@ -49,7 +49,7 @@ struct TrainSectionViewState: Equatable {
 		self.followingTrainsState = followingTrainsState
 	}
 	
-	// MARK: Sections
+	// MARK: View states
 	
 	var sectionState: TrainSectionState {
 		get {(
@@ -86,9 +86,7 @@ struct TrainSectionViewState: Equatable {
 				isFollowing: newValue.isFollowing
 			)
 		}
-	}
-	
-	// MARK: Following trains
+	}	
 }
 
 enum TrainSectionViewAction: Equatable {

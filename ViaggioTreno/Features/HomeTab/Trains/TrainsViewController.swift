@@ -6,24 +6,75 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import SceneBuilder
+import RxDataSources
+import Networking
+import Styling
+import Caprice
+import RxComposableArchitecture
 
 class TrainsViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	@IBOutlet var tableView: UITableView!
+	
+	var dataSource: RxTableViewSectionedAnimatedDataSource<FollowingTrainsListSectionModel>!
+	
+	public var store: Store<HomeViewState, HomeViewAction>?
+	
+	private let disposeBag = DisposeBag()
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		guard let store = self.store else {
+			return
+		}
+		
+		navigationController?.navigationBar.isHidden = true
+		
+		tableView.rowHeight = 200
+		tableView.separatorColor = .clear
+		
+		setupDataSource()
+		
+		registerTableViewCell(with: tableView, cell: FollowingTrainCell.self, reuseIdentifier: "FollowingTrainCell")
+		
+		store.send(.following(.trains(.trains)))
+				
+		store
+			.value
+			.map { $0.followingTrainsState.trains }
+			.map { (trains: [FollowingTrain]) -> [FollowingTrain] in
+				trains
+			}
+			.distinctUntilChanged()
+			.map { trends -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
+				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ t -> FollowingTrainsSectionItem in
+					FollowingTrainsSectionItem(
+						number: t.originTitle ?? "",
+						train: 120,
+						name: t.originTitle ?? "",
+						time: "",
+						status: "",
+						originCode: t.originTitle ?? ""
+					)
+				})]
+			}
+			.asDriver(onErrorJustReturn: [])
+			.drive(tableView.rx.items(dataSource: dataSource))
+			.disposed(by: disposeBag)
+	}
+	
+	
+	private func setupDataSource() {
+		dataSource = RxTableViewSectionedAnimatedDataSource<FollowingTrainsListSectionModel>(
+			animationConfiguration: AnimationConfiguration(
+				insertAnimation: .right,
+				reloadAnimation: .none
+			),
+			configureCell: TrainsViewController.configureCell()
+		)
+	}
+	
 }

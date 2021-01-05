@@ -128,36 +128,36 @@ public class HomeViewController: BaseViewController {
 		
 		followingTrainsCollectionView.delegate = trainsCollectionViewDelegate
 		
-		let configureTrainsCell = HomeViewController.configureFollowingTrainCell()
+//		let configureTrainsCell = HomeViewController.configureFollowingTrainCell()
 		
-		let trainsDataSource = RxCollectionViewSectionedAnimatedDataSource(configureCell: configureTrainsCell)
+//		let trainsDataSource = RxCollectionViewSectionedAnimatedDataSource(configureCell: configureTrainsCell)
 		
-		register(with: followingTrainsCollectionView, cell: FollowingTrainCell.self, identifier: "FollowingTrainCell")
+//		register(with: followingTrainsCollectionView, cell: FollowingTrainCell.self, identifier: "FollowingTrainCell")
 		
 		// MARK: - Trains bind dataSource
 				
-		store
-			.value
-			.map { $0.followingTrainsState.trains }
-			.map { (trains: [FollowingTrain]) -> [FollowingTrain] in
-				trains
-			}
-			.distinctUntilChanged()
-			.map { trends -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
-				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ t -> FollowingTrainsSectionItem in
-					FollowingTrainsSectionItem(
-						number: t.originTitle ?? "",
-						train: 120,
-						name: t.originTitle ?? "",
-						time: "",
-						status: "",
-						originCode: t.originTitle ?? ""
-					)
-				})]
-			}
-			.asDriver(onErrorJustReturn: [])
-			.drive(followingTrainsCollectionView.rx.items(dataSource: trainsDataSource))
-			.disposed(by: disposeBag)
+//		store
+//			.value
+//			.map { $0.followingTrainsState.trains }
+//			.map { (trains: [FollowingTrain]) -> [FollowingTrain] in
+//				trains
+//			}
+//			.distinctUntilChanged()
+//			.map { trends -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
+//				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ t -> FollowingTrainsSectionItem in
+//					FollowingTrainsSectionItem(
+//						number: t.originTitle ?? "",
+//						train: 120,
+//						name: t.originTitle ?? "",
+//						time: "",
+//						status: "",
+//						originCode: t.originTitle ?? ""
+//					)
+//				})]
+//			}
+//			.asDriver(onErrorJustReturn: [])
+//			.drive(followingTrainsCollectionView.rx.items(dataSource: trainsDataSource))
+//			.disposed(by: disposeBag)
 
 		// MARK: - Stations bind dataSource
 		

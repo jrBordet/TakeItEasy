@@ -124,14 +124,14 @@
 		F8613AC025A105D300F81594 /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613ABF25A105D300F81594 /* CollectionViewDelegate.swift */; };
 		F8613AF125A1BCC700F81594 /* HomeStationsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613AF025A1BCC700F81594 /* HomeStationsSection.swift */; };
 		F8613AFD25A1C06400F81594 /* FollowingTrainsSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613AFC25A1C06400F81594 /* FollowingTrainsSectionItem.swift */; };
-		F8613B0925A1C24500F81594 /* FollowingTrainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613B0725A1C24500F81594 /* FollowingTrainCell.swift */; };
-		F8613B0A25A1C24500F81594 /* FollowingTrainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8613B0825A1C24500F81594 /* FollowingTrainCell.xib */; };
 		F8613B2025A1D00200F81594 /* Mock+resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFA7C873E47894074686B6E /* Mock+resources.swift */; };
 		F8613B2625A1D1D400F81594 /* trend_milano_centrale.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613B2525A1D1D400F81594 /* trend_milano_centrale.json */; };
 		F8613B3025A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json in Resources */ = {isa = PBXBuildFile; fileRef = F8613B2F25A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json */; };
 		F8613B5125A3546900F81594 /* TrainsFavourites+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613B4325A3544700F81594 /* TrainsFavourites+FileClient.swift */; };
 		F8613B5A25A3551E00F81594 /* Trend+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8613B3925A233B600F81594 /* Trend+FileClient.swift */; };
 		F8613B5F25A3552C00F81594 /* Favourites+FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF5BC2F1521BB188AB78F11 /* Favourites+FileClient.swift */; };
+		F891EA9C25A4518900313191 /* FollowingTrainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F891EA9A25A4518900313191 /* FollowingTrainCell.swift */; };
+		F891EA9D25A4518900313191 /* FollowingTrainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F891EA9B25A4518900313191 /* FollowingTrainCell.xib */; };
 		F892D1A025A3761D00DEDFDC /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F892D19E25A3761D00DEDFDC /* HomeTabViewController.swift */; };
 		F892D1A125A3761D00DEDFDC /* HomeTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F892D19F25A3761D00DEDFDC /* HomeTabViewController.xib */; };
 		F892D1AE25A3764A00DEDFDC /* TrainsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F892D1AC25A3764A00DEDFDC /* TrainsViewController.swift */; };
@@ -336,12 +336,12 @@
 		F8613ABF25A105D300F81594 /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
 		F8613AF025A1BCC700F81594 /* HomeStationsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStationsSection.swift; sourceTree = "<group>"; };
 		F8613AFC25A1C06400F81594 /* FollowingTrainsSectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTrainsSectionItem.swift; sourceTree = "<group>"; };
-		F8613B0725A1C24500F81594 /* FollowingTrainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTrainCell.swift; sourceTree = "<group>"; };
-		F8613B0825A1C24500F81594 /* FollowingTrainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowingTrainCell.xib; sourceTree = "<group>"; };
 		F8613B2525A1D1D400F81594 /* trend_milano_centrale.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trend_milano_centrale.json; sourceTree = "<group>"; };
 		F8613B2F25A1D32000F81594 /* trend_torino_p_nuova_reggio_calabria.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trend_torino_p_nuova_reggio_calabria.json; sourceTree = "<group>"; };
 		F8613B3925A233B600F81594 /* Trend+FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Trend+FileClient.swift"; sourceTree = "<group>"; };
 		F8613B4325A3544700F81594 /* TrainsFavourites+FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrainsFavourites+FileClient.swift"; sourceTree = "<group>"; };
+		F891EA9A25A4518900313191 /* FollowingTrainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTrainCell.swift; sourceTree = "<group>"; };
+		F891EA9B25A4518900313191 /* FollowingTrainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowingTrainCell.xib; sourceTree = "<group>"; };
 		F892D19E25A3761D00DEDFDC /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		F892D19F25A3761D00DEDFDC /* HomeTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTabViewController.xib; sourceTree = "<group>"; };
 		F892D1AC25A3764A00DEDFDC /* TrainsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainsViewController.swift; sourceTree = "<group>"; };
@@ -951,8 +951,8 @@
 		F8613B0625A1C22500F81594 /* TrainsCell */ = {
 			isa = PBXGroup;
 			children = (
-				F8613B0725A1C24500F81594 /* FollowingTrainCell.swift */,
-				F8613B0825A1C24500F81594 /* FollowingTrainCell.xib */,
+				F891EA9A25A4518900313191 /* FollowingTrainCell.swift */,
+				F891EA9B25A4518900313191 /* FollowingTrainCell.xib */,
 			);
 			path = TrainsCell;
 			sourceTree = "<group>";
@@ -983,8 +983,8 @@
 			children = (
 				F892D23925A3A08400DEDFDC /* Cell */,
 				F892D22525A39C2D00DEDFDC /* FavouritesStationsViewController.swift */,
-				F892D24625A3A15100DEDFDC /* FavouritesStationsSectionItem.swift */,
 				F892D22625A39C2D00DEDFDC /* FavouritesStationsViewController.xib */,
+				F892D24625A3A15100DEDFDC /* FavouritesStationsSectionItem.swift */,
 			);
 			path = Stations;
 			sourceTree = "<group>";
@@ -1198,7 +1198,6 @@
 				272B44E149D1A1660332F1F7 /* FavouritesStationsCell.xib in Resources */,
 				F8613A7525A0B94300F81594 /* trend.json in Resources */,
 				4A37BC188B8ACADC310D25A3 /* GoogleService-Info.plist in Resources */,
-				F8613B0A25A1C24500F81594 /* FollowingTrainCell.xib in Resources */,
 				D78A3A5AC8D404B7CBAB2E16 /* HomeViewController.xib in Resources */,
 				63569071EDD0003F22776311 /* Localizable.strings in Resources */,
 				F892D1AF25A3764A00DEDFDC /* TrainsViewController.xib in Resources */,
@@ -1212,6 +1211,7 @@
 				F892D23D25A3A09800DEDFDC /* StationsCell.xib in Resources */,
 				C342B81D2F68E28D467186AA /* arrivals.json in Resources */,
 				6973CA5355A34F5D59ADAC70 /* arrivals_broken.json in Resources */,
+				F891EA9D25A4518900313191 /* FollowingTrainCell.xib in Resources */,
 				C466A4B28B5D16A05046085A /* departures.json in Resources */,
 				A00F1EC01E48E5BD7F3B94B0 /* departures_broken.json in Resources */,
 				A393DDB1E1AA2E1F5F5681A5 /* stations.txt in Resources */,
@@ -1448,8 +1448,8 @@
 				D226CEE2E20FC691CEF8ACBF /* Localizable.swift in Sources */,
 				F892D23C25A3A09800DEDFDC /* StationsCell.swift in Sources */,
 				A85D744A062B74E2F076E4B0 /* Mock+.swift in Sources */,
+				F891EA9C25A4518900313191 /* FollowingTrainCell.swift in Sources */,
 				FB5C00A7A8870C61D664B6C1 /* StationCell.swift in Sources */,
-				F8613B0925A1C24500F81594 /* FollowingTrainCell.swift in Sources */,
 				58E13B863748CDFD02A3CF8A /* Stations+Store.swift in Sources */,
 				A2089CCD1F0FF8F3BADB3CBD /* StationsSectionHeader.swift in Sources */,
 				F8613AF125A1BCC700F81594 /* HomeStationsSection.swift in Sources */,

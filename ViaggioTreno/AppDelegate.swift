@@ -25,30 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		FirebaseApp.configure()
 		
-		//		let container = Scene<ArrivalsDeparturesContainerViewController>().render()
-		//
-		//		container.store = Store<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction>(
-		//			initialValue: ArrivalsDeparturesViewState(selectedStation: nil, departures: [], arrivals: []),
-		//			reducer: arrivalsDeparturesViewReducer,
-		//			environment: arrivalsDeparturesViewEnvLive
-		//		)
-		
-		//		var expectedResult: [TrainSection] = TrainSectionsRequest.mock(Data.train_sections!)
-		
-//		let r = try! JSONDecoder().decode([TrainSection].self, from: Data.train_sections!)
-//
-//		let env: TrainSectionViewEnvironment = { _, _ in
-//			Effect.sync { r }
-//		}
-//
-//		let trainSections = Scene<TrainSectionViewController>().render()
-//
-//		trainSections.store = Store<TrainSectionViewState, TrainSectionViewAction>(
-//			initialValue: TrainSectionViewState(selectedStation: nil, train: nil, trainSections: r, originCode: nil, isRefreshing: false),
-//			reducer: trainSectionViewReducer,
-//			environment: env
-//		)
-		
 		let rootScene = Scene<HomeTabViewController>().render()
 		
 		rootScene.store = applicationStore.view(

@@ -73,9 +73,7 @@ class FavouritesStationsViewController: UIViewController {
 		// MARK: - Load favourites
 		
 		store.send(.favourites(.stations(.favourites)))
-		
-		//store.send(.stations(.favourites))
-		
+				
 		// MARK: - Select station
 		
 		tableView
@@ -129,8 +127,10 @@ class FavouritesStationsViewController: UIViewController {
 	
 	private func setupDataSource() {
 		dataSource = RxTableViewSectionedAnimatedDataSource<FavouritesStationsSectionModel>(
-			animationConfiguration: AnimationConfiguration(insertAnimation: .right,
-														   reloadAnimation: .none),
+			animationConfiguration: AnimationConfiguration(
+				insertAnimation: .right,
+				reloadAnimation: .none
+			),
 			configureCell: FavouritesStationsViewController.configureCell()
 		)
 	}
