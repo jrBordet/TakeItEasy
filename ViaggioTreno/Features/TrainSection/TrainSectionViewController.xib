@@ -60,17 +60,17 @@
                     <rect key="frame" x="0.0" y="806" width="414" height="56"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rse-9K-KGs">
-                            <rect key="frame" x="15" y="5" width="384" height="46"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                             <state key="normal" title="Button"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="rse-9K-KGs" firstAttribute="leading" secondItem="lGd-mM-dRM" secondAttribute="leading" constant="15" id="LWc-lR-7P5"/>
-                        <constraint firstAttribute="trailing" secondItem="rse-9K-KGs" secondAttribute="trailing" constant="15" id="V2B-0k-vEq"/>
-                        <constraint firstAttribute="bottom" secondItem="rse-9K-KGs" secondAttribute="bottom" constant="5" id="bv4-3O-uUA"/>
+                        <constraint firstItem="rse-9K-KGs" firstAttribute="leading" secondItem="lGd-mM-dRM" secondAttribute="leading" id="LWc-lR-7P5"/>
+                        <constraint firstAttribute="trailing" secondItem="rse-9K-KGs" secondAttribute="trailing" id="V2B-0k-vEq"/>
+                        <constraint firstAttribute="bottom" secondItem="rse-9K-KGs" secondAttribute="bottom" id="bv4-3O-uUA"/>
                         <constraint firstAttribute="height" constant="56" id="yS1-Te-p7p"/>
-                        <constraint firstItem="rse-9K-KGs" firstAttribute="top" secondItem="lGd-mM-dRM" secondAttribute="top" constant="5" id="zcA-Zl-WBn"/>
+                        <constraint firstItem="rse-9K-KGs" firstAttribute="top" secondItem="lGd-mM-dRM" secondAttribute="top" id="zcA-Zl-WBn"/>
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROk-r3-kjG">

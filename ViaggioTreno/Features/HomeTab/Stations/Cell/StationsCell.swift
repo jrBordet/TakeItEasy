@@ -24,7 +24,6 @@ class StationsCell: UITableViewCell {
 		
 		cardView
 			|> { $0.layer.cornerRadius = 5 }
-			<> { $0.backgroundColor = .white }
 		
 		shortNameLabel
 			|> theme.primaryLabel

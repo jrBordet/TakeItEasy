@@ -1137,9 +1137,6 @@
 			attributes = {
 				LastUpgradeCheck = 1020;
 				TargetAttributes = {
-					006D658CB0745169AB96685B = {
-						DevelopmentTeam = None;
-					};
 					653705F88E332426CAED6E99 = {
 						DevelopmentTeam = None;
 					};
@@ -1167,10 +1164,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F6CFB3E0FEF69C42C17D6C6B /* FileClient */,
-				A05297D6956CC0EF9EFD0783 /* Networking */,
 				006D658CB0745169AB96685B /* PendolareStanco */,
 				653705F88E332426CAED6E99 /* PendolareStancoTests */,
+				F6CFB3E0FEF69C42C17D6C6B /* FileClient */,
+				A05297D6956CC0EF9EFD0783 /* Networking */,
 				76A9F0CE953EFAB746C481E1 /* Styling */,
 			);
 		};
@@ -1619,7 +1616,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1819,7 +1817,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = XP6P798NUV;
 				INFOPLIST_FILE = "ViaggioTreno/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
