@@ -11,17 +11,40 @@ import Styling
 
 class FollowingTrainCell: UITableViewCell {
 	@IBOutlet var cardView: UIView!
+	
 	@IBOutlet var originLabel: UILabel!
+	@IBOutlet var originTimeLabel: UILabel!
+	@IBOutlet var destinationLabel: UILabel!
+	@IBOutlet var destinationTimeLabel: UILabel!
 	
     override func awakeFromNib() {
         super.awakeFromNib()
 		
 		cardView
-			|> { $0.layer.cornerRadius = 5 }
-			<> { $0.backgroundColor = .white }
+			|> theme.cardView
+		
+		originLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 17)
+		
+		destinationLabel
+			|> theme.primaryLabel
+			<> fontRegular(with: 17)
+		
+		originTimeLabel
+			|> theme.primaryLabel
+			<> fontThin(with: 21)
+		
+		destinationTimeLabel
+			|> theme.primaryLabel
+			<> fontThin(with: 21)
     }
 	
-	func configure(with origin: String) {
-		originLabel.text = origin
+	func configure(
+		with origin: String,
+		destination: String
+	) {
+		originLabel.text = origin.capitalized
+		destinationLabel.text = destination.capitalized
 	}
 }

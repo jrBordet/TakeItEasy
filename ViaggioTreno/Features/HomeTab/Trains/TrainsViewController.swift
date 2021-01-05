@@ -33,7 +33,7 @@ class TrainsViewController: UIViewController {
 		
 		navigationController?.navigationBar.isHidden = true
 		
-		tableView.rowHeight = 200
+		tableView.rowHeight = 115
 		tableView.separatorColor = .clear
 		
 		setupDataSource()

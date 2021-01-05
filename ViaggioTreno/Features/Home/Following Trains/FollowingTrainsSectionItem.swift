@@ -49,7 +49,10 @@ extension TrainsViewController {
 				return UITableViewCell(style: .default, reuseIdentifier: nil)
 			}
 			
-			cell.configure(with: item.originCode)
+			cell.configure(
+				with: item.originCode,
+				destination: item.name
+			)
 
 			cell |> cellSelectionView()
 
