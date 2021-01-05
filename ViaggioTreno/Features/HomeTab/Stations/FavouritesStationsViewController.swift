@@ -15,14 +15,6 @@ import Networking
 import Caprice
 import SceneBuilder
 
-extension Reactive where Base: Store<StationsViewState, StationsViewAction> {
-	var selectStation: Binder<FavouritesStationsSectionItem> {
-		Binder(self.base) { store, value in
-			store.send(StationsViewAction.stations(StationsAction.select(Station.milano.first!)))
-		}
-	}
-}
-
 class FavouritesStationsViewController: UIViewController {
 	@IBOutlet var tableView: UITableView!
 	@IBOutlet var searchStationsButton: UIButton!

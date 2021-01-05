@@ -157,9 +157,8 @@ public class StationsViewController: BaseViewController {
 		}
 		
 		// MARK: - styling
+		
 		title = L10n.Stations.title
-		//self.view |> backgroundColor(with: theme.selectionColor)
-		//self.tableView?.backgroundColor = .clear
 		
 		tableView.tableFooterView = UIView()
 		tableView.separatorStyle = .none
@@ -188,7 +187,10 @@ public class StationsViewController: BaseViewController {
 		registerTableViewCell(with: tableView, cell: StationCell.self, reuseIdentifier: "StationCell")
 		tableView.register(UINib(nibName: "StationsSectionHeader", bundle: Bundle.main), forHeaderFooterViewReuseIdentifier: "StationsSectionHeader")
 		
-		searchBar.rx
+		searchBar.becomeFirstResponder()
+		
+		searchBar
+			.rx
 			.searchButtonClicked
 			.subscribe(onNext: { [weak self] in
 				self?.searchBar.resignFirstResponder()
