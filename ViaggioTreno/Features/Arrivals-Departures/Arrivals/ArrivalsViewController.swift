@@ -69,6 +69,32 @@ class ArrivalsViewController: UIViewController {
 		
 		setupDataSource()
 		
+		// MARK: refresh controller
+		
+		let refreshControl = UIRefreshControl()
+		
+		refreshControl.tintColor = theme.primaryColor
+		
+		tableView.addSubview(refreshControl)
+		tableView.alwaysBounceVertical = true
+		
+		// MARK: - Refresh
+		
+		refreshControl
+			.rx
+			.controlEvent(.valueChanged)
+			.bind(to: store.rx.refresh)
+			.disposed(by: disposeBag)
+		
+		store
+			.value
+			.map { $0.isRefreshing }
+			.distinctUntilChanged()
+			.asDriver(onErrorJustReturn: false)
+			.drive(refreshControl.rx.isRefreshing)
+			.disposed(by: disposeBag)
+		
+		
 		// MARK: - Select train
 
 		tableView.rx
