@@ -30,10 +30,14 @@ class HomeTabViewController: TabmanViewController {
 		super.viewWillAppear(animated)
 		
 		navigationController?.navigationBar.isHidden = true
+		
+		self.title = ""
 	}
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		self.title = ""
 
 		guard let store = self.store else {
 			return
@@ -103,7 +107,7 @@ extension HomeTabViewController: PageboyViewControllerDataSource, TMBarDataSourc
 		case .stations:
 			return TMBarItem(title: L10n.Stations.title)
 		case .trains:
-			return TMBarItem(title: "I miei treni")
+			return TMBarItem(title: L10n.Trains.title)
 		}
 	}
 }

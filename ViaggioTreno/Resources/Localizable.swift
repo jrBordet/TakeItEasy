@@ -29,7 +29,7 @@ internal enum L10n {
       internal static let x = L10n.tr("Localizable", "app.common.x")
     }
     internal enum Home {
-      /// Add stations
+      /// Search stations
       internal static let addStations = L10n.tr("Localizable", "app.home.addStations")
       /// No stations on your favourites
       internal static let disclaimer = L10n.tr("Localizable", "app.home.disclaimer")
@@ -56,11 +56,16 @@ internal enum L10n {
     }
   }
 
+  internal enum Trains {
+    /// My trains
+    internal static let title = L10n.tr("Localizable", "trains.title")
+  }
+
   internal enum Trend {
     /// Follow
     internal static let follow = L10n.tr("Localizable", "trend.follow")
     internal enum Follow {
-      /// Follow
+      /// Stop follow
       internal static let stop = L10n.tr("Localizable", "trend.follow.stop")
     }
   }

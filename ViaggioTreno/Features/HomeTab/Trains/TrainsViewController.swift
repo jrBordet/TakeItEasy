@@ -45,19 +45,16 @@ class TrainsViewController: UIViewController {
 		store
 			.value
 			.map { $0.followingTrainsState.trains }
-			.map { (trains: [FollowingTrain]) -> [FollowingTrain] in
-				trains
-			}
 			.distinctUntilChanged()
-			.map { trends -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
-				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "following trains", items: trends.map{ t -> FollowingTrainsSectionItem in
+			.map { trains -> [AnimatableSectionModel<String, FollowingTrainsSectionItem>] in
+				[AnimatableSectionModel<String, FollowingTrainsSectionItem>(model: "", items: trains.map { t -> FollowingTrainsSectionItem in
 					FollowingTrainsSectionItem(
-						number: t.originTitle ?? "",
-						train: 120,
-						name: t.originTitle ?? "",
-						time: "",
-						status: "",
-						originCode: t.originTitle ?? ""
+						originCode: t.originCode,
+						trainNumber: t.trainNumber,
+						originName: t.originTitle ?? "",
+						destinationName: t.destinationTile ?? "",
+						originTime: t.originTime ?? "",
+						destinationTime: t.destinationTime ?? ""
 					)
 				})]
 			}

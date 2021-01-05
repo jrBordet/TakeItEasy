@@ -21,21 +21,21 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s03-8f-XOr">
-                    <rect key="frame" x="0.0" y="44" width="414" height="754"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s03-8f-XOr">
+                    <rect key="frame" x="0.0" y="44" width="414" height="762"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzC-eO-4M1">
-                    <rect key="frame" x="0.0" y="798" width="414" height="64"/>
+                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiq-A6-4YP">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                             <state key="normal" title="Button"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="64" id="Bqb-ah-dqs"/>
+                        <constraint firstAttribute="height" constant="56" id="Bqb-ah-dqs"/>
                         <constraint firstItem="jiq-A6-4YP" firstAttribute="top" secondItem="zzC-eO-4M1" secondAttribute="top" id="IcE-1s-gbz"/>
                         <constraint firstAttribute="trailing" secondItem="jiq-A6-4YP" secondAttribute="trailing" id="JnR-Uq-XUy"/>
                         <constraint firstItem="jiq-A6-4YP" firstAttribute="leading" secondItem="zzC-eO-4M1" secondAttribute="leading" id="d5C-0j-SgL"/>

@@ -20,8 +20,8 @@ extension APIRequest {
 	public func execute(with urlSession: URLSession = .shared, parse: ((String) -> Self.Response)? = nil) -> Observable<Self.Response> {
 		return Observable<Self.Response>.create { observer -> Disposable in
 			
-			os_log("execute %{public}@ ", log: OSLog.networking, type: .info, ["request", request.debugDescription.removingPercentEncoding])
-			
+			os_log("execute %{public}@ ", log: OSLog.networking, type: .info, ["request", request.debugDescription])
+
 			guard let request = self.request else {
 				observer.onError(APIError.wrongRequest)
 				return Disposables.create()

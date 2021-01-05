@@ -20,6 +20,8 @@ public struct Trend: Codable {
 	public let idDestinazione: String
 	
 	public let compDurata: String
+	public let compOrarioPartenzaZeroEffettivo: String
+	public let compOrarioArrivoZeroEffettivo: String
 	
 	public let fermate: [TrainSection]
 	

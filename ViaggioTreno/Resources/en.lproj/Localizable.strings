@@ -23,6 +23,10 @@
 "app.home.addStations" = "Search stations";
 "app.home.disclaimer" = "No stations on your favourites";
 
+// MARK: - Trains
+
+"trains.title"= "My trains";
+
 // MARK: - Stations
 
 "stations.title" = "Stations";

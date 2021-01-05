@@ -113,6 +113,8 @@ struct FollowingTrain {
 	var originTitle: String?
 	var destinationTile: String?
 	var duration: String?
+	var originTime: String?
+	var destinationTime: String?
 }
 
 extension FollowingTrain: Equatable {
@@ -143,13 +145,11 @@ enum TrainsAction: Equatable {
 	case follow(FollowingTrain)
 	case remove(FollowingTrain)
 	
-	case updateResponse(Bool)
+	case updateResponse(Bool) // persistence effect response
 	
 	case select(Trend?)
 	
 	case selectTrain(FollowingTrain?)
-	
-	case none
 }
 
 // MARK: - Environment
@@ -247,6 +247,8 @@ func trainsReducer(
 		let train = selectedTrain
 			|> \FollowingTrain.originTitle *~ trend.origine
 			|> \FollowingTrain.destinationTile *~ trend.destinazione
+			|> \FollowingTrain.destinationTime *~ trend.compOrarioArrivoZeroEffettivo
+			|> \FollowingTrain.originTime *~ trend.compOrarioPartenzaZeroEffettivo
 		
 		state.trains.append(train)
 		
@@ -254,8 +256,6 @@ func trainsReducer(
 			environment.saveTrains(state.trains).map(TrainsAction.updateResponse)
 		]
 	case let .selectTrain(train):
-		return []
-	case .none:
 		return []
 	}
 }

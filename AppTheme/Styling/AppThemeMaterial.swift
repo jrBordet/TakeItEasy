@@ -90,7 +90,7 @@ extension AppThemeMaterial {
         primaryButton:
         { $0.setTitleColor(.white, for: .normal) }
             <> filledButton(.primaryColor)
-			<> titleFont(size: 23, weight: UIFont.Weight.regular)
+			<> titleFont(size: 19, weight: UIFont.Weight.regular)
             <> rounded(with: 5),
         card:
         shadowStyle

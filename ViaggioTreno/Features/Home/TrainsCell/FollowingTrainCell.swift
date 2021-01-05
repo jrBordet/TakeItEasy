@@ -42,9 +42,14 @@ class FollowingTrainCell: UITableViewCell {
 	
 	func configure(
 		with origin: String,
-		destination: String
+		originTime: String,
+		destination: String,
+		destinationTime: String
 	) {
 		originLabel.text = origin.capitalized
+		originTimeLabel.text = originTime
+		
 		destinationLabel.text = destination.capitalized
+		destinationTimeLabel.text = destinationTime
 	}
 }

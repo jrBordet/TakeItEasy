@@ -21,12 +21,12 @@ extension Trend: IdentifiableType {
 typealias FollowingTrainsListSectionModel = AnimatableSectionModel<String, FollowingTrainsSectionItem>
 
 struct FollowingTrainsSectionItem {
-	var number: String
-	var train: Int
-	var name: String
-	var time: String
-	var status: String
 	var originCode: String
+	var trainNumber: String
+	var originName: String
+	var destinationName: String
+	var originTime: String
+	var destinationTime: String
 }
 
 extension FollowingTrainsSectionItem: Equatable {
@@ -36,7 +36,7 @@ extension FollowingTrainsSectionItem: IdentifiableType {
 	public typealias Identity = String
 	
 	public var identity: String {
-		return "\(number)\(String(train))\(time)\(originCode)\(name)"
+		return "\(originTime)\(trainNumber)\(originCode)\(destinationTime)"
 	}
 }
 
@@ -50,8 +50,10 @@ extension TrainsViewController {
 			}
 			
 			cell.configure(
-				with: item.originCode,
-				destination: item.name
+				with: item.originName,
+				originTime: item.originTime,
+				destination: item.destinationName,
+				destinationTime: item.destinationTime
 			)
 
 			cell |> cellSelectionView()

@@ -58,7 +58,8 @@ class HomeTests: XCTestCase {
 		
 		env = (
 			stations: stationsEnv,
-			arrivalsDepartures: arrivalsDeparturesViewEnv
+			arrivalsDepartures: arrivalsDeparturesViewEnv,
+			followingTrains: followingEnvMock
 		)
 	}
 
