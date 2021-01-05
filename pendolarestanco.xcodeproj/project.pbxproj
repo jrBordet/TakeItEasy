@@ -983,8 +983,8 @@
 			children = (
 				F892D23925A3A08400DEDFDC /* Cell */,
 				F892D22525A39C2D00DEDFDC /* FavouritesStationsViewController.swift */,
-				F892D22625A39C2D00DEDFDC /* FavouritesStationsViewController.xib */,
 				F892D24625A3A15100DEDFDC /* FavouritesStationsSectionItem.swift */,
+				F892D22625A39C2D00DEDFDC /* FavouritesStationsViewController.xib */,
 			);
 			path = Stations;
 			sourceTree = "<group>";

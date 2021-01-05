@@ -66,6 +66,7 @@ extension StationsViewController {
 					}
 					
 					cell.stationNameLabel.text = value.name.capitalized
+					cell.configure(false)
 					
 					return cell
 				case let .FavouriteStationSectionItem(value):
@@ -74,6 +75,7 @@ extension StationsViewController {
 					}
 					
 					cell.stationNameLabel.text = value.name.capitalized
+					cell.configure(true)
 					
 					return cell
 				case .EmptysectionItem:
@@ -180,8 +182,8 @@ public class StationsViewController: BaseViewController {
 			closeContainerHeightConstraint.constant = 44
 		}
 		
-		tableView.rowHeight = 72
-		tableView.separatorColor = .clear
+		tableView.rowHeight = 56
+		tableView.separatorColor = .lightGray
 		
 		registerTableViewCell(with: tableView, cell: StationCell.self, reuseIdentifier: "StationCell")
 		tableView.register(UINib(nibName: "StationsSectionHeader", bundle: Bundle.main), forHeaderFooterViewReuseIdentifier: "StationsSectionHeader")
