@@ -99,9 +99,11 @@ class TrainSectionViewController: UIViewController {
 			return
 		}
 		
-		// MARK: - Styling down
+		// MARK: - Styling
 		
 		tableView.allowsSelection = false
+		
+		// MARK: refresh controller
 		
 		let refreshControl = UIRefreshControl()
 		
@@ -109,6 +111,8 @@ class TrainSectionViewController: UIViewController {
 		
 		tableView.addSubview(refreshControl)
 		tableView.alwaysBounceVertical = true
+		
+		// MARK: table view
 		
 		self.navigationController?.navigationBar.isHidden = false
 		
@@ -206,6 +210,8 @@ class TrainSectionViewController: UIViewController {
 			.asDriver(onErrorJustReturn: false)
 			.drive(refreshControl.rx.isRefreshing)
 			.disposed(by: disposeBag)
+		
+		// MARK: - Header
 		
 		trainStatusLabel
 			|> theme.primaryLabel

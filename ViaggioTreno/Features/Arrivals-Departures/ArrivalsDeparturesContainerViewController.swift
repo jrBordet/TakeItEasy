@@ -144,7 +144,7 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 				
 				navigationLink(from: self, destination: Scene<TrainSectionViewController>(), completion: { vc in
 					vc.store = store.view(
-						value: { $0.trainSectionsState },
+						value: { $0.trainSectionsViewState },
 						action: { .sections($0) }
 					)
 				}, isModal: false)

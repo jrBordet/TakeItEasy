@@ -17,7 +17,7 @@ struct ArrivalsDeparturesViewState: Equatable {
 	var trainSections: [TrainSection]
 	var originCode: String?
 	var isRefreshing: Bool
-	
+		
 	var followingTrainsState: TrainsViewState
 	
 	init(
@@ -40,22 +40,24 @@ struct ArrivalsDeparturesViewState: Equatable {
 		self.followingTrainsState = followingTrainsState
 	}
 	
-	var stationsState: ArrivalsDeparturesState {
+	var stationsViewState: ArrivalsDeparturesState {
 		get { (
 			self.selectedStation,
 			self.departures,
 			self.arrivals,
-			self.train
+			self.train,
+			self.isRefreshing
 		) }
 		set {
 			self.selectedStation = newValue.selectedStation
 			self.departures = newValue.departures
 			self.arrivals = newValue.arrivals
 			self.train = newValue.train
+			self.isRefreshing = newValue.isRefreshing
 		 }
 	}
 	
-	var trainSectionsState: TrainSectionViewState {
+	var trainSectionsViewState: TrainSectionViewState {
 		get {
 			TrainSectionViewState(
 				selectedStation: self.selectedStation,
@@ -91,13 +93,13 @@ typealias ArrivalsDeparturesViewEnvironment = (
 let arrivalsDeparturesViewReducer: Reducer<ArrivalsDeparturesViewState, ArrivalsDeparturesViewAction, ArrivalsDeparturesViewEnvironment> = combine(
 	pullback(
 		arrivalsDeparturesReducer,
-		value: \ArrivalsDeparturesViewState.stationsState,
+		value: \ArrivalsDeparturesViewState.stationsViewState,
 		action: /ArrivalsDeparturesViewAction.arrivalDepartures,
 		environment: { $0.arrivalsDepartures }
 	),
 	pullback(
 		trainSectionViewReducer,
-		value: \ArrivalsDeparturesViewState.trainSectionsState,
+		value: \ArrivalsDeparturesViewState.trainSectionsViewState,
 		action: /ArrivalsDeparturesViewAction.sections,
 		environment: { $0.sections }
 	)
@@ -105,7 +107,7 @@ let arrivalsDeparturesViewReducer: Reducer<ArrivalsDeparturesViewState, Arrivals
 
 // MARk: - State
 
-typealias ArrivalsDeparturesState = (selectedStation: Station?, departures: [Departure], arrivals: [Arrival], train: CurrentTrain?)
+typealias ArrivalsDeparturesState = (selectedStation: Station?, departures: [Departure], arrivals: [Arrival], train: CurrentTrain?, isRefreshing: Bool)
 
 // MARk: - Action
 
@@ -120,7 +122,7 @@ enum ArrivalsDeparturesAction: Equatable {
 	
 	case selectTrain(CurrentTrain?)
 	
-	case none
+	case refresh
 }
 
 // MARK: - Environment
@@ -141,6 +143,8 @@ func arrivalsDeparturesReducer(
 			environment.departures(value).map(ArrivalsDeparturesAction.departuresResponse)
 		]
 	case let .departuresResponse(departures):
+		state.isRefreshing = false
+
 		state.departures = departures
 		return []
 	case let .arrivals(value):
@@ -148,10 +152,22 @@ func arrivalsDeparturesReducer(
 			environment.arrivals(value).map(ArrivalsDeparturesAction.arrivalsResponse)
 		]
 	case let .arrivalsResponse(result):
+		state.isRefreshing = false
+
 		state.arrivals = result
 		return []
-	case .none:
-		return []
+	case .refresh:
+		guard let station = state.selectedStation else {
+			return []
+		}
+		
+		state.isRefreshing = true
+		
+		return [
+			Effect.sync {}.map { ArrivalsDeparturesAction.departures(station.id) },
+			Effect.sync {}.map { ArrivalsDeparturesAction.arrivals(station.id) }
+
+		]
 	case let .select(station):
 		state.selectedStation = station
 		return []

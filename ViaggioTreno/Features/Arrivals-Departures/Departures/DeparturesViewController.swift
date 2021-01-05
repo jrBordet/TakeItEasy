@@ -23,7 +23,7 @@ extension Reactive where Base: Store<ArrivalsDeparturesViewState, ArrivalsDepart
 	
 	var selectTrain: Binder<CurrentTrain?> {
 		Binder(self.base) { store, value in
- 			store.send(.arrivalDepartures(.selectTrain(value)))
+			store.send(.arrivalDepartures(.selectTrain(value)))
 		}
 	}
 	
@@ -36,6 +36,12 @@ extension Reactive where Base: Store<ArrivalsDeparturesViewState, ArrivalsDepart
 	var arrivals: Binder<Station> {
 		Binder(self.base) { store, value in
 			store.send(.arrivalDepartures(.arrivals(value.id)))
+		}
+	}
+	
+	var refresh: Binder<(Void)> {
+		Binder(self.base) { store, value in
+			store.send(.arrivalDepartures(.refresh))
 		}
 	}
 }
@@ -60,17 +66,46 @@ class DeparturesViewController: BaseViewController {
 			return
 		}
 		
+		// MARK: refresh controller
+		
+		let refreshControl = UIRefreshControl()
+		
+		refreshControl.tintColor = theme.primaryColor
+		
+		tableView.addSubview(refreshControl)
+		tableView.alwaysBounceVertical = true
+		
+		// MARK: - Styling
+		
 		tableView.rowHeight = 85
 		tableView.separatorColor = .clear
 		
-		// Do any additional setup after loading the view.
+		// MARK: table view
+		
 		registerTableViewCell(with: tableView, cell: ArrivalsDeparturesCell.self, reuseIdentifier: "ArrivalsDeparturesCell")
 		
 		setupDataSource()
-				
+		
+		// MARK: - Refresh
+		
+		refreshControl
+			.rx
+			.controlEvent(.valueChanged)
+			.bind(to: store.rx.refresh)
+			.disposed(by: disposeBag)
+		
+		store
+			.value
+			.map { $0.isRefreshing }
+			.distinctUntilChanged()
+			.asDriver(onErrorJustReturn: false)
+			.drive(refreshControl.rx.isRefreshing)
+			.disposed(by: disposeBag)
+		
 		// MARK: - Select train
 		
-		tableView.rx
+		tableView
+			.rx
 			.modelSelected(ArrivalDepartureSectionItem.self)
 			.map {
 				CurrentTrain(
@@ -111,8 +146,10 @@ class DeparturesViewController: BaseViewController {
 	
 	private func setupDataSource() {
 		dataSource = RxTableViewSectionedAnimatedDataSource<ArrivalsDeparturesListSectionModel>(
-			animationConfiguration: AnimationConfiguration(insertAnimation: .right,
-														   reloadAnimation: .none),
+			animationConfiguration: AnimationConfiguration(
+				insertAnimation: .right,
+				reloadAnimation: .none
+			),
 			configureCell: configureCell
 		)
 	}

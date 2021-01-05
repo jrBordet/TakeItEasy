@@ -33,6 +33,12 @@ class FavouritesStationsViewController: UIViewController {
 	
 	private let disposeBag = DisposeBag()
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		store?.send(.favourites(.stations(.select(nil))))
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
