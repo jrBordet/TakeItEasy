@@ -145,13 +145,4 @@ class DeparturesArrivalsTests: XCTestCase {
 			})
 		)
 	}
-	
-	func test_none() throws {
-		assert(
-			initialValue: initialState,
-			reducer: reducer,
-			environment: env,
-			steps: Step(.send, .arrivalDepartures(.none), { _ in })
-		)
-	}
 }

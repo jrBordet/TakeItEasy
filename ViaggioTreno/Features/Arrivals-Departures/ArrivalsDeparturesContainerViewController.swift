@@ -93,35 +93,8 @@ class ArrivalsDeparturesContainerViewController: TabmanViewController {
 		
 		// MARK: - Error
 		
-		store
-			.error
-			.distinctUntilChanged({ (e1: Error?, e2: Error?) -> Bool in
-				let errors = zip(e1, e2)
-				
-				guard let e1 = errors?.0 as? APIError, let e2 = errors?.1 as? APIError else {
-					return false
-				}
-				
-				guard e1 == e2 else {
-					return false
-				}
-				
-				return true
-			})
-			.map { e -> Bool in
-				return false
-				
-				// TODO: handle error
-				
-				guard ((e as? APIError) != nil) else {
-					return false
-				}
-				
-				store.send(.arrivalDepartures(.arrivalsResponse([])))
-				store.send(.arrivalDepartures(.departuresResponse([])))
-				
-				return true
-			}
+		Observable<Bool>
+			.just(false)
 			.bind(to: emptyContainer.rx.isVisible)
 			.disposed(by: disposeBag)
 		

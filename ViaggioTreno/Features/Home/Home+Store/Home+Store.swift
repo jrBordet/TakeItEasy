@@ -108,13 +108,36 @@ public struct HomeViewState: Equatable {
 				isFollowing: newValue.isFollowing
 			)
 		}
-	}	
+	}
+	
+	var trainSectionsViewState: TrainSectionViewState {
+		get {
+			TrainSectionViewState(
+				selectedStation: self.selectedStation,
+				train: self.train,
+				trainSections: self.trainSections,
+				originCode: self.train?.originCode,
+				isRefreshing: self.isRefreshing,
+				followingTrainsState: self.followingTrainsState
+			)
+		}
+		
+		set {
+			self.selectedStation = newValue.selectedStation
+			self.train = newValue.train
+			self.trainSections = newValue.trainSections
+			self.originCode = newValue.train?.originCode
+			self.isRefreshing = newValue.isRefreshing
+			self.followingTrainsState = newValue.followingTrainsState
+		}
+	}
 }
 
 enum HomeViewAction: Equatable {
 	case favourites(StationsViewAction)
 	case arrivalsDepartures(ArrivalsDeparturesViewAction)
 	case following(TrainsViewAction)
+	case sections(TrainSectionViewAction)
 }
 
 typealias HomeViewEnvironment = (
@@ -141,5 +164,11 @@ let homeViewReducer: Reducer<HomeViewState, HomeViewAction, HomeViewEnvironment>
 		value: \HomeViewState.followingTrainsViewState,
 		action: /HomeViewAction.following,
 		environment: { $0.followingTrains }
+	),
+	pullback(
+		trainSectionViewReducer,
+		value: \HomeViewState.trainSectionsViewState,
+		action: /HomeViewAction.sections,
+		environment: { $0.arrivalsDepartures.sections }
 	)
 )

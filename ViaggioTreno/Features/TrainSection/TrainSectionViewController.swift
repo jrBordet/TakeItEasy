@@ -258,17 +258,10 @@ class TrainSectionViewController: UIViewController {
 		
 		// MARK: - Error
 		
-		store
-			.error
-			.map { e -> Bool in
-				return false
-				
-				guard ((e as? APIError) != nil) else {
-					return false
-				}
-				
-				return true
-			}
+		// MARK: - Error
+		
+		Observable<Bool>
+			.just(false)
 			.bind(to: emptyContainer.rx.isVisible)
 			.disposed(by: disposeBag)
 		
