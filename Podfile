@@ -10,7 +10,7 @@ def shared_pods
 end
 
 def caprice
-		pod 'Caprice', '0.0.5'
+		pod 'Caprice', '0.0.6'
 end
 
 target 'PendolareStanco' do

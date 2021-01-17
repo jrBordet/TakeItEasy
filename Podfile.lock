@@ -1,5 +1,5 @@
 PODS:
-  - Caprice (0.0.5)
+  - Caprice (0.0.6)
   - Difference (0.4)
   - Differentiator (4.0.1)
   - Firebase/Analytics (7.4.0):
@@ -97,7 +97,7 @@ PODS:
     - Pageboy (~> 3.6.0)
 
 DEPENDENCIES:
-  - Caprice (= 0.0.5)
+  - Caprice (= 0.0.6)
   - Difference
   - Firebase/Analytics
   - RxBlocking
@@ -144,7 +144,7 @@ SPEC REPOS:
     - Tabman
 
 SPEC CHECKSUMS:
-  Caprice: 6fc9fc49fcd8a510497a86b005a5aac9415f1df0
+  Caprice: 083660ba310518f0eb42fda32f7febc40198f112
   Difference: d647f091010f05267885fdf758b885c6cfbf116e
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Firebase: 09fb40287b6dfc8ee65f726fa0b788719d3f2a07
@@ -172,6 +172,6 @@ SPEC CHECKSUMS:
   SwiftSpinner: 0f15c006307f8d8bbac075638927ec1361b565d7
   Tabman: 085d89c65be9e883629bdaf5b1453a6397e57846
 
-PODFILE CHECKSUM: 396667529d2e2adf91f09f2a3fe284299bf7e066
+PODFILE CHECKSUM: 39cb5a6e7ba681bf30d1320c1cf83b7dca2d9de2
 
 COCOAPODS: 1.9.3
